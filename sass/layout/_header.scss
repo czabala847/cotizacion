@@ -5,3 +5,24 @@
 .header {
   height: 90px;
 }
+
+.header-menu {
+  height: inherit;
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    /* text-decoration: none; */
+    list-style: none;
+    height: inherit;
+    align-items: center;
+    justify-content: flex-end;
+
+    &--link {
+      color: white;
+      text-decoration: none;
+      padding-left: 1rem;
+    }
+  }
+}

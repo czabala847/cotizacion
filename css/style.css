@@ -4,7 +4,8 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #21243d;
+  background: -webkit-gradient(linear, left top, right top, from(#1a1c30), to(#363b63));
+  background: linear-gradient(90deg, #1a1c30 0%, #363b63 100%);
   color: white;
 }
 
@@ -17,5 +18,32 @@ figure {
 \*                    */
 .header {
   height: 90px;
+}
+
+.header-menu {
+  height: inherit;
+}
+
+.header-menu__list {
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  /* text-decoration: none; */
+  list-style: none;
+  height: inherit;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.header-menu__list--link {
+  color: white;
+  text-decoration: none;
+  padding-left: 1rem;
 }
 /*# sourceMappingURL=style.css.map */

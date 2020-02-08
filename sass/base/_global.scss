@@ -4,7 +4,11 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #21243d;
+  background: linear-gradient(
+    90deg,
+    rgba(26, 28, 48, 1) 0%,
+    rgba(54, 59, 99, 1) 100%
+  );
   color: white;
 }
 
