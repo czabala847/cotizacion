@@ -1,0 +1,21 @@
+/*                           *\
+        SETTINGS GLOBAL
+\*                           */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #21243d;
+  color: white;
+}
+
+figure {
+  margin: 0;
+}
+
+/*                    *\
+          HEADER
+\*                    */
+.header {
+  height: 90px;
+}
+/*# sourceMappingURL=style.css.map */
