@@ -1,0 +1,25 @@
+/*-----------------------------------------*\
+                  QUOTATION
+\*-----------------------------------------*/
+
+.quotation {
+  background-image: url("../assets/imagen_hero_opacity.png");
+  background-repeat: no-repeat;
+  background-position: left bottom;
+}
+
+.quotation .container {
+  height: 100%;
+}
+
+.quotation-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-content: $container-align;
+}
+
+.quotation__detail--title {
+  @extend .title-primary;
+  letter-spacing: 3px;
+  color: #ffa41b;
+}

@@ -3,7 +3,11 @@
 \*                    */
 
 .header {
-  height: 90px;
+  height: $header-height;
+
+  & .container {
+    height: inherit;
+  }
 }
 
 .header-menu {
@@ -12,15 +16,12 @@
   &__list {
     margin: 0;
     padding: 0;
-    display: flex;
-    /* text-decoration: none; */
     list-style: none;
     height: inherit;
-    align-items: center;
-    justify-content: flex-end;
+    @include m-flex(flex-end);
 
     &--link {
-      color: white;
+      color: $color-white;
       text-decoration: none;
       padding-left: 1rem;
     }

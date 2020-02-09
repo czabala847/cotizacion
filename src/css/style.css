@@ -1,0 +1,128 @@
+/*                   *\
+      VARIABLES
+\*                   */
+/*COLORS*/
+/*CONST*/
+/*CONTAINERS*/
+/*FONTS*/
+/*-----------------------------------------*\
+                  MIXINS
+\*-----------------------------------------*/
+/*                           *\
+        SETTINGS GLOBAL
+\*                           */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Cabin", sans-serif;
+}
+
+figure {
+  margin: 0;
+}
+
+#app {
+  background: -webkit-gradient(linear, left top, right top, from(#1a1c30), to(#363b63));
+  background: linear-gradient(90deg, #1a1c30 0%, #363b63 100%);
+  color: #fff;
+  height: 100vh;
+  overflow: hidden;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 90px 1fr;
+      grid-template-rows: 90px 1fr;
+}
+
+/*-----------------------------------------*\
+                  CONTAINERS
+\*-----------------------------------------*/
+.flex-center, .header-menu__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: minmax(auto, 1024px);
+      grid-template-columns: minmax(auto, 1024px);
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+/*-----------------------------------------*\
+                  TYPOGRAPHY
+\*-----------------------------------------*/
+.title-primary, .quotation__detail--title {
+  font-size: 2.5rem;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/*                    *\
+          HEADER
+\*                    */
+.header {
+  height: 90px;
+}
+
+.header .container {
+  height: inherit;
+}
+
+.header-menu {
+  height: inherit;
+}
+
+.header-menu__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: inherit;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.header-menu__list--link {
+  color: #fff;
+  text-decoration: none;
+  padding-left: 1rem;
+}
+
+/*-----------------------------------------*\
+                  QUOTATION
+\*-----------------------------------------*/
+.quotation {
+  background-image: url("../assets/imagen_hero_opacity.png");
+  background-repeat: no-repeat;
+  background-position: left bottom;
+}
+
+.quotation .container {
+  height: 100%;
+}
+
+.quotation-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.quotation__detail--title {
+  letter-spacing: 3px;
+  color: #ffa41b;
+}
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,15 @@
+/*-----------------------------------------*\
+                  CONTAINERS
+\*-----------------------------------------*/
+
+.flex-center {
+  display: flex;
+  justify-content: $container-justify;
+  align-items: $container-align;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: minmax(auto, 1024px);
+  justify-content: $container-justify;
+}

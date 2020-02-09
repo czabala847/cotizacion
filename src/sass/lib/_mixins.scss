@@ -1,0 +1,23 @@
+/*-----------------------------------------*\
+                  MIXINS
+\*-----------------------------------------*/
+
+@mixin m-flex(
+  $justify: $container-justify,
+  $align: $container-align,
+  $direction: $container-direction
+) {
+  @extend .flex-center;
+
+  @if ($justify != "center") {
+    justify-content: $justify;
+  }
+
+  @if ($align != "center") {
+    align-items: $align;
+  }
+
+  @if ($direction != "row") {
+    flex-direction: $direction;
+  }
+}
