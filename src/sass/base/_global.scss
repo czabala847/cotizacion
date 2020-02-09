@@ -1,12 +1,13 @@
-/*                           *\
-        SETTINGS GLOBAL
-\*                           */
+/*-----------------------------------------*\
+                  SETTING GLOBAL
+\*-----------------------------------------*/
 body {
-  margin: 0;
   padding: 0;
   font-family: $font-base;
+  font-size: $font-size-base;
 }
 
+body,
 figure {
   margin: 0;
 }
@@ -14,7 +15,7 @@ figure {
 #app {
   background: $color-background-deg;
   color: $color-white;
-  height: 100vh;
+  height: $height-viewport;
   overflow: hidden;
   display: grid;
   grid-template-rows: 90px 1fr;

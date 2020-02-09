@@ -4,6 +4,7 @@
 
 .header {
   height: $header-height;
+  // background-image: url("../assets/mask-header-hero.png");
 
   & .container {
     height: inherit;
@@ -14,16 +15,21 @@
   height: inherit;
 
   &__list {
+    height: inherit;
     margin: 0;
     padding: 0;
     list-style: none;
-    height: inherit;
     @include m-flex(flex-end);
 
     &--link {
-      color: $color-white;
+      color: $color-purple;
       text-decoration: none;
       padding-left: 1rem;
+      transition: 0.3s;
+
+      &:hover {
+        color: $color-yellow;
+      }
     }
   }
 }

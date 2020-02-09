@@ -1,29 +1,31 @@
-/*                   *\
-      VARIABLES
-\*                   */
+/*-----------------------------------------*\
+                  VARIABLES
+\*-----------------------------------------*/
 /*COLORS*/
 /*CONST*/
 /*CONTAINERS*/
 /*FONTS*/
+/*FONTS SIZE*/
+/*TEXT*/
 /*-----------------------------------------*\
                   MIXINS
 \*-----------------------------------------*/
-/*                           *\
-        SETTINGS GLOBAL
-\*                           */
+/*-----------------------------------------*\
+                  SETTING GLOBAL
+\*-----------------------------------------*/
 body {
-  margin: 0;
   padding: 0;
   font-family: "Cabin", sans-serif;
+  font-size: 16px;
 }
 
+body,
 figure {
   margin: 0;
 }
 
 #app {
-  background: -webkit-gradient(linear, left top, right top, from(#1a1c30), to(#363b63));
-  background: linear-gradient(90deg, #1a1c30 0%, #363b63 100%);
+  background: linear-gradient(150deg, #121320 50%, #363b63 100%);
   color: #fff;
   height: 100vh;
   overflow: hidden;
@@ -62,8 +64,8 @@ figure {
                   TYPOGRAPHY
 \*-----------------------------------------*/
 .title-primary, .quotation__detail--title {
-  font-size: 2.5rem;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  font-size: 3rem;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
   margin: 0;
   text-transform: uppercase;
 }
@@ -72,7 +74,7 @@ figure {
           HEADER
 \*                    */
 .header {
-  height: 90px;
+  height: 70px;
 }
 
 .header .container {
@@ -84,28 +86,34 @@ figure {
 }
 
 .header-menu__list {
+  height: inherit;
   margin: 0;
   padding: 0;
   list-style: none;
-  height: inherit;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
 }
 
 .header-menu__list--link {
-  color: #fff;
+  color: #1a1c30;
   text-decoration: none;
   padding-left: 1rem;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.header-menu__list--link:hover {
+  color: #ffb227;
 }
 
 /*-----------------------------------------*\
                   QUOTATION
 \*-----------------------------------------*/
 .quotation {
-  background-image: url("../assets/imagen_hero_opacity.png");
-  background-repeat: no-repeat;
-  background-position: left bottom;
+  background: url("../assets/SVG/img-hero.svg") no-repeat;
+  background-size: 40%;
+  background-position-y: 30vh;
 }
 
 .quotation .container {
@@ -117,12 +125,14 @@ figure {
   display: grid;
   -ms-grid-columns: (1fr)[2];
       grid-template-columns: repeat(2, 1fr);
-  -ms-flex-line-pack: center;
-      align-content: center;
+}
+
+.quotation__detail {
+  padding-top: 2rem;
 }
 
 .quotation__detail--title {
   letter-spacing: 3px;
-  color: #ffa41b;
+  color: #ffb227;
 }
 /*# sourceMappingURL=style.css.map */

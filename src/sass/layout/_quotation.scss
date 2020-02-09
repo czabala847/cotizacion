@@ -3,23 +3,29 @@
 \*-----------------------------------------*/
 
 .quotation {
-  background-image: url("../assets/imagen_hero_opacity.png");
-  background-repeat: no-repeat;
-  background-position: left bottom;
+  background: url("../assets/SVG/img-hero.svg") no-repeat;
+  background-size: 40%;
+  background-position-y: 30vh;
 }
 
 .quotation .container {
-  height: 100%;
+  height: $height-full;
 }
 
 .quotation-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  align-content: $container-align;
+  // align-content: $container-align;
 }
 
-.quotation__detail--title {
-  @extend .title-primary;
-  letter-spacing: 3px;
-  color: #ffa41b;
+.quotation__detail {
+  padding-top: 2rem;
+
+  &--title {
+    @extend .title-primary;
+    letter-spacing: 3px;
+    color: $color-yellow;
+  }
 }
+
+//FORMULARIO

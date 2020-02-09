@@ -1,18 +1,22 @@
-/*                   *\
-      VARIABLES
-\*                   */
+/*-----------------------------------------*\
+                  VARIABLES
+\*-----------------------------------------*/
 
 /*COLORS*/
 $color-white: #fff;
+$color-yellow: #ffb227;
+$color-purple: rgba(26, 28, 48, 1);
 
 $color-background-deg: linear-gradient(
-  90deg,
-  rgba(26, 28, 48, 1) 0%,
+  150deg,
+  rgb(18, 19, 32) 50%,
   rgba(54, 59, 99, 1) 100%
 );
 
 /*CONST*/
-$header-height: 90px;
+$header-height: 70px;
+$height-viewport: 100vh;
+$height-full: 100%;
 
 /*CONTAINERS*/
 $container-justify: center;
@@ -21,3 +25,10 @@ $container-direction: row;
 
 /*FONTS*/
 $font-base: "Cabin", sans-serif;
+
+/*FONTS SIZE*/
+$font-size-base: 16px;
+$font-title-primary: 3rem;
+
+/*TEXT*/
+$text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
