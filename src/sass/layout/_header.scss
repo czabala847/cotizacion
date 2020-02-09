@@ -4,7 +4,7 @@
 
 .header {
   height: $header-height;
-  // background-image: url("../assets/mask-header-hero.png");
+  position: relative;
 
   & .container {
     height: inherit;
@@ -13,6 +13,7 @@
 
 .header-menu {
   height: inherit;
+  z-index: 100;
 
   &__list {
     height: inherit;
@@ -32,4 +33,10 @@
       }
     }
   }
+}
+
+.header-mask img {
+  position: absolute;
+  width: 30%;
+  right: 0;
 }

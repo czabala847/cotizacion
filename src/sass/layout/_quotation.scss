@@ -29,3 +29,8 @@
 }
 
 //FORMULARIO
+.quotation__form {
+  @include m-flex(center, initial, column);
+  width: 85%;
+  margin: 0 auto;
+}

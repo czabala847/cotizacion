@@ -1,0 +1,18 @@
+/*-----------------------------------------*\
+                  BUTTONS
+\*-----------------------------------------*/
+.btn {
+  padding: 0.5rem;
+  border-radius: 3px;
+  border: none;
+  font-family: $font-base;
+
+  &--primary {
+    background-color: $color-btn-primary;
+    color: $color-white;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}

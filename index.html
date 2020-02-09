@@ -11,8 +11,11 @@
 </head>
 
 <body>
-  <div id="app">
+  <div id="app" class="mask-hero">
     <header class="header">
+      <!-- <div class="header-mask">
+        <img src="./src/assets/SVG/mask-header-hero.svg" alt="mask img" />
+      </div> -->
       <div class="container">
         <nav class="header-menu">
           <ul class="header-menu__list">
@@ -40,9 +43,11 @@
             <input type="text" placeholder="Nombre" />
             <input type="text" placeholder="Cédula" />
             <input type="email" placeholder="Correo" />
-            <textarea name="asunto" id="" cols="30" rows="10"></textarea>
-            <button>Enviar</button>
-            <button>Adjuntar archivos</button>
+            <textarea placeholder="Comentarios" name="asunto" id="" cols="30" rows="10"></textarea>
+            <div class="quotation-btn">
+              <button class="btn btn--primary">Enviar</button>
+              <button class="btn">Adjuntar archivos</button>
+            </div>
           </form>
         </div>
       </div>

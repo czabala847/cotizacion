@@ -5,6 +5,7 @@ body {
   padding: 0;
   font-family: $font-base;
   font-size: $font-size-base;
+  background: $color-background-deg;
 }
 
 body,
@@ -13,10 +14,14 @@ figure {
 }
 
 #app {
-  background: $color-background-deg;
   color: $color-white;
   height: $height-viewport;
   overflow: hidden;
   display: grid;
   grid-template-rows: 90px 1fr;
+}
+
+.mask-hero {
+  background: url("../assets/SVG/mask-header-hero.svg") no-repeat top right;
+  background-size: 30%;
 }

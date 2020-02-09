@@ -17,6 +17,7 @@ body {
   padding: 0;
   font-family: "Cabin", sans-serif;
   font-size: 16px;
+  background: linear-gradient(150deg, #121320 50%, #363b63 100%);
 }
 
 body,
@@ -25,7 +26,6 @@ figure {
 }
 
 #app {
-  background: linear-gradient(150deg, #121320 50%, #363b63 100%);
   color: #fff;
   height: 100vh;
   overflow: hidden;
@@ -35,10 +35,15 @@ figure {
       grid-template-rows: 90px 1fr;
 }
 
+.mask-hero {
+  background: url("../assets/SVG/mask-header-hero.svg") no-repeat top right;
+  background-size: 30%;
+}
+
 /*-----------------------------------------*\
                   CONTAINERS
 \*-----------------------------------------*/
-.flex-center, .header-menu__list {
+.flex-center, .header-menu__list, .quotation__form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -70,11 +75,43 @@ figure {
   text-transform: uppercase;
 }
 
+input,
+textarea {
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  font-family: "Cabin", sans-serif;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/*-----------------------------------------*\
+                  BUTTONS
+\*-----------------------------------------*/
+.btn {
+  padding: 0.5rem;
+  border-radius: 3px;
+  border: none;
+  font-family: "Cabin", sans-serif;
+}
+
+.btn--primary {
+  background-color: #ce0f3d;
+  color: #fff;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
 /*                    *\
           HEADER
 \*                    */
 .header {
   height: 70px;
+  position: relative;
 }
 
 .header .container {
@@ -83,6 +120,7 @@ figure {
 
 .header-menu {
   height: inherit;
+  z-index: 100;
 }
 
 .header-menu__list {
@@ -105,6 +143,12 @@ figure {
 
 .header-menu__list--link:hover {
   color: #ffb227;
+}
+
+.header-mask img {
+  position: absolute;
+  width: 30%;
+  right: 0;
 }
 
 /*-----------------------------------------*\
@@ -134,5 +178,17 @@ figure {
 .quotation__detail--title {
   letter-spacing: 3px;
   color: #ffb227;
+}
+
+.quotation__form {
+  -webkit-box-align: initial;
+      -ms-flex-align: initial;
+          align-items: initial;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 85%;
+  margin: 0 auto;
 }
 /*# sourceMappingURL=style.css.map */
