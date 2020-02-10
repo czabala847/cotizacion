@@ -37,8 +37,10 @@ figure {
 }
 
 .mask-hero {
-  background: url("../assets/SVG/mask-header-hero.svg") no-repeat top right;
-  background-size: 35%;
+  background: url("../assets/SVG/mask-header-hero.svg") no-repeat;
+  background-size: 50%;
+  background-position-y: -30%;
+  background-position-x: 110%;
 }
 
 @media only screen and (max-width: 840px) {
@@ -164,19 +166,13 @@ textarea {
   color: #ffb227;
 }
 
-.header-mask img {
-  position: absolute;
-  width: 30%;
-  right: 0;
-}
-
 /*-----------------------------------------*\
                   QUOTATION
 \*-----------------------------------------*/
 .quotation {
   background: url("../assets/SVG/img-hero.svg") no-repeat;
-  background-size: 40%;
-  background-position-y: 30vh;
+  background-size: 30%;
+  background-position-y: 40vh;
 }
 
 .quotation .container {
@@ -188,10 +184,11 @@ textarea {
   display: grid;
   -ms-grid-columns: (1fr)[2];
       grid-template-columns: repeat(2, 1fr);
-}
-
-.quotation__detail {
-  padding-top: 2rem;
+  grid-column-gap: 2rem;
+  height: 70%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .quotation__detail--title {
@@ -200,6 +197,9 @@ textarea {
 }
 
 .quotation__form {
+  -webkit-box-pack: initial;
+      -ms-flex-pack: initial;
+          justify-content: initial;
   -webkit-box-align: initial;
       -ms-flex-align: initial;
           align-items: initial;
@@ -207,8 +207,6 @@ textarea {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 85%;
-  margin: 0 auto;
 }
 
 @media only screen and (max-width: 1024px) {

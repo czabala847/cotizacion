@@ -4,8 +4,8 @@
 
 .quotation {
   background: url("../assets/SVG/img-hero.svg") no-repeat;
-  background-size: 40%;
-  background-position-y: 30vh;
+  background-size: 30%;
+  background-position-y: 40vh;
 }
 
 .quotation .container {
@@ -16,10 +16,13 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   // align-content: $container-align;
+  grid-column-gap: 2rem;
+  height: 70%;
+  align-items: center;
 }
 
 .quotation__detail {
-  padding-top: 2rem;
+  // padding-top: 2rem;
 
   &--title {
     @extend .title-primary;
@@ -30,9 +33,7 @@
 
 //FORMULARIO
 .quotation__form {
-  @include m-flex(center, initial, column);
-  width: 85%;
-  margin: 0 auto;
+  @include m-flex(initial, initial, column);
 }
 
 @media only screen and (max-width: 1024px) {

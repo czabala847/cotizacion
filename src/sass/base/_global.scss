@@ -22,8 +22,10 @@ figure {
 }
 
 .mask-hero {
-  background: url("../assets/SVG/mask-header-hero.svg") no-repeat top right;
-  background-size: 35%;
+  background: url("../assets/SVG/mask-header-hero.svg") no-repeat;
+  background-size: 50%;
+  background-position-y: -30%;
+  background-position-x: 110%;
 }
 
 @media only screen and (max-width: 840px) {
