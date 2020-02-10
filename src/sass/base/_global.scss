@@ -18,10 +18,16 @@ figure {
   height: $height-viewport;
   overflow: hidden;
   display: grid;
-  grid-template-rows: 90px 1fr;
+  grid-template-rows: $header-height 1fr;
 }
 
 .mask-hero {
   background: url("../assets/SVG/mask-header-hero.svg") no-repeat top right;
-  background-size: 30%;
+  background-size: 35%;
+}
+
+@media only screen and (max-width: 840px) {
+  .mask-hero {
+    background-size: 40%;
+  }
 }

@@ -13,3 +13,9 @@
   grid-template-columns: minmax(auto, 1024px);
   justify-content: $container-justify;
 }
+
+@media only screen and (max-width: 1024px) {
+  .container {
+    padding: 0 1rem;
+  }
+}
