@@ -28,5 +28,8 @@ figure {
 //   background-position-x: 110%;
 // }
 
-@media only screen and (max-width: 840px) {
+@media only screen and (max-height: 600px) {
+  #app {
+    height: auto;
+  }
 }

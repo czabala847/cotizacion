@@ -36,6 +36,12 @@ figure {
       grid-template-rows: 90px 1fr;
 }
 
+@media only screen and (max-height: 600px) {
+  #app {
+    height: auto;
+  }
+}
+
 /*-----------------------------------------*\
                   CONTAINERS
 \*-----------------------------------------*/
@@ -158,7 +164,6 @@ textarea {
 \*-----------------------------------------*/
 .quotation {
   background: url("../assets/SVG/img-hero.svg") no-repeat;
-  background-size: 30%;
   background-position-y: 40vh;
 }
 
@@ -199,6 +204,16 @@ textarea {
 @media only screen and (max-width: 1024px) {
   .quotation__detail {
     padding-top: 0;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .quotation {
+    background-position-y: 60vh;
+  }
+  .quotation-container {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
   }
 }
 /*# sourceMappingURL=style.css.map */

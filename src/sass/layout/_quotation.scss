@@ -4,7 +4,6 @@
 
 .quotation {
   background: url("../assets/SVG/img-hero.svg") no-repeat;
-  background-size: 30%;
   background-position-y: 40vh;
 }
 
@@ -39,5 +38,15 @@
 @media only screen and (max-width: 1024px) {
   .quotation__detail {
     padding-top: 0;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .quotation {
+    background-position-y: 60vh;
+  }
+
+  .quotation-container {
+    grid-template-columns: 1fr;
   }
 }
