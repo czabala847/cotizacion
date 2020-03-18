@@ -30,15 +30,18 @@ class Cotizacion
   public function createQuotation()
   {
 
+    //Archivo cargado
     $fileLoaded = $this->uf->uploadFile($this->getIdentification());
 
     if ($fileLoaded["success"]) {
       //Traer código generado automaticamente
       $this->setCode($this->generateCodeQuotation());
 
+      //Insertar cotización
       $queryInsert = "INSERT INTO cotizacion (codigo, nombre, cedula, correo, asunto) VALUES ('" . $this->getCode() . "', '" . $this->getName() . "', '" . $this->getIdentification() . "', '" . $this->getEmail() . "', ' " . $this->getSubject() . "')";
       $response = $this->db->myquery($queryInsert);
 
+      //Recorrer las rutas donde se guardaron los archivos que fueron guardados en el servidor
       foreach ($fileLoaded["data"]["route"] as $route) {
         $qInsertDetailFile = "INSERT INTO cotizacion_detalle (ruta, codigo_cotizacion) VALUES ('" . $route . "', '" . $this->getCode() . "')";
         $this->db->myquery($qInsertDetailFile);
@@ -47,7 +50,7 @@ class Cotizacion
       if ($response) {
         return ["success" => true];
       } else {
-        return ["success" => false, "errorMessage" => "A ocurrido un error al guardar el registro"];
+        return ["success" => false, "errorMessage" => "A ocurrido un error al guardar la cotización"];
       }
     } else {
       return $fileLoaded;

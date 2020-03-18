@@ -20,15 +20,12 @@ $form.addEventListener("submit", async e => {
     //Si la extensión es correcta (JPG y PDF)
     if (file.extension) {
       if (file.allSize <= 3000000) {
-        const response = await fetchData("./App/Model/insert.php", fd);
-        if (response.success) {
-          // $respuesta.innerHTML = response;
-          if (response.response.success) {
-            swal("Enviado Correctamente!", "", "success");
-          } else {
-            const errorMessage = response.response.errorMessage;
-            swal(errorMessage, "", "error");
-          }
+        const result = await fetchData("./App/Model/insert.php", fd);
+        if (result.success && result.response.success) {
+          swal("Enviado Correctamente!", "", "success");
+        } else {
+          const errorMessage = result.response.errorMessage;
+          swal(errorMessage, "", "error");
         }
       } else {
         swal(
@@ -59,6 +56,7 @@ const fetchData = async (url, data) => {
   try {
     const urlFetch = await fetch(url, config);
     const response = await urlFetch.json();
+    debugger;
     return { success: true, response: response };
   } catch (error) {
     return { success: false, error: error };

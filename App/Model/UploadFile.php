@@ -3,14 +3,10 @@
 class uploadFile
 {
   private $file;
-  private $fileExtensions;
-  private $maxFileSize;
 
   public function __construct($file)
   {
     $this->file = $file;
-    $this->setFileExtensions(["image/jpeg", "application/pdf"]); //Extensiones permitidas
-    $this->setMaxFileSize(3000000); //Tamaño maximo 3MB
   }
 
   /* Función cargar archivo al servidor */
@@ -30,6 +26,9 @@ class uploadFile
       $route = "../../src/archivos/$codeUser/";
 
       foreach ($fileNew["name"] as $key => $file) {
+        //covertir el nombre del archivo a md5
+        $name = md5($file);
+
         //Guardar el nombre del archivo con la ruta.
         $fileName = $route . $file;
 
@@ -45,7 +44,7 @@ class uploadFile
           //Guardar en el array la ruta de los archivos sin los ../../
           array_push($arrayRoute, substr($fileName, 6, strlen($fileName)));
         } else {
-          return ["success" => false, "errorMessage" => "Ocurrió un error al ingresar el archivo"];
+          return ["success" => false, "errorMessage" => "Ocurrió un error al subir el archivo"];
         }
       }
 
@@ -61,13 +60,9 @@ class uploadFile
   {
     //Array asosiativo, almacenar posibles errores
     $error = ["error" => false, "message" => ""];
-    //Sumar el tamaño de los archivos
-    $totalFileSize = 0;
 
     //Recorrer cada archivo a cargar
-    foreach ($files["error"] as $key => $codeError) {
-      //Sumando tamaños de los archivos
-      $totalFileSize += $files["size"][$key];
+    foreach ($files["error"] as $codeError) {
 
       //Si el archivo tiene en el código de error mayor a cero, ocurrió un error en la subida del archivo
       if ($codeError > 0) {
@@ -75,21 +70,6 @@ class uploadFile
         return $error = [
           "error" => true,
           "message" => $this->errorMessage($codeError) //Mensaje del error
-        ];
-      }
-      //Por el contrario si el error es 0, no ocurrió el error
-      //Si la suma total del tamaño de los archivos es superior al tamaño máximo establecido, mandar el error
-      elseif ($totalFileSize > $this->getMaxFileSize()) {
-        return $error = [
-          "error" => true,
-          "message" => $this->errorMessage(9)
-        ];
-      }
-      //Validar que los archivos cargados tengan la extensión permitida
-      elseif (!in_array($files["type"][$key], $this->getFileExtensions())) {
-        return $error = [
-          "error" => true,
-          "message" => $this->errorMessage(10)
         ];
       }
     }
@@ -122,13 +102,6 @@ class uploadFile
       case 8:
         $message = "Una extensión PHP detuvo la carga del archivo.";
         break;
-      case 9:
-        $message = "El archivo cargado excede el tamaño permitido, solo se pueden subir 3 MB.";
-        break;
-      case 10:
-        $message = "El tipo de archivo cargado no esta permitido, solo se permiten PDF y JPG.";
-        break;
-
       default:
         $message = "Error de carga desconocido";
         break;

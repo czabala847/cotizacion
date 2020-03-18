@@ -10,7 +10,6 @@ $subject = $_POST['asunto'];
 $file = $_FILES['archivo'];
 
 
-
 $cotizacion = new Cotizacion($name, $identification, $email, $subject, $file);
 
 $result = $cotizacion->createQuotation();
