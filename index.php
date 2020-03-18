@@ -36,14 +36,14 @@
               Deserunt atque at quidem culpa dolore quis accusantium.
             </p>
           </article>
-          <form id="frm-cotizacion" action="App\Model\Insert.php" method="POST" class="quotation__form">
+          <form id="frm-cotizacion" action="App\Model\Insert.php" method="POST" class="quotation__form" enctype="multipart/form-data">
             <input type="text" placeholder="Nombre" name="nombre" require />
             <input type="text" placeholder="Cédula" name="cedula" require />
             <input type="email" placeholder="Correo" name="correo" require />
             <textarea placeholder="Comentarios" name="asunto" id="" cols="30" rows="10"></textarea>
             <div class="quotation-btn">
               <button type="submit" class="btn btn--primary">Enviar</button>
-              <input type="file" class="btn" value="Adjuntar archivos" />
+              <input type="file" class="btn" name="archivo[]" value="Adjuntar archivos" accept="application/pdf, .jpg" multiple="multiple" />
             </div>
           </form>
           <p id="respuesta"></p>

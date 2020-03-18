@@ -1,18 +1,17 @@
 <?php
 
-require "../conexion.php";
+require_once "./UploadFile.php";
+require_once "./Cotizacion.php";
 
 $name = $_POST['nombre'];
-$identityCard = $_POST['cedula'];
+$identification = $_POST['cedula'];
 $email = $_POST['correo'];
 $subject = $_POST['asunto'];
+$file = $_FILES['archivo'];
 
-$queryInsert = "INSERT INTO cotizacion (nombre, cedula, correo, asunto) VALUES ('$name', '$identityCard', '$email', '$subject')";
 
-$response = $mysqli->query($queryInsert);
 
-if ($response) {
-  echo "Correcto";
-} else {
-  echo "Algo falló";
-}
+$cotizacion = new Cotizacion($name, $identification, $email, $subject, $file);
+
+$result = $cotizacion->createQuotation();
+echo json_encode($result);
