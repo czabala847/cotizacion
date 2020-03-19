@@ -10,7 +10,7 @@ class uploadFile
   }
 
   /* Función cargar archivo al servidor */
-  public function uploadFile($codeUser)
+  public function uploadFile($codeUser, $codeQuotation)
   {
     //Obtener archivos cargados en el file del constructor
     $fileNew = $this->getFile();
@@ -23,26 +23,32 @@ class uploadFile
       $arrayRoute = [];
 
       //Ruta donde se guardan los archivos ../../src/archivos/cedulausuario/
-      $route = "../../src/archivos/$codeUser/";
+      $uploadFileDir = "../../src/archivos/$codeUser/";
 
       foreach ($fileNew["name"] as $key => $file) {
-        //covertir el nombre del archivo a md5
-        $name = md5($file);
+        $fileName = $file;
+        //Dividir nombre en una matriz, separados por el (.)
+        $fileNameCmps = explode(".", $fileName);
+        //Extensión del archivo
+        $fileExtension = strtolower(end($fileNameCmps));
+
+        //Convertir nombre con MD5
+        $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
 
         //Guardar el nombre del archivo con la ruta.
-        $fileName = $route . $file;
+        $dest_path = $uploadFileDir . $newFileName;
 
         //Si no existe la ruta la crea
-        if (!file_exists($route)) {
-          mkdir($route);
+        if (!file_exists($uploadFileDir)) {
+          mkdir($uploadFileDir);
         }
 
         //Mover el archivo al directorio especificado
-        $result = @move_uploaded_file($fileNew["tmp_name"][$key], $fileName);
+        $result = @move_uploaded_file($fileNew["tmp_name"][$key], $dest_path);
 
         if ($result) {
           //Guardar en el array la ruta de los archivos sin los ../../
-          array_push($arrayRoute, substr($fileName, 6, strlen($fileName)));
+          array_push($arrayRoute, substr($dest_path, 6, strlen($dest_path)));
         } else {
           return ["success" => false, "errorMessage" => "Ocurrió un error al subir el archivo"];
         }

@@ -29,31 +29,38 @@ class Cotizacion
   //Insertar nueva cotización
   public function createQuotation()
   {
+    //Traer código generado automaticamente
+    $this->setCode($this->generateCodeQuotation());
 
-    //Archivo cargado
-    $fileLoaded = $this->uf->uploadFile($this->getIdentification());
+    //Insertar cotización
+    $queryInsert = "INSERT INTO cotizacion (codigo, nombre, cedula, correo, asunto) VALUES ('" . $this->getCode() . "', '" . $this->getName() . "', '" . $this->getIdentification() . "', '" . $this->getEmail() . "', ' " . $this->getSubject() . "')";
+    $response = $this->db->myquery($queryInsert);
 
-    if ($fileLoaded["success"]) {
-      //Traer código generado automaticamente
-      $this->setCode($this->generateCodeQuotation());
+    if ($response) {
+      //Traer resultado de la carga de los archivos al servidor
+      $fileLoaded = $this->uf->uploadFile($this->getIdentification(), $this->getCode());
 
-      //Insertar cotización
-      $queryInsert = "INSERT INTO cotizacion (codigo, nombre, cedula, correo, asunto) VALUES ('" . $this->getCode() . "', '" . $this->getName() . "', '" . $this->getIdentification() . "', '" . $this->getEmail() . "', ' " . $this->getSubject() . "')";
-      $response = $this->db->myquery($queryInsert);
+      //Si el archivo fue cargado con exito
+      if ($fileLoaded["success"]) {
+        //Recorrer las rutas donde se guardaron los archivos que fueron guardados en el servidor
+        foreach ($fileLoaded["data"]["route"] as $route) {
+          $qInsertDetailFile = "INSERT INTO cotizacion_detalle (ruta, codigo_cotizacion) VALUES ('" . $route . "', '" . $this->getCode() . "')";
+          $reponseInsertDetail = $this->db->myquery($qInsertDetailFile);
+        }
 
-      //Recorrer las rutas donde se guardaron los archivos que fueron guardados en el servidor
-      foreach ($fileLoaded["data"]["route"] as $route) {
-        $qInsertDetailFile = "INSERT INTO cotizacion_detalle (ruta, codigo_cotizacion) VALUES ('" . $route . "', '" . $this->getCode() . "')";
-        $this->db->myquery($qInsertDetailFile);
-      }
-
-      if ($response) {
-        return ["success" => true];
+        if ($reponseInsertDetail) {
+          return ["success" => true];
+        } else {
+          return ["errorMessage" => "A ocurrido un error al guardar el detalle de la cotización"];
+        }
       } else {
-        return ["success" => false, "errorMessage" => "A ocurrido un error al guardar la cotización"];
+        //Borrar la cotización ya que el archivo no se cargo correctamente
+        $queryDelete = "DELETE FROM cotizacion WHERE codigo = '" . $this->getCode() . "'";
+        $this->db->myquery($queryDelete);
+
+        //Devolver el error generado al guardar los archivos al servidor
+        return $fileLoaded;
       }
-    } else {
-      return $fileLoaded;
     }
   }
 
