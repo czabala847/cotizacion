@@ -34,7 +34,7 @@ class DataBase
 
   public function select($query, $fetchArray)
   {
-    $result = $this->mysqli->query($query) or die($this->mysqli->error . __LINE__);
+    $result = $this->mysqli->query($query) or die(["error" => $this->mysqli->error . __LINE__]);
     if ($result->num_rows > 0) {
       if ($fetchArray) {
         return $result->fetch_array(MYSQLI_ASSOC);
