@@ -17,7 +17,7 @@ class Cotizacion
   public function __construct($name, $identification, $email, $subject, $files)
   {
     $this->db = new DataBase();
-    $this->uf = new uploadFile($files);
+    $this->uf = new uploadFile();
     //Guardar datos
     $this->setName($name);
     $this->setIdentification($identification);
@@ -29,65 +29,84 @@ class Cotizacion
   //Insertar nueva cotización
   public function createQuotation()
   {
-    //Traer código generado automaticamente
-    $this->setCode($this->generateCodeQuotation());
+    $this->setCode($this->generateCode("cotizacion", "COT-"));
 
-    //Insertar cotización
     $queryInsert = "INSERT INTO cotizacion (codigo, nombre, cedula, correo, asunto) VALUES ('" . $this->getCode() . "', '" . $this->getName() . "', '" . $this->getIdentification() . "', '" . $this->getEmail() . "', ' " . $this->getSubject() . "')";
     $response = $this->db->myquery($queryInsert);
 
     if ($response) {
-      //Traer resultado de la carga de los archivos al servidor
-      $fileLoaded = $this->uf->uploadFile($this->getIdentification(), $this->getCode());
+      $loaded = $this->createDetailQuotation($this->getCode());
 
-      //Si el archivo fue cargado con exito
-      if ($fileLoaded["success"]) {
-        //Recorrer las rutas donde se guardaron los archivos que fueron guardados en el servidor
-        foreach ($fileLoaded["data"]["route"] as $route) {
-          $qInsertDetailFile = "INSERT INTO cotizacion_detalle (ruta, codigo_cotizacion) VALUES ('" . $route . "', '" . $this->getCode() . "')";
-          $reponseInsertDetail = $this->db->myquery($qInsertDetailFile);
+      if (!$loaded["success"]) {
+        if (!$this->exitsDetail($this->getCode())) {
+          //Borrar la cotización ya que no se cargo ningún detalle
+          $queryDelete = "DELETE FROM cotizacion WHERE codigo = '" . $this->getCode() . "'";
+          $this->db->myquery($queryDelete);
         }
-
-        if ($reponseInsertDetail) {
-          return ["success" => true];
-        } else {
-          return ["errorMessage" => "A ocurrido un error al guardar el detalle de la cotización"];
-        }
-      } else {
-        //Borrar la cotización ya que el archivo no se cargo correctamente
-        $queryDelete = "DELETE FROM cotizacion WHERE codigo = '" . $this->getCode() . "'";
-        $this->db->myquery($queryDelete);
-
-        //Devolver el error generado al guardar los archivos al servidor
-        return $fileLoaded;
       }
+
+      return $loaded;
     }
   }
 
-  //Crear código automatico de la cotizacion
-  public function generateCodeQuotation()
+  private function createDetailQuotation($codeQuotation)
   {
+    $file = array();
+    foreach ($this->getFiles()["name"] as $key => $name) {
+      $codeDetail = $this->generateCode("cotizacion_detalle", "COTDE-");
+      $queryInsert = "INSERT INTO cotizacion_detalle (codigo_detalle, ruta, codigo_cotizacion) VALUES ('$codeDetail', '', '$codeQuotation')";
+      $response = $this->db->myquery($queryInsert);
 
-    /* Obtener cantidad de registros en la tabla de cotizacion */
-    $queryQuantityQuotation = "SELECT COUNT(*) AS cantidad FROM cotizacion";
+      if ($response) {
 
-    /*Obtener cantidad del array asociativo y convertirlo a número */
-    $quantity = intval($this->db->select($queryQuantityQuotation, true)["cantidad"]);
+        $file["name"] = $this->getFiles()["name"][$key];
+        $file["type"] = $this->getFiles()["type"][$key];
+        $file["tmp_name"] = $this->getFiles()["tmp_name"][$key];
+        $file["error"] = $this->getFiles()["error"][$key];
+        $file["size"] = $this->getFiles()["size"][$key];
 
-    $codeQuotation = "COT-";
+        $fileLoaded = $this->uf->upload($file, $this->getIdentification(), $codeDetail);
+
+        // si se cargo correctamente
+        if ($fileLoaded["success"]) {
+          $this->db->myquery("UPDATE cotizacion_detalle SET ruta = '" . $fileLoaded["route"] . "' WHERE codigo_detalle = '$codeDetail'");
+        } else {
+          $this->db->myquery("DELETE FROM cotizacion_detalle WHERE codigo_detalle = '$codeDetail'");
+          return $fileLoaded;
+        }
+      }
+    }
+
+    return ["success" => true];
+  }
+
+  //Genera código automatico para la cotización y el detalle
+  private function generateCode($table, $prefix)
+  {
+    $selectCount = "SELECT COUNT(*) AS cantidad FROM $table";
+    $quantity = intval($this->db->select($selectCount, true)["cantidad"]);
 
     //Aumentar cantidad encontrada
     $quantity++;
 
     if ($quantity < 10) {
-      $codeQuotation .= "0" . strval($quantity);
+      return $prefix . "0" . strval($quantity);
     } else {
-      $codeQuotation .= strval($quantity);
+      return $prefix .= strval($quantity);
     }
-
-    return $codeQuotation;
   }
 
+  //Si existe detalle, de la cotización
+  private function exitsDetail($codeQuotation)
+  {
+    $result = $this->db->select("SELECT codigo_cotizacion FROM cotizacion_detalle WHERE codigo_cotizacion = '$codeQuotation' LIMIT 1", false);
+
+    if ($result != false) {
+      return true;
+    } else {
+      return $result;
+    }
+  }
 
   /* Getters y Setters */
   public function getCode()

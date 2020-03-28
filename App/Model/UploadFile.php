@@ -2,82 +2,58 @@
 
 class uploadFile
 {
-  private $file;
-
-  public function __construct($file)
-  {
-    $this->file = $file;
-  }
 
   /* Función cargar archivo al servidor */
-  public function uploadFile($codeUser, $codeQuotation)
+  public function upload($file, $codeUser, $codeDetail)
   {
-    //Obtener archivos cargados en el file del constructor
-    $fileNew = $this->getFile();
-
     //Obtener posibles errores
-    $error = $this->errores($fileNew);
+    $error = $this->errores($file);
 
     if (!$error["error"]) {
-      /*Guardar en un array los directorios de los archivos cargados al servidor */
-      $arrayRoute = [];
 
       //Ruta donde se guardan los archivos ../../src/archivos/cedulausuario/
       $uploadFileDir = "../../src/archivos/$codeUser/";
 
-      foreach ($fileNew["name"] as $key => $file) {
-        $fileName = $file;
-        //Dividir nombre en una matriz, separados por el (.)
-        $fileNameCmps = explode(".", $fileName);
-        //Extensión del archivo
-        $fileExtension = strtolower(end($fileNameCmps));
+      $fileName = $file["name"];
+      //Dividir nombre en un array, separados por el (.)
+      $fileNameCmps = explode(".", $fileName);
+      $fileExtension = strtolower(end($fileNameCmps));
 
-        //Convertir nombre con MD5
-        $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
+      //Convertir nombre con MD5
+      $newFileName = md5(time() . $codeDetail) . '.' . $fileExtension;
 
-        //Guardar el nombre del archivo con la ruta.
-        $dest_path = $uploadFileDir . $newFileName;
+      //Guardar el nombre del archivo con la ruta.
+      $dest_path = $uploadFileDir . $newFileName;
 
-        //Si no existe la ruta la crea
-        if (!file_exists($uploadFileDir)) {
-          mkdir($uploadFileDir);
-        }
-
-        //Mover el archivo al directorio especificado
-        $result = @move_uploaded_file($fileNew["tmp_name"][$key], $dest_path);
-
-        if ($result) {
-          //Guardar en el array la ruta de los archivos sin los ../../
-          array_push($arrayRoute, substr($dest_path, 6, strlen($dest_path)));
-        } else {
-          return ["success" => false, "errorMessage" => "Ocurrió un error al subir el archivo"];
-        }
+      //Si no existe la ruta la crea
+      if (!file_exists($uploadFileDir)) {
+        mkdir($uploadFileDir);
       }
 
-      //Devolver rutas
-      return ["success" => true, "data" => ["route" => $arrayRoute]];
+      //Mover el archivo al directorio especificado
+      $result = @move_uploaded_file($file["tmp_name"], $dest_path);
+
+      if ($result) {
+        return ["success" => true, "route" => "corr" . substr($dest_path, 6, strlen($dest_path))];
+      } else {
+        return ["success" => false, "errorMessage" => "Ocurrió un error al subir el archivo"];
+      }
     } else {
-      return ["success" => false, "errorMessage" => $error["message"]];
+      return ["success" => false, "errorMessage" => "Error al subir archivo" . $file["name"] . " " . $error["message"]];
     }
   }
 
   /* Manejar errores */
-  private function errores($files)
+  private function errores($file)
   {
     //Array asosiativo, almacenar posibles errores
     $error = ["error" => false, "message" => ""];
 
-    //Recorrer cada archivo a cargar
-    foreach ($files["error"] as $codeError) {
-
-      //Si el archivo tiene en el código de error mayor a cero, ocurrió un error en la subida del archivo
-      if ($codeError > 0) {
-        //retornar error
-        return $error = [
-          "error" => true,
-          "message" => $this->errorMessage($codeError) //Mensaje del error
-        ];
-      }
+    if ($file["error"] > 0) {
+      return $error = [
+        "error" => true,
+        "message" => $this->errorMessage($file["error"])
+      ];
     }
 
     return $error;
@@ -113,31 +89,5 @@ class uploadFile
         break;
     }
     return $message;
-  }
-
-  /* GETTERS y SETTERS*/
-  public function setFileExtensions($fileExtensions)
-  {
-    $this->fileExtensions = $fileExtensions;
-  }
-
-  public function setMaxFileSize($maxFileSize)
-  {
-    $this->maxFileSize = $maxFileSize;
-  }
-
-  public function getFileExtensions()
-  {
-    return $this->fileExtensions;
-  }
-
-  public function getMaxFileSize()
-  {
-    return $this->maxFileSize;
-  }
-
-  public function getFile()
-  {
-    return $this->file;
   }
 }

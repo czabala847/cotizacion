@@ -32,11 +32,11 @@ class DataBase
     // printf("Servidor información: %s\n", $mysqli->server_info);
   }
 
-  public function select($query, $fetchArray)
+  public function select($query, $getAsArray)
   {
-    $result = $this->mysqli->query($query) or die(["error" => $this->mysqli->error . __LINE__]);
+    $result = $this->mysqli->query($query) or die($this->mysqli->error . __LINE__);
     if ($result->num_rows > 0) {
-      if ($fetchArray) {
+      if ($getAsArray) {
         return $result->fetch_array(MYSQLI_ASSOC);
       } else {
         return $result;

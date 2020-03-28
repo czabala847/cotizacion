@@ -12,4 +12,5 @@ $file = $_FILES['archivo'];
 $cotizacion = new Cotizacion($name, $identification, $email, $subject, $file);
 
 $result = $cotizacion->createQuotation();
+
 echo json_encode($result);
