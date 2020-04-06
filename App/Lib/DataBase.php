@@ -4,56 +4,56 @@ require_once "Config.php";
 
 class DataBase
 {
-  public $host;
-  public $user;
-  public $pass;
-  public $dbname;
-  public $mysqli;
+  private $link;
+  private $user;
+  private $pass;
+  private $pdo;
 
   public function __construct()
   {
-    $this->host = DB_HOST;
+    $this->link = DB_LINK;
     $this->user = DB_USER;
     $this->pass = DB_PASS;
-    $this->dbname = DB_NAME;
-    $this->getConection();
   }
 
-  public function getConection()
+  private function getConection()
   {
-    $this->mysqli = new mysqli($this->host, $this->user, $this->pass, $this->dbname);
 
-    if ($this->mysqli->connect_error) {
-      die('Error en la conexión ' . $this->mysqli->connect_error);
-    } else {
-      return $this->mysqli;
-    }
-
-    // printf("Servidor información: %s\n", $mysqli->server_info);
-  }
-
-  public function select($query, $getAsArray)
-  {
-    $result = $this->mysqli->query($query) or die($this->mysqli->error . __LINE__);
-    if ($result->num_rows > 0) {
-      if ($getAsArray) {
-        return $result->fetch_array(MYSQLI_ASSOC);
-      } else {
-        return $result;
-      }
-    } else {
-      return false;
+    try {
+      $this->pdo = new PDO($this->link, $this->user, $this->pass);
+    } catch (PDOException $e) {
+      print "¡Error!: " . $e->getMessage() . "<br/>";
+      die();
     }
   }
 
   //Añadir queries personalizados como update, delete, o insert
-  public function myquery($query)
+  public function myquery($query, $params)
   {
-    $mysquery = $this->mysqli->query($query) or die($this->mysqli->error . __LINE__);
-    if ($mysquery) {
-      return $mysquery;
+
+    $this->getConection();
+    $stmt = $this->pdo->prepare($query);
+
+    if (empty($params)) {
+      $stmt->execute();
     } else {
-      return false;
+      $stmt->execute($params);
     }
+
+    $affectedRows = $stmt->rowCount();
+    $result = $stmt->fetchAll();
+
+    $stmt = null;
+    $this->pdo = null;
+
+    if (!empty($result)) {
+      return $result;
+    }
+
+    if ($affectedRows > 0) {
+      return true;
+    }
+
+    return false;
   }
 }
