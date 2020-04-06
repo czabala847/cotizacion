@@ -40,7 +40,6 @@ const fetchData = async (url, data) => {
   try {
     const urlFetch = await fetch(url, config);
     const response = await urlFetch.json();
-    debugger;
     return { success: true, response: response };
   } catch (error) {
     return { success: false, error };

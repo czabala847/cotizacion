@@ -1,5 +1,5 @@
 <?php
-
+// yc%ZAE%J4pe%8r.
 define("DB_HOST", "localhost");
 define("DB_USER", "root");
 define("DB_PASS", "");
