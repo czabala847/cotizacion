@@ -26,90 +26,93 @@ class Cotizacion
     $this->setFiles($files);
   }
 
-  //Insertar nueva cotización
-  // public function createQuotation()
-  // {
-  //   $this->setCode($this->generateCode("cotizacion", "COT-"));
+  // Insertar nueva cotización
+  public function createQuotation()
+  {
+    $this->setCode($this->generateCode("cotizacion", "COT-"));
 
-  //   $queryInsert = "INSERT INTO cotizacion (codigo, nombre, cedula, correo, asunto) VALUES ('" . $this->getCode() . "', '" . $this->getName() . "', '" . $this->getIdentification() . "', '" . $this->getEmail() . "', ' " . $this->getSubject() . "')";
-  //   $response = $this->db->myquery($queryInsert);
+    $params = array($this->getCode(), $this->getName(), $this->getIdentification(), $this->getEmail(), $this->getSubject());
 
-  //   if ($response) {
-  //     $loaded = $this->createDetailQuotation($this->getCode());
+    $queryInsert = "INSERT INTO cotizacion (codigo, nombre, cedula, correo, asunto) VALUES (?, ?, ?, ? , ?)";
+    $response = $this->db->modification($queryInsert, $params);
 
-  //     if (!$loaded["success"]) {
-  //       if (!$this->exitsDetail($this->getCode())) {
-  //         //Borrar la cotización ya que no se cargo ningún detalle
-  //         $queryDelete = "DELETE FROM cotizacion WHERE codigo = '" . $this->getCode() . "'";
-  //         $this->db->myquery($queryDelete);
-  //       }
-  //     }
+    if ($response) {
+      $loaded = $this->createDetailQuotation($this->getCode());
 
-  //     return $loaded;
-  //   }
-  // }
+      if (!$loaded["success"]) {
+        if (!$this->exitsDetail($this->getCode())) {
+          //Borrar la cotización ya que no se cargo ningún detalle
+          $queryDelete = "DELETE FROM cotizacion WHERE codigo = ?";
+          $this->db->modification($queryDelete, array($this->getCode()));
+        }
+      }
 
-  // private function createDetailQuotation($codeQuotation)
-  // {
-  //   $file = array();
-  //   foreach ($this->getFiles()["name"] as $key => $name) {
-  //     $codeDetail = $this->generateCode("cotizacion_detalle", "COTDE-");
-  //     $queryInsert = "INSERT INTO cotizacion_detalle (codigo_detalle, ruta, codigo_cotizacion) VALUES ('$codeDetail', '', '$codeQuotation')";
-  //     $response = $this->db->myquery($queryInsert);
+      return $loaded;
+    }
+  }
 
-  //     if ($response) {
+  private function createDetailQuotation($codeQuotation)
+  {
+    $file = array();
+    foreach ($this->getFiles()["name"] as $key => $name) {
+      $codeDetail = $this->generateCode("cotizacion_detalle", "COTDE-");
+      $params = array($codeDetail, " ", $codeQuotation);
+      $queryInsert = "INSERT INTO cotizacion_detalle (codigo_detalle, ruta, codigo_cotizacion) VALUES (?, ?, ?)";
+      $response = $this->db->modification($queryInsert, $params);
 
-  //       $file["name"] = $this->getFiles()["name"][$key];
-  //       $file["type"] = $this->getFiles()["type"][$key];
-  //       $file["tmp_name"] = $this->getFiles()["tmp_name"][$key];
-  //       $file["error"] = $this->getFiles()["error"][$key];
-  //       $file["size"] = $this->getFiles()["size"][$key];
+      if ($response) {
 
-  //       $fileLoaded = $this->uf->upload($file, $this->getIdentification(), $codeDetail);
+        $file["name"] = $this->getFiles()["name"][$key];
+        $file["type"] = $this->getFiles()["type"][$key];
+        $file["tmp_name"] = $this->getFiles()["tmp_name"][$key];
+        $file["error"] = $this->getFiles()["error"][$key];
+        $file["size"] = $this->getFiles()["size"][$key];
 
-  //       // si se cargo correctamente
-  //       if ($fileLoaded["success"]) {
-  //         $this->db->myquery("UPDATE cotizacion_detalle SET ruta = '" . $fileLoaded["route"] . "' WHERE codigo_detalle = '$codeDetail'");
-  //       } else {
-  //         $this->db->myquery("DELETE FROM cotizacion_detalle WHERE codigo_detalle = '$codeDetail'");
-  //         return $fileLoaded;
-  //       }
-  //     }
-  //   }
+        $fileLoaded = $this->uf->upload($file, $this->getIdentification(), $codeDetail);
 
-  //   return ["success" => true];
-  // }
+        // si se cargo correctamente
+        if ($fileLoaded["success"]) {
+          $params = array($fileLoaded["route"], $codeDetail);
+          $this->db->modification("UPDATE cotizacion_detalle SET ruta = ? WHERE codigo_detalle = ?", $params);
+        } else {
+          $this->db->myquery("DELETE FROM cotizacion_detalle WHERE codigo_detalle = ?", array($codeDetail));
+          return $fileLoaded;
+        }
+      }
+    }
+
+    return ["success" => true];
+  }
 
   //Genera código automatico para la cotización y el detalle
   public function generateCode($table, $prefix)
   {
     $selectCount = "SELECT COUNT(*) AS cantidad FROM $table";
-    // $quantity = intval($this->db->select($selectCount, true)["cantidad"]);
-    $quantity = $this->db->myquery($selectCount, []);
+    $quantity = $this->db->select($selectCount, [], false)["cantidad"];
 
-    return $quantity;
+    $quantity = intval($quantity);
 
-    //Aumentar cantidad encontrada
-    // $quantity++;
+    // Aumentar cantidad encontrada
+    $quantity++;
 
-    // if ($quantity < 10) {
-    //   return $prefix . "0" . strval($quantity);
-    // } else {
-    //   return $prefix .= strval($quantity);
-    // }
+    if ($quantity < 10) {
+      return $prefix . "0" . strval($quantity);
+    } else {
+      return $prefix .= strval($quantity);
+    }
   }
 
-  //Si existe detalle, de la cotización
-  // private function exitsDetail($codeQuotation)
-  // {
-  //   $result = $this->db->select("SELECT codigo_cotizacion FROM cotizacion_detalle WHERE codigo_cotizacion = '$codeQuotation' LIMIT 1", false);
+  // Si existe detalle, de la cotización
+  private function exitsDetail($codeQuotation)
+  {
+    $result = $this->db->select("SELECT codigo_cotizacion FROM cotizacion_detalle WHERE codigo_cotizacion = ? LIMIT 1", array($codeQuotation), false);
 
-  //   if ($result != false) {
-  //     return true;
-  //   } else {
-  //     return $result;
-  //   }
-  // }
+    if (!empty($result)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   /* Getters y Setters */
   public function getCode()

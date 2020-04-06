@@ -1,7 +1,7 @@
 const $form = document.getElementById("frm-cotizacion");
 
 /***** Evento de submit  *****/
-$form.addEventListener("submit", async e => {
+$form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const fd = new FormData($form);
 
@@ -34,7 +34,7 @@ $form.addEventListener("submit", async e => {
 const fetchData = async (url, data) => {
   const config = {
     method: "POST",
-    body: data
+    body: data,
   };
 
   try {
@@ -47,8 +47,8 @@ const fetchData = async (url, data) => {
 };
 
 /**** Comprobar campos vacios ****/
-const emptyField = entries => {
-  let dataEntries = entries.find(entry => {
+const emptyField = (entries) => {
+  let dataEntries = entries.find((entry) => {
     if (entry[0] === "archivo[]") {
       return entry[1].size <= 0;
     } else {
@@ -60,12 +60,12 @@ const emptyField = entries => {
 };
 
 /**** Comprobar si los archivos son validos, para cargarlos al servidor, solo JPG y PDF, maximo 3MB ***/
-const okFiles = entries => {
+const okFiles = (entries) => {
   const ALLOWED_EXTENSION = ["image/jpeg", "application/pdf"];
   const MAX_SIZE_FILE = 3000000;
   let sizeFiles = 0;
 
-  let arrayFiles = entries.filter(entry => {
+  let arrayFiles = entries.filter((entry) => {
     return entry[0] === "archivo[]";
   });
 
@@ -74,7 +74,7 @@ const okFiles = entries => {
       return {
         error: true,
         message:
-          "El tipo de archivo cargado no esta permitido, solo se permiten PDF y JPG."
+          "El tipo de archivo cargado no esta permitido, solo se permiten PDF y JPG.",
       };
     } else {
       sizeFiles += arrayFiles[i][1].size;
@@ -82,7 +82,7 @@ const okFiles = entries => {
         return {
           error: true,
           message:
-            "El archivo cargado excede el tamaño permitido, solo se pueden subir 3 MB."
+            "El archivo cargado excede el tamaño permitido, solo se pueden subir 3 MB.",
         };
       }
     }
@@ -90,6 +90,6 @@ const okFiles = entries => {
 
   return {
     error: false,
-    message: "Archivo cumple todos los requisitos, para ser subido."
+    message: "Archivo cumple todos los requisitos, para ser subido.",
   };
 };
