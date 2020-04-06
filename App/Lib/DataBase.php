@@ -27,10 +27,8 @@ class DataBase
     }
   }
 
-  //Añadir queries personalizados como update, delete, o insert
-  public function myquery($query, $params)
+  private function myQuery($query, $params)
   {
-
     $this->getConection();
     $stmt = $this->pdo->prepare($query);
 
@@ -40,20 +38,36 @@ class DataBase
       $stmt->execute($params);
     }
 
-    $affectedRows = $stmt->rowCount();
-    $result = $stmt->fetchAll();
+    $auxStmt = $stmt;
 
     $stmt = null;
     $this->pdo = null;
 
-    if (!empty($result)) {
-      return $result;
+    return $auxStmt;
+  }
+
+  //Para los select
+  public function select($query, $params, $assoc)
+  {
+    $result = $this->myQuery($query, $params);
+
+    if ($assoc) {
+      return $result->fetchAll();
     }
+
+    return $result->fetch();
+  }
+
+  //Añadir queries personalizados como update, delete, o insert
+  public function modification($query, $params)
+  {
+
+    $result = $this->myQuery($query, $params);
+    $affectedRows =   $result->rowCount();
 
     if ($affectedRows > 0) {
       return true;
     }
-
     return false;
   }
 }
