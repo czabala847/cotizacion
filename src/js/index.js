@@ -32,14 +32,22 @@ $form.addEventListener("submit", async (e) => {
 
 /**** Llamada AJAX *****/
 const fetchData = async (url, data) => {
+  const $loading = document.getElementById("loading");
   const config = {
     method: "POST",
     body: data,
   };
 
   try {
+    $loading.innerHTML = templateLoading();
+
     const urlFetch = await fetch(url, config);
     const response = await urlFetch.json();
+
+    if (urlFetch.status === 200) {
+      $loading.innerHTML = "";
+    }
+
     return { success: true, response: response };
   } catch (error) {
     return { success: false, error };
@@ -93,3 +101,13 @@ const okFiles = (entries) => {
     message: "Archivo cumple todos los requisitos, para ser subido.",
   };
 };
+
+function templateLoading() {
+  return `
+    <div class="lds-roller">
+      <div></div>
+      <div></div>
+      <div></div>
+    <div>
+    `;
+}

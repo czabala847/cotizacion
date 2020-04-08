@@ -1,7 +1,7 @@
 <?php
 
 require_once("../Lib/DataBase.php");
-include_once "UploadFile.php";
+require_once("UploadFile.php");
 
 class Cotizacion
 {

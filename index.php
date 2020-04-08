@@ -46,7 +46,7 @@
               <input type="file" class="btn" name="archivo[]" value="Adjuntar archivos" accept="application/pdf, .jpg" multiple="multiple" />
             </div>
           </form>
-          <p id="respuesta"></p>
+          <p id="loading"></p>
         </div>
       </div>
     </section>
