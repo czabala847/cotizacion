@@ -1,4 +1,5 @@
 const $form = document.getElementById("frm-cotizacion");
+const $loadingContainer = document.getElementById("loading");
 
 /***** Evento de submit  *****/
 $form.addEventListener("submit", async (e) => {
@@ -12,12 +13,15 @@ $form.addEventListener("submit", async (e) => {
   let isEmptyField = emptyField(entries);
 
   if (!isEmptyField) {
+    $loadingContainer.classList.add("is-active");
+
     let files = okFiles(entries);
 
     //Si los archivos cargados no arrojan error (0), hacer el fetch
     if (!files.error) {
       const result = await fetchData("./App/Model/insert.php", fd);
       if (result.success && result.response.success) {
+        $loadingContainer.classList.remove("is-active");
         swal("Enviado Correctamente!", "", "success");
       } else {
         swal(result.response.errorMessage, "", "error");
@@ -32,22 +36,14 @@ $form.addEventListener("submit", async (e) => {
 
 /**** Llamada AJAX *****/
 const fetchData = async (url, data) => {
-  const $loading = document.getElementById("loading");
   const config = {
     method: "POST",
     body: data,
   };
 
   try {
-    $loading.innerHTML = templateLoading();
-
     const urlFetch = await fetch(url, config);
     const response = await urlFetch.json();
-
-    if (urlFetch.status === 200) {
-      $loading.innerHTML = "";
-    }
-
     return { success: true, response: response };
   } catch (error) {
     return { success: false, error };
@@ -101,13 +97,3 @@ const okFiles = (entries) => {
     message: "Archivo cumple todos los requisitos, para ser subido.",
   };
 };
-
-function templateLoading() {
-  return `
-    <div class="lds-roller">
-      <div></div>
-      <div></div>
-      <div></div>
-    <div>
-    `;
-}

@@ -7,8 +7,9 @@ $color-white: #fff;
 $color-yellow: #ffb227;
 $color-purple: rgba(26, 28, 48, 1);
 $color-dark-gray: rgba(255, 255, 255, 0.2);
+$color-red: #ce0f3d;
 
-$color-btn-primary: #ce0f3d;
+$color-btn-primary: $color-red;
 
 $color-background-deg: linear-gradient(
   150deg,

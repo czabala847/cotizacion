@@ -1,5 +1,7 @@
 <?php
 
+sleep(10);
+
 require_once "./UploadFile.php";
 require_once "./Cotizacion.php";
 

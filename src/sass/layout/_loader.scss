@@ -5,6 +5,11 @@
 #loading {
   grid-column-start: 2;
   text-align: center;
+  display: none;
+
+  &.is-active {
+    display: initial;
+  }
 }
 
 .lds-roller {
@@ -24,7 +29,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #fff;
+  background: $color-red;
   margin: -4px 0 0 -4px;
 }
 .lds-roller div:nth-child(1) {

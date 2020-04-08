@@ -46,7 +46,13 @@
               <input type="file" class="btn" name="archivo[]" value="Adjuntar archivos" accept="application/pdf, .jpg" multiple="multiple" />
             </div>
           </form>
-          <p id="loading"></p>
+          <div id="loading">
+            <div class="lds-roller">
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
