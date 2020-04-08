@@ -23,6 +23,7 @@ $form.addEventListener("submit", async (e) => {
       if (result.success && result.response.success) {
         $loadingContainer.classList.remove("is-active");
         swal("Enviado Correctamente!", "", "success");
+        $form.reset();
       } else {
         swal(result.response.errorMessage, "", "error");
       }
