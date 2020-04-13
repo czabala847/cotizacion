@@ -36,7 +36,7 @@
               Deserunt atque at quidem culpa dolore quis accusantium.
             </p>
           </article>
-          <form id="frm-cotizacion" action="App\Model\Insert.php" method="POST" class="quotation__form" enctype="multipart/form-data">
+          <form id="frm-cotizacion" action="App\Model\Insert.php" method="POST" class="quotation__form" enctype="multipart/form-data" autocomplete="off">
             <input type="text" placeholder="Nombre" name="nombre" require />
             <input type="text" placeholder="Cédula" name="cedula" require />
             <input type="email" placeholder="Correo" name="correo" require />
