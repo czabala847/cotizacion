@@ -8,12 +8,14 @@ class DataBase
   private $user;
   private $pass;
   private $pdo;
+  private $idQuery;
 
   public function __construct()
   {
     $this->link = DB_LINK;
     $this->user = DB_USER;
     $this->pass = DB_PASS;
+    $this->idQuery = 0;
   }
 
   private function getConection()
@@ -40,6 +42,10 @@ class DataBase
 
     $auxStmt = $stmt;
 
+    //Guardar id de la fila afectada
+    $this->setIdQuery($this->pdo->lastInsertId());
+
+    //cerrar conexión
     $stmt = null;
     $this->pdo = null;
 
@@ -47,11 +53,11 @@ class DataBase
   }
 
   //Para los select
-  public function select($query, $params, $assoc)
+  public function select($query, $params, $all)
   {
     $result = $this->myQuery($query, $params);
 
-    if ($assoc) {
+    if ($all) {
       return $result->fetchAll();
     }
 
@@ -69,5 +75,15 @@ class DataBase
       return true;
     }
     return false;
+  }
+
+  public function getIdQuery()
+  {
+    return $this->idQuery;
+  }
+
+  public function setIdQuery($idQuery)
+  {
+    $this->idQuery = $idQuery;
   }
 }

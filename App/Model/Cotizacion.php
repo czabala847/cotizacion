@@ -29,12 +29,14 @@ class Cotizacion
   // Insertar nueva cotización
   public function createQuotation()
   {
-    $this->setCode($this->generateCode("cotizacion", "COT-"));
 
-    $params = array($this->getCode(), $this->getName(), $this->getIdentification(), $this->getEmail(), $this->getSubject());
+    $params = array($this->getName(), $this->getIdentification(), $this->getEmail(), $this->getSubject());
 
-    $queryInsert = "INSERT INTO cotizacion (codigo, nombre, cedula, correo, asunto) VALUES (?, ?, ?, ? , ?)";
+    $queryInsert = "INSERT INTO cotizacion (nombre, cedula, correo, asunto) VALUES (?, ?, ? , ?)";
     $response = $this->db->modification($queryInsert, $params);
+    //Codigo de la cotización, es el id auto de la base de datos
+    $idNewQuotation = $this->db->getIdQuery();
+    $this->setCode($idNewQuotation);
 
     if ($response) {
       $loaded = $this->createDetailQuotation($this->getCode());
@@ -42,7 +44,7 @@ class Cotizacion
       if (!$loaded["success"]) {
         if (!$this->exitsDetail($this->getCode())) {
           //Borrar la cotización ya que no se cargo ningún detalle
-          $queryDelete = "DELETE FROM cotizacion WHERE codigo = ?";
+          $queryDelete = "DELETE FROM cotizacion WHERE id = ?";
           $this->db->modification($queryDelete, array($this->getCode()));
         }
       }
@@ -51,14 +53,15 @@ class Cotizacion
     }
   }
 
+  // Insertar detalle de la cotización
   private function createDetailQuotation($codeQuotation)
   {
     $file = array();
     foreach ($this->getFiles()["name"] as $key => $name) {
-      $codeDetail = $this->generateCode("cotizacion_detalle", "COTDE-");
-      $params = array($codeDetail, " ", $codeQuotation);
-      $queryInsert = "INSERT INTO cotizacion_detalle (codigo_detalle, ruta, codigo_cotizacion) VALUES (?, ?, ?)";
+      $params = array(" ", $codeQuotation);
+      $queryInsert = "INSERT INTO cotizacion_detalle (ruta, codigo_cotizacion) VALUES (?, ?)";
       $response = $this->db->modification($queryInsert, $params);
+      $idNewDetail = $this->db->getIdQuery();
 
       if ($response) {
 
@@ -68,39 +71,39 @@ class Cotizacion
         $file["error"] = $this->getFiles()["error"][$key];
         $file["size"] = $this->getFiles()["size"][$key];
 
-        $fileLoaded = $this->uf->upload($file, $this->getIdentification(), $codeDetail);
+        $fileLoaded = $this->uf->upload($file, $this->getIdentification(), $idNewDetail);
 
-        // si se cargo correctamente
+        // si se cargo correctamente, guardar la ruta en base de datos
         if ($fileLoaded["success"]) {
-          $params = array($fileLoaded["route"], $codeDetail);
-          $this->db->modification("UPDATE cotizacion_detalle SET ruta = ? WHERE codigo_detalle = ?", $params);
+          $params = array($fileLoaded["route"], $idNewDetail);
+          $this->db->modification("UPDATE cotizacion_detalle SET ruta = ? WHERE id = ?", $params);
         } else {
-          $this->db->myquery("DELETE FROM cotizacion_detalle WHERE codigo_detalle = ?", array($codeDetail));
+          $this->db->modification("DELETE FROM cotizacion_detalle WHERE id = ?", array($idNewDetail));
           return $fileLoaded;
         }
       }
     }
 
-    return ["success" => true];
+    return ["success" => true, "detalle" => $idNewDetail];
   }
 
   //Genera código automatico para la cotización y el detalle
-  public function generateCode($table, $prefix)
-  {
-    $selectCount = "SELECT COUNT(*) AS cantidad FROM $table";
-    $quantity = $this->db->select($selectCount, [], false)["cantidad"];
+  // public function generateCode($table, $prefix)
+  // {
+  //   $selectCount = "SELECT COUNT(*) AS cantidad FROM $table";
+  //   $quantity = $this->db->select($selectCount, [], false)["cantidad"];
 
-    $quantity = intval($quantity);
+  //   $quantity = intval($quantity);
 
-    // Aumentar cantidad encontrada
-    $quantity++;
+  //   // Aumentar cantidad encontrada
+  //   $quantity++;
 
-    if ($quantity < 10) {
-      return $prefix . "0" . strval($quantity);
-    } else {
-      return $prefix .= strval($quantity);
-    }
-  }
+  //   if ($quantity < 10) {
+  //     return $prefix . "0" . strval($quantity);
+  //   } else {
+  //     return $prefix .= strval($quantity);
+  //   }
+  // }
 
   // Si existe detalle, de la cotización
   private function exitsDetail($codeQuotation)

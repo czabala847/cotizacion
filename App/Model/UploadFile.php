@@ -34,7 +34,7 @@ class uploadFile
       $result = @move_uploaded_file($file["tmp_name"], $dest_path);
 
       if ($result) {
-        return ["success" => true, "route" => "corr" . substr($dest_path, 6, strlen($dest_path))];
+        return ["success" => true, "route" => substr($dest_path, 6, strlen($dest_path))];
       } else {
         return ["success" => false, "errorMessage" => "Ocurrió un error al subir el archivo"];
       }

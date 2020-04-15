@@ -5,18 +5,26 @@ require_once("./App/Lib/DataBase.php");
 
 
 $pruebaConexion = new DataBase();
-$codigo = 2;
+// $codigo = 2;
 
-$selectCount = "SELECT COUNT(*) AS cantidad FROM cotizacion";
+// $selectCount = "SELECT COUNT(*) AS cantidad FROM cotizacion";
 // $quantity = intval($this->db->select($selectCount, true)["cantidad"]);
-$result = $pruebaConexion->select("SELECT codigo_cotizacion FROM cotizacion_detalle WHERE codigo_cotizacion = ? LIMIT 1", array("s"), false);
+// $result = $pruebaConexion->select("SELECT codigo_cotizacion FROM cotizacion_detalle WHERE codigo_cotizacion = ? LIMIT 1", array("s"), false);
 
 
 // var_dump($result);
 
 
-if (!empty($result)) {
-  echo "yeah";
-} else {
-  echo "nooo";
-}
+// if (!empty($result)) {
+//   echo "yeah";
+// } else {
+//   echo "nooo";
+// }
+
+$params = array("carlos zabala", "1143460015", "czabala847@gmail.com", "");
+
+$id = $pruebaConexion->getIdQuery();
+echo $id;
+
+$queryInsert = "INSERT INTO cotizacion (nombre, cedula, correo, asunto) VALUES (?, ?, ? , ?)";
+$response = $pruebaConexion->modification($queryInsert, $params);
