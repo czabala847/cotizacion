@@ -35,8 +35,10 @@ htmlHeader('Nueva Cotización');
   </div>
 </section>
 
-<?php
+</div>
+<!-- <script src="src/js/cotizacion.js"></script> -->
+<script src="src/js/index.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</body>
 
-require_once("./App/View/Footer.php");
-
-?>
+</html>

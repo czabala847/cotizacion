@@ -6,10 +6,16 @@ htmlHeader('Cotización');
 
 <section class="login">
   <div class="container">
-    <form action="">
-      <input type="text" placeholder="Usuario" />
-      <input type="password" placeholder="Contraseña" />
-    </form>
+    <div class="login-container">
+      <div class="login-description">
+        <p>Bienvenida, descrición...</p>
+      </div>
+      <form class="login-form quotation__form" action="" autocomplete="off">
+        <input type="text" name="user" placeholder="Usuario" />
+        <input type="password" name="password" placeholder="Contraseña" />
+        <input class="btn btn--primary" type="submit" value="Enviar" />
+      </form>
+    </div>
   </div>
 </section>
 
