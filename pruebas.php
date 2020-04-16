@@ -1,10 +1,10 @@
 <?php
 
-require_once("./App/Lib/DataBase.php");
+// require_once("./App/Lib/DataBase.php");
 // require_once("./App/Model/Cotizacion.php");
 
 
-$pruebaConexion = new DataBase();
+// $pruebaConexion = new DataBase();
 // $codigo = 2;
 
 // $selectCount = "SELECT COUNT(*) AS cantidad FROM cotizacion";
@@ -21,10 +21,12 @@ $pruebaConexion = new DataBase();
 //   echo "nooo";
 // }
 
-$params = array("carlos zabala", "1143460015", "czabala847@gmail.com", "");
+// $params = array("carlos zabala", "1143460015", "czabala847@gmail.com", "");
 
-$id = $pruebaConexion->getIdQuery();
-echo $id;
+// $id = $pruebaConexion->getIdQuery();
+// echo $id;
 
-$queryInsert = "INSERT INTO cotizacion (nombre, cedula, correo, asunto) VALUES (?, ?, ? , ?)";
-$response = $pruebaConexion->modification($queryInsert, $params);
+// $queryInsert = "INSERT INTO cotizacion (nombre, cedula, correo, asunto) VALUES (?, ?, ? , ?)";
+// $response = $pruebaConexion->modification($queryInsert, $params);
+
+echo password_hash("1234", PASSWORD_DEFAULT) . "\n";

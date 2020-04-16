@@ -1,54 +1,41 @@
-const templateLogin = (title, login) => {
-  $textFooterForm.innerText =
-    login === "sign-in" ? "No tienes una cuenta?" : "Ya tienes una cuenta?";
-
-  $btnRegister.innerText =
-    login === "sign-in" ? "Registrate" : "Iniciar sesión";
-
-  return `  
-  <h2>${title}</h2>
-  <form class="quotation__form" action="" autocomplete="off" method="POST">
-    <input class="login-form__input" type="text" name="user" placeholder="Usuario" />
-    <input class="login-form__input" type="password" name="password" placeholder="Contraseña" />
-    ${
-      login === "sign-up"
-        ? `<input class="login-form__input" type="password" name="password2" placeholder="Repetir Contraseña" />
-           <input class="login-form__input" type="text" name="code" placeholder="Código de registro" />`
-        : ``
-    }
-    <input class="btn btn--primary" type="submit" value="Enviar" />
-  </form>
-  `;
-};
-
-$formContainer = document.querySelector("#change-form");
+$singUpContainer = document.querySelector("#sign-up");
 $btnRegister = document.querySelector("#registerLogin");
+$formLogin = document.querySelector("#form-login");
 
 //Parte donde dice no tienes cuenta o ya tienes cuenta
-$textFooterForm = document.querySelector("#p-text");
+// $textFooterForm = document.querySelector("#p-text");
+
+const templateSignUp = () => {
+  return `    
+    <input class="login-form__input" type="password" name="password2" placeholder="Repetir Contraseña" />
+    <input class="login-form__input" type="text" name="code" placeholder="Código de registro" />`;
+};
 
 //cambiar entre sign in y sign up
 $btnRegister.addEventListener("click", (e) => {
   e.preventDefault();
 
   //si esta en login cambiar a registrar, si esta en registrar pasar a login
-  let dataLogin =
-    $formContainer.dataset.login == "sign-in" ? "sign-up" : "sign-in";
+  let dataLogin = $singUpContainer.dataset.up;
 
-  if (dataLogin === "sign-up") {
-    $formContainer.innerHTML = templateLogin("Registrate", dataLogin);
-    // $textFooterForm.innerText = "Ya tienes una cuenta?";
-    // $btnRegister.innerText = "";
+  if (dataLogin === "inactive") {
+    $singUpContainer.innerHTML = templateSignUp();
+    $singUpContainer.dataset.up = "active";
   } else {
-    $formContainer.innerHTML = templateLogin("Iniciar sesión", dataLogin);
+    $singUpContainer.innerHTML = "";
+    $singUpContainer.dataset.up = "inactive";
   }
 
-  //cambiar data-set
-  $formContainer.dataset.login = dataLogin;
+  // //cambiar data-set
+  // $singUpContainer.dataset.login = dataLogin;
 });
 
-//Por defecto se renderiza el sign in
-$formContainer.innerHTML = templateLogin(
-  "Iniciar sesión",
-  $formContainer.dataset.login
-);
+$formLogin.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const fd = new FormData($formLogin);
+
+  let entries = Array.from(fd.entries());
+
+  console.log(entries);
+});

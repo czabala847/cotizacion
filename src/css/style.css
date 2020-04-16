@@ -279,6 +279,9 @@ input[type="file"] {
   border: 1px solid rgba(0, 0, 0, 0.4);
   color: black;
   margin-bottom: 1rem;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 /*-----------------------------------------*\
