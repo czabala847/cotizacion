@@ -1,0 +1,13 @@
+/*-----------------------------------------*\
+                  TYPOGRAPHY
+\*-----------------------------------------*/
+
+.link {
+  color: $color-purple;
+  transition: 0.3s;
+  font-weight: bold;
+
+  &:hover {
+    color: $color-yellow;
+  }
+}

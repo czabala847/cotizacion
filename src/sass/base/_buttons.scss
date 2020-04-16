@@ -2,7 +2,7 @@
                   BUTTONS
 \*-----------------------------------------*/
 .btn {
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   border-radius: 15px;
   border: none;
   font-family: $font-base;
@@ -14,5 +14,12 @@
 
   &:hover {
     cursor: pointer;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
   }
 }

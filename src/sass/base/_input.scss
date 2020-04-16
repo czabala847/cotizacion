@@ -8,4 +8,10 @@ textarea {
   font-family: $font-base;
   background-color: $color-dark-gray;
   color: $color-white;
+  font-size: $font-size-base;
+}
+
+input[type="file"] {
+  box-sizing: border-box;
+  font-size: $font-size-secundary;
 }

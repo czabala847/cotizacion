@@ -8,7 +8,7 @@ htmlHeader('Nueva Cotización');
   <div class="container">
     <div class="quotation-container">
       <article class="quotation__detail">
-        <h1 class="quotation__detail--title">Envia tu cotización</h1>
+        <h1 class="title-primary">Envia tu cotización</h1>
         <p class="quotation__detail--description">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit.
           Deserunt atque at quidem culpa dolore quis accusantium.

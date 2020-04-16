@@ -12,13 +12,17 @@ htmlHeader('Cotización');
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur cumque quam fugiat perferendis accusantium consequuntur officia quia qui repudiandae dicta nihil nostrum soluta a, laborum nisi corporis hic quos officiis?</p>
       </div>
       <div class="login-form">
-        <h2>Ingresar</h2>
-        <form class="quotation__form" action="" autocomplete="off">
+        <h2>Iniciar sesión</h2>
+        <form class="quotation__form" action="" autocomplete="off" method="POST" data-login="sign-in">
           <input class="login-form__input" type="text" name="user" placeholder="Usuario" />
           <input class="login-form__input" type="password" name="password" placeholder="Contraseña" />
+          <input class="login-form__input" type="password" name="password2" placeholder="Repetir Contraseña" />
+          <input class="login-form__input" type="text" name="code" placeholder="Código de registro" />
           <input class="btn btn--primary" type="submit" value="Enviar" />
         </form>
-        <a href="">Registrate</a>
+        <p>
+          No tienes una cuenta? <a class="link" href="">Registrate</a>
+        </p>
       </div>
     </div>
   </div>
@@ -26,9 +30,7 @@ htmlHeader('Cotización');
 
 
 </div>
-<!-- <script src="src/js/cotizacion.js"></script> -->
-<!-- <script src="src/js/index.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+<script src="src/js/login.js"></script>
 </body>
 
 </html>

@@ -6,6 +6,8 @@
   text-shadow: $text-shadow;
   margin: 0;
   text-transform: uppercase;
+  letter-spacing: 3px;
+  color: $color-yellow;
 }
 
 @media only screen and (max-width: 768px) {

@@ -3,8 +3,6 @@
 \*-----------------------------------------*/
 
 .login {
-  margin-top: 3rem;
-
   & .title-primary {
     text-transform: initial;
   }
@@ -12,16 +10,21 @@
 
 .login-form {
   color: $color-black;
-  padding: 1rem;
+  padding: 2rem 1rem;
   background-color: $color-white;
   border-radius: 5px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
   text-align: center;
 
   & h2 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin: 0 0 2rem;
     text-align: left;
+  }
+
+  & form {
+    width: 90%;
+    margin: 0 auto;
   }
 
   & .login-form__input {
@@ -32,6 +35,5 @@
 }
 
 .login-container {
-  @include m-container-grid();
-  grid-template-columns: 1fr 40%;
+  @extend .section-container;
 }

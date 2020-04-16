@@ -12,6 +12,15 @@
   display: grid;
   grid-template-columns: minmax(auto, 1024px);
   justify-content: $container-justify;
+  height: $height-full;
+}
+
+.section-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 2rem;
+  align-items: $container-align;
+  height: 70%;
 }
 
 @media only screen and (max-width: 1024px) {
