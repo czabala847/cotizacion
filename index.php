@@ -8,13 +8,18 @@ htmlHeader('Cotización');
   <div class="container">
     <div class="login-container">
       <div class="login-description">
-        <p>Bienvenida, descrición...</p>
+        <h1 class="title-primary">Hola, bienvenido</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur cumque quam fugiat perferendis accusantium consequuntur officia quia qui repudiandae dicta nihil nostrum soluta a, laborum nisi corporis hic quos officiis?</p>
       </div>
-      <form class="login-form quotation__form" action="" autocomplete="off">
-        <input type="text" name="user" placeholder="Usuario" />
-        <input type="password" name="password" placeholder="Contraseña" />
-        <input class="btn btn--primary" type="submit" value="Enviar" />
-      </form>
+      <div class="login-form">
+        <h2>Ingresar</h2>
+        <form class="quotation__form" action="" autocomplete="off">
+          <input class="login-form__input" type="text" name="user" placeholder="Usuario" />
+          <input class="login-form__input" type="password" name="password" placeholder="Contraseña" />
+          <input class="btn btn--primary" type="submit" value="Enviar" />
+        </form>
+        <a href="">Registrate</a>
+      </div>
     </div>
   </div>
 </section>
