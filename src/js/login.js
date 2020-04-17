@@ -41,9 +41,10 @@ $formLogin.addEventListener("submit", async (e) => {
 
   // debugger;
 
-  if (result.response) {
+  if (result.response === true) {
     window.location = "http://localhost/cotizacion/nueva-cotizacion.php";
   } else {
     swal(result.response, "", "error");
+    $formLogin.reset();
   }
 });
