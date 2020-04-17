@@ -21,7 +21,7 @@ $form.addEventListener("submit", async (e) => {
 
     //Si los archivos cargados no arrojan error (0), hacer el fetch
     if (!files.error) {
-      const result = await fetchData("./App/Model/insert.php", fd);
+      const result = await fetchData("./App/Model/AgregarCotizacion.php", fd);
       if (result.success && result.response.success) {
         $loadingContainer.classList.remove("is-active");
         swal("Enviado Correctamente!", "", "success");

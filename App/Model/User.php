@@ -9,6 +9,29 @@ class User
   private $name;
   private $password;
   private $status;
+  private $db;
+
+  public function __construct()
+  {
+    $this->db = new DataBase();
+  }
+
+  public function userRegistered($identification, $pass)
+  {
+    $querySearch = "SELECT * FROM usuario WHERE cedula = ?";
+
+    $user = $this->db->select($querySearch, array($identification), false);
+
+    if (!empty($user)) {
+      if (password_verify($pass, $user["contrasena"])) {
+        return true;
+      } else {
+        return "Contraseña incorrecta";
+      }
+    } else {
+      return "Usuario no encontrado";
+    }
+  }
 
   public function getId()
   {
@@ -50,15 +73,13 @@ class User
     $this->name = $name;
   }
 
-  // public function __construct($name, $identification, $email, $subject, $files)
-  // {
-  //   $this->db = new DataBase();
-  //   $this->uf = new uploadFile();
-  //   //Guardar datos
-  //   $this->setName($name);
-  //   $this->setIdentification($identification);
-  //   $this->setEmail($email);
-  //   $this->setSubject($subject);
-  //   $this->setFiles($files);
-  // }
+  public function setPassword($password)
+  {
+    $this->password = $password;
+  }
+
+  public function setStatus($status)
+  {
+    $this->status = $status;
+  }
 }

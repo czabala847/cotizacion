@@ -82,7 +82,7 @@ class DataBase
     return $this->idQuery;
   }
 
-  public function setIdQuery($idQuery)
+  private function setIdQuery($idQuery)
   {
     $this->idQuery = $idQuery;
   }

@@ -87,24 +87,6 @@ class Cotizacion
     return ["success" => true, "detalle" => $idNewDetail];
   }
 
-  //Genera código automatico para la cotización y el detalle
-  // public function generateCode($table, $prefix)
-  // {
-  //   $selectCount = "SELECT COUNT(*) AS cantidad FROM $table";
-  //   $quantity = $this->db->select($selectCount, [], false)["cantidad"];
-
-  //   $quantity = intval($quantity);
-
-  //   // Aumentar cantidad encontrada
-  //   $quantity++;
-
-  //   if ($quantity < 10) {
-  //     return $prefix . "0" . strval($quantity);
-  //   } else {
-  //     return $prefix .= strval($quantity);
-  //   }
-  // }
-
   // Si existe detalle, de la cotización
   private function exitsDetail($codeQuotation)
   {

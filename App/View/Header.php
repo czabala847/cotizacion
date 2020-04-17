@@ -15,19 +15,5 @@ function htmlHeader($title)
 </head>
 
 <body>
-  <div id=\"app\">
-    <header class=\"header\">
-      <div class=\"container\">
-        <nav class=\"header-menu\">
-          <ul class=\"header-menu__list\">
-            <li class=\"header-menu__list--item\">
-              <a class=\"header-menu__list--link\" href=\"#\">Inicio</a>
-            </li>
-            <li class=\"header-menu__list--item\">
-              <a class=\"header-menu__list--link\" href=\"#\">Administración</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>";
+  <div id=\"app\">";
 }

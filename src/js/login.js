@@ -38,5 +38,12 @@ $formLogin.addEventListener("submit", async (e) => {
   const fd = new FormData($formLogin);
 
   const result = await fetchData("./App/Model/Login.php", fd);
-  console.log(result);
+
+  // debugger;
+
+  if (result.response) {
+    window.location = "http://localhost/cotizacion/nueva-cotizacion.php";
+  } else {
+    swal(result.response, "", "error");
+  }
 });
