@@ -1,4 +1,4 @@
-import FetchData from "./FetchData.js";
+import { fetchData } from "./FetchData.js";
 
 const $singUpContainer = document.querySelector("#sign-up");
 const $btnRegister = document.querySelector("#registerLogin");
@@ -36,8 +36,7 @@ $formLogin.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const fd = new FormData($formLogin);
-  const fetchData = new FetchData();
 
-  const result = await fetchData.fetchData("./App/Model/Login.php", fd);
+  const result = await fetchData("./App/Model/Login.php", fd);
   console.log(result);
 });

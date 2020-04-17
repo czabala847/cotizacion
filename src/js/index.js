@@ -1,4 +1,4 @@
-import FetchData from "./FetchData.js";
+import { fetchData } from "./FetchData.js";
 
 const $form = document.getElementById("frm-cotizacion");
 const $loadingContainer = document.getElementById("loading");
@@ -7,7 +7,6 @@ const $loadingContainer = document.getElementById("loading");
 $form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const fd = new FormData($form);
-  const fetchData = new FetchData();
 
   //FormData.entries, devuelve un objeto con los campos y valores del formulario, se convierte en un array con Array.from
   let entries = Array.from(fd.entries());
@@ -22,7 +21,7 @@ $form.addEventListener("submit", async (e) => {
 
     //Si los archivos cargados no arrojan error (0), hacer el fetch
     if (!files.error) {
-      const result = await fetchData.fetchData("./App/Model/insert.php", fd);
+      const result = await fetchData("./App/Model/insert.php", fd);
       if (result.success && result.response.success) {
         $loadingContainer.classList.remove("is-active");
         swal("Enviado Correctamente!", "", "success");
