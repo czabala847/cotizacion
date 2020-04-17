@@ -1,6 +1,8 @@
-$singUpContainer = document.querySelector("#sign-up");
-$btnRegister = document.querySelector("#registerLogin");
-$formLogin = document.querySelector("#form-login");
+import FetchData from "./FetchData.js";
+
+const $singUpContainer = document.querySelector("#sign-up");
+const $btnRegister = document.querySelector("#registerLogin");
+const $formLogin = document.querySelector("#form-login");
 
 //Parte donde dice no tienes cuenta o ya tienes cuenta
 // $textFooterForm = document.querySelector("#p-text");
@@ -30,12 +32,12 @@ $btnRegister.addEventListener("click", (e) => {
   // $singUpContainer.dataset.login = dataLogin;
 });
 
-$formLogin.addEventListener("submit", (e) => {
+$formLogin.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const fd = new FormData($formLogin);
+  const fetchData = new FetchData();
 
-  let entries = Array.from(fd.entries());
-
-  console.log(entries);
+  const result = await fetchData.fetchData("./App/Model/Login.php", fd);
+  console.log(result);
 });

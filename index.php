@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once("./App/View/Header.php");
 
 htmlHeader('Cotización');
@@ -14,8 +15,8 @@ htmlHeader('Cotización');
       <div class="login-form">
         <h2>Iniciar Sesión</h2>
         <form id="form-login" class="quotation__form" action="" autocomplete="off" method="POST">
-          <input class="login-form__input" type="text" name="user" placeholder="Usuario" />
-          <input class="login-form__input" type="password" name="password" placeholder="Contraseña" />
+          <input class="login-form__input" type="text" name="usuario" placeholder="Usuario" />
+          <input class="login-form__input" type="password" name="contraseña" placeholder="Contraseña" />
           <div id="sign-up" data-up="inactive">
           </div>
           <input class="btn btn--primary" type="submit" value="Enviar" />
@@ -30,7 +31,7 @@ htmlHeader('Cotización');
 
 
 </div>
-<script src="src/js/login.js"></script>
+<script type="module" src="src/js/login.js"></script>
 </body>
 
 </html>
