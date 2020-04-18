@@ -1,4 +1,4 @@
-import { fetchData } from "./FetchData.js";
+import { fetchData, emptyField } from "./FormFetch.js";
 
 const $form = document.getElementById("frm-cotizacion");
 const $loadingContainer = document.getElementById("loading");
@@ -36,19 +36,6 @@ $form.addEventListener("submit", async (e) => {
     swal(`El campo ${isEmptyField[0]} está vacío`, "", "error");
   }
 });
-
-/**** Comprobar campos vacios ****/
-const emptyField = (entries) => {
-  let dataEntries = entries.find((entry) => {
-    if (entry[0] === "archivo[]") {
-      return entry[1].size <= 0;
-    } else {
-      return entry[1].length <= 0 && entry[0] !== "asunto";
-    }
-  });
-
-  return dataEntries;
-};
 
 /**** Comprobar si los archivos son validos, para cargarlos al servidor, solo JPG y PDF, maximo 3MB ***/
 const okFiles = (entries) => {

@@ -30,8 +30,8 @@ htmlHeader('index');
       <div class="login-form">
         <h2>Iniciar Sesión</h2>
         <form id="form-login" class="quotation__form" action="" autocomplete="off" method="POST">
-          <input class="login-form__input" type="text" name="usuario" placeholder="Usuario" />
-          <input class="login-form__input" type="password" name="contraseña" placeholder="Contraseña" />
+          <input class="login-form__input" type="text" name="usuario" placeholder="Usuario" required />
+          <input class="login-form__input" type="password" name="contraseña" placeholder="Contraseña" required />
           <div id="sign-up" data-up="inactive">
           </div>
           <input class="btn btn--primary" type="submit" value="Enviar" />

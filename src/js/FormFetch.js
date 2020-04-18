@@ -12,3 +12,16 @@ export async function fetchData(url, data) {
     return { success: false, error };
   }
 }
+
+/**** Comprobar campos vacios ****/
+export const emptyField = (arrayFields) => {
+  let dataFields = arrayFields.find((entry) => {
+    if (entry[0] === "archivo[]") {
+      return entry[1].size <= 0;
+    } else {
+      return entry[1].length <= 0 && entry[0] !== "asunto";
+    }
+  });
+
+  return dataFields;
+};

@@ -1,4 +1,4 @@
-import { fetchData } from "./FetchData.js";
+import { fetchData, emptyField } from "./FormFetch.js";
 
 const $singUpContainer = document.querySelector("#sign-up");
 const $btnRegister = document.querySelector("#registerLogin");
@@ -37,14 +37,20 @@ $formLogin.addEventListener("submit", async (e) => {
 
   const fd = new FormData($formLogin);
 
-  const result = await fetchData("./App/Model/Login.php", fd);
+  let entries = Array.from(fd.entries());
 
-  // debugger;
+  //Ver campos que estan vacios
+  let isEmptyField = emptyField(entries);
 
-  if (result.response === true) {
-    window.location = "http://localhost/cotizacion/nueva-cotizacion.php";
+  if (!isEmptyField) {
+    const result = await fetchData("./App/Model/Login.php", fd);
+    if (result.response === true) {
+      window.location = "http://localhost/cotizacion/nueva-cotizacion.php";
+    } else {
+      swal(result.response, "", "error");
+      $formLogin.reset();
+    }
   } else {
-    swal(result.response, "", "error");
-    $formLogin.reset();
+    swal(`El campo ${isEmptyField[0]} está vacío`, "", "error");
   }
 });
