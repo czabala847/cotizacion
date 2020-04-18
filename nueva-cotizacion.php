@@ -59,7 +59,7 @@ htmlHeader('Nueva Cotización');
 </div>
 <!-- <script src="src/js/cotizacion.js"></script> -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script type="module" src="src/js/index.js"></script>
+<script type="module" src="src/js/Cotizacion.js"></script>
 </body>
 
 </html>

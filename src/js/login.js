@@ -10,7 +10,7 @@ const $formLogin = document.querySelector("#form-login");
 const templateSignUp = () => {
   return `    
     <input class="login-form__input" type="password" name="password2" placeholder="Repetir Contraseña" />
-    <input class="login-form__input" type="text" name="code" placeholder="Código de registro" />`;
+    <input class="login-form__input" type="text" name="nombre" placeholder="Nombre completo" />`;
 };
 
 //cambiar entre sign in y sign up

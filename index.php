@@ -47,7 +47,7 @@ htmlHeader('index');
 
 </div>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script type="module" src="src/js/login.js"></script>
+<script type="module" src="src/js/Login.js"></script>
 </body>
 
 </html>
