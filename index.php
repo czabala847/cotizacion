@@ -32,6 +32,7 @@ htmlHeader('Inicio');
         <form id="form-login" class="quotation__form" action="" autocomplete="off" method="POST">
           <input class="login-form__input" type="text" name="cedula" placeholder="Cédula" required />
           <input class="login-form__input" type="password" name="contraseña" placeholder="Contraseña" required />
+          <input type="hidden" name="login" value="" />
           <input class="btn btn--primary" type="submit" value="Enviar" />
         </form>
         <p>

@@ -84,17 +84,18 @@ $formLogin.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const fd = new FormData($formLogin);
-  let dataLogin = $formContainer.dataset.up;
-  let equalPassword = true;
+  let signUp = $formContainer.dataset.up;
+
+  fd.set("login", "sign-in");
 
   //Verificar si el formulario es de registro
-  if (dataLogin == "active") {
-    if (fd.get("contraseña" !== fd.get("contraseña2"))) {
-      equalPassword = false;
+  if (signUp == "active") {
+    if (fd.get("contraseña") !== fd.get("contraseña2")) {
+      console.log("no son iguales");
+      return swal("Las contraseñas ingresadas no coinciden", "", "error");
     }
-  }
 
-  if (equalPassword) {
+    fd.set("login", "sign-up");
   }
 
   let fields = Array.from(fd.entries());
@@ -104,12 +105,14 @@ $formLogin.addEventListener("submit", async (e) => {
 
   if (!isEmptyField) {
     const result = await fetchData("./App/Model/Login.php", fd);
-    if (result.response === true) {
-      window.location = "./nueva-cotizacion.php";
-    } else {
-      swal(result.response, "", "error");
-      $formLogin.reset();
-    }
+    debugger;
+
+    // if (result.response === true) {
+    //   window.location = "./nueva-cotizacion.php";
+    // } else {
+    //   swal(result.response, "", "error");
+    //   $formLogin.reset();
+    // }
   } else {
     swal(`El campo ${isEmptyField[0]} está vacío`, "", "error");
   }

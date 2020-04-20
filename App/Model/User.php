@@ -33,6 +33,19 @@ class User
     }
   }
 
+  private function existUser($identification)
+  {
+  }
+
+  public function consultUser($identification, $name, $password)
+  {
+    $querySearch = "SELECT * FROM usuario WHERE cedula = ?";
+
+    $user = $this->db->select($querySearch, array($identification), false);
+
+    return $user;
+  }
+
   public function getId()
   {
     return $this->id;
