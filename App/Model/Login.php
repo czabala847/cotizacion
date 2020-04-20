@@ -2,7 +2,7 @@
 session_start();
 require_once("User.php");
 
-$user = $_POST["usuario"];
+$user = $_POST["cedula"];
 $password = $_POST["contraseña"];
 
 $newUser = new User();

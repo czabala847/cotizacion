@@ -2,7 +2,7 @@
 session_start();
 require_once("./App/View/Header.php");
 
-htmlHeader('index');
+htmlHeader('Inicio');
 ?>
 
 <header class="header">
@@ -27,17 +27,15 @@ htmlHeader('index');
         <h1 class="title-primary">Hola, bienvenido</h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur cumque quam fugiat perferendis accusantium consequuntur officia quia qui repudiandae dicta nihil nostrum soluta a, laborum nisi corporis hic quos officiis?</p>
       </div>
-      <div class="login-form">
+      <div class="login-form" id="container-form" data-up="inactive">
         <h2>Iniciar Sesión</h2>
         <form id="form-login" class="quotation__form" action="" autocomplete="off" method="POST">
-          <input class="login-form__input" type="text" name="usuario" placeholder="Usuario" required />
+          <input class="login-form__input" type="text" name="cedula" placeholder="Cédula" required />
           <input class="login-form__input" type="password" name="contraseña" placeholder="Contraseña" required />
-          <div id="sign-up" data-up="inactive">
-          </div>
           <input class="btn btn--primary" type="submit" value="Enviar" />
         </form>
         <p>
-          <span id="p-text">No tienes una cuenta?</span> <a id="registerLogin" class="link" href="">Registrate</a>
+          <span>No tienes una cuenta?</span> <a id="registerLogin" class="link" href="">Registrate</a>
         </p>
       </div>
     </div>
