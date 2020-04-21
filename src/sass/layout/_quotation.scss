@@ -35,7 +35,8 @@
     background-position-y: 60vh;
   }
 
-  .quotation-container {
+  .quotation-container,
+  .login-container {
     grid-template-columns: 1fr;
   }
 }

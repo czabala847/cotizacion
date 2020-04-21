@@ -241,7 +241,8 @@ input[type="file"] {
   .quotation {
     background-position-y: 60vh;
   }
-  .quotation-container {
+  .quotation-container,
+  .login-container {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
   }
@@ -250,6 +251,13 @@ input[type="file"] {
 /*-----------------------------------------*\
                   LOGIN
 \*-----------------------------------------*/
+.login {
+  background: url("../assets/495078-PHE69C-919.png") no-repeat;
+  background-size: 500px;
+  background-position-y: 65%;
+  background-position-x: 20%;
+}
+
 .login .title-primary {
   text-transform: initial;
 }
@@ -282,6 +290,18 @@ input[type="file"] {
   width: 100%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+.login-description {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+  margin-top: 1rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .quotation {
+    background-position-y: 60vh;
+  }
 }
 
 /*-----------------------------------------*\

@@ -25,7 +25,10 @@ htmlHeader('Inicio');
     <div class="login-container">
       <div class="login-description">
         <h1 class="title-primary">Hola, bienvenido</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur cumque quam fugiat perferendis accusantium consequuntur officia quia qui repudiandae dicta nihil nostrum soluta a, laborum nisi corporis hic quos officiis?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur cumque quam fugiat perferendis accusantium consequuntur.</p>
+        <figure>
+          <!-- <img src="./src/assets/495078-PHE69C-919.png" alt="login imagen" /> -->
+        </figure>
       </div>
       <div class="login-form" id="container-form" data-up="inactive">
         <h2>Iniciar Sesión</h2>

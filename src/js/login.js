@@ -107,12 +107,12 @@ $formLogin.addEventListener("submit", async (e) => {
     const result = await fetchData("./App/Model/Login.php", fd);
     debugger;
 
-    // if (result.response === true) {
-    //   window.location = "./nueva-cotizacion.php";
-    // } else {
-    //   swal(result.response, "", "error");
-    //   $formLogin.reset();
-    // }
+    if (result.response === true) {
+      window.location = "./nueva-cotizacion.php";
+    } else {
+      swal(result.response, "", "error");
+      $formLogin.reset();
+    }
   } else {
     swal(`El campo ${isEmptyField[0]} está vacío`, "", "error");
   }

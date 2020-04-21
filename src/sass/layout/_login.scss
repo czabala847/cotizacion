@@ -3,6 +3,11 @@
 \*-----------------------------------------*/
 
 .login {
+  background: url("../assets/495078-PHE69C-919.png") no-repeat;
+  background-size: 500px;
+  background-position-y: 65%;
+  background-position-x: 20%;
+
   & .title-primary {
     text-transform: initial;
   }
@@ -38,4 +43,15 @@
 
 .login-container {
   @extend .section-container;
+}
+
+.login-description {
+  align-self: flex-start;
+  margin-top: 1rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .quotation {
+    background-position-y: 60vh;
+  }
 }
