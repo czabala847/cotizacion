@@ -3,11 +3,6 @@
 \*-----------------------------------------*/
 
 .login {
-  background: url("../assets/495078-PHE69C-919.png") no-repeat;
-  background-size: 500px;
-  background-position-y: 65%;
-  background-position-x: 20%;
-
   & .title-primary {
     text-transform: initial;
   }
@@ -20,6 +15,7 @@
   border-radius: 5px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
   text-align: center;
+  @include m-flex(space-evenly, initial, column);
 
   & h2 {
     font-size: 1.8rem;
@@ -43,15 +39,27 @@
 
 .login-container {
   @extend .section-container;
+  align-items: initial;
+  padding-top: 3rem;
+  height: 60%;
+
+  & .login-description {
+    padding-top: 3rem;
+    text-align: center;
+    background: url("../assets/495078-PHE69C-919.png") no-repeat;
+    background-size: 100%;
+    background-position-y: bottom;
+    background-position-x: center;
+  }
 }
 
-.login-description {
-  align-self: flex-start;
-  margin-top: 1rem;
-}
+// .login-description {
+//   align-self: flex-start;
+//   margin-top: 1rem;
+// }
 
 @media only screen and (max-width: 768px) {
-  .quotation {
-    background-position-y: 60vh;
+  .login-description {
+    background-image: none !important;
   }
 }
