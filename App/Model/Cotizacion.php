@@ -34,7 +34,7 @@ class Cotizacion
 
     $queryInsert = "INSERT INTO cotizacion (nombre, cedula, correo, asunto) VALUES (?, ?, ? , ?)";
     $response = $this->db->modification($queryInsert, $params);
-    //Codigo de la cotización, es el id auto de la base de datos
+    //Codigo de la cotización, es el id que se genera automaticamente de la base de datos
     $idNewQuotation = $this->db->getIdQuery();
     $this->setCode($idNewQuotation);
 

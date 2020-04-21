@@ -16,34 +16,61 @@ class User
     $this->db = new DataBase();
   }
 
-  public function userRegistered($identification, $pass)
+  //Validar si un usuario se encuentra registrado
+  private function existUser($identification)
   {
     $querySearch = "SELECT * FROM usuario WHERE cedula = ?";
-
     $user = $this->db->select($querySearch, array($identification), false);
 
+    //Si se encuentra retornar el resultado de la consulta
     if (!empty($user)) {
-      if (password_verify($pass, $user["contrasena"])) {
-        return true;
-      } else {
-        return "Contraseña incorrecta";
-      }
+      return $user;
     } else {
-      return "Usuario no encontrado";
+      return false;
     }
   }
 
-  private function existUser($identification)
+  //Login
+  public function signIn($identification, $pass)
   {
+
+    $user = $this->existUser($identification);
+
+    if (!$user) {
+      return "El usuario ingresado no existe";
+    } else if (password_verify($pass, $user["contrasena"])) {
+      return true;
+    } else {
+      return "Contraseña incorrecta";
+    }
   }
 
-  public function consultUser($identification, $name, $password)
+  //Registro
+  public function signUp($identification, $name, $password)
   {
-    $querySearch = "SELECT * FROM usuario WHERE cedula = ?";
+    $user = $this->existUser($identification);
 
-    $user = $this->db->select($querySearch, array($identification), false);
+    if (!$user) {
 
-    return $user;
+      //Guardar los parametros
+      $this->setIdentification($identification);
+      $this->setName($name);
+      $this->setPassword(password_hash($password, PASSWORD_DEFAULT));
+      $this->setStatus("A");
+
+      $queryInsert = "INSERT INTO usuario (cedula, nombre, contrasena, estado) VALUES (?, ?, ? , ?)";
+      $response = $this->db->modification($queryInsert, array($this->getIdentification(), $this->getName(), $this->getPassword(), $this->getStatus()));
+
+      return $response;
+
+      if ($response) {
+        return $response;
+      } else {
+        return "Ha ocurrido un error al crear el usuario";
+      }
+    } else {
+      return "usuario ya se encuentra creado";
+    }
   }
 
   public function getId()
@@ -76,9 +103,9 @@ class User
     $this->id = $id;
   }
 
-  public function setIdentification($id)
+  public function setIdentification($identification)
   {
-    $this->id = $id;
+    $this->identification = $identification;
   }
 
   public function setName($name)

@@ -31,25 +31,38 @@ class DataBase
 
   private function myQuery($query, $params)
   {
-    $this->getConection();
-    $stmt = $this->pdo->prepare($query);
 
-    if (empty($params)) {
-      $stmt->execute();
-    } else {
-      $stmt->execute($params);
+    try {
+      $this->getConection();
+      $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+      $stmt = $this->pdo->prepare($query);
+
+      if (empty($params)) {
+        $stmt->execute();
+      } else {
+
+        // echo '<pre>';
+        // var_dump($params);
+        // echo '</pre>';
+
+        $stmt->execute($params);
+      }
+
+      // print_r($stmt->errorInfo());
+
+      $auxStmt = $stmt;
+
+      //Guardar id de la fila afectada
+      $this->setIdQuery($this->pdo->lastInsertId());
+
+      //cerrar conexión
+      $stmt = null;
+      $this->pdo = null;
+
+      return $auxStmt;
+    } catch (Exception $e) {
+      return $e->getMessage();
     }
-
-    $auxStmt = $stmt;
-
-    //Guardar id de la fila afectada
-    $this->setIdQuery($this->pdo->lastInsertId());
-
-    //cerrar conexión
-    $stmt = null;
-    $this->pdo = null;
-
-    return $auxStmt;
   }
 
   //Para los select
@@ -69,6 +82,11 @@ class DataBase
   {
 
     $result = $this->myQuery($query, $params);
+
+    // if (!$result) {
+    //   return "$this->pdo->errorInfo();";
+    // }
+
     $affectedRows =   $result->rowCount();
 
     if ($affectedRows > 0) {

@@ -2,17 +2,27 @@
 session_start();
 require_once("User.php");
 
-$user = $_POST["cedula"];
+$identification = $_POST["cedula"];
 $password = $_POST["contraseña"];
 $login = $_POST["login"];
 
 $newUser = new User();
 
-$response = $newUser->userRegistered($user, $password);
 
-if ($response) {
-  $_SESSION["newsession"] = $user;
-  // header("Location: ../../nueva-cotizacion.php");
+if ($login === 'sign-in') {
+  $response = $newUser->signIn($identification, $password);
+} else {
+  $name = $_POST["nombre"];
+  $response = $newUser->signUp($identification, $name, $password);
 }
 
-echo json_encode(true);
+if ($response === true) {
+
+  if ($login === 'sign-in') {
+    $_SESSION["newsession"] = $identification;
+    // header("Location: ../../nueva-cotizacion.php");
+  }
+  echo json_encode(["success" => true, "login" => $login]);
+} else {
+  echo json_encode(["success" => false, "errorMessage" => $response]);
+}

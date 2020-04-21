@@ -91,7 +91,7 @@ $formLogin.addEventListener("submit", async (e) => {
   //Verificar si el formulario es de registro
   if (signUp == "active") {
     if (fd.get("contraseña") !== fd.get("contraseña2")) {
-      console.log("no son iguales");
+      $formLogin.reset();
       return swal("Las contraseñas ingresadas no coinciden", "", "error");
     }
 
@@ -106,14 +106,18 @@ $formLogin.addEventListener("submit", async (e) => {
   if (!isEmptyField) {
     const result = await fetchData("./App/Model/Login.php", fd);
     debugger;
-
-    if (result.response === true) {
-      window.location = "./nueva-cotizacion.php";
+    if (result.response.success) {
+      if (result.response.login == "sign-in") {
+        window.location = "./nueva-cotizacion.php";
+      } else {
+        swal("Usuario creado correctamente", "", "success");
+      }
     } else {
-      swal(result.response, "", "error");
-      $formLogin.reset();
+      swal(result.response.errorMessage, "", "error");
     }
   } else {
     swal(`El campo ${isEmptyField[0]} está vacío`, "", "error");
   }
+
+  $formLogin.reset();
 });
