@@ -40,15 +40,15 @@
 .login-container {
   @extend .section-container;
   align-items: initial;
-  padding-top: 3rem;
-  height: 60%;
+  padding-top: 2rem;
+  height: 80%;
 
   & .login-description {
     padding-top: 3rem;
     text-align: center;
     background: url("../assets/495078-PHE69C-919.png") no-repeat;
     background-size: 100%;
-    background-position-y: bottom;
+    background-position-y: 90%;
     background-position-x: center;
   }
 }
@@ -61,5 +61,16 @@
 @media only screen and (max-width: 768px) {
   .login-description {
     background-image: none !important;
+  }
+}
+
+@media only screen and (max-height: 668px) {
+  .login-container {
+    height: auto;
+    padding: 0 0 1rem;
+  }
+
+  .login-description {
+    padding-top: 0 !important;
   }
 }
