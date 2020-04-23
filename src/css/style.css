@@ -36,6 +36,13 @@ figure {
       grid-template-rows: 90px 1fr;
 }
 
+@media only screen and (max-height: 600px) {
+  #app {
+    height: auto;
+    padding-bottom: 1rem;
+  }
+}
+
 @media only screen and (max-width: 468px) {
   #app {
     height: auto;
@@ -57,6 +64,17 @@ figure {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.grid-center {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .container {
@@ -257,8 +275,21 @@ input[type="file"] {
   text-transform: initial;
 }
 
-.login-form {
-  border: 1px solid white;
+.login-container {
+  -webkit-box-align: initial;
+      -ms-flex-align: initial;
+          align-items: initial;
+  padding-top: 2rem;
+  height: 80%;
+}
+
+.login-container .login-description {
+  padding-top: 3rem;
+  text-align: center;
+}
+
+.login-container .login-description .login-description__img {
+  width: 100%;
 }
 
 .login-form .form-container {
@@ -271,59 +302,59 @@ input[type="file"] {
           box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
   text-align: center;
   width: 100%;
-  padding-top: 2rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
-.login-form h2 {
+.login-form .form-container h2 {
   font-size: 1.8rem;
   margin: 0 0 2rem;
   text-align: left;
 }
 
-.login-form form {
+.login-form .form-container form {
   width: 90%;
   margin: 0 auto;
 }
 
-.login-form .login-form__input {
+.login-form .form-container .login-form__input {
   border: 1px solid rgba(0, 0, 0, 0.4);
-  color: black;
+  color: #000;
   margin-bottom: 1rem;
   width: 100%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-.login-container {
-  -webkit-box-align: initial;
-      -ms-flex-align: initial;
-          align-items: initial;
-  padding-top: 2rem;
-  height: 80%;
-}
-
-.login-container .login-description {
-  padding-top: 3rem;
-  text-align: center;
-  background: url("../assets/495078-PHE69C-919.png") no-repeat;
-  background-size: 100%;
-  background-position-y: 90%;
-  background-position-x: center;
-}
-
 @media only screen and (max-width: 768px) {
   .login-description {
-    background-image: none !important;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 60%;
+        grid-template-columns: 1fr 60%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
   }
 }
 
-@media only screen and (max-height: 668px) {
+@media only screen and (max-height: 600px) {
   .login-container {
     height: auto;
     padding: 0 0 1rem;
   }
   .login-description {
     padding-top: 0 !important;
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  .login-description {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
+  .login-description__img {
+    display: none;
   }
 }
 

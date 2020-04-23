@@ -24,10 +24,12 @@ htmlHeader('Inicio');
   <div class="container">
     <div class="login-container">
       <div class="login-description">
-        <h1 class="title-primary">Hola, bienvenido</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur cumque quam fugiat perferendis accusantium consequuntur.</p>
+        <div class="login-decription__text">
+          <h1 class="title-primary">Hola, bienvenido</h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur cumque quam fugiat perferendis accusantium consequuntur.</p>
+        </div>
         <figure>
-          <!-- <img src="./src/assets/495078-PHE69C-919.png" alt="login imagen" /> -->
+          <img class="login-description__img" src="./src/assets/495078-PHE69C-919.png" alt="login imagen" width="400" />
         </figure>
       </div>
       <div class="login-form" id="container-form" data-up="inactive">

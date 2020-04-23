@@ -8,6 +8,12 @@
   align-items: $container-align;
 }
 
+.grid-center {
+  display: grid;
+  align-items: $container-justify;
+  justify-content: $container-justify;
+}
+
 .container {
   display: grid;
   grid-template-columns: minmax(auto, 1024px);

@@ -28,12 +28,12 @@ figure {
 //   background-position-x: 110%;
 // }
 
-// @media only screen and (max-height: 600px) {
-//   #app {
-//     height: auto;
-//     padding-bottom: 1rem;
-//   }
-// }
+@media only screen and (max-height: 600px) {
+  #app {
+    height: auto;
+    padding-bottom: 1rem;
+  }
+}
 
 @media only screen and (max-width: 468px) {
   #app {
