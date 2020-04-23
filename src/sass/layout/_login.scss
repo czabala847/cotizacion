@@ -9,13 +9,28 @@
 }
 
 .login-form {
-  color: $color-black;
-  padding: 2rem 1rem;
-  background-color: $color-white;
-  border-radius: 5px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-  text-align: center;
-  @include m-flex(space-evenly, initial, column);
+  // color: $color-black;
+  // padding: 2rem 1rem;
+  // background-color: $color-white;
+  // border-radius: 5px;
+  // box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  // text-align: center;
+  // @include m-flex(space-evenly, initial, column);
+  border: 1px solid white;
+  // display: flex;
+  // align-items: center;
+
+  & .form-container {
+    color: $color-black;
+    margin-top: 2rem;
+    padding: 2rem 1rem;
+    background-color: $color-white;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 100%;
+    padding-top: 2rem;
+  }
 
   & h2 {
     font-size: 1.8rem;
