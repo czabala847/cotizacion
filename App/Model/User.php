@@ -61,8 +61,6 @@ class User
       $queryInsert = "INSERT INTO usuario (cedula, nombre, contrasena, estado) VALUES (?, ?, ? , ?)";
       $response = $this->db->modification($queryInsert, array($this->getIdentification(), $this->getName(), $this->getPassword(), $this->getStatus()));
 
-      return $response;
-
       if ($response) {
         return $response;
       } else {

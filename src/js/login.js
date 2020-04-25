@@ -108,7 +108,7 @@ $formLogin.addEventListener("submit", async (e) => {
     debugger;
     if (result.response.success) {
       if (result.response.login == "sign-in") {
-        window.location = "./nueva-cotizacion.php";
+        window.location = "./App/View/nueva-cotizacion.php";
       } else {
         swal("Usuario creado correctamente", "", "success");
       }
