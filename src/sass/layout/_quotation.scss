@@ -16,6 +16,10 @@
   @include m-flex(initial, initial, column);
 }
 
+.quotation-btn span {
+  margin-left: 0.2rem;
+}
+
 .quotation-btn button {
   width: 25%;
 }

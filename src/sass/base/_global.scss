@@ -21,12 +21,9 @@ figure {
   grid-template-rows: $header-height 1fr;
 }
 
-// .mask-hero {
-//   background: url("../assets/SVG/mask-header-hero.svg") no-repeat;
-//   background-size: 50%;
-//   background-position-y: -30%;
-//   background-position-x: 110%;
-// }
+.hidden-element {
+  display: none !important;
+}
 
 @media only screen and (max-height: 600px) {
   #app {

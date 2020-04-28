@@ -36,6 +36,10 @@ figure {
       grid-template-rows: 90px 1fr;
 }
 
+.hidden-element {
+  display: none !important;
+}
+
 @media only screen and (max-height: 600px) {
   #app {
     height: auto;
@@ -158,6 +162,11 @@ input[type="file"] {
   color: #fff;
 }
 
+.btn--disabled {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
 .btn:hover {
   cursor: pointer;
 }
@@ -241,6 +250,10 @@ input[type="file"] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+.quotation-btn span {
+  margin-left: 0.2rem;
 }
 
 .quotation-btn button {

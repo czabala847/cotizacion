@@ -12,6 +12,11 @@
     color: $color-white;
   }
 
+  &--disabled {
+    background-color: $color-dark-gray;
+    color: $color-white;
+  }
+
   &:hover {
     cursor: pointer;
   }

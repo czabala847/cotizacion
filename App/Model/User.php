@@ -71,6 +71,11 @@ class User
     }
   }
 
+  public function showUser()
+  {
+    $query = "SELECT * FROM usuario";
+  }
+
   public function getId()
   {
     return $this->id;

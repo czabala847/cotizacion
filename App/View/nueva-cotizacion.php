@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION["newsession"])) {
-  header("Location: ./index.php");
+  header("Location: ../../index.php");
 }
 ?>
 
@@ -13,7 +13,7 @@ if (!isset($_SESSION["newsession"])) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>{$title}</title>
+  <title>Nueva cotización</title>
   <link rel="stylesheet" href="../../src/css/style.css" />
   <link href="https://fonts.googleapis.com/css?family=Cabin&display=swap" rel="stylesheet" />
 </head>
@@ -52,7 +52,7 @@ if (!isset($_SESSION["newsession"])) {
             <input type="email" placeholder="Correo" name="correo" required />
             <textarea placeholder="Comentarios" name="asunto" id="" cols="30" rows="10"></textarea>
             <div class="quotation-btn">
-              <button type="submit" class="btn btn--primary">Enviar</button>
+              <button id="btn-send" type="submit" class="btn btn--primary"><span>Enviar</span><i id="icon-loading" class="fa fa-spinner fa-spin hidden-element"></i></button>
               <input type="file" class="btn" name="archivo[]" value="Adjuntar archivos" accept="application/pdf, .jpg" multiple="multiple" required />
             </div>
           </form>
@@ -69,7 +69,9 @@ if (!isset($_SESSION["newsession"])) {
 
   </div>
   <!-- <script src="src/js/cotizacion.js"></script> -->
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+  <script src="https://kit.fontawesome.com/2028b75fa6.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <script type="module" src="../../src/js/Cotizacion.js"></script>
 </body>
 
