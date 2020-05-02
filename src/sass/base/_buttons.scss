@@ -13,8 +13,9 @@
   }
 
   &--disabled {
-    background-color: $color-dark-gray;
+    background-color: $color-gray;
     color: $color-white;
+    cursor: not-allowed !important;
   }
 
   &:hover {

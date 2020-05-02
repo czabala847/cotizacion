@@ -1,8 +1,10 @@
-import { fetchData, emptyField } from "./FormFetch.js";
+import { fetchData, emptyField, fetchLoading } from "./FormFetch.js";
 
 const $formContainer = document.querySelector("#container-form");
 const $formLogin = document.querySelector("#form-login");
 const $btnRegister = document.querySelector("#registerLogin");
+const $iconLoading = document.querySelector("#icon-loading");
+const $btnSend = document.querySelector("#btn-send");
 
 //Cambiar texto del formulario dependiendo si es sign in o sign up
 const changeTextForm = (
@@ -104,8 +106,9 @@ $formLogin.addEventListener("submit", async (e) => {
   let isEmptyField = emptyField(fields);
 
   if (!isEmptyField) {
+    fetchLoading($iconLoading, $btnSend, true);
+
     const result = await fetchData("./App/Model/Login.php", fd);
-    debugger;
     if (result.response.success) {
       if (result.response.login == "sign-in") {
         window.location = "./App/View/nueva-cotizacion.php";
@@ -119,5 +122,6 @@ $formLogin.addEventListener("submit", async (e) => {
     swal(`El campo ${isEmptyField[0]} está vacío`, "", "error");
   }
 
+  fetchLoading($iconLoading, $btnSend, false);
   $formLogin.reset();
 });

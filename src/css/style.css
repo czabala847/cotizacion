@@ -163,8 +163,9 @@ input[type="file"] {
 }
 
 .btn--disabled {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: #6c757d;
   color: #fff;
+  cursor: not-allowed !important;
 }
 
 .btn:hover {
@@ -258,10 +259,17 @@ input[type="file"] {
 
 .quotation-btn button {
   width: 25%;
+  position: relative;
 }
 
 .quotation-btn input {
   width: 60%;
+}
+
+#icon-loading {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -278,6 +286,10 @@ input[type="file"] {
   .login-container {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
+  }
+  .quotation-btn button,
+  .quotation-btn input {
+    width: 100%;
   }
 }
 
@@ -337,6 +349,18 @@ input[type="file"] {
   width: 100%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+.form-login__btn {
+  position: relative;
+}
+
+.form-login__btn input {
+  width: 100%;
+}
+
+.form-login__btn i {
+  color: #fff;
 }
 
 @media only screen and (max-width: 768px) {

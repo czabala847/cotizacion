@@ -23,6 +23,7 @@ class DataBase
 
     try {
       $this->pdo = new PDO($this->link, $this->user, $this->pass);
+      $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     } catch (PDOException $e) {
       print "¡Error!: " . $e->getMessage() . "<br/>";
       die();
@@ -34,16 +35,11 @@ class DataBase
 
     try {
       $this->getConection();
-      $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
       $stmt = $this->pdo->prepare($query);
 
       if (empty($params)) {
         $stmt->execute();
       } else {
-
-        // echo '<pre>';
-        // var_dump($params);
-        // echo '</pre>';
 
         $stmt->execute($params);
       }
@@ -82,12 +78,9 @@ class DataBase
   {
 
     $result = $this->myQuery($query, $params);
-
-    // if (!$result) {
-    //   return "$this->pdo->errorInfo();";
-    // }
-
     $affectedRows =   $result->rowCount();
+
+    $result = null;
 
     if ($affectedRows > 0) {
       return true;

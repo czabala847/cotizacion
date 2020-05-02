@@ -1,4 +1,4 @@
-import { fetchData, emptyField } from "./FormFetch.js";
+import { fetchData, emptyField, fetchLoading } from "./FormFetch.js";
 
 const $form = document.getElementById("frm-cotizacion");
 const $iconLoading = document.querySelector("#icon-loading");
@@ -17,8 +17,7 @@ $form.addEventListener("submit", async (e) => {
   let isEmptyField = emptyField(entries);
 
   if (!isEmptyField) {
-    $iconLoading.classList.remove("hidden-element");
-    $btnSend.classList.replace("btn--primary", "btn--disabled");
+    fetchLoading($iconLoading, $btnSend, true);
 
     let files = okFiles(entries);
 
@@ -27,9 +26,6 @@ $form.addEventListener("submit", async (e) => {
       const result = await fetchData("../Model/AgregarCotizacion.php", fd);
       if (result.success && result.response.success) {
         Swal.fire("Enviado Correctamente!", "", "success");
-        $iconLoading.classList.add("hidden-element");
-        $btnSend.classList.replace("btn--disabled", "btn--primary");
-        $form.reset();
       } else {
         Swal.fire(result.response.errorMessage, "", "error");
       }
@@ -39,6 +35,9 @@ $form.addEventListener("submit", async (e) => {
   } else {
     Swal.fire(`El campo ${isEmptyField[0]} está vacío`, "", "error");
   }
+
+  fetchLoading($iconLoading, $btnSend, false);
+  $form.reset();
 });
 
 /**** Comprobar si los archivos son validos, para cargarlos al servidor, solo JPG y PDF, maximo 3MB ***/

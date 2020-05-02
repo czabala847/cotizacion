@@ -57,6 +57,18 @@
   }
 }
 
+.form-login__btn {
+  position: relative;
+
+  & input {
+    width: 100%;
+  }
+
+  & i {
+    color: $color-white;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .login-description {
     display: grid;

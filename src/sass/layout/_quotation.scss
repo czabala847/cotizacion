@@ -22,10 +22,18 @@
 
 .quotation-btn button {
   width: 25%;
+  position: relative;
 }
 
 .quotation-btn input {
   width: 60%;
+}
+
+//ICONO CARGANDO BOTON
+#icon-loading {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -42,5 +50,10 @@
   .quotation-container,
   .login-container {
     grid-template-columns: 1fr;
+  }
+
+  .quotation-btn button,
+  .quotation-btn input {
+    width: 100%;
   }
 }

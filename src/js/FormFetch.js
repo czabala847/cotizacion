@@ -25,3 +25,16 @@ export const emptyField = (arrayFields) => {
 
   return dataFields;
 };
+
+/**** Mostrar el icono de loading al hacer el fetch ****/
+export const fetchLoading = (icon, btnSend, show) => {
+  icon.classList.toggle("hidden-element");
+
+  if (show) {
+    btnSend.classList.replace("btn--primary", "btn--disabled");
+    btnSend.disabled = true;
+  } else {
+    btnSend.classList.replace("btn--disabled", "btn--primary");
+    btnSend.disabled = false;
+  }
+};
