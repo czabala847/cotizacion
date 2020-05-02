@@ -36,12 +36,48 @@ if (!isset($_SESSION["newsession"])) {
         </div>
       </header>
       <section class="hero">
-        <h1>Busqueda</h1>
-        <form action="">
-          <input type="text" placeholder="Buscar">
-        </form>
+        <div class="container">
+          <h1 class="title-primary">Usuarios</h1>
+          <form action="">
+            <input type="text" placeholder="Buscar">
+          </form>
+        </div>
       </section>
     </div>
+    <section class="users">
+      <div class="container">
+        <table>
+          <thead>
+            <tr>
+              <th>Cédula</th>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th>Estado</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>1143460015</th>
+              <th>Carlos Zabala</th>
+              <th>czabala847@gmail.com</th>
+              <th>Activo</th>
+              <th>Editar</th>
+              <th>Desactivar</th>
+            </tr>
+            <tr>
+              <th>1</th>
+              <th>Prueba1</th>
+              <th>prueba1@gmail.com</th>
+              <th>Inactivo</th>
+              <th>Editar</th>
+              <th>Desactivar</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
   </div>
 </body>
 

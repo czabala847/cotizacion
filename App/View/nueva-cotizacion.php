@@ -57,13 +57,6 @@ if (!isset($_SESSION["newsession"])) {
               <input type="file" class="btn" name="archivo[]" value="Adjuntar archivos" accept="application/pdf, .jpg" multiple="multiple" required />
             </div>
           </form>
-          <div id="loading">
-            <div class="lds-roller">
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
