@@ -1,11 +1,13 @@
-import { fetchData, emptyField } from "./FormFetch.js";
+import { fetchData, emptyField, fetchLoading } from "./FormFetch.js";
 
 const $form = document.getElementById("frm-cotizacion");
-const $loadingContainer = document.getElementById("loading");
+const $iconLoading = document.querySelector("#icon-loading");
+const $btnSend = document.querySelector("#btn-send");
 
 /***** Evento de submit  *****/
 $form.addEventListener("submit", async (e) => {
   e.preventDefault();
+
   const fd = new FormData($form);
 
   //FormData.entries, devuelve un objeto con los campos y valores del formulario, se convierte en un array con Array.from
@@ -15,26 +17,27 @@ $form.addEventListener("submit", async (e) => {
   let isEmptyField = emptyField(entries);
 
   if (!isEmptyField) {
-    $loadingContainer.classList.add("is-active");
+    fetchLoading($iconLoading, $btnSend, true);
 
     let files = okFiles(entries);
 
     //Si los archivos cargados no arrojan error (0), hacer el fetch
     if (!files.error) {
-      const result = await fetchData("./App/Model/AgregarCotizacion.php", fd);
+      const result = await fetchData("../Model/AgregarCotizacion.php", fd);
       if (result.success && result.response.success) {
-        $loadingContainer.classList.remove("is-active");
-        swal("Enviado Correctamente!", "", "success");
-        $form.reset();
+        Swal.fire("Enviado Correctamente!", "", "success");
       } else {
-        swal(result.response.errorMessage, "", "error");
+        Swal.fire(result.response.errorMessage, "", "error");
       }
     } else {
-      swal(files.message, "", "error");
+      Swal.fire(files.message, "", "error");
     }
   } else {
-    swal(`El campo ${isEmptyField[0]} está vacío`, "", "error");
+    Swal.fire(`El campo ${isEmptyField[0]} está vacío`, "", "error");
   }
+
+  fetchLoading($iconLoading, $btnSend, false);
+  $form.reset();
 });
 
 /**** Comprobar si los archivos son validos, para cargarlos al servidor, solo JPG y PDF, maximo 3MB ***/

@@ -36,6 +36,10 @@ figure {
       grid-template-rows: 90px 1fr;
 }
 
+.hidden-element {
+  display: none !important;
+}
+
 @media only screen and (max-height: 600px) {
   #app {
     height: auto;
@@ -158,6 +162,12 @@ input[type="file"] {
   color: #fff;
 }
 
+.btn--disabled {
+  background-color: #6c757d;
+  color: #fff;
+  cursor: not-allowed !important;
+}
+
 .btn:hover {
   cursor: pointer;
 }
@@ -243,12 +253,23 @@ input[type="file"] {
           flex-direction: column;
 }
 
+.quotation-btn span {
+  margin-left: 0.2rem;
+}
+
 .quotation-btn button {
   width: 25%;
+  position: relative;
 }
 
 .quotation-btn input {
   width: 60%;
+}
+
+#icon-loading {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -265,6 +286,10 @@ input[type="file"] {
   .login-container {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
+  }
+  .quotation-btn button,
+  .quotation-btn input {
+    width: 100%;
   }
 }
 
@@ -326,6 +351,18 @@ input[type="file"] {
           box-sizing: border-box;
 }
 
+.form-login__btn {
+  position: relative;
+}
+
+.form-login__btn input {
+  width: 100%;
+}
+
+.form-login__btn i {
+  color: #fff;
+}
+
 @media only screen and (max-width: 768px) {
   .login-description {
     display: -ms-grid;
@@ -365,150 +402,22 @@ input[type="file"] {
 }
 
 /*-----------------------------------------*\
-              LOADER ANIMATION
+              LISTA DE USUARIOS
 \*-----------------------------------------*/
-#loading {
-  -ms-grid-column: 2;
-      grid-column-start: 2;
-  text-align: center;
-  display: none;
+.user-header-hero {
+  background: linear-gradient(150deg, #121320 50%, #363b63 100%);
+  color: #fff;
 }
 
-#loading.is-active {
-  display: initial;
+.user-header-hero .hero {
+  padding: 2rem 0;
 }
 
-.lds-roller {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
+.user-header-hero .hero .title-primary {
+  margin-bottom: 1rem;
 }
 
-.lds-roller div {
-  -webkit-animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-          animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  -webkit-transform-origin: 40px 40px;
-          transform-origin: 40px 40px;
-}
-
-.lds-roller div:after {
-  content: " ";
-  display: block;
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #ce0f3d;
-  margin: -4px 0 0 -4px;
-}
-
-.lds-roller div:nth-child(1) {
-  -webkit-animation-delay: -0.036s;
-          animation-delay: -0.036s;
-}
-
-.lds-roller div:nth-child(1):after {
-  top: 63px;
-  left: 63px;
-}
-
-.lds-roller div:nth-child(2) {
-  -webkit-animation-delay: -0.072s;
-          animation-delay: -0.072s;
-}
-
-.lds-roller div:nth-child(2):after {
-  top: 68px;
-  left: 56px;
-}
-
-.lds-roller div:nth-child(3) {
-  -webkit-animation-delay: -0.108s;
-          animation-delay: -0.108s;
-}
-
-.lds-roller div:nth-child(3):after {
-  top: 71px;
-  left: 48px;
-}
-
-.lds-roller div:nth-child(4) {
-  -webkit-animation-delay: -0.144s;
-          animation-delay: -0.144s;
-}
-
-.lds-roller div:nth-child(4):after {
-  top: 72px;
-  left: 40px;
-}
-
-.lds-roller div:nth-child(5) {
-  -webkit-animation-delay: -0.18s;
-          animation-delay: -0.18s;
-}
-
-.lds-roller div:nth-child(5):after {
-  top: 71px;
-  left: 32px;
-}
-
-.lds-roller div:nth-child(6) {
-  -webkit-animation-delay: -0.216s;
-          animation-delay: -0.216s;
-}
-
-.lds-roller div:nth-child(6):after {
-  top: 68px;
-  left: 24px;
-}
-
-.lds-roller div:nth-child(7) {
-  -webkit-animation-delay: -0.252s;
-          animation-delay: -0.252s;
-}
-
-.lds-roller div:nth-child(7):after {
-  top: 63px;
-  left: 17px;
-}
-
-.lds-roller div:nth-child(8) {
-  -webkit-animation-delay: -0.288s;
-          animation-delay: -0.288s;
-}
-
-.lds-roller div:nth-child(8):after {
-  top: 56px;
-  left: 12px;
-}
-
-@-webkit-keyframes lds-roller {
-  0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
-}
-
-@keyframes lds-roller {
-  0% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  #loading {
-    -ms-grid-column: 1;
-        grid-column-start: 1;
-  }
+.users {
+  padding: 2rem 0;
 }
 /*# sourceMappingURL=style.css.map */

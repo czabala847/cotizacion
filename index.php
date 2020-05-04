@@ -39,7 +39,10 @@ htmlHeader('Inicio');
             <input class="login-form__input" type="text" name="cedula" placeholder="Cédula" required />
             <input class="login-form__input" type="password" name="contraseña" placeholder="Contraseña" required />
             <input type="hidden" name="login" value="" />
-            <input class="btn btn--primary" type="submit" value="Enviar" />
+            <div class="form-login__btn">
+              <input id="btn-send" class="btn btn--primary" type="submit" value="Enviar" />
+              <i id="icon-loading" class="fa fa-spinner fa-spin hidden-element"></i>
+            </div>
           </form>
           <p>
             <span>No tienes una cuenta?</span> <a id="registerLogin" class="link" href="">Registrate</a>
@@ -53,6 +56,7 @@ htmlHeader('Inicio');
 
 </div>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://kit.fontawesome.com/2028b75fa6.js" crossorigin="anonymous"></script>
 <script type="module" src="src/js/Login.js"></script>
 </body>
 
