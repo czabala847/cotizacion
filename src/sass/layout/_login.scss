@@ -65,6 +65,12 @@
   }
 }
 
+@media only screen and (max-height: 679px) {
+  .login-container {
+    padding-top: 0;
+  }
+}
+
 @media only screen and (max-height: 600px) {
   .login-container {
     height: auto;
