@@ -1,6 +1,5 @@
 <?php
 // sleep(5);
-session_start();
 require_once("User.php");
 
 $identification = $_POST["cedula"];
@@ -20,6 +19,7 @@ if ($login === 'sign-in') {
 if ($response === true) {
 
   if ($login === 'sign-in') {
+    session_start();
     $_SESSION["newsession"] = $identification;
     // header("Location: ../../nueva-cotizacion.php");
   }
