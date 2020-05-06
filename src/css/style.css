@@ -193,6 +193,13 @@ input[type="file"] {
   color: #ffb227;
 }
 
+/*-----------------------------------------*\
+                TABLES
+\*-----------------------------------------*/
+th {
+  font-weight: normal;
+}
+
 /*                    *\
           HEADER
 \*                    */
@@ -419,5 +426,33 @@ input[type="file"] {
 
 .users {
   padding: 2rem 0;
+  background-color: #f4f8f9;
+}
+
+.users__table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0.5em;
+}
+
+.users__table thead tr {
+  color: #7a7b7b;
+}
+
+.users__table tbody tr {
+  background-color: #fff;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.users__table tbody tr:hover {
+  -webkit-transform: scale(1.03);
+          transform: scale(1.03);
+}
+
+.users__table th {
+  padding: 1rem;
 }
 /*# sourceMappingURL=style.css.map */

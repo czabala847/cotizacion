@@ -37,7 +37,7 @@ if (!isset($_SESSION["newsession"])) {
       </header>
       <section class="hero">
         <div class="container">
-          <h1 class="title-primary">Usuarios</h1>
+          <h1 class="title-primary">Administrador de usuarios</h1>
           <form action="">
             <input type="text" placeholder="Buscar">
           </form>
@@ -46,7 +46,7 @@ if (!isset($_SESSION["newsession"])) {
     </div>
     <section class="users">
       <div class="container">
-        <table>
+        <table class="users__table">
           <thead>
             <tr>
               <th>Cédula</th>

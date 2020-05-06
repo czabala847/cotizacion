@@ -17,4 +17,29 @@
 
 .users {
   padding: 2rem 0;
+  background-color: $color-light-gray;
+
+  &__table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0.5em;
+
+    & thead tr {
+      color: $color-gray-text;
+    }
+
+    & tbody tr {
+      background-color: $color-white;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+
+      &:hover {
+        transform: scale(1.03);
+      }
+    }
+
+    & th {
+      padding: 1rem;
+    }
+  }
 }
