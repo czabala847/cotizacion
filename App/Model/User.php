@@ -1,12 +1,13 @@
 <?php
 
-require_once("../Lib/DataBase.php");
+require_once("DataBase.php");
 
 class User
 {
   private $id;
   private $identification;
   private $name;
+  private $email;
   private $password;
   private $status;
   private $db;
@@ -46,7 +47,7 @@ class User
   }
 
   //Registro
-  public function signUp($identification, $name, $password)
+  public function signUp($identification, $name, $email, $password)
   {
     $user = $this->existUser($identification);
 
@@ -55,11 +56,12 @@ class User
       //Guardar los parametros
       $this->setIdentification($identification);
       $this->setName($name);
+      $this->setEmail($email);
       $this->setPassword(password_hash($password, PASSWORD_DEFAULT));
       $this->setStatus("A");
 
-      $queryInsert = "INSERT INTO usuario (cedula, nombre, contrasena, estado) VALUES (?, ?, ? , ?)";
-      $response = $this->db->modification($queryInsert, array($this->getIdentification(), $this->getName(), $this->getPassword(), $this->getStatus()));
+      $queryInsert = "INSERT INTO usuario (cedula, nombre, correo, contrasena, estado) VALUES (?, ?, ?, ?, ?)";
+      $response = $this->db->modification($queryInsert, array($this->getIdentification(), $this->getName(), $this->getEmail(), $this->getPassword(), $this->getStatus()));
 
       if ($response) {
         return $response;
@@ -71,7 +73,7 @@ class User
     }
   }
 
-  public function showUser()
+  public function showAllUser()
   {
     $query = "SELECT * FROM usuario";
   }
@@ -89,6 +91,11 @@ class User
   public function getName()
   {
     return $this->name;
+  }
+
+  public function getEmail()
+  {
+    return $this->email;
   }
 
   public function getPassword()
@@ -114,6 +121,11 @@ class User
   public function setName($name)
   {
     $this->name = $name;
+  }
+
+  public function setEmail($email)
+  {
+    $this->email = $email;
   }
 
   public function setPassword($password)

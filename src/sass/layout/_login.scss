@@ -3,6 +3,8 @@
 \*-----------------------------------------*/
 
 .login {
+  padding: 1rem 0;
+
   & .title-primary {
     text-transform: initial;
   }
@@ -27,7 +29,7 @@
 .login-form {
   & .form-container {
     color: $color-black;
-    margin-top: 2rem;
+    // margin-top: 2rem;
     padding: 2rem 1rem;
     background-color: $color-white;
     border-radius: 5px;

@@ -25,10 +25,9 @@ figure {
   display: none !important;
 }
 
-@media only screen and (max-height: 600px) {
+@media only screen and (max-height: 733px) {
   #app {
     height: auto;
-    padding-bottom: 1rem;
   }
 }
 

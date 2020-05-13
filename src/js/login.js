@@ -24,6 +24,8 @@ const showSignUp = (formContainer) => {
     '<input class="login-form__input" type="password" name="contraseña2" placeholder="Repetir Contraseña" required/>';
   const $fieldName =
     '<input class="login-form__input" type="text" name="nombre" placeholder="Nombre completo" required/>';
+  const $fieldEmail =
+    '<input class="login-form__input" type="email" name="email" placeholder="Correo electrónico" required/>';
 
   if (formContainer) {
     //Cambiar textos del formulario
@@ -40,6 +42,7 @@ const showSignUp = (formContainer) => {
     );
 
     fieldReference.insertAdjacentHTML("beforebegin", $fieldName);
+    fieldReference.insertAdjacentHTML("beforebegin", $fieldEmail);
     fieldReference.insertAdjacentHTML("afterend", $fieldPassword2);
   }
 };
@@ -59,10 +62,12 @@ const removeSignUp = (formContainer) => {
     let fieldPassword2 = formContainer.querySelector(
       "input[name='contraseña2']"
     );
+    let fieldEmail = formContainer.querySelector("input[name='email']");
 
     //Eliminandolos
     fieldName.parentNode.removeChild(fieldName);
     fieldPassword2.parentNode.removeChild(fieldPassword2);
+    fieldEmail.parentNode.removeChild(fieldEmail);
   }
 };
 
@@ -108,7 +113,7 @@ $formLogin.addEventListener("submit", async (e) => {
   if (!isEmptyField) {
     fetchLoading($iconLoading, $btnSend, true);
 
-    const result = await fetchData("./App/Model/Login.php", fd);
+    const result = await fetchData("./App/Controller/Login.php", fd);
     if (result.response.success) {
       if (result.response.login == "sign-in") {
         window.location = "./App/View/nueva-cotizacion.php";

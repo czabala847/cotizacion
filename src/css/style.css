@@ -40,10 +40,9 @@ figure {
   display: none !important;
 }
 
-@media only screen and (max-height: 600px) {
+@media only screen and (max-height: 733px) {
   #app {
     height: auto;
-    padding-bottom: 1rem;
   }
 }
 
@@ -303,6 +302,10 @@ th {
 /*-----------------------------------------*\
                   LOGIN
 \*-----------------------------------------*/
+.login {
+  padding: 1rem 0;
+}
+
 .login .title-primary {
   text-transform: initial;
 }
@@ -326,7 +329,6 @@ th {
 
 .login-form .form-container {
   color: #000;
-  margin-top: 2rem;
   padding: 2rem 1rem;
   background-color: #fff;
   border-radius: 5px;

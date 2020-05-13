@@ -23,7 +23,7 @@ $form.addEventListener("submit", async (e) => {
 
     //Si los archivos cargados no arrojan error (0), hacer el fetch
     if (!files.error) {
-      const result = await fetchData("../Model/AgregarCotizacion.php", fd);
+      const result = await fetchData("../Controller/AgregarCotizacion.php", fd);
       if (result.success && result.response.success) {
         Swal.fire("Enviado Correctamente!", "", "success");
       } else {

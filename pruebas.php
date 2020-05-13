@@ -1,6 +1,6 @@
 <?php
 
-// require_once("./App/Lib/DataBase.php");
+// require_once("./App/Model/DataBase.php");
 // require_once("./App/Model/Cotizacion.php");
 
 

@@ -1,6 +1,6 @@
 <?php
 // sleep(5);
-require_once("User.php");
+require_once("../Model/User.php");
 
 $identification = $_POST["cedula"];
 $password = $_POST["contraseña"];
@@ -13,7 +13,8 @@ if ($login === 'sign-in') {
   $response = $newUser->signIn($identification, $password);
 } else {
   $name = $_POST["nombre"];
-  $response = $newUser->signUp($identification, $name, $password);
+  $email = $_POST["email"];
+  $response = $newUser->signUp($identification, $name, $email, $password);
 }
 
 if ($response === true) {

@@ -4,6 +4,9 @@ session_start();
 if (!isset($_SESSION["newsession"])) {
   header("Location: ../../index.php");
 }
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +57,6 @@ if (!isset($_SESSION["newsession"])) {
               <th>Correo</th>
               <th>Estado</th>
               <th></th>
-              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -64,7 +66,6 @@ if (!isset($_SESSION["newsession"])) {
               <th>czabala847@gmail.com</th>
               <th>Activo</th>
               <th>Editar</th>
-              <th>Desactivar</th>
             </tr>
             <tr>
               <th>1</th>
@@ -72,7 +73,6 @@ if (!isset($_SESSION["newsession"])) {
               <th>prueba1@gmail.com</th>
               <th>Inactivo</th>
               <th>Editar</th>
-              <th>Desactivar</th>
             </tr>
           </tbody>
         </table>

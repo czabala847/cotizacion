@@ -2,8 +2,8 @@
 
 // sleep(10);
 
-require_once "./UploadFile.php";
-require_once "./Cotizacion.php";
+require_once "../Model/UploadFile.php";
+require_once "../Model/Cotizacion.php";
 
 $name = $_POST['nombre'];
 $identification = $_POST['cedula'];
