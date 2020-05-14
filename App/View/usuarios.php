@@ -68,14 +68,16 @@ $listUser = $user->showAllUser();
                 <th><?php echo $user["nombre"]; ?></th>
                 <th><?php echo $user["correo"]; ?></th>
                 <th>
-                  <?php
-                  if ($user["estado"] === 'A') :
-                    echo "<a class='btn-status' href='index.php'><i class='fas fa-check-square'></i></a>";
-                  else :
-                    echo "<a class='btn-status' href=''><i class='btn-status fas fa-window-close'></i></a>";
-                  endif; ?>
+                  <a class="btn-status" data-id=<?php echo $user["id"] ?> data-href="../Controller/UserController.php" data-status=<?php echo strtolower($user["estado"]) ?> href="#">
+                    <?php
+                    if ($user["estado"] === 'A') :
+                      echo "<i class='fas fa-check-square'></i>";
+                    else :
+                      echo "<i class='fas fa-window-close'></i>";
+                    endif; ?>
+                  </a>
                 </th>
-                <th><a href=""><i class="fas fa-pen-square"></i></a></th>
+                <th><a href=<?php echo "usuarioEditar.php?id=" . $user["id"] ?>><i class="fas fa-pen-square"></i></a></th>
               </tr>
             <?php endforeach ?>
           </tbody>
@@ -83,8 +85,9 @@ $listUser = $user->showAllUser();
       </div>
     </section>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <script src="https://kit.fontawesome.com/2028b75fa6.js" crossorigin="anonymous"></script>
-  <script src="../../src/js/User.js"></script>
+  <script type="module" src="../../src/js/User.js"></script>
 </body>
 
 </html>

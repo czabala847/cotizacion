@@ -40,7 +40,11 @@ class User
     if (!$user) {
       return "El usuario ingresado no existe";
     } else if (password_verify($pass, $user["contrasena"])) {
-      return true;
+      if ($user["estado"] === 'A') {
+        return true;
+      } else {
+        return "Usuario se encuentra inactivo";
+      }
     } else {
       return "Contraseña incorrecta";
     }
@@ -73,10 +77,43 @@ class User
     }
   }
 
+  public function getUser($id)
+  {
+    $query = "SELECT * FROM usuario WHERE id = ?";
+    return $this->db->select($query, array($id), false);
+  }
+
   public function showAllUser()
   {
     $query = "SELECT * FROM usuario";
     return $this->db->select($query, array(), true);
+  }
+
+  public function changeStatus($id)
+  {
+    $querySearchId = "SELECT * FROM usuario WHERE id = ?";
+    $user = $this->db->select($querySearchId, array($id), false);
+
+    $queryUpdate = "UPDATE usuario SET estado = ? WHERE id = ?";
+
+    $messageModification = "activado";
+
+    if ($user) {
+      if ($user["estado"] === 'A') {
+        $response = $this->db->modification($queryUpdate, array('I', $id));
+        $messageModification = 'desactivado';
+      } else {
+        $response = $this->db->modification($queryUpdate, array('A', $id));
+      }
+
+      if ($response) {
+        return "Usuario $messageModification con éxito";
+      } else {
+        return "Ocurrio un error al modificar el usuario";
+      }
+    } else {
+      return "Usuario a modificar no existe";
+    }
   }
 
   public function getId()

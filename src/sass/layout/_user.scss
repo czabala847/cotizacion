@@ -49,3 +49,57 @@
 tbody tr th:nth-last-child(-n + 2) {
   padding: 0;
 }
+
+/*Editar usuarios*/
+
+#editUser {
+  .title-primary,
+  p {
+    margin: 0;
+  }
+
+  & .users {
+    color: $color-black;
+  }
+}
+
+.editUser {
+  &__form {
+    @extend .grid-center;
+    grid-template-columns: 30% 1fr;
+    grid-row-gap: 1rem;
+    grid-column-gap: 2rem;
+
+    &--field {
+      background-color: $color-white;
+      border: 1px solid lightgray;
+      color: $color-black;
+      margin: 0;
+    }
+
+    & label {
+      text-align: end;
+    }
+
+    & input[type="submit"] {
+      grid-column: 2;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .editUser {
+    &__form {
+      grid-template-columns: 1fr;
+      grid-row-gap: 0.5rem;
+
+      & input[type="submit"] {
+        grid-column: 1;
+      }
+    }
+
+    & label {
+      text-align: initial;
+    }
+  }
+}

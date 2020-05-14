@@ -69,7 +69,7 @@ figure {
           align-items: center;
 }
 
-.grid-center {
+.grid-center, .editUser__form {
   display: -ms-grid;
   display: grid;
   -webkit-box-align: center;
@@ -204,6 +204,7 @@ th {
 \*-----------------------------------------*/
 .users .fas {
   font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .fa-pen-square {
@@ -371,7 +372,7 @@ th {
 }
 
 .login-form .form-container .login-form__input {
-  border: 1px solid rgba(0, 0, 0, 0.4);
+  border: 1px solid lightgray;
   color: #000;
   margin-bottom: 1rem;
   width: 100%;
@@ -480,5 +481,53 @@ th {
 /*Seleccionar los dos ultimos hijos del elemento*/
 tbody tr th:nth-last-child(-n + 2) {
   padding: 0;
+}
+
+/*Editar usuarios*/
+#editUser .title-primary,
+#editUser p {
+  margin: 0;
+}
+
+#editUser .users {
+  color: #000;
+}
+
+.editUser__form {
+  -ms-grid-columns: 30% 1fr;
+      grid-template-columns: 30% 1fr;
+  grid-row-gap: 1rem;
+  grid-column-gap: 2rem;
+}
+
+.editUser__form--field {
+  background-color: #fff;
+  border: 1px solid lightgray;
+  color: #000;
+  margin: 0;
+}
+
+.editUser__form label {
+  text-align: end;
+}
+
+.editUser__form input[type="submit"] {
+  -ms-grid-column: 2;
+  grid-column: 2;
+}
+
+@media only screen and (max-width: 768px) {
+  .editUser__form {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+    grid-row-gap: 0.5rem;
+  }
+  .editUser__form input[type="submit"] {
+    -ms-grid-column: 1;
+    grid-column: 1;
+  }
+  .editUser label {
+    text-align: initial;
+  }
 }
 /*# sourceMappingURL=style.css.map */
