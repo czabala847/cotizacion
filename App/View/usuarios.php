@@ -67,7 +67,14 @@ $listUser = $user->showAllUser();
                 <th><?php echo $user["cedula"]; ?></th>
                 <th><?php echo $user["nombre"]; ?></th>
                 <th><?php echo $user["correo"]; ?></th>
-                <th><?php echo $user["estado"] === 'A' ? "<a href=\"\"><i class=\"fas fa-check-square\"></i></a>" : "<a href=\"\"><i class=\"fas fa-window-close\"></i></a>";  ?></th>
+                <th>
+                  <?php
+                  if ($user["estado"] === 'A') :
+                    echo "<a class='btn-status' href='index.php'><i class='fas fa-check-square'></i></a>";
+                  else :
+                    echo "<a class='btn-status' href=''><i class='btn-status fas fa-window-close'></i></a>";
+                  endif; ?>
+                </th>
                 <th><a href=""><i class="fas fa-pen-square"></i></a></th>
               </tr>
             <?php endforeach ?>
@@ -77,6 +84,7 @@ $listUser = $user->showAllUser();
     </section>
   </div>
   <script src="https://kit.fontawesome.com/2028b75fa6.js" crossorigin="anonymous"></script>
+  <script src="../../src/js/User.js"></script>
 </body>
 
 </html>
