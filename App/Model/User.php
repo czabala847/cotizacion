@@ -76,6 +76,7 @@ class User
   public function showAllUser()
   {
     $query = "SELECT * FROM usuario";
+    return $this->db->select($query, array(), true);
   }
 
   public function getId()

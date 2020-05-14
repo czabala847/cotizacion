@@ -1,11 +1,13 @@
 <?php
 session_start();
+require_once("../Model/User.php");
 
 if (!isset($_SESSION["newsession"])) {
   header("Location: ../../index.php");
 }
 
-
+$user = new User();
+$listUser = $user->showAllUser();
 
 ?>
 
@@ -60,25 +62,21 @@ if (!isset($_SESSION["newsession"])) {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>1143460015</th>
-              <th>Carlos Zabala</th>
-              <th>czabala847@gmail.com</th>
-              <th>Activo</th>
-              <th>Editar</th>
-            </tr>
-            <tr>
-              <th>1</th>
-              <th>Prueba1</th>
-              <th>prueba1@gmail.com</th>
-              <th>Inactivo</th>
-              <th>Editar</th>
-            </tr>
+            <?php foreach ($listUser as $user) : ?>
+              <tr>
+                <th><?php echo $user["cedula"]; ?></th>
+                <th><?php echo $user["nombre"]; ?></th>
+                <th><?php echo $user["correo"]; ?></th>
+                <th><?php echo $user["estado"] === 'A' ? "<a href=\"\"><i class=\"fas fa-check-square\"></i></a>" : "<a href=\"\"><i class=\"fas fa-window-close\"></i></a>";  ?></th>
+                <th><a href=""><i class="fas fa-pen-square"></i></a></th>
+              </tr>
+            <?php endforeach ?>
           </tbody>
         </table>
       </div>
     </section>
   </div>
+  <script src="https://kit.fontawesome.com/2028b75fa6.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

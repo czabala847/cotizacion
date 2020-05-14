@@ -199,6 +199,25 @@ th {
   font-weight: normal;
 }
 
+/*-----------------------------------------*\
+                  VARIABLES
+\*-----------------------------------------*/
+.users .fas {
+  font-size: 1.5rem;
+}
+
+.fa-pen-square {
+  color: #23263f;
+}
+
+.fa-check-square {
+  color: #28a745;
+}
+
+.fa-window-close {
+  color: #ce0f3d;
+}
+
 /*                    *\
           HEADER
 \*                    */
@@ -450,11 +469,16 @@ th {
 }
 
 .users__table tbody tr:hover {
-  -webkit-transform: scale(1.03);
-          transform: scale(1.03);
+  -webkit-transform: scale(1.02);
+          transform: scale(1.02);
 }
 
-.users__table th {
+.users__table tbody tr th {
   padding: 1rem;
+}
+
+/*Seleccionar los dos ultimos hijos del elemento*/
+tbody tr th:nth-last-child(-n + 2) {
+  padding: 0;
 }
 /*# sourceMappingURL=style.css.map */

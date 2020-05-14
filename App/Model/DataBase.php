@@ -67,7 +67,7 @@ class DataBase
     $result = $this->myQuery($query, $params);
 
     if ($all) {
-      return $result->fetchAll();
+      return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
     return $result->fetch();
