@@ -33,7 +33,7 @@ $listUser = $user->getAllUsers();
           <a class="header-menu__list--link" href="#">Inicio</a>
         </li> -->
               <li class="header-menu__list--item">
-                <a class="header-menu__list--link" href="usuarios.php">Administrar Usuario</a>
+                <a class="header-menu__list--link" href="nueva-cotizacion.php">Crear cotización</a>
                 <a class="header-menu__list--link" href="../Model/Logout.php">Salir</a>
               </li>
             </ul>

@@ -52,14 +52,11 @@ if ($formUpdateUser) {
     const fd = new FormData($formUpdateUser);
 
     if (fd.get("password") !== fd.get("password2")) {
-      console.log("Funciona?");
       $formUpdateUser.reset();
       return Swal.fire("Las contraseñas ingresadas no coinciden", "", "error");
     }
 
     const result = await fetchData("../Controller/UserController.php", fd);
     Swal.fire(result.response, "", "success");
-
-    $formUpdateUser.reset();
   });
 }

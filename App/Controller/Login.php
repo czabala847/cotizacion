@@ -10,11 +10,11 @@ $newUser = new User();
 
 
 if ($login === 'sign-in') {
-  $response = $newUser->signIn($identification, $password);
+  $response = $newUser->login($identification, $password);
 } else {
   $name = $_POST["nombre"];
   $email = $_POST["email"];
-  $response = $newUser->signUp($identification, $name, $email, $password);
+  $response = $newUser->createUser($identification, $name, $email, $password);
 }
 
 if ($response === true) {

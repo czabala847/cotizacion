@@ -7,7 +7,7 @@ if (!isset($_SESSION["newsession"])) {
 }
 
 $newUser = new User();
-$user = $newUser->getUser($_GET["id"]);
+$user = $newUser->searchUser($_GET["id"]);
 
 ?>
 

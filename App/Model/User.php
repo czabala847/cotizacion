@@ -17,41 +17,8 @@ class User
     $this->db = new DataBase();
   }
 
-  //Validar si un usuario se encuentra registrado
-  private function existUser($identification)
-  {
-    $querySearch = "SELECT * FROM usuario WHERE cedula = ?";
-    $user = $this->db->select($querySearch, array($identification), false);
-
-    //Si se encuentra retornar el resultado de la consulta
-    if (!empty($user)) {
-      return $user;
-    } else {
-      return false;
-    }
-  }
-
-  //Login
-  public function signIn($identification, $pass)
-  {
-
-    $user = $this->existUser($identification);
-
-    if (!$user) {
-      return "El usuario ingresado no existe";
-    } else if (password_verify($pass, $user["contrasena"])) {
-      if ($user["estado"] === 'A') {
-        return true;
-      } else {
-        return "Usuario se encuentra inactivo";
-      }
-    } else {
-      return "Contraseña incorrecta";
-    }
-  }
-
-  //Guardar datos del usuario
-  private function saveUser($name, $email, $password)
+  //Guardar en variables datos del usuario
+  private function saveDataUser($name, $email, $password)
   {
 
     $this->setName($name);
@@ -61,13 +28,13 @@ class User
   }
 
   //Registro
-  public function signUp($identification, $name, $email, $password)
+  public function createUser($identification, $name, $email, $password)
   {
-    $user = $this->existUser($identification);
+    $newUser = $this->searchUser($identification, true);
 
-    if (!$user) {
-
-      $this->saveUser($name, $email, $password);
+    if (!$newUser) {
+      //Guardar datos
+      $this->saveDataUser($name, $email, $password);
       $this->setIdentification($identification);
       $queryInsert = "INSERT INTO usuario (cedula, nombre, correo, contrasena, estado) VALUES (?, ?, ?, ?, ?)";
       $response = $this->db->modification($queryInsert, array($this->getIdentification(), $this->getName(), $this->getEmail(), $this->getPassword(), $this->getStatus()));
@@ -82,12 +49,51 @@ class User
     }
   }
 
+  //Validar si un usuario se encuentra registrado, buscar en la columna ingresado por parametro
+  public function searchUser($id, $searchIdentification = false)
+  {
+
+    $searchColum = "id";
+
+    if ($searchIdentification) {
+      $searchColum = "cedula";
+    }
+
+    $querySearch = "SELECT * FROM usuario WHERE $searchColum = ?";
+    $userFound = $this->db->select($querySearch, array($id), false);
+
+    //Si se encuentra retornar el resultado de la consulta
+    if (!empty($userFound)) {
+      return $userFound;
+    } else {
+      return false;
+    }
+  }
+
+  //Login
+  public function login($identification, $pass)
+  {
+
+    $user = $this->searchUser($identification, true);
+
+    if (!$user) {
+      return "El usuario ingresado no existe";
+    } else if (password_verify($pass, $user["contrasena"])) {
+      if ($user["estado"] === 'A') {
+        return true;
+      } else {
+        return "Usuario se encuentra inactivo";
+      }
+    } else {
+      return "Contraseña incorrecta";
+    }
+  }
 
   public function updateUser($id, $name, $email, $password)
   {
-    $user = $this->getUser($id);
-    if ($user) {
-      $this->saveUser($name, $email, $password);
+    $userFound = $this->searchUser($id);
+    if ($userFound) {
+      $this->saveDataUser($name, $email, $password);
       $this->setId($id);
 
       $queryUpdate = "UPDATE usuario SET nombre = ?, correo = ?, contrasena = ? WHERE id = ?";
@@ -100,13 +106,6 @@ class User
     }
   }
 
-  //Buscar usuario por id
-  public function getUser($id)
-  {
-    $query = "SELECT * FROM usuario WHERE id = ?";
-    return $this->db->select($query, array($id), false);
-  }
-
   //Mostrar todos los usuarios
   public function getAllUsers()
   {
@@ -114,9 +113,10 @@ class User
     return $this->db->select($query, array(), true);
   }
 
+  //Cambiar estado del usuario
   public function changeStatus($id)
   {
-    $user = $this->getUser($id);
+    $user = $this->searchUser($id, "id");
     $queryUpdate = "UPDATE usuario SET estado = ? WHERE id = ?";
     $messageModification = "activado";
 

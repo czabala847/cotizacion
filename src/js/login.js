@@ -93,6 +93,7 @@ $formLogin.addEventListener("submit", async (e) => {
   const fd = new FormData($formLogin);
   let signUp = $formContainer.dataset.up;
 
+  //Enviar al servidor si la peticion es para hacer signIn
   fd.set("login", "sign-in");
 
   //Verificar si el formulario es de registro
@@ -102,19 +103,24 @@ $formLogin.addEventListener("submit", async (e) => {
       return swal("Las contraseñas ingresadas no coinciden", "", "error");
     }
 
+    //Enviar al servidor si la peticion es para hacer signUp
     fd.set("login", "sign-up");
   }
 
+  //Guardar los campos del formulario en un array, con llave valor
   let fields = Array.from(fd.entries());
 
   //Guardar en un array los campos vacios
   let isEmptyField = emptyField(fields);
 
+  //Si no hay campos vacios, proceder con la petición
   if (!isEmptyField) {
+    //Mostrar icono de cargando...
     fetchLoading($iconLoading, $btnSend, true);
 
     const result = await fetchData("./App/Controller/Login.php", fd);
     if (result.response.success) {
+      //Si el resultado de la petición era para sign-in, redireccionar a la página siguiente
       if (result.response.login == "sign-in") {
         window.location = "./App/View/nueva-cotizacion.php";
       } else {
