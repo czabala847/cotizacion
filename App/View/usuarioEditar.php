@@ -1,11 +1,11 @@
 <?php
 session_start();
-require_once("../Model/User.php");
 
 if (!isset($_SESSION["newsession"])) {
   header("Location: ../../index.php");
 }
 
+require_once("../Model/User.php");
 $newUser = new User();
 $user = $newUser->searchUser($_GET["id"]);
 
@@ -50,19 +50,24 @@ $user = $newUser->searchUser($_GET["id"]);
         <div class="container">
           <h2>Editar usuario</h2>
           <form id="formUpdate" class="editUser__form" autocomplete="off" action="">
-            <input type="hidden" name="id" value=<?php echo $user["id"] ?> />
-            <label for="name">Nombre</label><input class="editUser__form--field" type="text" name="nombre" id="name" value=<?php echo $user["nombre"] ?> required />
-            <label for="email">Correo </label><input class="editUser__form--field" type="email" name="correo" id="email" value=<?php echo $user["correo"] ?> required />
-            <label for="pw1">Contraseña</label>
-            <input class="editUser__form--field" type="password" name="password" id="password" required />
-            <label for="pw2">Confirmar contraseña</label><input class="editUser__form--field" type="password" name="password2" id="pw2" required />
-            <input class="btn btn--primary" type="submit" id="btnEnviar" value="Enviar">
+            <input type="hidden" name="id" value="<?php echo $user['id'] ?>"" />
+            <label for=" name">Nombre</label><input class="editUser__form--field" type="text" name="nombre" id="name" value="<?php echo $user['nombre'] ?>" required />
+            <label for=" email">Correo </label><input class="editUser__form--field" type="email" name="correo" id="email" value="<?php echo $user['correo'] ?>"" required />
+            <label for=" changePass">¿Cambiar contraseña?</label><input type="checkbox" name="changePass" id="changePass" value="Si" />
+            <label for=" pw1">Contraseña</label>
+            <input class="editUser__form--field" type="password" name="password" id="password" disabled />
+            <label for="pw2">Confirmar contraseña</label><input class="editUser__form--field" type="password" name="password2" id="pw2" disabled />
+            <div class="form-login__btn">
+              <input class="btn btn--primary" type="submit" id="btnEnviar" value="Enviar">
+              <i id="icon-loading" class="fa fa-spinner fa-spin hidden-element"></i>
+            </div>
           </form>
         </div>
       </section>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script src="https://kit.fontawesome.com/2028b75fa6.js" crossorigin="anonymous"></script>
   <script type="module" src="../../src/js/User.js"></script>
 </body>
 

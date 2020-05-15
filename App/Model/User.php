@@ -99,9 +99,9 @@ class User
       $queryUpdate = "UPDATE usuario SET nombre = ?, correo = ?, contrasena = ? WHERE id = ?";
       $response = $this->db->modification($queryUpdate, array($this->getName(), $this->getEmail(), $this->getPassword(), $this->getId()));
       if ($response) {
-        return "Actualizado con exito";
+        return ["success" => true, "message" => "Actualizado con exito"];
       } else {
-        return "Ha ocurrido un error al actualizar el usuario";
+        return ["success" => false, "message" => "Ha ocurrido un error al actualizar el usuario"];
       }
     }
   }

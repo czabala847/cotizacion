@@ -1,4 +1,4 @@
-import { fetchData } from "./FormFetch.js";
+import { fetchData, fetchLoading } from "./FormFetch.js";
 
 //Listar todos los botones de modicar el estado
 let $listElements = document.querySelectorAll(".btn-status");
@@ -47,16 +47,40 @@ if ($listElements) {
 const $formUpdateUser = document.querySelector("#formUpdate");
 
 if ($formUpdateUser) {
+  const $iconLoading = document.querySelector("#icon-loading");
+  const $btnSend = document.querySelector("#btnEnviar");
+
   $formUpdateUser.addEventListener("submit", async (e) => {
     e.preventDefault();
     const fd = new FormData($formUpdateUser);
-
+    fetchLoading($iconLoading, $btnSend, true);
     if (fd.get("password") !== fd.get("password2")) {
       $formUpdateUser.reset();
       return Swal.fire("Las contraseñas ingresadas no coinciden", "", "error");
     }
 
     const result = await fetchData("../Controller/UserController.php", fd);
-    Swal.fire(result.response, "", "success");
+
+    if (result.success) {
+      if (result.response.success) {
+        ok = Swal.fire(result.response, "", "success");
+        Swal.fire({
+          text: "Actualizado con exito",
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonColor: "#353a62",
+          confirmButtonText: "Ok",
+        }).then((result) => {
+          if (result.value) {
+            location.reload();
+          }
+        });
+      } else {
+        Swal.fire(result.response.message, "", "error");
+      }
+    } else {
+      Swal.fire("Error al hacer la petición", "", "error");
+    }
+    fetchLoading($iconLoading, $btnSend, false);
   });
 }

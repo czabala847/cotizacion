@@ -81,7 +81,7 @@ tbody tr th:nth-last-child(-n + 2) {
       text-align: end;
     }
 
-    & input[type="submit"] {
+    & .form-login__btn {
       grid-column: 2;
     }
   }
@@ -93,7 +93,7 @@ tbody tr th:nth-last-child(-n + 2) {
       grid-template-columns: 1fr;
       grid-row-gap: 0.5rem;
 
-      & input[type="submit"] {
+      & .form-login__btn {
         grid-column: 1;
       }
     }
