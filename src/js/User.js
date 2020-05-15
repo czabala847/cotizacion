@@ -58,7 +58,8 @@ if ($formUpdateUser) {
     }
 
     const result = await fetchData("../Controller/UserController.php", fd);
-    debugger;
-    return Swal.fire(result.response, "", "success");
+    Swal.fire(result.response, "", "success");
+
+    $formUpdateUser.reset();
   });
 }

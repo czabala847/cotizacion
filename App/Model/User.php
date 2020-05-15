@@ -86,11 +86,11 @@ class User
   public function updateUser($id, $name, $email, $password)
   {
     $user = $this->getUser($id);
-
-    if (!$user) {
+    if ($user) {
       $this->saveUser($name, $email, $password);
       $this->setId($id);
-      $queryUpdate = "UPDATE FROM usuario SET nombre = ? AND correo = ? AND contrasena = ? WHERE id = ?";
+
+      $queryUpdate = "UPDATE usuario SET nombre = ?, correo = ?, contrasena = ? WHERE id = ?";
       $response = $this->db->modification($queryUpdate, array($this->getName(), $this->getEmail(), $this->getPassword(), $this->getId()));
       if ($response) {
         return "Actualizado con exito";
