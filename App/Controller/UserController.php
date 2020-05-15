@@ -8,3 +8,13 @@ if (isset($_POST["modify"])) {
 
   echo json_encode($result);
 }
+
+$id = $_POST["id"];
+$name = $_POST["nombre"];
+$email = $_POST["correo"];
+$password = $_POST["password"];
+
+
+$resultUpdate = $user->updateUser($id, $name, $email, $password);
+
+echo json_encode($resultUpdate);

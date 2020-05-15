@@ -43,23 +43,27 @@ $user = $newUser->getUser($_GET["id"]);
       <section class="hero">
         <div class="container">
           <h1 class="title-primary"><?php echo  $user["nombre"] ?></h1>
-          <p>CC XXXXXXXX</p>
+          <p>C.C <?php echo $user["cedula"] ?></p>
         </div>
       </section>
       <section class="users editUser">
         <div class="container">
           <h2>Editar usuario</h2>
-          <form class="editUser__form" autocomplete="off" action="">
-            <label for="name">Nombre</label><input class="editUser__form--field" type="text" name="nombre" id="name" required />
-            <label for="email">Correo </label><input class="editUser__form--field" type="email" name="correo" id="email" required />
-            <label for="pw1">Contraseña</label><input class="editUser__form--field" type="password" name="contraseña" id="pw1" required />
-            <label for="pw2">Confirmar contraseña</label><input class="editUser__form--field" type="password" name="contraseña2" id="pw2" required />
-            <input class="btn btn--primary" type="submit" name="btnEnviar" id="btnEnviar" value="Enviar">
+          <form id="formUpdate" class="editUser__form" autocomplete="off" action="">
+            <input type="hidden" name="id" value=<?php echo $user["id"] ?> />
+            <label for="name">Nombre</label><input class="editUser__form--field" type="text" name="nombre" id="name" value=<?php echo $user["nombre"] ?> required />
+            <label for="email">Correo </label><input class="editUser__form--field" type="email" name="correo" id="email" value=<?php echo $user["correo"] ?> required />
+            <label for="pw1">Contraseña</label>
+            <input class="editUser__form--field" type="password" name="password" id="password" required />
+            <label for="pw2">Confirmar contraseña</label><input class="editUser__form--field" type="password" name="password2" id="pw2" required />
+            <input class="btn btn--primary" type="submit" id="btnEnviar" value="Enviar">
           </form>
         </div>
       </section>
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script type="module" src="../../src/js/User.js"></script>
 </body>
 
 </html>

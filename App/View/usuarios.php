@@ -7,7 +7,7 @@ if (!isset($_SESSION["newsession"])) {
 }
 
 $user = new User();
-$listUser = $user->showAllUser();
+$listUser = $user->getAllUsers();
 
 ?>
 

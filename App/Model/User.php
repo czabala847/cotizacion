@@ -50,6 +50,16 @@ class User
     }
   }
 
+  //Guardar datos del usuario
+  private function saveUser($name, $email, $password)
+  {
+
+    $this->setName($name);
+    $this->setEmail($email);
+    $this->setPassword(password_hash($password, PASSWORD_DEFAULT));
+    $this->setStatus("A");
+  }
+
   //Registro
   public function signUp($identification, $name, $email, $password)
   {
@@ -57,13 +67,8 @@ class User
 
     if (!$user) {
 
-      //Guardar los parametros
+      $this->saveUser($name, $email, $password);
       $this->setIdentification($identification);
-      $this->setName($name);
-      $this->setEmail($email);
-      $this->setPassword(password_hash($password, PASSWORD_DEFAULT));
-      $this->setStatus("A");
-
       $queryInsert = "INSERT INTO usuario (cedula, nombre, correo, contrasena, estado) VALUES (?, ?, ?, ?, ?)";
       $response = $this->db->modification($queryInsert, array($this->getIdentification(), $this->getName(), $this->getEmail(), $this->getPassword(), $this->getStatus()));
 
@@ -77,13 +82,33 @@ class User
     }
   }
 
+
+  public function updateUser($id, $name, $email, $password)
+  {
+    $user = $this->getUser($id);
+
+    if (!$user) {
+      $this->saveUser($name, $email, $password);
+      $this->setId($id);
+      $queryUpdate = "UPDATE FROM usuario SET nombre = ? AND correo = ? AND contrasena = ? WHERE id = ?";
+      $response = $this->db->modification($queryUpdate, array($this->getName(), $this->getEmail(), $this->getPassword(), $this->getId()));
+      if ($response) {
+        return "Actualizado con exito";
+      } else {
+        return "Ha ocurrido un error al actualizar el usuario";
+      }
+    }
+  }
+
+  //Buscar usuario por id
   public function getUser($id)
   {
     $query = "SELECT * FROM usuario WHERE id = ?";
     return $this->db->select($query, array($id), false);
   }
 
-  public function showAllUser()
+  //Mostrar todos los usuarios
+  public function getAllUsers()
   {
     $query = "SELECT * FROM usuario";
     return $this->db->select($query, array(), true);
@@ -91,11 +116,8 @@ class User
 
   public function changeStatus($id)
   {
-    $querySearchId = "SELECT * FROM usuario WHERE id = ?";
-    $user = $this->db->select($querySearchId, array($id), false);
-
+    $user = $this->getUser($id);
     $queryUpdate = "UPDATE usuario SET estado = ? WHERE id = ?";
-
     $messageModification = "activado";
 
     if ($user) {

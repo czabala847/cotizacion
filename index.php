@@ -53,7 +53,6 @@ htmlHeader('Inicio');
   </div>
 </section>
 
-
 </div>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://kit.fontawesome.com/2028b75fa6.js" crossorigin="anonymous"></script>

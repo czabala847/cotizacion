@@ -29,4 +29,40 @@
 // $queryInsert = "INSERT INTO cotizacion (nombre, cedula, correo, asunto) VALUES (?, ?, ? , ?)";
 // $response = $pruebaConexion->modification($queryInsert, $params);
 
-echo password_hash("1234", PASSWORD_DEFAULT) . "\n";
+// echo password_hash("1234", PASSWORD_DEFAULT) . "\n";
+
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar usuario</title>
+</head>
+
+<body>
+
+  <form id="form" action="">
+    <input type="text" placeholder="nombre" name="nombre" />
+    <input type="email" placeholder="correo" name="correo" />
+    <input type="password" placeholder="contraseña" name="password" />
+    <input type="submit" value="enviar">
+  </form>
+
+  <script>
+    const formulario = document.querySelector("#form")
+
+    formulario.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const fd = new FormData(formulario);
+
+      debugger;
+
+    })
+  </script>
+</body>
+
+</html>
