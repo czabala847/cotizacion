@@ -14,9 +14,7 @@
   }
 
   &--disabled {
-    background-color: $color-gray;
-    color: $color-white;
-    cursor: not-allowed !important;
+    @extend .disabled;
   }
 
   &:hover {

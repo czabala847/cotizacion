@@ -89,15 +89,23 @@ class User
     }
   }
 
-  public function updateUser($id, $name, $email, $password)
+  public function updateUser($id, $name, $email, $password = false)
   {
     $userFound = $this->searchUser($id);
     if ($userFound) {
       $this->saveDataUser($name, $email, $password);
       $this->setId($id);
 
-      $queryUpdate = "UPDATE usuario SET nombre = ?, correo = ?, contrasena = ? WHERE id = ?";
-      $response = $this->db->modification($queryUpdate, array($this->getName(), $this->getEmail(), $this->getPassword(), $this->getId()));
+      $queryUpdate = "UPDATE usuario SET nombre = ?, correo = ? WHERE id = ?";
+      $params = array($this->getName(), $this->getEmail(), $this->getId());
+
+      //Si tambien se actualiza la contraseña
+      if ($password) {
+        $queryUpdate = "UPDATE usuario SET nombre = ?, correo = ?, contrasena = ? WHERE id = ?";
+        $params = array($this->getName(), $this->getEmail(), $this->getPassword(), $this->getId());
+      }
+
+      $response = $this->db->modification($queryUpdate, $params);
       if ($response) {
         return ["success" => true, "message" => "Actualizado con exito"];
       } else {
@@ -116,25 +124,24 @@ class User
   //Cambiar estado del usuario
   public function changeStatus($id)
   {
-    $user = $this->searchUser($id, "id");
+    $user = $this->searchUser($id);
     $queryUpdate = "UPDATE usuario SET estado = ? WHERE id = ?";
     $messageModification = "activado";
-
     if ($user) {
-      if ($user["estado"] === 'A') {
-        $response = $this->db->modification($queryUpdate, array('I', $id));
+      if ($user["estado"] == 'A') {
+        $response = $this->db->modification($queryUpdate, array("I", $id));
         $messageModification = 'desactivado';
       } else {
-        $response = $this->db->modification($queryUpdate, array('A', $id));
+        $response = $this->db->modification($queryUpdate, array("A", $id));
       }
 
       if ($response) {
         return "Usuario $messageModification con éxito";
       } else {
-        return "Ocurrio un error al modificar el usuario";
+        return "Ocurrio un error al cambiar el estado del usuario";
       }
     } else {
-      return "Usuario a modificar no existe";
+      return "Usuario a modificar el estado no existe";
     }
   }
 

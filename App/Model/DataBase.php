@@ -70,7 +70,7 @@ class DataBase
       return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    return $result->fetch();
+    return $result->fetch(PDO::FETCH_ASSOC);
   }
 
   //Añadir queries personalizados como update, delete, o insert

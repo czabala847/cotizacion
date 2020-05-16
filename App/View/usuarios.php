@@ -68,7 +68,7 @@ $listUser = $user->getAllUsers();
                 <th><?php echo $user["nombre"]; ?></th>
                 <th><?php echo $user["correo"]; ?></th>
                 <th>
-                  <a class="btn-status" data-id=<?php echo $user["id"] ?> data-href="../Controller/UserController.php" data-status=<?php echo strtolower($user["estado"]) ?> href="#">
+                  <a class="btn-status" data-id=<?php echo $user["id"] ?> data-status=<?php echo strtolower($user["estado"]) ?> href="#">
                     <?php
                     if ($user["estado"] === 'A') :
                       echo "<i class='fas fa-check-square'></i>";

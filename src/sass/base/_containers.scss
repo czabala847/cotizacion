@@ -29,6 +29,12 @@
   height: 70%;
 }
 
+.disabled {
+  background-color: $color-disabled;
+  color: $color-black;
+  cursor: not-allowed !important;
+}
+
 @media only screen and (max-width: 1024px) {
   .container {
     padding: 0 1rem;

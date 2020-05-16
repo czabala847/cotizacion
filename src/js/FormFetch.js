@@ -12,6 +12,7 @@ export async function fetchData(url, data) {
     const response = await urlFetch.json();
     return { success: true, response: response };
   } catch (error) {
+    debugger;
     return { success: false, error };
   }
 }
