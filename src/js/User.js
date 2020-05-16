@@ -73,6 +73,8 @@ if ($formUpdateUser) {
           showCancelButton: false,
           confirmButtonColor: "#353a62",
           confirmButtonText: "Ok",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
         }).then((result) => {
           if (result.value) {
             location.reload();
