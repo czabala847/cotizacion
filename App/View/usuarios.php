@@ -44,44 +44,46 @@ $listUser = $user->getAllUsers();
         <div class="container">
           <h1 class="title-primary">Administrador de usuarios</h1>
           <form action="">
-            <input type="text" placeholder="Buscar">
+            <input type="text" placeholder="Buscar" name="buscador" id="fieldSearch" />
           </form>
         </div>
       </section>
     </div>
     <section class="users">
       <div class="container">
-        <table class="users__table">
-          <thead>
-            <tr>
-              <th>Cédula</th>
-              <th>Nombre</th>
-              <th>Correo</th>
-              <th>Estado</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php foreach ($listUser as $user) : ?>
+        <div class="table-container">
+          <table class="users__table">
+            <thead>
               <tr>
-                <th><?php echo $user["cedula"]; ?></th>
-                <th><?php echo $user["nombre"]; ?></th>
-                <th><?php echo $user["correo"]; ?></th>
-                <th>
-                  <a class="btn-status" data-id=<?php echo $user["id"] ?> data-status=<?php echo strtolower($user["estado"]) ?> href="#">
-                    <?php
-                    if ($user["estado"] === 'A') :
-                      echo "<i class='fas fa-check-square'></i>";
-                    else :
-                      echo "<i class='fas fa-window-close'></i>";
-                    endif; ?>
-                  </a>
-                </th>
-                <th><a href=<?php echo "usuarioEditar.php?id=" . $user["id"] ?>><i class="fas fa-pen-square"></i></a></th>
+                <th>Cédula</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Estado</th>
+                <th></th>
               </tr>
-            <?php endforeach ?>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <?php foreach ($listUser as $user) : ?>
+                <tr>
+                  <th><?php echo $user["cedula"]; ?></th>
+                  <th><?php echo $user["nombre"]; ?></th>
+                  <th><?php echo $user["correo"]; ?></th>
+                  <th>
+                    <a class="btn-status" data-id=<?php echo $user["id"] ?> data-status=<?php echo strtolower($user["estado"]) ?> href="#">
+                      <?php
+                      if ($user["estado"] === 'A') :
+                        echo "<i class='fas fa-check-square'></i>";
+                      else :
+                        echo "<i class='fas fa-window-close'></i>";
+                      endif; ?>
+                    </a>
+                  </th>
+                  <th><a href=<?php echo "usuarioEditar.php?id=" . $user["id"] ?>><i class="fas fa-pen-square"></i></a></th>
+                </tr>
+              <?php endforeach ?>
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
   </div>

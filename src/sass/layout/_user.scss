@@ -87,7 +87,17 @@ tbody tr th:nth-last-child(-n + 2) {
   }
 }
 
+#fieldSearch {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 1rem;
+}
+
 @media only screen and (max-width: 768px) {
+  .table-container {
+    overflow: auto;
+  }
+
   .editUser {
     &__form {
       grid-template-columns: 1fr;
