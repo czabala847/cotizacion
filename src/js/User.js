@@ -4,7 +4,6 @@ import { fetchData, fetchLoading } from "./FormFetch.js";
 const loadStates = () => {
   //Listar todos los botones de modicar el estado
   let $listElements = document.querySelectorAll(".btn-status");
-
   //Cambiar estados de los usuarios
   if ($listElements) {
     //A cada item añadir el evento click, que enviara la petición AJAX
@@ -98,6 +97,7 @@ if ($checkPassword) {
     handleFieldPassword($checkPassword.checked);
   });
 }
+
 //Activar y desactivar los campos contraseña
 const handleFieldPassword = (check) => {
   const $fieldsPw = document.querySelectorAll("input[type=password]");
@@ -114,15 +114,19 @@ const handleFieldPassword = (check) => {
 
 //Detectar evento en la caja de texto
 const $fieldSearch = document.querySelector("#fieldSearch");
+let timeInterval;
 
 if ($fieldSearch) {
   $fieldSearch.addEventListener("keyup", async (e) => {
-    let loaded = await searchUser(e.target.value);
+    clearInterval(timeInterval); //limpiar el intervalo
+    let loaded;
 
-    //Despues de hacer el filtro volver a cargar las opciones del estado
-    if (loaded) {
-      loadStates();
-    }
+    timeInterval = setTimeout(async () => {
+      loaded = await searchUser(e.target.value);
+      if (loaded) {
+        loadStates();
+      }
+    }, 1000);
   });
 }
 
