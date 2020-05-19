@@ -1,4 +1,4 @@
-export async function fetchData(url, data) {
+export async function fetchData(url, data, type = "json") {
   let config;
   if (data) {
     config = {
@@ -9,7 +9,17 @@ export async function fetchData(url, data) {
 
   try {
     const urlFetch = await fetch(url, config);
-    const response = await urlFetch.json();
+    let response;
+
+    switch (type) {
+      case "json":
+        response = await urlFetch.json();
+        break;
+      case "text":
+        response = await urlFetch.text();
+        break;
+    }
+
     return { success: true, response: response };
   } catch (error) {
     debugger;

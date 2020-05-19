@@ -115,10 +115,17 @@ class User
   }
 
   //Mostrar todos los usuarios
-  public function getAllUsers()
+  public function getAllUsers($value)
   {
     $query = "SELECT * FROM usuario";
-    return $this->db->select($query, array(), true);
+    $params = array();
+    if ($value != "") {
+      $search = "%$value%";
+      $query = "SELECT * FROM usuario WHERE nombre LIKE ? OR cedula LIKE ? OR correo LIKE ?";
+      $params = array($search, $search, $search);
+    }
+
+    return $this->db->select($query, $params, true);
   }
 
   //Cambiar estado del usuario
