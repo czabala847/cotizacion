@@ -50,6 +50,15 @@ if (!isset($_SESSION["newsession"])) {
         <div class="table-container" id="userTable">
 
         </div>
+        <div class="users__pagination">
+          <ul class="users__pagination--list">
+            <li><a class="users_pagination--link" data-href="anterior" href="">Anterior</a></li>
+            <!-- <li><a class="users_pagination--link" data-href="0" href="">1</a></li>
+            <li><a class="users_pagination--link" data-href="1" href="">2</a></li>
+            <li><a class="users_pagination--link" data-href="2" href="">3</a></li> -->
+            <li><a class="users_pagination--link" data-href="siguiente" href="">Siguiente</a></li>
+          </ul>
+        </div>
       </div>
     </section>
   </div>

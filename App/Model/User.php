@@ -115,13 +115,16 @@ class User
   }
 
   //Mostrar todos los usuarios
-  public function getAllUsers($value)
+  public function getAllUsers($value, $offSet = 0)
   {
-    $query = "SELECT * FROM usuario";
+    //Elementos a mostrar
+    define("LIMIT", 5);
+    $offSet *= LIMIT;
+    $query = "SELECT * FROM usuario LIMIT  $offSet, " . LIMIT;
     $params = array();
     if ($value != "") {
       $search = "%$value%";
-      $query = "SELECT * FROM usuario WHERE nombre LIKE ? OR cedula LIKE ? OR correo LIKE ?";
+      $query = "SELECT * FROM usuario WHERE nombre LIKE ? OR cedula LIKE ? OR correo LIKE ? LIMIT $offSet, " . LIMIT;
       $params = array($search, $search, $search);
     }
 
