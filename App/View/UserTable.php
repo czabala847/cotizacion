@@ -36,3 +36,12 @@ if (!isset($_SESSION["newsession"])) {
     <?php endforeach ?>
   </tbody>
 </table>
+<div class="users__pagination">
+  <ul class="users__pagination--list">
+    <li><a class="users_pagination--link" data-href="anterior" href="">Anterior</a></li>
+    <!-- <li><a class="users_pagination--link" data-href="0" href="">1</a></li>
+            <li><a class="users_pagination--link" data-href="1" href="">2</a></li>
+            <li><a class="users_pagination--link" data-href="2" href="">3</a></li> -->
+    <li><a class="users_pagination--link" data-href="<?php echo $page + 1 ?>" href="">Siguiente</a></li>
+  </ul>
+</div>

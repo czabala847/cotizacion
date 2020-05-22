@@ -115,20 +115,19 @@ class User
   }
 
   //Mostrar todos los usuarios
-  public function getAllUsers($value, $offSet = 0)
+  public function getAllUsers($value, $page = 0)
   {
-    //Elementos a mostrar
     define("LIMIT", 5);
-    $offSet *= LIMIT;
-    $query = "SELECT * FROM usuario LIMIT  $offSet, " . LIMIT;
-    $params = array();
-    if ($value != "") {
-      $search = "%$value%";
-      $query = "SELECT * FROM usuario WHERE nombre LIKE ? OR cedula LIKE ? OR correo LIKE ? LIMIT $offSet, " . LIMIT;
-      $params = array($search, $search, $search);
-    }
+    $index = $page * LIMIT;
+    // $query = "SELECT * FROM usuario";
+    // $params = array();
+    $search = "%$value%";
+    $query = "SELECT * FROM usuario WHERE nombre LIKE ? OR cedula LIKE ? OR correo LIKE ? LIMIT $index, " . LIMIT;
+    $params = array($search, $search, $search);
+    // if ($value != "") {
+    // }
 
-    return $this->db->select($query, $params, true);
+    return ["data" => $this->db->select($query, $params, true), "page" => $page];
   }
 
   //Cambiar estado del usuario

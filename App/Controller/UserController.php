@@ -32,6 +32,8 @@ if (isset($_POST["modify"])) {
 //Mostrar usuarios en tiempo
 if (isset($_POST["value"])) {
 
-  $listUser = $user->getAllUsers($_POST["value"]);
+  $data = $user->getAllUsers($_POST["value"]);
+  $listUser = $data["data"];
+  $page = $data["page"];
   require_once("../View/UserTable.php");
 }

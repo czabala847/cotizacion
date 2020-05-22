@@ -153,5 +153,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (loaded) {
     loadStates();
+
+    const $paginatorLink = document.querySelectorAll(".users_pagination--link");
+
+    $paginatorLink.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+      });
+    });
   }
 });
