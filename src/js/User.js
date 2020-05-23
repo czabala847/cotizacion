@@ -1,4 +1,5 @@
 import { fetchData, fetchLoading } from "./FormFetch.js";
+import User from "./User/User.js";
 
 //Despues que se renderice la tabla con los usuarios, añadir la funcionalidad de cambiar el estado al usuario
 const loadStates = () => {
@@ -10,13 +11,11 @@ const loadStates = () => {
   $listElements.forEach((element) => {
     element.addEventListener("click", async (e) => {
       e.preventDefault();
-      //Mensaje del modal
-      let messageStatus =
-        element.dataset.status === "a" ? "desactivado" : "activado";
+      let alertms = element.dataset.status === "a" ? "desactivado" : "activado";
 
       let resultModal = await Swal.fire({
         title: "¿Estas seguro?",
-        text: `El usuario quedara ${messageStatus}`,
+        text: `El usuario quedara ${alertms}`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#353a62",
@@ -27,18 +26,26 @@ const loadStates = () => {
 
       //Si en el modal se seleccion OK
       if (resultModal) {
+        let newUser = new User();
+
+        let result = newUser.setStatus(element.dataset.id);
+
+        let resultStatus = result.success ? "success" : "error";
+
+        Swal.fire(result.response, "", resultStatus);
+
         //Obtener URL del llamado al servidor
-        let link =
-          "../Controller/UserController.php" + "?id=" + element.dataset.id;
+        // let link =
+        //   "../Controller/UserController.php" + "?id=" + element.dataset.id;
 
-        //Enviar una variable modify, para validar en el servidor que acción se va a realizar si cambiar el estado o actualizar el cliente
-        const formData = new FormData();
-        formData.append("modify", "status");
+        // //Enviar una variable modify, para validar en el servidor que acción se va a realizar si cambiar el estado o actualizar el cliente
+        // const formData = new FormData();
+        // formData.append("modify", "status");
 
-        await fetchData(link, formData);
-        // Swal.fire(result.response, "", "success");
+        // await fetchData(link, formData);
+        // // Swal.fire(result.response, "", "success");
 
-        window.location = "../../App/View/usuarios.php";
+        // window.location = "../../App/View/usuarios.php";
       }
     });
   });
@@ -121,7 +128,7 @@ if ($fieldSearch) {
     let loaded;
 
     timeInterval = setTimeout(async () => {
-      loaded = await searchUser(e.target.value);
+      loaded = await renderUsers(e.target.value);
       if (loaded) {
         loadStates();
       }
@@ -129,10 +136,11 @@ if ($fieldSearch) {
   });
 }
 
-//Busqueda de usuarios en tiempo real
-const searchUser = async (text = "") => {
+//Mostrar usuarios en pantalla
+const renderUsers = async (text = "", page = 0) => {
   const fieldText = new FormData();
   fieldText.set("value", text);
+  fieldText.set("page", page);
   const result = await fetchData(
     "../Controller/UserController.php",
     fieldText,
@@ -143,23 +151,32 @@ const searchUser = async (text = "") => {
 
   if ($userTable) {
     $userTable.innerHTML = result.response;
+    paginator();
   }
 
   return true;
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
-  let loaded = await searchUser();
+  let loaded = await renderUsers();
 
   if (loaded) {
     loadStates();
-
-    const $paginatorLink = document.querySelectorAll(".users_pagination--link");
-
-    $paginatorLink.forEach((link) => {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-      });
-    });
   }
+
+  // let newUser = new User();
+  // const $userTable = document.querySelector("#userTable");
+
+  // newUser.renderUsers($userTable);
 });
+
+const paginator = () => {
+  const $paginatorLink = document.querySelectorAll(".users_pagination--link");
+
+  $paginatorLink.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      renderUsers("", link.dataset.page);
+    });
+  });
+};
