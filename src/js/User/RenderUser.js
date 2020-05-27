@@ -137,7 +137,7 @@ const updateUser = (form, elementCheck) => {
     let resultModal = await showModal("", result.message, iconModal, optModal);
 
     if (resultModal) {
-      // location.reload();
+      location.reload();
     }
     fetchLoading($iconLoading, $btnSend, false);
     // handleFieldPassword(false, $fieldsPw);
