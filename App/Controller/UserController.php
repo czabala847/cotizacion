@@ -29,11 +29,17 @@ if (isset($_POST["modify"])) {
   }
 }
 
-//Mostrar usuarios en tiempo
+//Mostrar usuarios en tiempo real
 if (isset($_POST["value"])) {
-  $page = $_POST["page"];
-  $data = $user->getAllUsers($_POST["value"], $page);
+
+  $search = $_POST["value"];
+  $pageSearch = $_POST["page"];
+
+  $data = $user->getAllUsers($search, $pageSearch);
+
   $listUser = $data["data"];
-  $page = $data["page"];
+  $actualPage = $data["page"];
+  $numberPages = $data["numberPages"];
+
   require_once("../View/UserTable.php");
 }

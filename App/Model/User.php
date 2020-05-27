@@ -122,12 +122,17 @@ class User
     // $query = "SELECT * FROM usuario";
     // $params = array();
     $search = "%$value%";
-    $query = "SELECT * FROM usuario WHERE nombre LIKE ? OR cedula LIKE ? OR correo LIKE ? LIMIT $index, " . LIMIT;
     $params = array($search, $search, $search);
+
+    $queryCount = "SELECT COUNT(*) Cantidad FROM usuario WHERE nombre LIKE ? OR cedula LIKE ? OR correo LIKE ?";
+    $resultCount = $this->db->select($queryCount, $params, false);
+    $numberPages = ceil(intval($resultCount["Cantidad"]) / LIMIT);
+
+    $query = "SELECT * FROM usuario WHERE nombre LIKE ? OR cedula LIKE ? OR correo LIKE ? LIMIT $index, " . LIMIT;
     // if ($value != "") {
     // }
 
-    return ["data" => $this->db->select($query, $params, true), "page" => $page];
+    return ["data" => $this->db->select($query, $params, true), "page" => $page, "numberPages" => $numberPages];
   }
 
   //Cambiar estado del usuario

@@ -56,7 +56,7 @@ if (!isset($_SESSION["newsession"])) {
   </div>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <script src="https://kit.fontawesome.com/2028b75fa6.js" crossorigin="anonymous"></script>
-  <script type="module" src="../../src/js/User.js"></script>
+  <script type="module" src="../../src/js/User/RenderUser.js"></script>
 </body>
 
 </html>

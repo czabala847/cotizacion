@@ -30,7 +30,7 @@
 }
 
 .disabled {
-  background-color: $color-disabled;
+  background-color: $color-disabled !important;
   color: $color-black;
   cursor: not-allowed !important;
 }

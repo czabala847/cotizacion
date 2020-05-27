@@ -1,4 +1,4 @@
-import { fetchData, fetchLoading } from "../FormFetch.js";
+import { fetchData } from "../FormFetch.js";
 
 class User {
   constructor() {
@@ -7,7 +7,7 @@ class User {
   }
 
   //Mostrar usuarios en pantalla
-  renderUsers = async (containerRender, value = "", page = 0) => {
+  getAllUsers = async (value, page) => {
     this.fd = new FormData();
     //Valor a buscar por defecto cadena de texto vacia
     this.fd.set("value", value);
@@ -16,13 +16,9 @@ class User {
 
     const result = await fetchData(this.url, this.fd, "text");
 
-    if (containerRender) {
-      containerRender.innerHTML = result.response;
-      //paginator();
-      return true;
+    if (result.success) {
+      return result.response;
     }
-
-    return false;
   };
 
   //Cambiar estado de los usuarios
@@ -33,6 +29,31 @@ class User {
     const linkFetch = `${this.url}?id=${id}`;
     const response = await fetchData(linkFetch, this.fd);
     return response;
+  };
+
+  //Actualizar usuario
+  update = async (form) => {
+    this.fd = new FormData(form);
+    if (this.fd.get("password") !== this.fd.get("password2")) {
+      return {
+        success: false,
+        message: "Las contraseñas ingresadas no coinciden.",
+      };
+    }
+
+    this.fd.set("modify", "update");
+    const result = await fetchData(this.url, this.fd);
+    if (result.success) {
+      return {
+        success: result.response.success,
+        message: result.response.message,
+      };
+    } else {
+      return {
+        success: false,
+        message: "Error al hacer la petición.",
+      };
+    }
   };
 }
 

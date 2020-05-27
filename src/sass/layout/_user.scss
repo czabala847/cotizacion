@@ -93,6 +93,25 @@ tbody tr th:nth-last-child(-n + 2) {
   margin-top: 1rem;
 }
 
+.users__pagination--list {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  margin: 1rem 0 0;
+  padding: 0;
+}
+
+.users_pagination--link {
+  margin-right: 1rem;
+  // box-sizing: border-box;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  background-color: $color-purple-dark;
+  text-decoration: none;
+  transition: 0.3s;
+  display: block;
+  border-radius: 0;
+}
+
 @media only screen and (max-width: 768px) {
   .table-container {
     overflow: auto;
