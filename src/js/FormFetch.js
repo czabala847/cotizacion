@@ -20,7 +20,7 @@ export async function fetchData(url, data, type = "json") {
         break;
     }
 
-    return { success: true, response: response };
+    return { success: true, response };
   } catch (error) {
     debugger;
     return { success: false, error };

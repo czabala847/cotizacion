@@ -1,4 +1,5 @@
 import { fetchData } from "../FormFetch.js";
+import { showModal } from "../Helper/Modal/Modal.js";
 
 class User {
   constructor() {
@@ -7,28 +8,61 @@ class User {
   }
 
   //Mostrar usuarios en pantalla
-  getAllUsers = async (value, page) => {
+  renderUsers = async (value = "", page = 0, container) => {
     this.fd = new FormData();
-    //Valor a buscar por defecto cadena de texto vacia
     this.fd.set("value", value);
-    //Número de la página a buscar, empieza desde la primera (0)
     this.fd.set("page", page);
 
-    const result = await fetchData(this.url, this.fd, "text");
+    const tbUserHTML = await fetchData(this.url, this.fd, "text");
 
-    if (result.success) {
-      return result.response;
+    if (tbUserHTML.success) {
+      container.innerHTML = tbUserHTML.response;
     }
   };
 
   //Cambiar estado de los usuarios
-  setStatus = async (id) => {
+  setStatus = async (idUser) => {
     this.fd = new FormData();
     this.fd.set("modify", "status");
 
-    const linkFetch = `${this.url}?id=${id}`;
+    const linkFetch = `${this.url}?id=${idUser}`;
     const response = await fetchData(linkFetch, this.fd);
     return response;
+  };
+
+  //Añadir interactividad a los botones de cambiar estados
+  loadStatus = (arrButtons) => {
+    arrButtons.forEach((button) => {
+      button.addEventListener("click", async (e) => {
+        e.preventDefault();
+        //Mensajes a mostrar en el modal
+        let status = button.dataset.status === "a" ? "desactivado" : "activado";
+        let msgAlert = `El usuario quedará ${status}`;
+
+        //Opciones adicionales al modal
+        const optModal = {
+          showCancelButton: true,
+          allowOutsideClick: true,
+          allowEscapeKey: true,
+        };
+
+        let resultModal = await showModal(
+          "¿Estas seguro?",
+          msgAlert,
+          "warning",
+          optModal
+        );
+
+        if (resultModal) {
+          let result = await this.setStatus(button.dataset.id);
+          let resultStatus = result.success ? "success" : "error";
+          Swal.fire(result.response, "", resultStatus);
+          // await this.renderUsers($tableContainer, $fieldSearch.value, page);
+          debugger;
+          return result.success;
+        }
+      });
+    });
   };
 
   //Actualizar usuario

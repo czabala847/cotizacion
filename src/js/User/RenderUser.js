@@ -1,27 +1,11 @@
 import User from "./User.js";
 import { fetchLoading } from "../FormFetch.js";
+import { showModal } from "../Helper/Modal/Modal.js";
 
 const $tableContainer = document.querySelector("#userTable");
 const $fieldSearch = document.querySelector("#fieldSearch");
 let timeInterval;
 let page = 0;
-
-const showModal = async (title = "", text, icon, opt) => {
-  let resultModal = await Swal.fire({
-    title: title,
-    text: text,
-    icon: icon,
-    showCancelButton: opt.showCancelButton,
-    confirmButtonColor: "#353a62",
-    cancelButtonColor: "#ce0f3d",
-    confirmButtonText: "Ok",
-    cancelButtonText: "Cancelar",
-    allowOutsideClick: opt.allowOutsideClick,
-    allowEscapeKey: opt.allowEscapeKey,
-  }).then((result) => result.value);
-
-  return resultModal;
-};
 
 //Paginador
 const paginator = (listPages) => {
@@ -41,10 +25,13 @@ const paginator = (listPages) => {
 const renderUsers = async (container, value = "", page = 0) => {
   if (container) {
     const user = new User();
-    container.innerHTML = await user.getAllUsers(value, page);
+
+    await user.renderUsers(value, page, container);
 
     const $btnListStatus = document.querySelectorAll(".btn-status");
-    loadStatus($btnListStatus);
+
+    let resultStatus = await user.loadStatus($btnListStatus);
+    console.log("Despues del click");
 
     const $paginatorLink = document.querySelectorAll(".users_pagination--link");
     paginator($paginatorLink);
@@ -52,35 +39,35 @@ const renderUsers = async (container, value = "", page = 0) => {
 };
 
 //Cambiar estados del usuario
-const loadStatus = (listElements) => {
-  listElements.forEach((element) => {
-    element.addEventListener("click", async (e) => {
-      e.preventDefault();
-      let alertms = element.dataset.status === "a" ? "desactivado" : "activado";
-      let msg = `El usuario quedara ${alertms}`;
-      const optModal = {
-        showCancelButton: true,
-        allowOutsideClick: true,
-        allowEscapeKey: true,
-      };
+// const loadStatus = (listElements) => {
+//   listElements.forEach((element) => {
+//     element.addEventListener("click", async (e) => {
+//       e.preventDefault();
+//       let alertms = element.dataset.status === "a" ? "desactivado" : "activado";
+//       let msg = `El usuario quedara ${alertms}`;
+//       const optModal = {
+//         showCancelButton: true,
+//         allowOutsideClick: true,
+//         allowEscapeKey: true,
+//       };
 
-      let resultModal = await showModal(
-        "¿Estas seguro?",
-        msg,
-        "warning",
-        optModal
-      );
+//       let resultModal = await showModal(
+//         "¿Estas seguro?",
+//         msg,
+//         "warning",
+//         optModal
+//       );
 
-      if (resultModal) {
-        const user = new User();
-        let result = await user.setStatus(element.dataset.id);
-        let resultStatus = result.success ? "success" : "error";
-        Swal.fire(result.response, "", resultStatus);
-        await renderUsers($tableContainer, $fieldSearch.value, page);
-      }
-    });
-  });
-};
+//       if (resultModal) {
+//         const user = new User();
+//         let result = await user.setStatus(element.dataset.id);
+//         let resultStatus = result.success ? "success" : "error";
+//         Swal.fire(result.response, "", resultStatus);
+//         await renderUsers($tableContainer, $fieldSearch.value, page);
+//       }
+//     });
+//   });
+// };
 
 if ($tableContainer) {
   document.addEventListener("DOMContentLoaded", async () => {
