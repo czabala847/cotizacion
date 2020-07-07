@@ -8,7 +8,7 @@ class User {
   }
 
   //====== Cambiar estado del usuario ===============================
-  setStatus = async (idUser) => {
+  setStatus = async (idUser, container) => {
     //Mostrar el modal
     let resultModal = await showModal(
       "¿Estas seguro?",
@@ -24,9 +24,15 @@ class User {
       const result = await fetchData(linkFetch, this.fd);
 
       let resultStatus = result.success ? "success" : "error";
-      await showModal("", result.response, resultStatus, {
+      let resultModal = await showModal("", result.response, resultStatus, {
         showCancelButton: false,
       });
+
+      if (resultModal) {
+        this.renderUsers(container);
+      }
+
+      ///////////////////////////
     }
   };
 
@@ -47,8 +53,8 @@ class User {
       arrButtons.forEach((button) => {
         button.addEventListener("click", async (e) => {
           e.preventDefault();
-          this.setStatus(button.dataset.id);
-          ///////
+          this.setStatus(button.dataset.id, container);
+          ////////////////////////
         });
       });
     }
