@@ -7,8 +7,31 @@ class User {
     this.fd = null;
   }
 
-  //Mostrar usuarios en pantalla
-  renderUsers = async (value = "", page = 0, container) => {
+  //====== Cambiar estado del usuario ===============================
+  setStatus = async (idUser) => {
+    //Mostrar el modal
+    let resultModal = await showModal(
+      "¿Estas seguro?",
+      "Se cambiará el estado del usuario",
+      "warning"
+    );
+
+    if (resultModal) {
+      this.fd = new FormData();
+      this.fd.set("modify", "status");
+
+      const linkFetch = `${this.url}?id=${idUser}`;
+      const result = await fetchData(linkFetch, this.fd);
+
+      let resultStatus = result.success ? "success" : "error";
+      await showModal("", result.response, resultStatus, {
+        showCancelButton: false,
+      });
+    }
+  };
+
+  //====== Mostrar tabla de usuarios en pantalla ====================
+  renderUsers = async (container, value = "", page = 0) => {
     this.fd = new FormData();
     this.fd.set("value", value);
     this.fd.set("page", page);
@@ -17,52 +40,18 @@ class User {
 
     if (tbUserHTML.success) {
       container.innerHTML = tbUserHTML.response;
-    }
-  };
 
-  //Cambiar estado de los usuarios
-  setStatus = async (idUser) => {
-    this.fd = new FormData();
-    this.fd.set("modify", "status");
+      const arrButtons = document.querySelectorAll(".btn-status");
 
-    const linkFetch = `${this.url}?id=${idUser}`;
-    const response = await fetchData(linkFetch, this.fd);
-    return response;
-  };
-
-  //Añadir interactividad a los botones de cambiar estados
-  loadStatus = (arrButtons) => {
-    arrButtons.forEach((button) => {
-      button.addEventListener("click", async (e) => {
-        e.preventDefault();
-        //Mensajes a mostrar en el modal
-        let status = button.dataset.status === "a" ? "desactivado" : "activado";
-        let msgAlert = `El usuario quedará ${status}`;
-
-        //Opciones adicionales al modal
-        const optModal = {
-          showCancelButton: true,
-          allowOutsideClick: true,
-          allowEscapeKey: true,
-        };
-
-        let resultModal = await showModal(
-          "¿Estas seguro?",
-          msgAlert,
-          "warning",
-          optModal
-        );
-
-        if (resultModal) {
-          let result = await this.setStatus(button.dataset.id);
-          let resultStatus = result.success ? "success" : "error";
-          Swal.fire(result.response, "", resultStatus);
-          // await this.renderUsers($tableContainer, $fieldSearch.value, page);
-          debugger;
-          return result.success;
-        }
+      //===== Añadir interactividad a los botones de cambiar estados ======
+      arrButtons.forEach((button) => {
+        button.addEventListener("click", async (e) => {
+          e.preventDefault();
+          this.setStatus(button.dataset.id);
+          ///////
+        });
       });
-    });
+    }
   };
 
   //Actualizar usuario
