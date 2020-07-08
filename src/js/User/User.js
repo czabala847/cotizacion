@@ -8,7 +8,8 @@ class User {
   }
 
   //====== Cambiar estado del usuario ===============================
-  setStatus = async (idUser, container) => {
+  //====== Nota: cuando se cree el datatable.js no se pedira el valor y la página por parametro
+  setStatus = async (idUser, container, value, page) => {
     //Mostrar el modal
     let resultModal = await showModal(
       "¿Estas seguro?",
@@ -24,15 +25,13 @@ class User {
       const result = await fetchData(linkFetch, this.fd);
 
       let resultStatus = result.success ? "success" : "error";
-      let resultModal = await showModal("", result.response, resultStatus, {
+      let okModal = await showModal("", result.response, resultStatus, {
         showCancelButton: false,
       });
 
-      if (resultModal) {
-        this.renderUsers(container);
+      if (okModal) {
+        this.renderUsers(container, value, page);
       }
-
-      ///////////////////////////
     }
   };
 
@@ -53,8 +52,7 @@ class User {
       arrButtons.forEach((button) => {
         button.addEventListener("click", async (e) => {
           e.preventDefault();
-          this.setStatus(button.dataset.id, container);
-          ////////////////////////
+          this.setStatus(button.dataset.id, container, value, page);
         });
       });
     }

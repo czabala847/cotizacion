@@ -38,68 +38,11 @@ const renderUsers = async (container, value = "", page = 0) => {
   }
 };
 
-//Cambiar estados del usuario
-// const loadStatus = (listElements) => {
-//   listElements.forEach((element) => {
-//     element.addEventListener("click", async (e) => {
-//       e.preventDefault();
-//       let alertms = element.dataset.status === "a" ? "desactivado" : "activado";
-//       let msg = `El usuario quedara ${alertms}`;
-//       const optModal = {
-//         showCancelButton: true,
-//         allowOutsideClick: true,
-//         allowEscapeKey: true,
-//       };
-
-//       let resultModal = await showModal(
-//         "¿Estas seguro?",
-//         msg,
-//         "warning",
-//         optModal
-//       );
-
-//       if (resultModal) {
-//         const user = new User();
-//         let result = await user.setStatus(element.dataset.id);
-//         let resultStatus = result.success ? "success" : "error";
-//         Swal.fire(result.response, "", resultStatus);
-//         await renderUsers($tableContainer, $fieldSearch.value, page);
-//       }
-//     });
-//   });
-// };
-
-if ($tableContainer) {
-  document.addEventListener("DOMContentLoaded", async () => {
-    await renderUsers($tableContainer);
-  });
-
-  $fieldSearch.addEventListener("keyup", async (e) => {
-    clearInterval(timeInterval); //limpiar el intervalo
-    timeInterval = setTimeout(async () => {
-      await renderUsers($tableContainer, e.target.value);
-    }, 1000);
-  });
-}
-
 // Editar usuarios
 const $formUpdateUser = document.querySelector("#formUpdate");
 const $checkPassword = document.querySelector("input[type=checkbox]");
 const $iconLoading = document.querySelector("#icon-loading");
 const $btnSend = document.querySelector("#btnEnviar");
-
-//Activar y desactivar los campos contraseña
-const handleFieldPassword = (check, fieldsPass) => {
-  fieldsPass.forEach((field) => {
-    if (check) {
-      field.removeAttribute("disabled");
-      field.setAttribute("required", "");
-    } else {
-      field.removeAttribute("required");
-      field.setAttribute("disabled", "");
-    }
-  });
-};
 
 const updateUser = (form, elementCheck) => {
   if (elementCheck) {
