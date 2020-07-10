@@ -1,4 +1,5 @@
 import User from "./User.js";
+import { fetchLoading } from "../FormFetch.js";
 
 //======== Elementos HTML Necesarios ===================================
 const $tableContainer = document.querySelector("#userTable");
@@ -42,36 +43,28 @@ const handlePasswordFields = (passFields, showFields = true) => {
   });
 };
 
-const modifyUser = (form, elementCheck) => {
-  if (elementCheck) {
-    const $fieldsPw = document.querySelectorAll("input[type=password]");
-    elementCheck.addEventListener("change", (e) => {
-      handleFieldPassword(elementCheck.checked, $fieldsPw);
-    });
-  }
+if ($checkPassword) {
+  const $fieldsPw = document.querySelectorAll("input[type=password]");
+  $checkPassword.addEventListener("change", () =>
+    handlePasswordFields($fieldsPw, $checkPassword.checked)
+  );
+}
 
-  form.addEventListener("submit", async (e) => {
+if ($formUpdateUser) {
+  $formUpdateUser.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const user = new User();
-    fetchLoading($iconLoading, $btnSend, true);
-    let result = await user.update(form);
-    // modal
-    const iconModal = result.success ? "success" : "error";
-    const optModal = {
-      showCancelButton: false,
-      allowOutsideClick: false,
-      allowEscapeKey: false,
-    };
-    let resultModal = await showModal("", result.message, iconModal, optModal);
+    objUser = new User();
 
-    if (resultModal) {
+    const dataForm = new FormData($formUpdateUser);
+
+    //Icono de cargando
+    fetchLoading($iconLoading, $btnSend, true);
+    let result = await objUser.updateUser(dataForm);
+    if (result) {
       location.reload();
     }
+
     fetchLoading($iconLoading, $btnSend, false);
     // handleFieldPassword(false, $fieldsPw);
   });
-};
-
-if ($formUpdateUser) {
-  modifyUser($formUpdateUser, $checkPassword);
 }

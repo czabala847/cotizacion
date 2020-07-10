@@ -48,7 +48,7 @@ class User {
 
       const arrButtons = document.querySelectorAll(".btn-status");
 
-      //===== Añadir interactividad a los botones de cambiar estados ======
+      //===== Añadir interactividad a los botones de cambiar estados =====
       arrButtons.forEach((button) => {
         button.addEventListener("click", async (e) => {
           e.preventDefault();
@@ -58,29 +58,38 @@ class User {
     }
   };
 
-  //Actualizar usuario
-  update = async (form) => {
-    this.fd = new FormData(form);
-    if (this.fd.get("password") !== this.fd.get("password2")) {
-      return {
-        success: false,
-        message: "Las contraseñas ingresadas no coinciden.",
-      };
+  //===== Actualizar usuarios =========================================
+  updateUser = async (dataForm) => {
+    let resultModal = false;
+    const optModal = {
+      showCancelButton: false,
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+    };
+
+    if (dataForm.get("password") !== dataForm.get("password2")) {
+      resultModal = await showModal(
+        "",
+        "Las contraseñas deben ser iguales",
+        "error",
+        optModal
+      );
+      return resultModal;
     }
 
-    this.fd.set("modify", "update");
-    const result = await fetchData(this.url, this.fd);
-    if (result.success) {
-      return {
-        success: result.response.success,
-        message: result.response.message,
-      };
-    } else {
-      return {
-        success: false,
-        message: "Error al hacer la petición.",
-      };
-    }
+    dataForm.set("modify", "update");
+
+    const result = await fetchData(this.url, dataForm);
+
+    const iconModal = result.success ? "success" : "error";
+
+    const message = result.success
+      ? result.response.message
+      : "Ocurrio un error al hacer la petición";
+
+    resultModal = await showModal("", message, iconModal, optModal);
+
+    return resultModal;
   };
 }
 

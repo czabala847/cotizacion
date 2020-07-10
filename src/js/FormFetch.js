@@ -22,7 +22,7 @@ export async function fetchData(url, data, type = "json") {
 
     return { success: true, response };
   } catch (error) {
-    debugger;
+    // debugger;
     return { success: false, error };
   }
 }
