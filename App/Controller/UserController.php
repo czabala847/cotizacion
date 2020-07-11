@@ -37,9 +37,11 @@ if (isset($_POST["value"])) {
 
   $data = $user->getAllUsers($search, $pageSearch);
 
-  $listUser = $data["data"];
-  $actualPage = $data["page"];
-  $numberPages = $data["numberPages"];
+  echo json_encode($data);
 
-  require_once("../View/UserTable.php");
+  // $listUser = $data["data"];
+  // $actualPage = $data["page"];
+  // $numberPages = $data["numberPages"];
+
+  // require_once("../View/UserTable.php");
 }

@@ -1,5 +1,6 @@
 import { fetchData } from "../FormFetch.js";
 import { showModal } from "../Helper/Modal/Modal.js";
+import DataTable from "../Helper/DataTable/DataTable.js";
 
 class User {
   constructor() {
@@ -41,10 +42,13 @@ class User {
     this.fd.set("value", value);
     this.fd.set("page", page);
 
-    const tbUserHTML = await fetchData(this.url, this.fd, "text");
+    const dataUser = await fetchData(this.url, this.fd);
+    const dt = new DataTable();
+    const tableUserHTML = dt.templateTable(dataUser.response.data);
 
-    if (tbUserHTML.success) {
-      container.innerHTML = tbUserHTML.response;
+    debugger;
+    if (dataUser.success) {
+      container.innerHTML = tableUserHTML;
 
       const arrButtons = document.querySelectorAll(".btn-status");
 
