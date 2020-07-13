@@ -134,7 +134,8 @@ figure {
 }
 
 input,
-textarea {
+textarea,
+select {
   padding: 0.5rem 1rem;
   margin-bottom: 0.5rem;
   border-radius: 5px;
@@ -146,7 +147,8 @@ textarea {
   font-size: 16px;
 }
 
-input[type="file"] {
+input[type="file"],
+select {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-size: 14px;

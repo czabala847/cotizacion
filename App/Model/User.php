@@ -10,6 +10,7 @@ class User
   private $email;
   private $password;
   private $status;
+  private $rol;
   private $db;
 
   public function __construct()
@@ -25,6 +26,7 @@ class User
     $this->setEmail($email);
     $this->setPassword(password_hash($password, PASSWORD_DEFAULT));
     $this->setStatus("A");
+    $this->setRol(2);
   }
 
   //Registro
@@ -34,10 +36,10 @@ class User
 
     if (!$newUser) {
       //Guardar datos
-      $this->saveDataUser($name, $email, $password);
+      $this->saveDataUser($name, $email, $password, 2);
       $this->setIdentification($identification);
-      $queryInsert = "INSERT INTO usuario (cedula, nombre, correo, contrasena, estado) VALUES (?, ?, ?, ?, ?)";
-      $response = $this->db->modification($queryInsert, array($this->getIdentification(), $this->getName(), $this->getEmail(), $this->getPassword(), $this->getStatus()));
+      $queryInsert = "INSERT INTO usuario (cedula, nombre, correo, contrasena, estado, rol) VALUES (?, ?, ?, ?, ?, ?)";
+      $response = $this->db->modification($queryInsert, array($this->getIdentification(), $this->getName(), $this->getEmail(), $this->getPassword(), $this->getStatus(), $this->getRol()));
 
       if ($response) {
         return $response;
@@ -89,20 +91,21 @@ class User
     }
   }
 
-  public function updateUser($id, $name, $email, $password = false)
+  public function updateUser($id, $name, $email, int $rol, $password = false)
   {
     $userFound = $this->searchUser($id);
     if ($userFound) {
       $this->saveDataUser($name, $email, $password);
       $this->setId($id);
+      $this->setRol($rol);
 
-      $queryUpdate = "UPDATE usuario SET nombre = ?, correo = ? WHERE id = ?";
-      $params = array($this->getName(), $this->getEmail(), $this->getId());
+      $queryUpdate = "UPDATE usuario SET nombre = ?, correo = ?, rol = ? WHERE id = ?";
+      $params = array($this->getName(), $this->getEmail(), $this->getRol(), $this->getId());
 
       //Si tambien se actualiza la contraseña
       if ($password) {
-        $queryUpdate = "UPDATE usuario SET nombre = ?, correo = ?, contrasena = ? WHERE id = ?";
-        $params = array($this->getName(), $this->getEmail(), $this->getPassword(), $this->getId());
+        $queryUpdate = "UPDATE usuario SET nombre = ?, correo = ?, rol = ?, contrasena = ? WHERE id = ?";
+        $params = array($this->getName(), $this->getEmail(), $this->getRol(), $this->getPassword(), $this->getId());
       }
 
       $response = $this->db->modification($queryUpdate, $params);
@@ -128,7 +131,7 @@ class User
     $resultCount = $this->db->select($queryCount, $params, false);
     $numberPages = ceil(intval($resultCount["Cantidad"]) / LIMIT);
 
-    $query = "SELECT * FROM usuario WHERE nombre LIKE ? OR cedula LIKE ? OR correo LIKE ? LIMIT $index, " . LIMIT;
+    $query = "SELECT U.id, U.cedula, U.nombre, U.correo, U.estado, R.nombre rol FROM usuario U INNER JOIN rol R ON U.rol = R.id WHERE U.nombre LIKE ? OR U.cedula LIKE ? OR U.correo LIKE ? LIMIT $index, " . LIMIT;
     // if ($value != "") {
     // }
 
@@ -217,5 +220,15 @@ class User
   public function setStatus($status)
   {
     $this->status = $status;
+  }
+
+  public function setRol($rol)
+  {
+    $this->rol = $rol;
+  }
+
+  public function getRol()
+  {
+    return $this->rol;
   }
 }

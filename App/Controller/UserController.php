@@ -17,13 +17,14 @@ if (isset($_POST["modify"])) {
     $id = $_POST["id"];
     $name = $_POST["nombre"];
     $email = $_POST["correo"];
+    $comboRol = intval($_POST["comboRol"]);
 
     //Validar si se quiere actualizar tambien la contraseña
     if (isset($_POST["password"])) {
       $password = $_POST["password"];
-      $resultUpdate = $user->updateUser($id, $name, $email, $password);
+      $resultUpdate = $user->updateUser($id, $name, $email, $comboRol, $password);
     } else {
-      $resultUpdate = $user->updateUser($id, $name, $email);
+      $resultUpdate = $user->updateUser($id, $name, $email, $comboRol);
     }
     echo json_encode($resultUpdate);
   }
@@ -37,11 +38,9 @@ if (isset($_POST["value"])) {
 
   $data = $user->getAllUsers($search, $pageSearch);
 
-  echo json_encode($data);
+  $listUser = $data["data"];
+  $actualPage = $data["page"];
+  $numberPages = $data["numberPages"];
 
-  // $listUser = $data["data"];
-  // $actualPage = $data["page"];
-  // $numberPages = $data["numberPages"];
-
-  // require_once("../View/UserTable.php");
+  require_once("../View/UserTable.php");
 }

@@ -1,5 +1,6 @@
 input,
-textarea {
+textarea,
+select {
   padding: 0.5rem 1rem;
   margin-bottom: 0.5rem;
   border-radius: 5px;
@@ -11,7 +12,8 @@ textarea {
   font-size: $font-size-base;
 }
 
-input[type="file"] {
+input[type="file"],
+select {
   box-sizing: border-box;
   font-size: $font-size-secundary;
 }

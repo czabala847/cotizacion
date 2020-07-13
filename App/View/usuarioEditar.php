@@ -5,9 +5,15 @@ if (!isset($_SESSION["newsession"])) {
   header("Location: ../../index.php");
 }
 
+require_once("../Model/DataBase.php");
 require_once("../Model/User.php");
 $newUser = new User();
 $user = $newUser->searchUser($_GET["id"]);
+
+$sqlRol = "SELECT id, nombre FROM rol";
+$db = new DataBase();
+
+$arrRoles = $db->select($sqlRol, [], true);
 
 ?>
 
@@ -54,6 +60,12 @@ $user = $newUser->searchUser($_GET["id"]);
             <label for="name">Nombre</label>
             <input class="editUser__form--field" type="text" name="nombre" id="name" value="<?php echo $user['nombre'] ?>" required />
             <label for="email">Correo</label><input class="editUser__form--field" type="email" name="correo" id="email" value="<?php echo $user['correo'] ?>" required />
+            <label>Seleccionar perfil de usuario</label>
+            <select class="editUser__form--field" name="comboRol" id="comboRol">
+              <?php for ($i = 0; $i < count($arrRoles); $i++) : ?>
+                <option value="<?= $arrRoles[$i]['id'] ?>" <?= ($i + 1) == $user["rol"] ? "selected" : "" ?>><?= $arrRoles[$i]["nombre"] ?></option>
+              <?php endfor; ?>
+            </select>
             <label for="changePass">¿Cambiar contraseña?</label><input type="checkbox" name="changePass" id="changePass" value="Si" />
             <label for="pw1">Contraseña</label>
             <input class="editUser__form--field" type="password" name="password" id="pw1" disabled />
@@ -69,7 +81,7 @@ $user = $newUser->searchUser($_GET["id"]);
   </div>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
   <script src="https://kit.fontawesome.com/2028b75fa6.js" crossorigin="anonymous"></script>
-  <script type="module" src="../../src/js/User/MainUser.js"></script>
+  <script type="module" src="../../src/js/User/UserRender.js"></script>
 </body>
 
 </html>
