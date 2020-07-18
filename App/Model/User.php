@@ -91,7 +91,7 @@ class User
     }
   }
 
-  public function updateUser($id, $name, $email, int $rol, $password = false)
+  public function updateUser(int $id, string $name, string $email, int $rol, $password = false)
   {
     $userFound = $this->searchUser($id);
     if ($userFound) {
