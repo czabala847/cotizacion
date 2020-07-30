@@ -45,14 +45,14 @@ session_start();
                             <img class="login-description__img" src="<?= getUrlMedia(); ?>/img/upload/495078-PHE69C-919.png" alt="login imagen" width="400" />
                         </figure>
                     </div>
-                    <div class="login-form" id="container-form" data-up="inactive">
+                    <div class="login-form" id="login-form-container" data-up="inactive">
                         <div class="form-container">
                             <h2>Iniciar Sesión</h2>
-                            <form id="form-login" class="quotation__form" action="" autocomplete="off" method="POST">
+                            <form id="login-form" class="quotation__form" action="" autocomplete="off" method="POST">
                                 <input class="login-form__input" type="text" name="cedula" placeholder="Cédula" required />
                                 <input class="login-form__input" type="password" name="contraseña" placeholder="Contraseña" required />
                                 <input type="hidden" name="login" value="" />
-                                <div class="form-login__btn">
+                                <div class="login-form__btn">
                                     <input id="btn-send" class="btn btn--primary" type="submit" value="Enviar" />
                                     <i id="icon-loading" class="fa fa-spinner fa-spin hidden-element"></i>
                                 </div>
@@ -67,9 +67,9 @@ session_start();
         </section>
 
     </div>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="https://kit.fontawesome.com/2028b75fa6.js" crossorigin="anonymous"></script>
-    <script type="module" src="<?= getUrlMedia(); ?>js/Login.js"></script>
+    <script type="module" src="<?= getUrlMedia(); ?>js/User/UserLogin.js"></script>
 </body>
 
 </html>

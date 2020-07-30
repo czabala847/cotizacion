@@ -1,4 +1,4 @@
-export async function fetchData(url, data, type = "json") {
+async function fetchData(url, data, type = "json") {
   let config;
   if (data) {
     config = {
@@ -28,7 +28,7 @@ export async function fetchData(url, data, type = "json") {
 }
 
 /**** Comprobar campos vacios ****/
-export const emptyField = (arrayFields) => {
+const emptyField = (arrayFields) => {
   let dataFields = arrayFields.find((entry) => {
     if (entry[0] === "archivo[]") {
       return entry[1].size <= 0;
@@ -41,7 +41,7 @@ export const emptyField = (arrayFields) => {
 };
 
 /**** Mostrar el icono de loading al hacer el fetch ****/
-export const fetchLoading = (icon, btnSend, show) => {
+const handlerIconFetch = (icon, btnSend, show) => {
   icon.classList.toggle("hidden-element");
 
   if (show) {
@@ -52,3 +52,5 @@ export const fetchLoading = (icon, btnSend, show) => {
     btnSend.disabled = false;
   }
 };
+
+export default { fetchData, emptyField, handlerIconFetch };

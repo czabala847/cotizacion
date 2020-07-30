@@ -390,15 +390,15 @@ th {
           box-sizing: border-box;
 }
 
-.form-login__btn {
+.login-form__btn {
   position: relative;
 }
 
-.form-login__btn input {
+.login-form__btn input {
   width: 100%;
 }
 
-.form-login__btn i {
+.login-form__btn i {
   color: #fff;
 }
 
@@ -566,7 +566,7 @@ tbody tr th:nth-last-child(-n + 2) {
         grid-template-columns: 1fr;
     grid-row-gap: 0.5rem;
   }
-  .editUser__form .form-login__btn {
+  .editUser__form .login-form__btn {
     -ms-grid-column: 1;
     grid-column: 1;
   }

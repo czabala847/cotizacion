@@ -20,7 +20,6 @@ class Controller
         $controller = str_replace("Controller", "", $controller);
         $nameModel = $controller . "Model";
         $fileModel = "Model/" . $nameModel . ".php";
-
         if (file_exists($fileModel)) {
             require_once $fileModel;
             $this->model = new $nameModel();

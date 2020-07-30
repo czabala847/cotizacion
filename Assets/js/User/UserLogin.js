@@ -1,10 +1,11 @@
-import { fetchData, emptyField, fetchLoading } from "./FormFetch.js";
+import formFetch from "../Helper/FormFetch.js";
 
-const $formContainer = document.querySelector("#container-form");
-const $formLogin = document.querySelector("#form-login");
+const $formContainer = document.querySelector("#login-form-container");
+const $formLogin = document.querySelector("#login-form");
 const $btnRegister = document.querySelector("#registerLogin");
 const $iconLoading = document.querySelector("#icon-loading");
 const $btnSend = document.querySelector("#btn-send");
+const URL_BASE = "http://localhost/cotizacion/";
 
 //Cambiar texto del formulario dependiendo si es sign in o sign up
 const changeTextForm = (
@@ -28,7 +29,6 @@ const showSignUp = (formContainer) => {
     '<input class="login-form__input" type="email" name="email" placeholder="Correo electrónico" required/>';
 
   if (formContainer) {
-    //Cambiar textos del formulario
     changeTextForm(
       formContainer,
       "Registrate",
@@ -36,7 +36,8 @@ const showSignUp = (formContainer) => {
       "Iniciar sesión"
     );
 
-    // obtener campo contraseña, ya que es el punto de referencia, donde se mostrara los campos nombre (antes) y contraseña2 (despues)
+    // obtener campo contraseña, ya que es el punto de referencia, donde se mostrara
+    // los campos nombre (antes) y contraseña2 (despues)
     let fieldReference = formContainer.querySelector(
       "input[name='contraseña']"
     );
@@ -49,7 +50,6 @@ const showSignUp = (formContainer) => {
 
 const removeSignUp = (formContainer) => {
   if (formContainer) {
-    //Cambiar textos esta vez colocando los textos del sign in
     changeTextForm(
       formContainer,
       "Iniciar sesión",
@@ -64,7 +64,7 @@ const removeSignUp = (formContainer) => {
     );
     let fieldEmail = formContainer.querySelector("input[name='email']");
 
-    //Eliminandolos
+    //Eliminando campos
     fieldName.parentNode.removeChild(fieldName);
     fieldPassword2.parentNode.removeChild(fieldPassword2);
     fieldEmail.parentNode.removeChild(fieldEmail);
@@ -100,39 +100,37 @@ $formLogin.addEventListener("submit", async (e) => {
   if (signUp == "active") {
     if (fd.get("contraseña") !== fd.get("contraseña2")) {
       $formLogin.reset();
-      return swal("Las contraseñas ingresadas no coinciden", "", "error");
+      return Swal.fire("Las contraseñas ingresadas no coinciden", "", "error");
     }
 
     //Enviar al servidor si la peticion es para hacer signUp
     fd.set("login", "sign-up");
   }
 
-  //Guardar los campos del formulario en un array, con llave valor
+  //Validar campos vacios
   let fields = Array.from(fd.entries());
+  let isEmptyField = formFetch.emptyField(fields);
 
-  //Guardar en un array los campos vacios
-  let isEmptyField = emptyField(fields);
-
-  //Si no hay campos vacios, proceder con la petición
   if (!isEmptyField) {
     //Mostrar icono de cargando...
-    fetchLoading($iconLoading, $btnSend, true);
+    formFetch.handlerIconFetch($iconLoading, $btnSend, true);
 
-    const result = await fetchData("./App/Controller/Login.php", fd);
+    const URL_FETCH = URL_BASE + "User/login";
+    const result = await formFetch.fetchData(URL_FETCH, fd);
+
     if (result.response.success) {
-      //Si el resultado de la petición era para sign-in, redireccionar a la página siguiente
-      if (result.response.login == "sign-in") {
-        window.location = "./App/View/nueva-cotizacion.php";
-      } else {
-        swal("Usuario creado correctamente", "", "success");
-      }
+      // if (result.response.login == "sign-in") {
+      //   window.location = "./App/View/nueva-cotizacion.php";
+      // } else {
+      //   Swal.fire("Usuario creado correctamente", "", "success");
+      // }
     } else {
-      swal(result.response.errorMessage, "", "error");
+      Swal.fire(result.response.msg, "", "error");
     }
   } else {
-    swal(`El campo ${isEmptyField[0]} está vacío`, "", "error");
+    Swal.fire(`El campo ${isEmptyField[0]} está vacío`, "", "error");
   }
 
-  fetchLoading($iconLoading, $btnSend, false);
+  formFetch.handlerIconFetch($iconLoading, $btnSend, false);
   $formLogin.reset();
 });

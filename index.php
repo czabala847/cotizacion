@@ -4,7 +4,7 @@ require_once "./Config/Config.php";
 require_once "./Helper/Helper.php";
 
 //URL digitada
-$url = isset($_GET["url"]) ? $_GET["url"] : "Login/login";
+$url = isset($_GET["url"]) ? $_GET["url"] : "User/home";
 
 $arrURL = explode("/", $url);
 

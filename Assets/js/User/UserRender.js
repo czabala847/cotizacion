@@ -1,4 +1,4 @@
-import { fetchData, fetchLoading } from "../FormFetch.js";
+import { fetchData, fetchLoading } from "../Helper/FormFetch.js";
 import { showModal } from "../Helper/Modal/Modal.js";
 
 const URL_FECTH = "../Controller/UserController.php";
