@@ -13,28 +13,13 @@ figure {
 }
 
 #app {
-  background: $color-background-deg;
-  color: $color-white;
-  height: $height-viewport;
-  overflow: hidden;
   display: grid;
   grid-template-rows: $header-height 1fr;
+  background: $color-background-deg;
+  color: $color-white;
+  box-sizing: border-box;
 }
 
 .hidden-element {
   display: none !important;
-}
-
-@media only screen and (max-height: 613px) {
-  #app {
-    height: auto;
-  }
-}
-
-@media only screen and (max-width: 468px) {
-  #app {
-    height: auto;
-    border: 1px solid;
-    padding-bottom: 1rem;
-  }
 }

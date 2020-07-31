@@ -45,6 +45,7 @@ const showSignUp = (formContainer) => {
     fieldReference.insertAdjacentHTML("beforebegin", $fieldName);
     fieldReference.insertAdjacentHTML("beforebegin", $fieldEmail);
     fieldReference.insertAdjacentHTML("afterend", $fieldPassword2);
+    // debugger;
   }
 };
 

@@ -3,7 +3,9 @@
 \*-----------------------------------------*/
 
 .login {
-  padding: 1rem 0;
+  height: $height-main-section;
+  overflow: hidden;
+  box-sizing: border-box;
 
   & .title-primary {
     text-transform: initial;
@@ -12,13 +14,8 @@
 
 .login-container {
   @extend .section-container;
-  align-items: initial;
-  padding-top: 2rem;
-  height: 80%;
-  align-items: center;
 
   & .login-description {
-    padding-top: 3rem;
     text-align: center;
 
     & .login-description__img {
@@ -30,7 +27,6 @@
 .login-form {
   & .form-container {
     color: $color-black;
-    // margin-top: 2rem;
     padding: 2rem 1rem;
     background-color: $color-white;
     border-radius: 5px;
@@ -80,26 +76,21 @@
   }
 }
 
-@media only screen and (max-height: 679px) {
-  .login-container {
-    padding-top: 0;
-  }
-}
-
-@media only screen and (max-height: 600px) {
-  .login-container {
+@media only screen and (max-height: 570px) {
+  .login {
     height: auto;
-    padding: 0 0 1rem;
-  }
-
-  .login-description {
-    padding-top: 0 !important;
+    padding-bottom: 2rem;
   }
 }
 
 @media only screen and (max-width: 425px) {
+  .login .container {
+    overflow: auto;
+  }
+
   .login-description {
     grid-template-columns: 1fr;
+    align-self: flex-end;
   }
 
   .login-description__img {

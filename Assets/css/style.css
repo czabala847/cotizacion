@@ -26,32 +26,18 @@ figure {
 }
 
 #app {
-  background: linear-gradient(150deg, #121320 50%, #363b63 100%);
-  color: #fff;
-  height: 100vh;
-  overflow: hidden;
   display: -ms-grid;
   display: grid;
   -ms-grid-rows: 90px 1fr;
       grid-template-rows: 90px 1fr;
+  background: linear-gradient(150deg, #121320 50%, #363b63 100%);
+  color: #fff;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 .hidden-element {
   display: none !important;
-}
-
-@media only screen and (max-height: 613px) {
-  #app {
-    height: auto;
-  }
-}
-
-@media only screen and (max-width: 468px) {
-  #app {
-    height: auto;
-    border: 1px solid;
-    padding-bottom: 1rem;
-  }
 }
 
 /*-----------------------------------------*\
@@ -100,7 +86,6 @@ figure {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 70%;
 }
 
 .disabled, input:disabled, .btn--disabled {
@@ -330,26 +315,17 @@ th {
                   LOGIN
 \*-----------------------------------------*/
 .login {
-  padding: 1rem 0;
+  height: calc(100vh - 90px);
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 .login .title-primary {
   text-transform: initial;
 }
 
-.login-container {
-  -webkit-box-align: initial;
-      -ms-flex-align: initial;
-          align-items: initial;
-  padding-top: 2rem;
-  height: 80%;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
 .login-container .login-description {
-  padding-top: 3rem;
   text-align: center;
 }
 
@@ -414,26 +390,22 @@ th {
   }
 }
 
-@media only screen and (max-height: 679px) {
-  .login-container {
-    padding-top: 0;
-  }
-}
-
-@media only screen and (max-height: 600px) {
-  .login-container {
+@media only screen and (max-height: 570px) {
+  .login {
     height: auto;
-    padding: 0 0 1rem;
-  }
-  .login-description {
-    padding-top: 0 !important;
+    padding-bottom: 2rem;
   }
 }
 
 @media only screen and (max-width: 425px) {
+  .login .container {
+    overflow: auto;
+  }
   .login-description {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
+    -ms-flex-item-align: end;
+        align-self: flex-end;
   }
   .login-description__img {
     display: none;
