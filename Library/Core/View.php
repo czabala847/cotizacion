@@ -9,8 +9,10 @@ class View
         $nameController = get_class($controller);
         $nameController = str_replace("Controller", "", $nameController);
         $fileView = "View/" . $nameController . "/" . $nameView . ".php";
-        if (file_exists($fileView)) {
-            require_once $fileView;
+        if (!isset($_SESSION["newsession"])) {
+            if (file_exists($fileView)) {
+                require_once $fileView;
+            }
         }
     }
 }

@@ -1,0 +1,11 @@
+/*-----------------------------------------*\
+                  DASHBOARD
+\*-----------------------------------------*/
+
+.app-dashboard#app {
+  background: $color-white;
+  color: $color-black;
+
+  display: grid;
+  grid-template-columns: 200px 1fr;
+}

@@ -133,7 +133,7 @@ $formLogin.addEventListener("submit", async (e) => {
       );
 
       if (responseLogin.response.success) {
-        window.location = "./App/View/nueva-cotizacion.php";
+        window.location = URL_BASE + "dashboard";
       } else {
         Swal.fire(responseLogin.response.msg, "", "error");
       }

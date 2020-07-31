@@ -11,3 +11,10 @@ function getUrlMedia()
 {
     return URL_BASE . "Assets/";
 }
+
+//traer template de cabecera
+
+function getHeaderTemplate($data = "")
+{
+    require_once "View/Templates/Header.php";
+}

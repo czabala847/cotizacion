@@ -546,4 +546,16 @@ tbody tr th:nth-last-child(-n + 2) {
     text-align: initial;
   }
 }
+
+/*-----------------------------------------*\
+                  DASHBOARD
+\*-----------------------------------------*/
+.app-dashboard#app {
+  background: #fff;
+  color: #000;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 200px 1fr;
+      grid-template-columns: 200px 1fr;
+}
 /*# sourceMappingURL=style.css.map */
