@@ -92,40 +92,50 @@ $formLogin.addEventListener("submit", async (e) => {
 
   const fd = new FormData($formLogin);
   let signUp = $formContainer.dataset.up;
-
-  //Enviar al servidor si la peticion es para hacer signIn
   fd.set("login", "sign-in");
-
-  //Verificar si el formulario es de registro
-  if (signUp == "active") {
-    if (fd.get("contraseña") !== fd.get("contraseña2")) {
-      $formLogin.reset();
-      return Swal.fire("Las contraseñas ingresadas no coinciden", "", "error");
-    }
-
-    //Enviar al servidor si la peticion es para hacer signUp
-    fd.set("login", "sign-up");
-  }
 
   //Validar campos vacios
   let fields = Array.from(fd.entries());
   let isEmptyField = formFetch.emptyField(fields);
 
   if (!isEmptyField) {
-    //Mostrar icono de cargando...
-    formFetch.handlerIconFetch($iconLoading, $btnSend, true);
+    if (signUp == "active") {
+      if (fd.get("contraseña") !== fd.get("contraseña2")) {
+        $formLogin.reset();
+        return Swal.fire(
+          "Las contraseñas ingresadas no coinciden",
+          "",
+          "error"
+        );
+      }
 
-    const URL_FETCH = URL_BASE + "User/login";
-    const result = await formFetch.fetchData(URL_FETCH, fd);
+      fd.set("login", "sign-up");
+      formFetch.handlerIconFetch($iconLoading, $btnSend, true); //Mostrar icono de cargando...
+      //PETICION PARA REGISTRAR
+      const responseRegister = await formFetch.fetchData(
+        URL_BASE + "User/register",
+        fd
+      );
 
-    if (result.response.success) {
-      // if (result.response.login == "sign-in") {
-      //   window.location = "./App/View/nueva-cotizacion.php";
-      // } else {
-      //   Swal.fire("Usuario creado correctamente", "", "success");
-      // }
+      if (responseRegister.success) {
+        let icon = responseRegister.response.success ? "success" : "error";
+        Swal.fire(responseRegister.response.msg, "", icon);
+      } else {
+        Swal.fire("Error al hacer la petición", "", "error");
+      }
     } else {
-      Swal.fire(result.response.msg, "", "error");
+      formFetch.handlerIconFetch($iconLoading, $btnSend, true);
+      //PETICION PARA LOGIN
+      const responseLogin = await formFetch.fetchData(
+        URL_BASE + "User/login",
+        fd
+      );
+
+      if (responseLogin.response.success) {
+        window.location = "./App/View/nueva-cotizacion.php";
+      } else {
+        Swal.fire(responseLogin.response.msg, "", "error");
+      }
     }
   } else {
     Swal.fire(`El campo ${isEmptyField[0]} está vacío`, "", "error");

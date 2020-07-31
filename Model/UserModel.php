@@ -66,15 +66,14 @@ class UserModel
     }
 
     //Registro
-    public function insertUser($identification, $name, $email, $password)
+    public function insertUser(string $identification, string $name, string $email, string $password)
     {
-        $newUser = $this->searchUser($identification, true);
+        //Guardar datos
+        $this->saveDataUser($name, $email, $password);
+        $this->setIdentification($identification);
+        $newUser = $this->searchUser($this->getIdentification(), true);
 
         if (empty($newUser)) {
-            //Guardar datos
-            $this->saveDataUser($name, $email, $password);
-            $this->setIdentification($identification);
-
             $strQueryInsert = "INSERT INTO usuarios(cedula, nombre, correo, contrasena, estado, rol) VALUES (?, ?, ?, ?, ?, ?)";
             $response = $this->db->insert($strQueryInsert, array($this->getIdentification(), $this->getName(), $this->getEmail(), $this->getPassword(), $this->getStatus(), $this->getRol()));
 
@@ -150,7 +149,7 @@ class UserModel
         $this->password = $password;
     }
 
-    public function setStatus(int $status)
+    public function setStatus(string $status)
     {
         $this->status = $status;
     }
