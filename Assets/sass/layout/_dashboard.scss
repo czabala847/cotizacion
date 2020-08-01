@@ -8,4 +8,17 @@
 
   display: grid;
   grid-template-columns: 200px 1fr;
+  position: relative;
+
+  & .header {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+  }
+}
+
+.dashboard-header {
+  @include m-flex(space-between, center, initial);
+}
+
+.dashboard-container {
+  background-color: $color-light-gray;
 }

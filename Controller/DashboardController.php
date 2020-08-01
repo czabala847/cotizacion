@@ -11,6 +11,9 @@ class DashboardController extends Controller
     public function dashboard()
     {
 
-        $this->view->loadView($this, "dashboard");
+        $dataPage = [
+            "titlePage" => "dashboard"
+        ];
+        $this->view->loadView($this, "dashboard", $dataPage);
     }
 }

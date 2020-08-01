@@ -1,0 +1,18 @@
+/*-----------------------------------------*\
+                  SIDEBAR
+\*-----------------------------------------*/
+
+.asidebar {
+  background: $color-background-deg;
+  color: $color-white;
+  height: $height-viewport;
+  position: relative;
+}
+
+.asidebar-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 200px;
+}
