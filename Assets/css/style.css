@@ -555,8 +555,8 @@ tbody tr th:nth-last-child(-n + 2) {
   color: #000;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 200px 1fr;
-      grid-template-columns: 200px 1fr;
+  -ms-grid-columns: 15% 1fr;
+      grid-template-columns: 15% 1fr;
   position: relative;
 }
 
@@ -594,6 +594,21 @@ tbody tr th:nth-last-child(-n + 2) {
   left: 0;
   top: 0;
   bottom: 0;
-  width: 200px;
+  width: 100%;
+}
+
+.asidebar__logo--text {
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.aside-bar__menu ul,
+.aside-bar__menu li {
+  padding: 0;
+  margin: 0;
+}
+
+.aside-bar__menu--item {
+  list-style: none;
 }
 /*# sourceMappingURL=style.css.map */

@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if (!isset($_SESSION["newsession"])) {
+    $location = "location: " . getUrlBase();
+    header($location);
+}
 
 getHeaderTemplate();
 
@@ -9,11 +15,24 @@ getHeaderTemplate();
         <!-- =======BARRA MENU IZQUIERDO ============= -->
         <aside class="asidebar">
             <div class="asidebar-container">
-                aside bar
+                <figure class="asidebar__logo">
+                    <h3 class="asidebar__logo--text">LOGO</h3>
+                </figure>
+                <nav class="aside-bar__menu">
+                    <ul>
+                        <li class="asidebar__menu--item"><i class="fas fa-users"></i><span>Usuarios</span>
+                            <ol>
+                                <li>Lista de usuarios</li>
+                                <li>Roles</li>
+                            </ol>
+                        </li>
+                        <li class="asidebar__menu--item"><i class="fas fa-sign-out-alt"></i>Salir</li>
+                    </ul>
+                </nav>
             </div>
         </aside>
         <section class="dashboard">
-            <!-- =======HEADER ============= -->
+            <!-- ======= HEADER ============= -->
             <header class="header">
                 <div class="container">
                     <div class="dashboard-header">
@@ -28,6 +47,7 @@ getHeaderTemplate();
                 </div>
             </header>
 
+            <!-- ======= DASHBOARD ============= -->
             <div class="dashboard-container">
                 <div class="container">
                     <div class="dashboard-welcome">

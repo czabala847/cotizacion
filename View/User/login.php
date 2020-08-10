@@ -1,4 +1,12 @@
 <?php
+
+session_start();
+
+if (isset($_SESSION["newsession"])) {
+    $location = "location: " . getUrlBase() . "dashboard";
+    header($location);
+}
+
 getHeaderTemplate();
 ?>
 
