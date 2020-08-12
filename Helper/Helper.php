@@ -12,9 +12,22 @@ function getUrlMedia()
     return URL_BASE . "Assets/";
 }
 
-//traer template de cabecera
+function getTemplateDashboard($dataPage = "")
+{
+    require_once "View/Templates/TemplateDashboard.php";
+}
 
-function getHeaderTemplate($data = "")
+function getSideBarTemplate($dataPage = "")
+{
+    require_once "View/Templates/Sidebar.php";
+}
+
+function getFooterTemplate($dataPage = "")
+{
+    require_once "View/Templates/Footer.php";
+}
+
+function getHeaderTemplate($dataPage = "")
 {
     require_once "View/Templates/Header.php";
 }

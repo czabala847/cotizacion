@@ -2,6 +2,11 @@
                   TYPOGRAPHY
 \*-----------------------------------------*/
 
+.link-normal {
+  color: $color-white;
+  text-decoration: none;
+}
+
 .link {
   color: $color-purple;
   transition: 0.3s;

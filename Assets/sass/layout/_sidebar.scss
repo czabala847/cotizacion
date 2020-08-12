@@ -2,34 +2,138 @@
                   SIDEBAR
 \*-----------------------------------------*/
 
-.asidebar {
+.sidebar {
   background: $color-background-deg;
   color: $color-white;
   height: $height-viewport;
+  width: $sidebar-width;
+  transition: $sidebar-transition;
   position: relative;
 }
 
-.asidebar-container {
-  position: absolute;
+.sidebar-container {
+  position: fixed;
+  z-index: 10;
   left: 0;
   top: 0;
   bottom: 0;
-  width: 100%;
+  // overflow: hidden;
+  width: $sidebar-width;
 }
 
-.asidebar__logo--text {
-  font-size: 2.5rem;
-  text-align: center;
+//Parte del logo y del icono de ménu del sidebar
+.sidebar-header {
+  display: grid;
+  grid-template-columns: 70% 1fr;
+  grid-template-areas: "logo icon-menu";
+  padding: 3rem 0;
+
+  &__title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 0;
+  }
+
+  &__logo--circle {
+    background-color: $color-white;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: none;
+    margin: 0 auto;
+  }
+
+  &__icon {
+    align-self: center;
+    justify-self: center;
+    cursor: pointer;
+    grid-area: icon-menu;
+  }
 }
 
-.aside-bar__menu {
-  & ul,
-  & li {
+//Menu del side bar
+.sidebar__menu {
+  & ul {
     padding: 0;
     margin: 0;
   }
 
   &--item {
+    box-sizing: border-box;
     list-style: none;
+    padding: 0.5rem 1rem;
+    display: grid;
+    grid-template-columns: 25% 1fr;
+    align-items: $container-align;
+    cursor: pointer;
+    position: relative;
+
+    & .fas {
+      justify-self: center;
+    }
+  }
+
+  &--item:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+    box-shadow: inset 5px 0px $color-red;
+  }
+}
+
+//Cuando se active o desactive el mostrar todo el menú
+#app {
+  @media (min-width: 768px) {
+    &.sidebar-toggled {
+      grid-template-columns: $sidebar-width-min 1fr;
+
+      .sidebar {
+        width: $sidebar-width-min;
+      }
+
+      .sidebar-header {
+        grid-template-columns: 1fr;
+        grid-row-gap: 1rem;
+        grid-template-areas:
+          "icon-menu"
+          "logo";
+
+        &__logo {
+          grid-area: logo;
+        }
+
+        &__logo--circle {
+          display: block;
+        }
+
+        &__icon {
+          grid-area: icon-menu;
+        }
+
+        &__title {
+          display: none;
+        }
+      }
+
+      .sidebar-container {
+        width: $sidebar-width-min;
+      }
+
+      .sidebar__menu {
+        &--item {
+          grid-template-columns: 1fr;
+          padding: 1rem 0;
+
+          & a {
+            // display: none;
+            position: absolute;
+            right: -$sidebar-width-min;
+            background-color: $color-black;
+          }
+
+          & .fas {
+            font-size: 1.3rem;
+          }
+        }
+      }
+    }
   }
 }

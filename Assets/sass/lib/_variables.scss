@@ -15,9 +15,7 @@ $color-red: #ce0f3d;
 $color-purple-dark: #23263f;
 $color-green: #28a745;
 $color-disabled: #d8d8d8;
-
 $color-btn-primary: $color-red;
-
 $color-background-deg: linear-gradient(
   150deg,
   rgb(18, 19, 32) 50%,
@@ -48,3 +46,8 @@ $text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 
 /*DIMENSIONES*/
 $less-size-base: 1rem;
+
+/*SIDEBAR*/
+$sidebar-width: 230px;
+$sidebar-width-min: 50px;
+$sidebar-transition: left 0.3s ease, width 0.3s ease;

@@ -3,7 +3,7 @@
 class View
 {
 
-    public function loadView($controller, $nameView, $data = "")
+    public function loadView($controller, $nameView, $dataPage = "")
     {
 
         $nameController = get_class($controller);

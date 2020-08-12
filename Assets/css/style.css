@@ -8,6 +8,7 @@
 /*FONTS SIZE*/
 /*TEXT*/
 /*DIMENSIONES*/
+/*SIDEBAR*/
 /*-----------------------------------------*\
                   MIXINS
 \*-----------------------------------------*/
@@ -173,6 +174,11 @@ select {
 /*-----------------------------------------*\
                   TYPOGRAPHY
 \*-----------------------------------------*/
+.link-normal {
+  color: #fff;
+  text-decoration: none;
+}
+
 .link {
   color: #1a1c30;
   -webkit-transition: 0.3s;
@@ -555,14 +561,22 @@ tbody tr th:nth-last-child(-n + 2) {
   color: #000;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 15% 1fr;
-      grid-template-columns: 15% 1fr;
+  -ms-grid-columns: 230px 1fr;
+      grid-template-columns: 230px 1fr;
   position: relative;
+  -webkit-transition: left 0.3s ease, width 0.3s ease;
+  transition: left 0.3s ease, width 0.3s ease;
 }
 
 .app-dashboard#app .header {
   -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
           box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+}
+
+.dashboard {
+  -webkit-transition: left 0.3s ease, width 0.3s ease;
+  transition: left 0.3s ease, width 0.3s ease;
+  width: 100%;
 }
 
 .dashboard-header {
@@ -582,33 +596,138 @@ tbody tr th:nth-last-child(-n + 2) {
 /*-----------------------------------------*\
                   SIDEBAR
 \*-----------------------------------------*/
-.asidebar {
+.sidebar {
   background: linear-gradient(150deg, #121320 50%, #363b63 100%);
   color: #fff;
   height: 100vh;
+  width: 230px;
+  -webkit-transition: left 0.3s ease, width 0.3s ease;
+  transition: left 0.3s ease, width 0.3s ease;
   position: relative;
 }
 
-.asidebar-container {
-  position: absolute;
+.sidebar-container {
+  position: fixed;
+  z-index: 10;
   left: 0;
   top: 0;
   bottom: 0;
-  width: 100%;
+  width: 230px;
 }
 
-.asidebar__logo--text {
+.sidebar-header {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 70% 1fr;
+      grid-template-columns: 70% 1fr;
+      grid-template-areas: "logo icon-menu";
+  padding: 3rem 0;
+}
+
+.sidebar-header__title {
   font-size: 2.5rem;
   text-align: center;
+  margin: 0;
 }
 
-.aside-bar__menu ul,
-.aside-bar__menu li {
+.sidebar-header__logo--circle {
+  background-color: #fff;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  display: none;
+  margin: 0 auto;
+}
+
+.sidebar-header__icon {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  cursor: pointer;
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: icon-menu;
+}
+
+.sidebar__menu ul {
   padding: 0;
   margin: 0;
 }
 
-.aside-bar__menu--item {
+.sidebar__menu--item {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   list-style: none;
+  padding: 0.5rem 1rem;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 25% 1fr;
+      grid-template-columns: 25% 1fr;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.sidebar__menu--item .fas {
+  -ms-grid-column-align: center;
+      justify-self: center;
+}
+
+.sidebar__menu--item:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 5px 0px #ce0f3d;
+          box-shadow: inset 5px 0px #ce0f3d;
+}
+
+@media (min-width: 768px) {
+  #app.sidebar-toggled {
+    -ms-grid-columns: 50px 1fr;
+        grid-template-columns: 50px 1fr;
+  }
+  #app.sidebar-toggled .sidebar {
+    width: 50px;
+  }
+  #app.sidebar-toggled .sidebar-header {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+    grid-row-gap: 1rem;
+        grid-template-areas: "icon-menu" "logo";
+  }
+  #app.sidebar-toggled .sidebar-header__logo {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    grid-area: logo;
+  }
+  #app.sidebar-toggled .sidebar-header__logo--circle {
+    display: block;
+  }
+  #app.sidebar-toggled .sidebar-header__icon {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    grid-area: icon-menu;
+  }
+  #app.sidebar-toggled .sidebar-header__title {
+    display: none;
+  }
+  #app.sidebar-toggled .sidebar-container {
+    width: 50px;
+  }
+  #app.sidebar-toggled .sidebar__menu--item {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+    padding: 1rem 0;
+  }
+  #app.sidebar-toggled .sidebar__menu--item a {
+    position: absolute;
+    right: -50px;
+    background-color: #000;
+  }
+  #app.sidebar-toggled .sidebar__menu--item .fas {
+    font-size: 1.3rem;
+  }
 }
 /*# sourceMappingURL=style.css.map */
