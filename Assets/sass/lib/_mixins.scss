@@ -21,3 +21,11 @@
     flex-direction: $direction;
   }
 }
+
+@mixin m-container-circle($size, $background-color: $color-white) {
+  border-radius: 50%;
+  height: $size;
+  width: $size;
+  background-color: $background-color;
+  margin: 0 auto;
+}

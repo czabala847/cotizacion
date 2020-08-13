@@ -27,59 +27,71 @@
   grid-template-areas: "logo icon-menu";
   padding: 3rem 0;
 
-  &__logo {
-    &--title {
-      font-size: 2.5rem;
-      text-align: center;
-      margin: 0;
-    }
-
-    &--circle {
-      background-color: $color-white;
-      border-radius: 50%;
-      height: 30px;
-      width: 30px;
-      display: none;
-      margin: 0 auto;
-    }
+  //Logo circulo
+  &__logo--circle {
+    @include m-container-circle(25px);
+    display: none;
   }
 
+  //icono de menú en el sidebar
   &__icon {
-    align-self: center;
-    justify-self: center;
+    align-self: $container-align;
+    justify-self: $container-justify;
     cursor: pointer;
     grid-area: icon-menu;
   }
 }
 
 //****Menu del side bar*****//
-.sidebar__menu {
-  & ul {
-    padding: 0;
-    margin: 0;
+.sidebar__menu--item {
+  position: relative;
+
+  & > a {
+    padding: 0.7rem 1rem;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    grid-column-gap: 0.3rem;
+    align-items: $container-align;
+    position: inherit;
+    transition: $transition_base;
+
+    //****font awesome***//
+    & .fas {
+      justify-self: $container-justify;
+      font-size: 1rem;
+    }
   }
 
-  &--item {
-    list-style: none;
-    & a {
-      padding: 0.5rem 1rem;
-      box-sizing: border-box;
-      display: grid;
-      grid-template-columns: 25% 1fr;
-      align-items: center;
-      cursor: pointer;
-      position: relative;
-      transition: 0.3s;
+  & a:hover {
+    background-color: $color-red;
+  }
 
-      //****font awesome***//
-      & .fas {
-        justify-self: center;
-      }
+  &.menu-dropdown {
+    & > a {
+      grid-template-columns: 30px 1fr 30px;
     }
+  }
 
-    & a:hover {
-      background-color: $color-red;
+  &.menu-dropdown.expanded {
+    .sidebar__submenu {
+      overflow: initial;
+      max-height: $height-viewport;
     }
+  }
+}
+
+//****submenu****//
+.sidebar__submenu {
+  max-height: 0;
+  overflow: hidden;
+  transition: $transition_base;
+  // border: 1px solid red;
+
+  &--item > a {
+    display: block;
+    padding: 0.3rem 1rem 0.3rem 3rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -89,7 +101,8 @@
     &.sidebar-toggled {
       grid-template-columns: $sidebar-width-min 1fr;
 
-      .sidebar {
+      .sidebar,
+      .sidebar-container {
         width: $sidebar-width-min;
       }
 
@@ -99,52 +112,82 @@
         grid-template-areas:
           "icon-menu"
           "logo";
-
-        &__logo {
-          grid-area: logo;
-
-          &--circle {
-            display: block;
-          }
-
-          &--icon {
-            grid-area: icon-menu;
-          }
-
-          &--title {
-            display: none;
-          }
-        }
       }
 
-      .sidebar-container {
-        width: $sidebar-width-min;
+      .sidebar-header__logo {
+        grid-area: logo;
+
+        &--circle {
+          display: block;
+        }
+
+        &--icon {
+          grid-area: icon-menu;
+        }
+
+        &--title {
+          display: none;
+        }
       }
 
       // menu
-      .sidebar__menu {
-        &--item a {
-          // border: 1px solid green;
-          grid-template-columns: $sidebar-width-min auto;
-          height: 40px;
-          padding: 0;
 
-          & span {
-            line-height: 40px;
-            padding: 0 0.5rem;
-            transition: 0.3s;
-            background-color: $color-red;
-            position: absolute;
-            width: 0;
-            right: $sidebar-width;
-            transition: 0.3s;
-          }
+      .sidebar__menu--item > a {
+        grid-template-columns: $sidebar-width-min auto;
+        grid-column-gap: 0;
+        height: $sidebar-item-height;
+        padding: 0;
+
+        & span {
+          line-height: $sidebar-item-height;
+          background-color: $color-red;
+          width: 0;
+          position: absolute;
+          right: $sidebar-width;
+          transition: $transition_base;
+          overflow: hidden;
+          padding: 0 0.5rem;
         }
 
-        &--item a:hover {
-          & span {
-            width: 90px;
-            left: $sidebar-width-min;
+        & #icon-angle {
+          display: none;
+        }
+      }
+
+      .sidebar__menu--item:hover {
+        & span {
+          width: 120px;
+          box-sizing: border-box;
+          left: $sidebar-width-min;
+        }
+
+        .sidebar__submenu {
+          width: 120px;
+          left: $sidebar-width-min;
+          height: auto;
+          max-height: 100vh;
+          overflow: initial;
+        }
+      }
+
+      // submenu
+      .sidebar__submenu {
+        position: absolute;
+        z-index: $sidebar-zindex;
+        right: $sidebar-width;
+        background-color: $color-purple-dark;
+        width: 0;
+        padding: 0;
+
+        // padding: 0 0.5rem;
+
+        &--item > a {
+          padding: 0;
+          height: $sidebar-item-height;
+          padding: 0 0.5rem;
+
+          & > span {
+            line-height: $sidebar-item-height;
           }
         }
       }

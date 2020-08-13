@@ -9,6 +9,7 @@
 /*TEXT*/
 /*DIMENSIONES*/
 /*SIDEBAR*/
+/*TRANSITIONS*/
 /*-----------------------------------------*\
                   MIXINS
 \*-----------------------------------------*/
@@ -113,6 +114,12 @@ figure {
   color: #ffb227;
 }
 
+.title-logo {
+  font-size: 2.5rem;
+  text-align: center;
+  margin: 0;
+}
+
 @media only screen and (max-width: 768px) {
   .title-primary {
     font-size: 2rem;
@@ -215,6 +222,21 @@ th {
 
 .fa-window-close {
   color: #ce0f3d;
+}
+
+/*-----------------------------------------*\
+                  LIST
+\*-----------------------------------------*/
+.list-normal {
+  margin: 0;
+  padding: 0;
+}
+
+.list-normal > ol,
+.list-normal > li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 /*                    *\
@@ -624,19 +646,13 @@ tbody tr th:nth-last-child(-n + 2) {
   padding: 3rem 0;
 }
 
-.sidebar-header__logo--title {
-  font-size: 2.5rem;
-  text-align: center;
-  margin: 0;
-}
-
 .sidebar-header__logo--circle {
-  background-color: #fff;
   border-radius: 50%;
-  height: 30px;
-  width: 30px;
-  display: none;
+  height: 25px;
+  width: 25px;
+  background-color: #fff;
   margin: 0 auto;
+  display: none;
 }
 
 .sidebar-header__icon {
@@ -651,39 +667,58 @@ tbody tr th:nth-last-child(-n + 2) {
   grid-area: icon-menu;
 }
 
-.sidebar__menu ul {
-  padding: 0;
-  margin: 0;
-}
-
 .sidebar__menu--item {
-  list-style: none;
+  position: relative;
 }
 
-.sidebar__menu--item a {
-  padding: 0.5rem 1rem;
+.sidebar__menu--item > a {
+  padding: 0.7rem 1rem;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 25% 1fr;
-      grid-template-columns: 25% 1fr;
+  -ms-grid-columns: 30px 1fr;
+      grid-template-columns: 30px 1fr;
+  grid-column-gap: 0.3rem;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  cursor: pointer;
-  position: relative;
+  position: inherit;
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
 
-.sidebar__menu--item a .fas {
+.sidebar__menu--item > a .fas {
   -ms-grid-column-align: center;
       justify-self: center;
+  font-size: 1rem;
 }
 
 .sidebar__menu--item a:hover {
   background-color: #ce0f3d;
+}
+
+.sidebar__menu--item.menu-dropdown > a {
+  -ms-grid-columns: 30px 1fr 30px;
+      grid-template-columns: 30px 1fr 30px;
+}
+
+.sidebar__menu--item.menu-dropdown.expanded .sidebar__submenu {
+  overflow: initial;
+  max-height: 100vh;
+}
+
+.sidebar__submenu {
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.sidebar__submenu--item > a {
+  display: block;
+  padding: 0.3rem 1rem 0.3rem 3rem;
+  font-size: 0.9rem;
 }
 
 @media (min-width: 768px) {
@@ -691,7 +726,8 @@ tbody tr th:nth-last-child(-n + 2) {
     -ms-grid-columns: 50px 1fr;
         grid-template-columns: 50px 1fr;
   }
-  #app.sidebar-toggled .sidebar {
+  #app.sidebar-toggled .sidebar,
+  #app.sidebar-toggled .sidebar-container {
     width: 50px;
   }
   #app.sidebar-toggled .sidebar-header {
@@ -716,29 +752,55 @@ tbody tr th:nth-last-child(-n + 2) {
   #app.sidebar-toggled .sidebar-header__logo--title {
     display: none;
   }
-  #app.sidebar-toggled .sidebar-container {
-    width: 50px;
-  }
-  #app.sidebar-toggled .sidebar__menu--item a {
+  #app.sidebar-toggled .sidebar__menu--item > a {
     -ms-grid-columns: 50px auto;
         grid-template-columns: 50px auto;
+    grid-column-gap: 0;
     height: 40px;
     padding: 0;
   }
-  #app.sidebar-toggled .sidebar__menu--item a span {
+  #app.sidebar-toggled .sidebar__menu--item > a span {
     line-height: 40px;
-    padding: 0 0.5rem;
+    background-color: #ce0f3d;
+    width: 0;
+    position: absolute;
+    right: 230px;
     -webkit-transition: 0.3s;
     transition: 0.3s;
-    background-color: #ce0f3d;
-    position: absolute;
-    width: 0;
-    right: 230px;
-    transition: 0.3s;
+    overflow: hidden;
+    padding: 0 0.5rem;
   }
-  #app.sidebar-toggled .sidebar__menu--item a:hover span {
-    width: 90px;
+  #app.sidebar-toggled .sidebar__menu--item > a #icon-angle {
+    display: none;
+  }
+  #app.sidebar-toggled .sidebar__menu--item:hover span {
+    width: 120px;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
     left: 50px;
+  }
+  #app.sidebar-toggled .sidebar__menu--item:hover .sidebar__submenu {
+    width: 120px;
+    left: 50px;
+    height: auto;
+    max-height: 100vh;
+    overflow: initial;
+  }
+  #app.sidebar-toggled .sidebar__submenu {
+    position: absolute;
+    z-index: 10;
+    right: 230px;
+    background-color: #121320;
+    width: 0;
+    padding: 0;
+  }
+  #app.sidebar-toggled .sidebar__submenu--item > a {
+    padding: 0;
+    height: 40px;
+    padding: 0 0.5rem;
+  }
+  #app.sidebar-toggled .sidebar__submenu--item > a > span {
+    line-height: 40px;
   }
 }
 /*# sourceMappingURL=style.css.map */
