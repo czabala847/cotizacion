@@ -13,34 +13,35 @@
 
 .sidebar-container {
   position: fixed;
-  z-index: 10;
+  z-index: $sidebar-zindex;
   left: 0;
   top: 0;
   bottom: 0;
-  // overflow: hidden;
   width: $sidebar-width;
 }
 
-//Parte del logo y del icono de ménu del sidebar
+//*****Parte del logo y del icono de ménu del sidebar****//
 .sidebar-header {
   display: grid;
   grid-template-columns: 70% 1fr;
   grid-template-areas: "logo icon-menu";
   padding: 3rem 0;
 
-  &__title {
-    font-size: 2.5rem;
-    text-align: center;
-    margin: 0;
-  }
+  &__logo {
+    &--title {
+      font-size: 2.5rem;
+      text-align: center;
+      margin: 0;
+    }
 
-  &__logo--circle {
-    background-color: $color-white;
-    border-radius: 50%;
-    height: 30px;
-    width: 30px;
-    display: none;
-    margin: 0 auto;
+    &--circle {
+      background-color: $color-white;
+      border-radius: 50%;
+      height: 30px;
+      width: 30px;
+      display: none;
+      margin: 0 auto;
+    }
   }
 
   &__icon {
@@ -51,7 +52,7 @@
   }
 }
 
-//Menu del side bar
+//****Menu del side bar*****//
 .sidebar__menu {
   & ul {
     padding: 0;
@@ -59,27 +60,30 @@
   }
 
   &--item {
-    box-sizing: border-box;
     list-style: none;
-    padding: 0.5rem 1rem;
-    display: grid;
-    grid-template-columns: 25% 1fr;
-    align-items: $container-align;
-    cursor: pointer;
-    position: relative;
+    & a {
+      padding: 0.5rem 1rem;
+      box-sizing: border-box;
+      display: grid;
+      grid-template-columns: 25% 1fr;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+      transition: 0.3s;
 
-    & .fas {
-      justify-self: center;
+      //****font awesome***//
+      & .fas {
+        justify-self: center;
+      }
     }
-  }
 
-  &--item:hover {
-    background-color: rgba(0, 0, 0, 0.3);
-    box-shadow: inset 5px 0px $color-red;
+    & a:hover {
+      background-color: $color-red;
+    }
   }
 }
 
-//Cuando se active o desactive el mostrar todo el menú
+//**Cuando se active o desactive el mostrar todo el menú***//
 #app {
   @media (min-width: 768px) {
     &.sidebar-toggled {
@@ -98,18 +102,18 @@
 
         &__logo {
           grid-area: logo;
-        }
 
-        &__logo--circle {
-          display: block;
-        }
+          &--circle {
+            display: block;
+          }
 
-        &__icon {
-          grid-area: icon-menu;
-        }
+          &--icon {
+            grid-area: icon-menu;
+          }
 
-        &__title {
-          display: none;
+          &--title {
+            display: none;
+          }
         }
       }
 
@@ -117,20 +121,30 @@
         width: $sidebar-width-min;
       }
 
+      // menu
       .sidebar__menu {
-        &--item {
-          grid-template-columns: 1fr;
-          padding: 1rem 0;
+        &--item a {
+          // border: 1px solid green;
+          grid-template-columns: $sidebar-width-min auto;
+          height: 40px;
+          padding: 0;
 
-          & a {
-            // display: none;
+          & span {
+            line-height: 40px;
+            padding: 0 0.5rem;
+            transition: 0.3s;
+            background-color: $color-red;
             position: absolute;
-            right: -$sidebar-width-min;
-            background-color: $color-black;
+            width: 0;
+            right: $sidebar-width;
+            transition: 0.3s;
           }
+        }
 
-          & .fas {
-            font-size: 1.3rem;
+        &--item a:hover {
+          & span {
+            width: 90px;
+            left: $sidebar-width-min;
           }
         }
       }
