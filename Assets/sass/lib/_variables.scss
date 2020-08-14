@@ -4,17 +4,20 @@
 
 /*COLORS*/
 $color-white: #fff;
+$color-light-gray: #f4f8f9;
+$color-gray: #6c757d;
+$color-gray-dark: rgba(255, 255, 255, 0.2);
+// $color-gray-text: #7a7b7b;
 $color-black: #000;
 $color-yellow: #ffb227;
+
 $color-purple: rgba(26, 28, 48, 1);
 $color-purple-dark: rgb(18, 19, 32);
-$color-dark-gray: rgba(255, 255, 255, 0.2);
-$color-gray: #6c757d;
-$color-gray-text: #7a7b7b;
-$color-light-gray: #f4f8f9;
+
 $color-red: #ce0f3d;
 $color-green: #28a745;
-$color-disabled: #d8d8d8;
+// $color-disabled: #d8d8d8;
+
 $color-btn-primary: $color-red;
 $color-background-deg: linear-gradient(
   150deg,

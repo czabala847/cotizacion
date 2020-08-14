@@ -91,7 +91,7 @@ figure {
 }
 
 .disabled, input:disabled, .btn--disabled {
-  background-color: #d8d8d8 !important;
+  background-color: #6c757d !important;
   color: #000;
   cursor: not-allowed !important;
 }
@@ -253,22 +253,16 @@ th {
 
 .header-menu {
   height: inherit;
-  z-index: 100;
 }
 
 .header-menu__list {
   height: inherit;
-  margin: 0;
-  padding: 0;
-  list-style: none;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
 }
 
 .header-menu__list--link {
-  color: #fff;
-  text-decoration: none;
   padding-left: 1rem;
   -webkit-transition: 0.3s;
   transition: 0.3s;
@@ -468,7 +462,7 @@ th {
 }
 
 .users__table thead tr {
-  color: #7a7b7b;
+  color: rgba(255, 255, 255, 0.2);
 }
 
 .users__table tbody tr {
@@ -773,14 +767,17 @@ tbody tr th:nth-last-child(-n + 2) {
   #app.sidebar-toggled .sidebar__menu--item > a #icon-angle {
     display: none;
   }
+  #app.sidebar-toggled .sidebar__menu--item:hover > a {
+    background-color: #ce0f3d;
+  }
   #app.sidebar-toggled .sidebar__menu--item:hover span {
-    width: 120px;
+    width: 150px;
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
     left: 50px;
   }
   #app.sidebar-toggled .sidebar__menu--item:hover .sidebar__submenu {
-    width: 120px;
+    width: 150px;
     left: 50px;
     height: auto;
     max-height: 100vh;
@@ -795,8 +792,6 @@ tbody tr th:nth-last-child(-n + 2) {
     padding: 0;
   }
   #app.sidebar-toggled .sidebar__submenu--item > a {
-    padding: 0;
-    height: 40px;
     padding: 0 0.5rem;
   }
   #app.sidebar-toggled .sidebar__submenu--item > a > span {

@@ -12,16 +12,15 @@ getHeaderTemplate($dataPage);
 
 <body>
     <div id="app">
-
         <header class="header">
             <div class="container">
                 <nav class="header-menu">
-                    <ul class="header-menu__list">
+                    <ul class="header-menu__list list-normal">
                         <li class="header-menu__list--item">
-                            <a class="header-menu__list--link" href="index.php">Inicio</a>
+                            <a class="header-menu__list--link link-normal" href="index.php">Inicio</a>
                         </li>
                         <li class="header-menu__list--item">
-                            <a class="header-menu__list--link" href="#">Acerca de</a>
+                            <a class="header-menu__list--link link-normal" href="#">Acerca de</a>
                         </li>
                     </ul>
                 </nav>

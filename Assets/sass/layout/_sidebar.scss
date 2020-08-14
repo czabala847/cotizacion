@@ -155,14 +155,18 @@
       }
 
       .sidebar__menu--item:hover {
+        & > a {
+          background-color: $color-red;
+        }
+
         & span {
-          width: 120px;
+          width: 150px;
           box-sizing: border-box;
           left: $sidebar-width-min;
         }
 
         .sidebar__submenu {
-          width: 120px;
+          width: 150px;
           left: $sidebar-width-min;
           height: auto;
           max-height: 100vh;
@@ -182,8 +186,8 @@
         // padding: 0 0.5rem;
 
         &--item > a {
-          padding: 0;
-          height: $sidebar-item-height;
+          // padding: 0;
+          // height: $sidebar-item-height;
           padding: 0 0.5rem;
 
           & > span {
