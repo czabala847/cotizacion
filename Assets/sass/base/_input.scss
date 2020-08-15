@@ -4,18 +4,22 @@ select {
   padding: 0.5rem 1rem;
   margin-bottom: 0.5rem;
   border-radius: 5px;
-  border: none;
+  // border: none;
   outline: none;
   font-family: $font-base;
-  background-color: $color-gray-dark;
-  color: $color-white;
+  // background-color: $color-gray-dark;
+  // color: $color-white;
   font-size: $font-size-base;
+  border: 1px solid lightgrey;
+  color: $color-black;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 input[type="file"],
 select {
-  box-sizing: border-box;
-  font-size: $font-size-secundary;
+  // box-sizing: border-box;
+  font-size: $font-size-secondary;
 }
 
 input:disabled {

@@ -42,13 +42,18 @@ $font-base: "Cabin", sans-serif;
 /*FONTS SIZE*/
 $font-size-base: 16px;
 $font-title-primary: 3rem;
-$font-size-secundary: 14px;
+$font-title-secondary: 1.8rem;
+$font-size-secondary: 14px;
 
-/*TEXT*/
+/*SHADOW*/
 $text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+$box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 
 /*DIMENSIONES*/
 $less-size-base: 1rem;
+
+/*BORDER*/
+$border-radius-size: 5px;
 
 /*SIDEBAR*/
 $sidebar-width: 230px;

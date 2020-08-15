@@ -6,9 +6,10 @@
   height: $height-main-section;
   overflow: hidden;
   box-sizing: border-box;
+  // padding-bottom: 2rem;
 
-  & .title-primary {
-    text-transform: initial;
+  & .container {
+    overflow: auto;
   }
 }
 
@@ -24,69 +25,25 @@
   }
 }
 
-.login-form {
-  & .form-container {
-    color: $color-black;
-    padding: 2rem 1rem;
-    background-color: $color-white;
-    border-radius: 5px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    text-align: center;
-    width: 100%;
-    box-sizing: border-box;
-
-    & h2 {
-      font-size: 1.8rem;
-      margin: 0 0 2rem;
-      text-align: left;
-    }
-
-    & form {
-      width: 90%;
-      margin: 0 auto;
-    }
-
-    & .login-form__input {
-      border: 1px solid lightgray;
-      color: $color-black;
-      margin-bottom: 1rem;
-      width: 100%;
-      box-sizing: border-box;
-    }
-  }
-}
-
-.login-form__btn {
-  position: relative;
-
-  & input {
-    width: 100%;
-  }
-
-  & i {
-    color: $color-white;
-  }
-}
-
 @media only screen and (max-width: 768px) {
   .login-description {
     display: grid;
     grid-template-columns: 1fr 60%;
-    align-items: center;
+    align-items: $container-align;
   }
 }
 
-@media only screen and (max-height: 570px) {
-  .login {
-    height: auto;
-    padding-bottom: 2rem;
-  }
-}
+// @media only screen and (max-height: 570px) {
+//   .login {
+//     height: auto;
+//     padding-bottom: 2rem;
+//   }
+// }
 
 @media only screen and (max-width: 425px) {
-  .login .container {
-    overflow: auto;
-  }
+  // .login .container {
+  //   overflow: auto;
+  // }
 
   .login-description {
     grid-template-columns: 1fr;

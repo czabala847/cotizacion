@@ -6,8 +6,9 @@
 /*CONTAINERS*/
 /*FONTS*/
 /*FONTS SIZE*/
-/*TEXT*/
+/*SHADOW*/
 /*DIMENSIONES*/
+/*BORDER*/
 /*SIDEBAR*/
 /*TRANSITIONS*/
 /*-----------------------------------------*\
@@ -36,10 +37,6 @@ figure {
   color: #fff;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-}
-
-.hidden-element {
-  display: none !important;
 }
 
 /*-----------------------------------------*\
@@ -77,6 +74,9 @@ figure {
       -ms-flex-pack: center;
           justify-content: center;
   height: 100%;
+  padding: 0 1rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 .section-container, .quotation-container, .login-container {
@@ -90,16 +90,45 @@ figure {
           align-items: center;
 }
 
+.form-container {
+  color: #000;
+  padding: 2rem 1rem;
+  background-color: #fff;
+  border-radius: 5px;
+  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.form-container__title {
+  margin: 0 0 2rem;
+  text-align: left;
+}
+
+.form-container__form {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.form-container__btn {
+  position: relative;
+}
+
+.form-container__btn i {
+  color: #fff;
+}
+
 .disabled, input:disabled, .btn--disabled {
   background-color: #6c757d !important;
   color: #000;
   cursor: not-allowed !important;
 }
 
-@media only screen and (max-width: 1024px) {
-  .container {
-    padding: 0 1rem;
-  }
+.hidden-element {
+  display: none !important;
 }
 
 /*-----------------------------------------*\
@@ -112,6 +141,10 @@ figure {
   text-transform: uppercase;
   letter-spacing: 3px;
   color: #ffb227;
+}
+
+.title-secondary {
+  font-size: 1.8rem;
 }
 
 .title-logo {
@@ -132,18 +165,18 @@ select {
   padding: 0.5rem 1rem;
   margin-bottom: 0.5rem;
   border-radius: 5px;
-  border: none;
   outline: none;
   font-family: "Cabin", sans-serif;
-  background-color: rgba(255, 255, 255, 0.2);
-  color: #fff;
   font-size: 16px;
+  border: 1px solid lightgrey;
+  color: #000;
+  width: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 input[type="file"],
 select {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
   font-size: 14px;
 }
 
@@ -343,8 +376,8 @@ th {
           box-sizing: border-box;
 }
 
-.login .title-primary {
-  text-transform: initial;
+.login .container {
+  overflow: auto;
 }
 
 .login-container .login-description {
@@ -353,51 +386,6 @@ th {
 
 .login-container .login-description .login-description__img {
   width: 100%;
-}
-
-.login-form .form-container {
-  color: #000;
-  padding: 2rem 1rem;
-  background-color: #fff;
-  border-radius: 5px;
-  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-  text-align: center;
-  width: 100%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-}
-
-.login-form .form-container h2 {
-  font-size: 1.8rem;
-  margin: 0 0 2rem;
-  text-align: left;
-}
-
-.login-form .form-container form {
-  width: 90%;
-  margin: 0 auto;
-}
-
-.login-form .form-container .login-form__input {
-  border: 1px solid lightgray;
-  color: #000;
-  margin-bottom: 1rem;
-  width: 100%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-}
-
-.login-form__btn {
-  position: relative;
-}
-
-.login-form__btn input {
-  width: 100%;
-}
-
-.login-form__btn i {
-  color: #fff;
 }
 
 @media only screen and (max-width: 768px) {
@@ -412,17 +400,7 @@ th {
   }
 }
 
-@media only screen and (max-height: 570px) {
-  .login {
-    height: auto;
-    padding-bottom: 2rem;
-  }
-}
-
 @media only screen and (max-width: 425px) {
-  .login .container {
-    overflow: auto;
-  }
   .login-description {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;

@@ -22,11 +22,11 @@ const changeTextForm = (
 const showSignUp = (formContainer) => {
   // campos que se muestran en el registro
   const $fieldPassword2 =
-    '<input class="login-form__input" type="password" name="contraseña2" placeholder="Repetir Contraseña" required/>';
+    '<input type="password" name="contraseña2" placeholder="Repetir Contraseña" required/>';
   const $fieldName =
-    '<input class="login-form__input" type="text" name="nombre" placeholder="Nombre completo" required/>';
+    '<input type="text" name="nombre" placeholder="Nombre completo" required/>';
   const $fieldEmail =
-    '<input class="login-form__input" type="email" name="email" placeholder="Correo electrónico" required/>';
+    '<input type="email" name="email" placeholder="Correo electrónico" required/>';
 
   if (formContainer) {
     changeTextForm(

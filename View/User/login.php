@@ -41,12 +41,12 @@ getHeaderTemplate($dataPage);
                     </div>
                     <div class="login-form" id="login-form-container" data-up="inactive">
                         <div class="form-container">
-                            <h2>Iniciar Sesión</h2>
-                            <form id="login-form" class="quotation__form" action="" autocomplete="off" method="POST">
-                                <input class="login-form__input" type="text" name="cedula" placeholder="Cédula" required />
-                                <input class="login-form__input" type="password" name="contraseña" placeholder="Contraseña" required />
+                            <h2 class="form-container__title title-secondary">Iniciar Sesión</h2>
+                            <form id="login-form" class="form-container__form" autocomplete="off" method="POST">
+                                <input type="text" name="cedula" placeholder="Cédula" required />
+                                <input type="password" name="contraseña" placeholder="Contraseña" required />
                                 <input type="hidden" name="login" value="" />
-                                <div class="login-form__btn">
+                                <div class="form-container__btn">
                                     <input id="btn-send" class="btn btn--primary" type="submit" value="Enviar" />
                                     <i id="icon-loading" class="fa fa-spinner fa-spin hidden-element"></i>
                                 </div>

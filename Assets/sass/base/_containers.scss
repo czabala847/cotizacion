@@ -19,6 +19,8 @@
   grid-template-columns: minmax(auto, 1024px);
   justify-content: $container-justify;
   height: $height-full;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 .section-container {
@@ -28,14 +30,41 @@
   align-items: $container-align;
 }
 
+.form-container {
+  color: $color-black;
+  padding: 2rem 1rem;
+  background-color: $color-white;
+  border-radius: $border-radius-size;
+  box-shadow: $box-shadow;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+
+  &__title {
+    margin: 0 0 2rem;
+    text-align: left;
+  }
+
+  &__form {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  &__btn {
+    position: relative;
+
+    & i {
+      color: $color-white;
+    }
+  }
+}
+
 .disabled {
   background-color: $color-gray !important;
   color: $color-black;
   cursor: not-allowed !important;
 }
 
-@media only screen and (max-width: 1024px) {
-  .container {
-    padding: 0 1rem;
-  }
+.hidden-element {
+  display: none !important;
 }
