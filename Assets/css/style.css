@@ -553,11 +553,14 @@ tbody tr th:nth-last-child(-n + 2) {
 .app-dashboard#app {
   background: #fff;
   color: #000;
-  display: -ms-grid;
-  display: grid;
+  display: -ms-inline-grid;
+  display: inline-grid;
   -ms-grid-columns: 230px 1fr;
       grid-template-columns: 230px 1fr;
   position: relative;
+      grid-template-areas: "sidebar content" "sidebar content";
+  width: 100%;
+  overflow-x: hidden;
   -webkit-transition: left 0.3s ease, width 0.3s ease;
   transition: left 0.3s ease, width 0.3s ease;
 }
@@ -568,9 +571,14 @@ tbody tr th:nth-last-child(-n + 2) {
 }
 
 .dashboard {
-  -webkit-transition: left 0.3s ease, width 0.3s ease;
-  transition: left 0.3s ease, width 0.3s ease;
-  width: 100%;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 2;
+  grid-area: content;
+  width: calc(100vw - 180px);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  overflow-x: hidden;
 }
 
 .dashboard-header {
@@ -595,18 +603,16 @@ tbody tr th:nth-last-child(-n + 2) {
   color: #fff;
   height: 100vh;
   width: 230px;
-  -webkit-transition: left 0.3s ease, width 0.3s ease;
-  transition: left 0.3s ease, width 0.3s ease;
-  position: relative;
-}
-
-.sidebar-container {
-  position: fixed;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
   z-index: 10;
   left: 0;
   top: 0;
   bottom: 0;
-  width: 230px;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  grid-area: sidebar;
 }
 
 .sidebar-header {
@@ -694,12 +700,7 @@ tbody tr th:nth-last-child(-n + 2) {
 }
 
 @media (min-width: 768px) {
-  #app.sidebar-toggled {
-    -ms-grid-columns: 50px 1fr;
-        grid-template-columns: 50px 1fr;
-  }
-  #app.sidebar-toggled .sidebar,
-  #app.sidebar-toggled .sidebar-container {
+  #app.sidebar-toggled .sidebar {
     width: 50px;
   }
   #app.sidebar-toggled .sidebar-header {
@@ -774,6 +775,11 @@ tbody tr th:nth-last-child(-n + 2) {
   }
   #app.sidebar-toggled .sidebar__submenu--item > a > span {
     line-height: 40px;
+  }
+  #app.sidebar-toggled .dashboard {
+    -webkit-transform: translateX(-180px);
+            transform: translateX(-180px);
+    width: 100vw;
   }
 }
 /*# sourceMappingURL=style.css.map */

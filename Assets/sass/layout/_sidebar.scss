@@ -7,17 +7,13 @@
   color: $color-white;
   height: $height-viewport;
   width: $sidebar-width;
-  transition: $sidebar-transition;
-  position: relative;
-}
-
-.sidebar-container {
-  position: fixed;
+  transition: 0.3s;
+  // position: fixed;
   z-index: $sidebar-zindex;
   left: 0;
   top: 0;
   bottom: 0;
-  width: $sidebar-width;
+  grid-area: sidebar;
 }
 
 //*****Parte del logo y del icono de ménu del sidebar****//
@@ -99,10 +95,12 @@
 #app {
   @media (min-width: 768px) {
     &.sidebar-toggled {
-      grid-template-columns: $sidebar-width-min 1fr;
+      // grid-template-columns: $sidebar-width-min 1fr;
+      // width: 800px;
+      // transition: 0.3s;
 
-      .sidebar,
-      .sidebar-container {
+      .sidebar {
+        // transform: translateX($sidebar-width-min - $sidebar-width);
         width: $sidebar-width-min;
       }
 
@@ -194,6 +192,11 @@
             line-height: $sidebar-item-height;
           }
         }
+      }
+
+      .dashboard {
+        transform: translateX($sidebar-width-min - $sidebar-width);
+        width: 100vw;
       }
     }
   }

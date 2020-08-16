@@ -5,10 +5,13 @@
 .app-dashboard#app {
   background: $color-white;
   color: $color-black;
-  display: grid;
+  display: inline-grid;
   grid-template-columns: $sidebar-width 1fr;
   // display: flex;
   position: relative;
+  grid-template-areas: "sidebar content" "sidebar content";
+  width: 100%;
+  overflow-x: hidden;
   transition: $sidebar-transition;
 
   & .header {
@@ -17,8 +20,10 @@
 }
 
 .dashboard {
-  transition: $sidebar-transition;
-  width: 100%;
+  grid-area: content;
+  width: calc(100vw - 180px);
+  transition: all 0.3s;
+  overflow-x: hidden;
 }
 
 .dashboard-header {
