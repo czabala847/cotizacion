@@ -5,7 +5,7 @@
 .sidebar {
   background: $color-background-deg;
   color: $color-white;
-  height: $height-viewport;
+  min-height: $height-viewport;
   width: $sidebar-width;
   transition: 0.3s;
   // position: fixed;
@@ -196,7 +196,7 @@
 
       .dashboard {
         transform: translateX($sidebar-width-min - $sidebar-width);
-        width: 100vw;
+        width: $dashboard-width-min;
       }
     }
   }

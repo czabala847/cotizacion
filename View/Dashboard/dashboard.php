@@ -1,7 +1,7 @@
 <?php getTemplateDashboard($dataPage); ?>
 
 <!-- ======= DASHBOARD ============= -->
-<div class="dashboard-container">
+<section class="dashboard-container dashboard-content">
     <div class="container">
         <div class="dashboard-welcome">
             <h2>Bienvenido</h2>
@@ -18,6 +18,6 @@
             </p>
         </div>
     </div>
-</div>
+</section>
 
 <?php getFooterTemplate(); ?>

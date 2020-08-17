@@ -36,7 +36,7 @@ getHeaderTemplate($dataPage);
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur cumque quam fugiat perferendis accusantium consequuntur.</p>
                         </div>
                         <figure>
-                            <img class="login-description__img" src="<?= getUrlMedia(); ?>/img/upload/495078-PHE69C-919.png" alt="login imagen" width="400" />
+                            <img class="login-description__img" src="<?= getUrlMedia(); ?>img/upload/495078-PHE69C-919.png" alt="login imagen" width="400" />
                         </figure>
                     </div>
                     <div class="login-form" id="login-form-container" data-up="inactive">

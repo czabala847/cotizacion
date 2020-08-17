@@ -5,20 +5,18 @@
 /*COLORS*/
 $color-white: #fff;
 $color-light-gray: #f4f8f9;
-$color-gray: #6c757d;
+$color-gray: #d8d8d8;
+$color-gray-secondary: #7a7b7b;
 $color-gray-dark: rgba(255, 255, 255, 0.2);
-// $color-gray-text: #7a7b7b;
 $color-black: #000;
-$color-yellow: #ffb227;
 
 $color-purple: rgba(26, 28, 48, 1);
 $color-purple-dark: rgb(18, 19, 32);
 
+$color-yellow: #ffb227;
 $color-red: #ce0f3d;
 $color-green: #28a745;
-// $color-disabled: #d8d8d8;
 
-$color-btn-primary: $color-red;
 $color-background-deg: linear-gradient(
   150deg,
   rgb(18, 19, 32) 50%,
@@ -49,9 +47,6 @@ $font-size-secondary: 14px;
 $text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 $box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 
-/*DIMENSIONES*/
-$less-size-base: 1rem;
-
 /*BORDER*/
 $border-radius-size: 5px;
 
@@ -62,5 +57,13 @@ $sidebar-transition: left 0.3s ease, width 0.3s ease;
 $sidebar-zindex: 10;
 $sidebar-item-height: 40px;
 
+/*CONTENIDO DASHBOARD*/
+$dashboard-width: calc(100vw - 230px);
+$dashboard-width-min: calc(100vw - 50px);
+$dashboard-min-height: $height-main-section;
+
 /*TRANSITIONS*/
 $transition-base: 0.3s;
+
+/*ASSETS*/
+$url-assets: "http://localhost/cotizacion/Assets/img/upload/";

@@ -1,6 +1,6 @@
 <?php getTemplateDashboard($dataPage); ?>
 
-<section class="quotation">
+<section class="quotation dashboard-content">
     <div class="container">
         <div class="quotation-container">
             <article class="quotation__detail">

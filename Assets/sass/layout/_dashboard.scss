@@ -5,7 +5,7 @@
 .app-dashboard#app {
   background: $color-white;
   color: $color-black;
-  display: inline-grid;
+  display: grid;
   grid-template-columns: $sidebar-width 1fr;
   // display: flex;
   position: relative;
@@ -21,9 +21,14 @@
 
 .dashboard {
   grid-area: content;
-  width: calc(100vw - 180px);
+  width: $dashboard-width;
+  min-height: $dashboard-min-height;
   transition: all 0.3s;
   overflow-x: hidden;
+
+  &-content {
+    min-height: inherit;
+  }
 }
 
 .dashboard-header {
@@ -31,5 +36,5 @@
 }
 
 .dashboard-container {
-  background-color: $color-light-gray;
+  @extend .view-container;
 }

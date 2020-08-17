@@ -3,7 +3,8 @@
 \*-----------------------------------------*/
 
 .quotation {
-  background: url("../assets/SVG/img-hero.svg") no-repeat;
+  @extend .view-container;
+  background: url($url-assets + "SVG/img-hero.svg") no-repeat $color-light-gray;
   background-position-y: 40vh;
 }
 

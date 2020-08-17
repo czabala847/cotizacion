@@ -7,10 +7,11 @@
 /*FONTS*/
 /*FONTS SIZE*/
 /*SHADOW*/
-/*DIMENSIONES*/
 /*BORDER*/
 /*SIDEBAR*/
+/*CONTENIDO DASHBOARD*/
 /*TRANSITIONS*/
+/*ASSETS*/
 /*-----------------------------------------*\
                   MIXINS
 \*-----------------------------------------*/
@@ -79,6 +80,10 @@ figure {
           box-sizing: border-box;
 }
 
+.view-container, .quotation, .dashboard-container {
+  background-color: #f4f8f9;
+}
+
 .section-container, .quotation-container, .login-container {
   display: -ms-grid;
   display: grid;
@@ -122,7 +127,7 @@ figure {
 }
 
 .disabled, input:disabled, .btn--disabled {
-  background-color: #6c757d !important;
+  background-color: #d8d8d8 !important;
   color: #000;
   cursor: not-allowed !important;
 }
@@ -309,7 +314,7 @@ th {
                   QUOTATION
 \*-----------------------------------------*/
 .quotation {
-  background: url("../assets/SVG/img-hero.svg") no-repeat;
+  background: url("http://localhost/cotizacion/Assets/img/upload/SVG/img-hero.svg") no-repeat #f4f8f9;
   background-position-y: 40vh;
 }
 
@@ -553,8 +558,8 @@ tbody tr th:nth-last-child(-n + 2) {
 .app-dashboard#app {
   background: #fff;
   color: #000;
-  display: -ms-inline-grid;
-  display: inline-grid;
+  display: -ms-grid;
+  display: grid;
   -ms-grid-columns: 230px 1fr;
       grid-template-columns: 230px 1fr;
   position: relative;
@@ -575,10 +580,15 @@ tbody tr th:nth-last-child(-n + 2) {
   -ms-grid-row-span: 2;
   -ms-grid-column: 2;
   grid-area: content;
-  width: calc(100vw - 180px);
+  width: calc(100vw - 230px);
+  min-height: calc(100vh - 90px);
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   overflow-x: hidden;
+}
+
+.dashboard-content {
+  min-height: inherit;
 }
 
 .dashboard-header {
@@ -591,17 +601,13 @@ tbody tr th:nth-last-child(-n + 2) {
           flex-direction: initial;
 }
 
-.dashboard-container {
-  background-color: #f4f8f9;
-}
-
 /*-----------------------------------------*\
                   SIDEBAR
 \*-----------------------------------------*/
 .sidebar {
   background: linear-gradient(150deg, #121320 50%, #363b63 100%);
   color: #fff;
-  height: 100vh;
+  min-height: 100vh;
   width: 230px;
   -webkit-transition: 0.3s;
   transition: 0.3s;
@@ -779,7 +785,7 @@ tbody tr th:nth-last-child(-n + 2) {
   #app.sidebar-toggled .dashboard {
     -webkit-transform: translateX(-180px);
             transform: translateX(-180px);
-    width: 100vw;
+    width: calc(100vw - 50px);
   }
 }
 /*# sourceMappingURL=style.css.map */
