@@ -17,6 +17,15 @@ class UserController extends Controller
         $this->view->loadView($this, "login", $dataPage);
     }
 
+    public function user()
+    {
+        $dataPage = [
+            "titlePage" => "usuarios",
+            "titleMetaPage" => "Usuarios"
+        ];
+        $this->view->loadView($this, "user", $dataPage);
+    }
+
     public function login()
     {
         $identification = $_POST["cedula"];
