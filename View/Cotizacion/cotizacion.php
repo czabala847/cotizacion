@@ -1,5 +1,6 @@
-<?php getTemplateDashboard($dataPage); ?>
+<?php getDashboardTemplate($dataPage); ?>
 
+<!-- ======= SECCIÓN DE COTIZACIÓN ============= -->
 <section class="quotation dashboard-content">
     <div class="container">
         <div class="quotation-container">

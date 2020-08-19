@@ -43,7 +43,7 @@ figure {
 /*-----------------------------------------*\
                   CONTAINERS
 \*-----------------------------------------*/
-.flex-center, .header-menu__list, .quotation__form, .dashboard-header {
+.flex-center, .header__dashboard, .header-menu__list, .quotation, .quotation__form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -78,10 +78,6 @@ figure {
   padding: 0 1rem;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-}
-
-.view-container, .quotation, .dashboard-container {
-  background-color: #f4f8f9;
 }
 
 .section-container, .quotation-container, .login-container {
@@ -289,6 +285,16 @@ th {
   height: inherit;
 }
 
+.header__dashboard {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: initial;
+  -webkit-box-direction: initial;
+      -ms-flex-direction: initial;
+          flex-direction: initial;
+}
+
 .header-menu {
   height: inherit;
 }
@@ -314,8 +320,21 @@ th {
                   QUOTATION
 \*-----------------------------------------*/
 .quotation {
-  background: url("http://localhost/cotizacion/Assets/img/upload/SVG/img-hero.svg") no-repeat #f4f8f9;
+  background: url("http://localhost/cotizacion/Assets/img/upload/SVG/img-hero.svg") no-repeat;
   background-position-y: 40vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.quotation-container {
+  -ms-grid-columns: 40% 1fr;
+      grid-template-columns: 40% 1fr;
+  grid-column-gap: 0.5rem;
+  -webkit-box-align: initial;
+      -ms-flex-align: initial;
+          align-items: initial;
 }
 
 .quotation__form {
@@ -329,10 +348,6 @@ th {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-}
-
-.quotation-btn span {
-  margin-left: 0.2rem;
 }
 
 .quotation-btn button {
@@ -351,20 +366,18 @@ th {
 }
 
 @media only screen and (max-width: 1024px) {
-  .quotation__detail {
-    padding-top: 0;
+  .quotation {
+    background-position-y: 60vh;
+  }
+  .quotation-container {
+    padding-top: 3rem;
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+    grid-row-gap: 2rem;
   }
 }
 
 @media only screen and (max-width: 768px) {
-  .quotation {
-    background-position-y: 60vh;
-  }
-  .quotation-container,
-  .login-container {
-    -ms-grid-columns: 1fr;
-        grid-template-columns: 1fr;
-  }
   .quotation-btn button,
   .quotation-btn input {
     width: 100%;
@@ -394,6 +407,10 @@ th {
 }
 
 @media only screen and (max-width: 768px) {
+  .login-container {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
   .login-description {
     display: -ms-grid;
     display: grid;
@@ -566,8 +583,8 @@ tbody tr th:nth-last-child(-n + 2) {
       grid-template-areas: "sidebar content" "sidebar content";
   width: 100%;
   overflow-x: hidden;
-  -webkit-transition: left 0.3s ease, width 0.3s ease;
-  transition: left 0.3s ease, width 0.3s ease;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
 }
 
 .app-dashboard#app .header {
@@ -589,16 +606,7 @@ tbody tr th:nth-last-child(-n + 2) {
 
 .dashboard-content {
   min-height: inherit;
-}
-
-.dashboard-header {
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-orient: initial;
-  -webkit-box-direction: initial;
-      -ms-flex-direction: initial;
-          flex-direction: initial;
+  background-color: #f4f8f9;
 }
 
 /*-----------------------------------------*\
@@ -611,6 +619,7 @@ tbody tr th:nth-last-child(-n + 2) {
   width: 230px;
   -webkit-transition: 0.3s;
   transition: 0.3s;
+  position: fixed;
   z-index: 10;
   left: 0;
   top: 0;

@@ -5,7 +5,6 @@ const $formLogin = document.querySelector("#login-form");
 const $btnRegister = document.querySelector("#registerLogin");
 const $iconLoading = document.querySelector("#icon-loading");
 const $btnSend = document.querySelector("#btn-send");
-const URL_BASE = "http://localhost/cotizacion/";
 
 //Cambiar texto del formulario dependiendo si es sign in o sign up
 const changeTextForm = (
@@ -114,7 +113,7 @@ $formLogin.addEventListener("submit", async (e) => {
       formFetch.handlerIconFetch($iconLoading, $btnSend, true); //Mostrar icono de cargando...
       //PETICION PARA REGISTRAR
       const responseRegister = await formFetch.fetchData(
-        URL_BASE + "User/register",
+        formFetch.URL_BASE + "User/register",
         fd
       );
 
@@ -128,12 +127,12 @@ $formLogin.addEventListener("submit", async (e) => {
       formFetch.handlerIconFetch($iconLoading, $btnSend, true);
       //PETICION PARA LOGIN
       const responseLogin = await formFetch.fetchData(
-        URL_BASE + "User/login",
+        formFetch.URL_BASE + "User/login",
         fd
       );
 
       if (responseLogin.response.success) {
-        window.location = URL_BASE + "dashboard";
+        window.location = formFetch.URL_BASE + "dashboard";
       } else {
         Swal.fire(responseLogin.response.msg, "", "error");
       }

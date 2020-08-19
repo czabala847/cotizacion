@@ -8,7 +8,7 @@
   min-height: $height-viewport;
   width: $sidebar-width;
   transition: 0.3s;
-  // position: fixed;
+  position: fixed;
   z-index: $sidebar-zindex;
   left: 0;
   top: 0;
@@ -201,3 +201,9 @@
     }
   }
 }
+
+// @media only screen and (max-width: 767px) {
+//   .sidebar {
+//     width: 0;
+//   }
+// }

@@ -7,12 +7,11 @@
   color: $color-black;
   display: grid;
   grid-template-columns: $sidebar-width 1fr;
-  // display: flex;
   position: relative;
   grid-template-areas: "sidebar content" "sidebar content";
   width: 100%;
   overflow-x: hidden;
-  transition: $sidebar-transition;
+  transition: $transition-base;
 
   & .header {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
@@ -28,13 +27,6 @@
 
   &-content {
     min-height: inherit;
+    background-color: $color-light-gray;
   }
-}
-
-.dashboard-header {
-  @include m-flex(space-between, center, initial);
-}
-
-.dashboard-container {
-  @extend .view-container;
 }

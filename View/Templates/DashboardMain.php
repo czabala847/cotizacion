@@ -7,23 +7,28 @@ if (!isset($_SESSION["newsession"])) {
     header($location);
 }
 
-getHeaderTemplate($dataPage);
+getHeadTemplate($dataPage);
 ?>
 
 <body>
+    <!-- =======  INICIO APP ============= -->
     <div id="app" class="app-dashboard">
-        <!-- =======BARRA MENU IZQUIERDO ============= -->
+
+        <!-- =======  MENU IZQUIERDO ============= -->
         <?php getSideBarTemplate(); ?>
+
+        <!-- =======  CONTENIDO DERECHO ============= -->
         <section class="dashboard">
+
             <!-- ======= HEADER ============= -->
             <header class="header">
                 <div class="container">
-                    <div class="dashboard-header">
-                        <div class="header-route">
+                    <div class="header__dashboard">
+                        <div class="header__dashboard--route">
                             <i class="fas fa-home"> / </i>
                             <a class="link" href="<?= getUrlBase() . $dataPage['titlePage']; ?>"><?= $dataPage["titlePage"]; ?></a>
                         </div>
-                        <div class="header-options">
+                        <div class="header__dashboard--options">
                             <i class="fas fa-cog"></i>
                         </div>
                     </div>

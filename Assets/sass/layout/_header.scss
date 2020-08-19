@@ -9,6 +9,10 @@
   & .container {
     height: inherit;
   }
+
+  &__dashboard {
+    @include m-flex(space-between, center, initial);
+  }
 }
 
 .header-menu {

@@ -1,3 +1,5 @@
+const URL_BASE = "http://localhost/cotizacion/";
+
 async function fetchData(url, data, type = "json") {
   let config;
   if (data) {
@@ -22,7 +24,7 @@ async function fetchData(url, data, type = "json") {
 
     return { success: true, response };
   } catch (error) {
-    // debugger;
+    debugger;
     return { success: false, error };
   }
 }
@@ -53,4 +55,4 @@ const handlerIconFetch = (icon, btnSend, show) => {
   }
 };
 
-export default { fetchData, emptyField, handlerIconFetch };
+export default { URL_BASE, fetchData, emptyField, handlerIconFetch };

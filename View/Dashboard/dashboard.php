@@ -1,9 +1,9 @@
-<?php getTemplateDashboard($dataPage); ?>
+<?php getDashboardTemplate($dataPage); ?>
 
 <!-- ======= DASHBOARD ============= -->
-<section class="dashboard-container dashboard-content">
+<section class="dashboard-content home">
     <div class="container">
-        <div class="dashboard-welcome">
+        <div class="home-container">
             <h2>Bienvenido</h2>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor nesciunt doloribus nobis,

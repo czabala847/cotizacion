@@ -24,11 +24,6 @@
   box-sizing: border-box;
 }
 
-//Contenedor de las vistas principales: login, cotizaciones, usuarios
-.view-container {
-  background-color: $color-light-gray;
-}
-
 //Contenedor para las secciones principales de cada vista
 .section-container {
   display: grid;

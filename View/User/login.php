@@ -7,7 +7,7 @@ if (isset($_SESSION["newsession"])) {
     header($location);
 }
 
-getHeaderTemplate($dataPage);
+getHeadTemplate($dataPage);
 ?>
 
 <body>
