@@ -2,22 +2,14 @@
               LISTA DE USUARIOS
 \*-----------------------------------------*/
 
-.user-header-hero {
-  background: $color-background-deg;
-  color: $color-white;
-
-  & .hero {
-    padding: 2rem 0;
-
-    & .title-primary {
-      margin-bottom: 1rem;
-    }
-  }
+.user-search,
+.user-search__form {
+  margin-top: 2rem;
 }
 
 .users {
   padding: 2rem 0;
-  background-color: $color-light-gray;
+  // background-color: $color-light-gray;
 
   &__table {
     width: 100%;
@@ -87,11 +79,11 @@ tbody tr th:nth-last-child(-n + 2) {
   }
 }
 
-#fieldSearch {
-  width: 100%;
-  box-sizing: border-box;
-  margin-top: 1rem;
-}
+// #fieldSearch {
+//   width: 100%;
+//   box-sizing: border-box;
+//   margin-top: 1rem;
+// }
 
 .users__pagination--list {
   display: flex;

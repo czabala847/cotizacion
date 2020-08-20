@@ -4,9 +4,9 @@
 <section class="user dashboard-content">
     <div class="container">
         <div class="user-container">
-            <section class="hero">
-                <h1 class="title-primary">Administrador de usuarios</h1>
-                <form action="" autocomplete="off">
+            <section class="user-search">
+                <h1 class="t-center title-primary">Administrador de usuarios</h1>
+                <form class="user-search__form" autocomplete="off">
                     <input type="text" placeholder="Buscar" name="buscador" id="fieldSearch" />
                 </form>
             </section>

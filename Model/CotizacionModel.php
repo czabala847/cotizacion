@@ -4,11 +4,11 @@ require_once("UploadFile.php");
 
 class CotizacionModel
 {
-  private int $code;
-  private string $name;
-  private string $identification;
-  private string $email;
-  private string $subject;
+  private $code;
+  private $name;
+  private $identification;
+  private $email;
+  private $subject;
   private $files;
   private $db;
   private $uf;

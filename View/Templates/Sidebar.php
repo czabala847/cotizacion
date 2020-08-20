@@ -17,7 +17,7 @@
                 </a>
                 <ul class="list-normal sidebar__submenu">
                     <li class="sidebar__submenu--item">
-                        <a href="<?= getUrlBase() ?>User" class="link-normal">
+                        <a href="<?= getUrlBase() ?>user" class="link-normal">
                             <span>Lista usuarios</span>
                         </a>
                     </li>
