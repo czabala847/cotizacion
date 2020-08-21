@@ -238,7 +238,40 @@ select {
 /*-----------------------------------------*\
                 TABLES
 \*-----------------------------------------*/
-th {
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 0.5em;
+}
+
+.table__header {
+  color: rgba(39, 37, 37, 0.815);
+}
+
+.table__body {
+  /*Seleccionar los dos ultimos hijos del elemento*/
+}
+
+.table__body .table__row {
+  background-color: #fff;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.table__body .table__row:hover {
+  -webkit-transform: scale(1.02);
+          transform: scale(1.02);
+}
+
+.table__body .table__column:nth-last-child(-n + 2) {
+  padding: 0;
+  font-size: 1.5rem;
+}
+
+.table__column {
+  padding: 1rem;
   font-weight: normal;
 }
 
@@ -441,47 +474,42 @@ th {
 /*-----------------------------------------*\
               LISTA DE USUARIOS
 \*-----------------------------------------*/
+.user-container {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 .user-search,
 .user-search__form {
-  margin-top: 2rem;
+  margin: 2rem 0;
 }
 
-.users {
+/*.users {
   padding: 2rem 0;
-}
+  // background-color: $color-light-gray;
 
-.users__table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 0.5em;
-}
+  &__table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0.5em;
 
-.users__table thead tr {
-  color: rgba(255, 255, 255, 0.2);
-}
+    & tbody tr {
+      background-color: $color-white;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
 
-.users__table tbody tr {
-  background-color: #fff;
-  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
-}
+      &:hover {
+        transform: scale(1.02);
+        // background-color: $color-light-gray;
+      }
 
-.users__table tbody tr:hover {
-  -webkit-transform: scale(1.02);
-          transform: scale(1.02);
-}
-
-.users__table tbody tr th {
-  padding: 1rem;
-}
-
+      & th {
+        padding: 1rem;
+      }
+    }
+  }
+}*/
 /*Seleccionar los dos ultimos hijos del elemento*/
-tbody tr th:nth-last-child(-n + 2) {
-  padding: 0;
-}
-
 /*Editar usuarios*/
 #editUser .title-primary,
 #editUser p {
@@ -539,10 +567,13 @@ tbody tr th:nth-last-child(-n + 2) {
   border-radius: 0;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 877px) {
   .table-container {
     overflow: auto;
   }
+}
+
+@media only screen and (max-width: 768px) {
   .editUser__form {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
@@ -595,6 +626,18 @@ tbody tr th:nth-last-child(-n + 2) {
 .dashboard-content {
   min-height: inherit;
   background-color: #f4f8f9;
+}
+
+@media only screen and (max-width: 767px) {
+  .app-dashboard#app {
+    -ms-grid-rows: initial;
+        grid-template-rows: initial;
+  }
+  .app-dashboard#app .dashboard {
+    width: 100vw;
+    -webkit-transform: translateX(-230px);
+            transform: translateX(-230px);
+  }
 }
 
 /*-----------------------------------------*\
@@ -783,6 +826,26 @@ tbody tr th:nth-last-child(-n + 2) {
     -webkit-transform: translateX(-180px);
             transform: translateX(-180px);
     width: calc(100vw - 50px);
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  #app .sidebar {
+    width: 0;
+    left: -230px;
+  }
+  #app .sidebar-header__icon {
+    -webkit-transform: translateX(230px);
+            transform: translateX(230px);
+    color: black;
+  }
+  #app.sidebar-toggled .sidebar {
+    width: 230px;
+    left: 0;
+  }
+  #app.sidebar-toggled .sidebar-header__icon {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
   }
 }
 /*# sourceMappingURL=style.css.map */

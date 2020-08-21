@@ -202,8 +202,27 @@
   }
 }
 
-// @media only screen and (max-width: 767px) {
-//   .sidebar {
-//     width: 0;
-//   }
-// }
+#app {
+  @media only screen and (max-width: 767px) {
+    .sidebar {
+      width: 0;
+      left: -$sidebar-width;
+    }
+
+    .sidebar-header__icon {
+      transform: translateX($sidebar-width);
+      color: black;
+    }
+
+    &.sidebar-toggled {
+      .sidebar {
+        width: $sidebar-width;
+        left: 0;
+      }
+
+      .sidebar-header__icon {
+        transform: translateX(0);
+      }
+    }
+  }
+}

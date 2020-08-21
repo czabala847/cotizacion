@@ -1,13 +1,17 @@
 /*-----------------------------------------*\
               LISTA DE USUARIOS
 \*-----------------------------------------*/
+.user-container {
+  width: 100%;
+  overflow-x: hidden;
+}
 
 .user-search,
 .user-search__form {
-  margin-top: 2rem;
+  margin: 2rem 0;
 }
 
-.users {
+/*.users {
   padding: 2rem 0;
   // background-color: $color-light-gray;
 
@@ -15,10 +19,6 @@
     width: 100%;
     border-collapse: separate;
     border-spacing: 0 0.5em;
-
-    & thead tr {
-      color: $color-gray-dark;
-    }
 
     & tbody tr {
       background-color: $color-white;
@@ -35,12 +35,12 @@
       }
     }
   }
-}
+}*/
 
 /*Seleccionar los dos ultimos hijos del elemento*/
-tbody tr th:nth-last-child(-n + 2) {
-  padding: 0;
-}
+// tbody th:nth-last-child(-n + 2) {
+//   padding: 0;
+// }
 
 /*Editar usuarios*/
 
@@ -104,11 +104,13 @@ tbody tr th:nth-last-child(-n + 2) {
   border-radius: 0;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 877px) {
   .table-container {
     overflow: auto;
   }
+}
 
+@media only screen and (max-width: 768px) {
   .editUser {
     &__form {
       grid-template-columns: 1fr;

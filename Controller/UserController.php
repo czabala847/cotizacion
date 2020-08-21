@@ -26,6 +26,22 @@ class UserController extends Controller
         $this->view->loadView($this, "user", $dataPage);
     }
 
+    public function userTable()
+    {
+        $valueSearch = $_POST["value"];
+        $page = $_POST["pageShow"];
+
+        $response = $this->model->getAllUsers($valueSearch, $page);
+
+        $dataTable = [
+            "data" => $response["users"],
+            "actualPage" => $response["pageShow"],
+            "numberPages" => $response["numberPagesShow"]
+        ];
+
+        getTableTemplate($dataTable);
+    }
+
     public function login()
     {
         $identification = $_POST["cedula"];

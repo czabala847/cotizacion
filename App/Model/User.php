@@ -118,10 +118,10 @@ class User
   }
 
   //Mostrar todos los usuarios
-  public function getAllUsers($value, $page = 0)
+  public function getAllUsers($value, $pageShow = 0)
   {
     define("LIMIT", 5);
-    $index = $page * LIMIT;
+    $index = $pageShow * LIMIT;
     // $query = "SELECT * FROM usuario";
     // $params = array();
     $search = "%$value%";
@@ -135,7 +135,7 @@ class User
     // if ($value != "") {
     // }
 
-    return ["data" => $this->db->select($query, $params, true), "page" => $page, "numberPages" => $numberPages];
+    return ["data" => $this->db->select($query, $params, true), "page" => $pageShow, "numberPages" => $numberPages];
   }
 
   //Cambiar estado del usuario

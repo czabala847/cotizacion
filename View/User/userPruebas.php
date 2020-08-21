@@ -10,7 +10,16 @@
                     <input type="text" placeholder="Buscar" name="buscador" id="fieldSearch" />
                 </form>
             </section>
-            <section class="table-container" id="userTable">
+            <section class="users">
+                <div class="container">
+                    <div class="table-container" id="userTable">
+                        <?php
+                        if (isset($dataPage["listUser"])) {
+                            getTableTemplate($dataPage);
+                        }
+                        ?>
+                    </div>
+                </div>
             </section>
         </div>
     </div>

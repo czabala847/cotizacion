@@ -31,3 +31,8 @@ function getHeadTemplate($dataPage = "")
 {
     require_once "View/Templates/HeadMeta.php";
 }
+
+function getTableTemplate($dataTable = "")
+{
+    require_once "View/Templates/Tables/TableTemplate.php";
+}

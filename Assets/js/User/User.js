@@ -52,12 +52,14 @@ const setStatusUser = async (idUser, container, value, page) => {
 };
 
 //====== Mostrar tabla de usuarios en pantalla ====================
-const renderTableUser = async (container, value = "", page = 0) => {
+const renderTableUser = async (container, value = "", pageShow = 0) => {
   const fd = new FormData();
   fd.set("value", value);
-  fd.set("page", page);
+  fd.set("pageShow", pageShow);
 
-  const result = await fetchData(URL_FECTH, fd, "text");
+  const URL_FECTH = formFetch.URL_BASE + "user/userTable";
+  const result = await formFetch.fetchData(URL_FECTH, fd, "text");
+
   const tableHTML = result.response;
 
   if (container) {
@@ -69,7 +71,7 @@ const renderTableUser = async (container, value = "", page = 0) => {
     $arrBtnStatus.forEach((button) => {
       button.addEventListener("click", async (e) => {
         e.preventDefault();
-        setStatusUser(button.dataset.id, container, value, page);
+        setStatusUser(button.dataset.id, container, value, pageShow);
       });
     });
 

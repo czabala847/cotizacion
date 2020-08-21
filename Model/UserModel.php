@@ -88,23 +88,23 @@ class UserModel
     }
 
     //Mostrar usuarios dependiendo de la pagina
-    public function getAllUsers(string $value, int $page = 0)
+    public function getAllUsers(string $value, int $pageShow = 0)
     {
         $limit = 5;
-        $index = $page * $limit;
+        $index = $pageShow * $limit;
 
         $valueSearch = "%$value%";
         $arrParams = array($valueSearch, $valueSearch, $valueSearch);
 
         $strQueryCount = "SELECT COUNT(id) Cantidad FROM usuarios WHERE nombre LIKE ? OR cedula LIKE ? OR correo LIKE ?";
         $resultCount = $this->db->select($strQueryCount, $arrParams);
-        $numberPages = ceil(intval($resultCount["Cantidad"]) / limit);
+        //Obtener cuantas páginas tiene la tabla usuarios
+        $numberPagesShow = ceil(intval($resultCount["Cantidad"]) / $limit);
 
-        $query = "SELECT U.id, U.cedula, U.nombre, U.correo, U.estado, R.nombre rol FROM usuario U INNER JOIN rol R ON U.rol = R.id WHERE U.nombre LIKE ? OR U.cedula LIKE ? OR U.correo LIKE ? LIMIT $index, " . LIMIT;
-        // if ($value != "") {
-        // }
+        $strQueryUsers = "SELECT U.id, U.cedula, U.nombre, U.correo, U.estado, R.nombre rol FROM usuarios U INNER JOIN roles R ON U.rol = R.id WHERE U.nombre LIKE ? OR U.cedula LIKE ? OR U.correo LIKE ? LIMIT $index, " . $limit;
+        $arrUsers = $this->db->select($strQueryUsers, $arrParams, true);
 
-        return ["data" => $this->db->select($query, $arrParams, true), "page" => $page, "numberPages" => $numberPages];
+        return ["users" => $arrUsers, "pageShow" => $pageShow, "numberPagesShow" => $numberPagesShow];
     }
 
 
