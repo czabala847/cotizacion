@@ -668,6 +668,7 @@ select {
       grid-template-columns: 70% 1fr;
       grid-template-areas: "logo icon-menu";
   padding: 3rem 0;
+  position: relative;
 }
 
 .sidebar-header__logo--circle {
@@ -680,15 +681,30 @@ select {
 }
 
 .sidebar-header__icon {
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  background-color: #fff;
+  margin: 0 auto;
+  background-color: #121320;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
-  -ms-grid-column-align: center;
-      justify-self: center;
-  cursor: pointer;
+  text-align: center;
   -ms-grid-row: 1;
   -ms-grid-column: 2;
   grid-area: icon-menu;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  cursor: pointer;
+}
+
+.sidebar-header__icon:before {
+  line-height: 30px;
 }
 
 .sidebar__menu--item {
@@ -835,17 +851,16 @@ select {
     left: -230px;
   }
   #app .sidebar-header__icon {
-    -webkit-transform: translateX(230px);
-            transform: translateX(230px);
-    color: black;
+    left: 240px;
+    top: 25px;
   }
   #app.sidebar-toggled .sidebar {
     width: 230px;
     left: 0;
   }
   #app.sidebar-toggled .sidebar-header__icon {
-    -webkit-transform: translateX(0);
-            transform: translateX(0);
+    left: 0;
+    top: 0;
   }
 }
 /*# sourceMappingURL=style.css.map */

@@ -22,6 +22,7 @@
   grid-template-columns: 70% 1fr;
   grid-template-areas: "logo icon-menu";
   padding: 3rem 0;
+  position: relative;
 
   //Logo circulo
   &__logo--circle {
@@ -31,10 +32,23 @@
 
   //icono de menú en el sidebar
   &__icon {
+    @include m-container-circle(30px);
+    background-color: $color-purple-dark;
     align-self: $container-align;
-    justify-self: $container-justify;
-    cursor: pointer;
+    text-align: center;
+    // justify-self: $container-justify;
     grid-area: icon-menu;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    cursor: pointer;
+
+    &:before {
+      line-height: 30px;
+    }
   }
 }
 
@@ -129,7 +143,6 @@
       }
 
       // menu
-
       .sidebar__menu--item > a {
         grid-template-columns: $sidebar-width-min auto;
         grid-column-gap: 0;
@@ -210,8 +223,9 @@
     }
 
     .sidebar-header__icon {
-      transform: translateX($sidebar-width);
-      color: black;
+      left: $sidebar-width + 10px;
+      top: 25px;
+      // transform: translateX($sidebar-width);
     }
 
     &.sidebar-toggled {
@@ -221,7 +235,9 @@
       }
 
       .sidebar-header__icon {
-        transform: translateX(0);
+        left: 0;
+        top: 0;
+        // transform: translateX(0);
       }
     }
   }
