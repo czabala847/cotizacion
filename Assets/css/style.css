@@ -276,6 +276,47 @@ select {
 }
 
 /*-----------------------------------------*\
+                PAGINATION
+\*-----------------------------------------*/
+.pagination {
+  margin: 2rem 0;
+}
+
+.pagination__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0;
+}
+
+.pagination__list--item {
+  margin-right: 1rem;
+}
+
+.pagination__list--link {
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  background-color: #121320;
+  text-decoration: none;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  display: block;
+  border-radius: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+@media only screen and (max-width: 877px) {
+  .table-container {
+    overflow: auto;
+  }
+}
+
+/*-----------------------------------------*\
                   VARIABLES
 \*-----------------------------------------*/
 .users .fas {
@@ -484,32 +525,6 @@ select {
   margin: 2rem 0;
 }
 
-/*.users {
-  padding: 2rem 0;
-  // background-color: $color-light-gray;
-
-  &__table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 0.5em;
-
-    & tbody tr {
-      background-color: $color-white;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-      transition: 0.3s;
-
-      &:hover {
-        transform: scale(1.02);
-        // background-color: $color-light-gray;
-      }
-
-      & th {
-        padding: 1rem;
-      }
-    }
-  }
-}*/
-/*Seleccionar los dos ultimos hijos del elemento*/
 /*Editar usuarios*/
 #editUser .title-primary,
 #editUser p {
@@ -541,36 +556,6 @@ select {
 .editUser__form .form-login__btn {
   -ms-grid-column: 2;
   grid-column: 2;
-}
-
-.users__pagination--list {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  list-style: none;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin: 1rem 0 0;
-  padding: 0;
-}
-
-.users_pagination--link {
-  margin-right: 1rem;
-  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-  background-color: #121320;
-  text-decoration: none;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
-  display: block;
-  border-radius: 0;
-}
-
-@media only screen and (max-width: 877px) {
-  .table-container {
-    overflow: auto;
-  }
 }
 
 @media only screen and (max-width: 768px) {

@@ -11,37 +11,6 @@
   margin: 2rem 0;
 }
 
-/*.users {
-  padding: 2rem 0;
-  // background-color: $color-light-gray;
-
-  &__table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 0.5em;
-
-    & tbody tr {
-      background-color: $color-white;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-      transition: 0.3s;
-
-      &:hover {
-        transform: scale(1.02);
-        // background-color: $color-light-gray;
-      }
-
-      & th {
-        padding: 1rem;
-      }
-    }
-  }
-}*/
-
-/*Seleccionar los dos ultimos hijos del elemento*/
-// tbody th:nth-last-child(-n + 2) {
-//   padding: 0;
-// }
-
 /*Editar usuarios*/
 
 #editUser {
@@ -84,31 +53,6 @@
 //   box-sizing: border-box;
 //   margin-top: 1rem;
 // }
-
-.users__pagination--list {
-  display: flex;
-  list-style: none;
-  align-items: center;
-  margin: 1rem 0 0;
-  padding: 0;
-}
-
-.users_pagination--link {
-  margin-right: 1rem;
-  // box-sizing: border-box;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-  background-color: $color-purple-dark;
-  text-decoration: none;
-  transition: 0.3s;
-  display: block;
-  border-radius: 0;
-}
-
-@media only screen and (max-width: 877px) {
-  .table-container {
-    overflow: auto;
-  }
-}
 
 @media only screen and (max-width: 768px) {
   .editUser {

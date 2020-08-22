@@ -1,4 +1,4 @@
-<table class="users__table table">
+<table class="table">
     <thead class="table__header">
         <tr class="table__row">
             <th class="table__column">id</th>
@@ -33,3 +33,5 @@
         <?php endforeach ?>
     </tbody>
 </table>
+
+<?php getPaginationTemplate($dataTable); ?>

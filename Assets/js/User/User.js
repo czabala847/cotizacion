@@ -1,7 +1,6 @@
 import formFetch from "../Helper/FormFetch.js";
 import { showModal } from "../Helper/Modal/Modal.js";
 
-const URL_FECTH = "../Controller/UserController.php";
 let timeInterval;
 
 //======== Elementos HTML Necesarios ===================================
@@ -36,11 +35,11 @@ const setStatusUser = async (idUser, container, value, page) => {
     const fd = new FormData();
     fd.set("modify", "status");
 
-    const linkFetch = `${URL_FECTH}?id=${idUser}`;
-    const result = await fetchData(linkFetch, fd);
+    const URL_FECTH = formFetch.URL_BASE + "user/setStatus/" + idUser;
+    const result = await formFetch.fetchData(URL_FECTH, fd);
 
     let resultStatus = result.success ? "success" : "error";
-    let okModal = await showModal("", result.response, resultStatus, {
+    let okModal = await showModal("", result.response.response, resultStatus, {
       showCancelButton: false,
     });
 
@@ -63,23 +62,27 @@ const renderTableUser = async (container, value = "", pageShow = 0) => {
   const tableHTML = result.response;
 
   if (container) {
-    container.innerHTML = tableHTML;
+    if (result.success) {
+      container.innerHTML = tableHTML;
 
-    const $arrBtnStatus = document.querySelectorAll(".btn-status");
+      const $arrBtnStatus = document.querySelectorAll(".btn-status");
 
-    //===== Añadir interactividad a los botones de cambiar estados =====
-    $arrBtnStatus.forEach((button) => {
-      button.addEventListener("click", async (e) => {
-        e.preventDefault();
-        setStatusUser(button.dataset.id, container, value, pageShow);
+      //===== Añadir interactividad a los botones de cambiar estados =====
+      $arrBtnStatus.forEach((button) => {
+        button.addEventListener("click", async (e) => {
+          e.preventDefault();
+          setStatusUser(button.dataset.id, container, value, pageShow);
+        });
       });
-    });
 
-    const $arrBtnPaginator = document.querySelectorAll(
-      ".users_pagination--link"
-    );
+      const $arrBtnPaginator = document.querySelectorAll(
+        ".pagination__list--link"
+      );
 
-    paginatorTable($arrBtnPaginator, container, value);
+      paginatorTable($arrBtnPaginator, container, value);
+    } else {
+      container.innerHTML = `<p>No se encontraron resultados</p>`;
+    }
   }
 };
 

@@ -107,7 +107,31 @@ class UserModel
         return ["users" => $arrUsers, "pageShow" => $pageShow, "numberPagesShow" => $numberPagesShow];
     }
 
+    //Cambiar estado del usuario
+    public function setStatusUser(int $id)
+    {
+        $user = $this->searchUser($id);
+        $strUpdate = "UPDATE usuarios SET estado = ? WHERE id = ?";
 
+        $messageModification = "activado";
+
+        if ($user) {
+            if ($user["estado"] == 'A') {
+                $responseUpdate = $this->db->update($strUpdate, array("I", $id));
+                $messageModification = 'desactivado';
+            } else {
+                $responseUpdate = $this->db->update($strUpdate, array("A", $id));
+            }
+
+            if ($responseUpdate) {
+                return ["success" => true, "response" => "Usuario " . $messageModification . " con exito"];
+            } else {
+                return ["success" => false, "response" => "Ocurrio error al modificar usuario"];
+            }
+        } else {
+            return ["success" => false, "response" => "Usuario no a modificar no existe"];;
+        }
+    }
 
     /** GETTERS Y SETTERS */
 

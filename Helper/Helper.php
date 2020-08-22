@@ -36,3 +36,8 @@ function getTableTemplate($dataTable = "")
 {
     require_once "View/Templates/Tables/TableTemplate.php";
 }
+
+function getPaginationTemplate($dataTable = "")
+{
+    require_once "View/Templates/Tables/PaginatorTemplate.php";
+}
