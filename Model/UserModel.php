@@ -30,7 +30,7 @@ class UserModel
     }
 
     //Buscar usuario por id o por cedula
-    private function searchUser(string $value, bool $searchIdentification = false)
+    public function searchUser(string $value, bool $searchIdentification = false)
     {
 
         $searchColum = "id";

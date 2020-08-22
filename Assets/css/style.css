@@ -520,6 +520,10 @@ select {
   overflow-x: hidden;
 }
 
+.user-container__info {
+  margin: 2rem 0;
+}
+
 .user-search,
 .user-search__form {
   margin: 2rem 0;

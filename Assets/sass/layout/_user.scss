@@ -4,6 +4,10 @@
 .user-container {
   width: 100%;
   overflow-x: hidden;
+
+  &__info {
+    margin: 2rem 0;
+  }
 }
 
 .user-search,

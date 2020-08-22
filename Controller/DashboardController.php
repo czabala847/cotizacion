@@ -13,7 +13,8 @@ class DashboardController extends Controller
 
         $dataPage = [
             "titlePage" => "dashboard",
-            "titleMetaPage" => "Dashboard"
+            "titleMetaPage" => "Dashboard",
+            "urlPage" => "dashboard"
         ];
         $this->view->loadView($this, "dashboard", $dataPage);
     }

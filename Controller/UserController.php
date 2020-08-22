@@ -12,7 +12,9 @@ class UserController extends Controller
     {
         $dataPage = [
             "titlePage" => "login",
-            "titleMetaPage" => "Login"
+            "titleMetaPage" => "Login",
+            "urlPage" => "user"
+
         ];
         $this->view->loadView($this, "login", $dataPage);
     }
@@ -21,7 +23,8 @@ class UserController extends Controller
     {
         $dataPage = [
             "titlePage" => "usuarios",
-            "titleMetaPage" => "Usuarios"
+            "titleMetaPage" => "Usuarios",
+            "urlPage" => "user"
         ];
         $this->view->loadView($this, "user", $dataPage);
     }
@@ -129,5 +132,19 @@ class UserController extends Controller
     {
         $response = $this->model->setStatusUser($idUser);
         echo json_encode($response, JSON_UNESCAPED_UNICODE);
+    }
+
+    public function edit(int $idUser)
+    {
+
+        $user = $this->model->searchUser($idUser);
+
+        $dataPage = [
+            "titlePage" => "usuarios",
+            "titleMetaPage" => "Editar Usuarios",
+            "urlPage" => "user",
+            "user" => $user
+        ];
+        $this->view->loadView($this, "editarUsuario", $dataPage);
     }
 }

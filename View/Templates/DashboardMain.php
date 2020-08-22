@@ -26,7 +26,7 @@ getHeadTemplate($dataPage);
                     <div class="header__dashboard">
                         <div class="header__dashboard--route">
                             <i class="fas fa-home"> / </i>
-                            <a class="link" href="<?= getUrlBase() . $dataPage['titlePage']; ?>"><?= $dataPage["titlePage"]; ?></a>
+                            <a class="link" href="<?= getUrlBase() . $dataPage['urlPage']; ?>"><?= $dataPage["titlePage"]; ?></a>
                         </div>
                         <div class="header__dashboard--options">
                             <i class="fas fa-cog"></i>

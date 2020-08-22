@@ -19,7 +19,7 @@
                 <th class="table__column"><?php echo $user["correo"]; ?></th>
                 <th class="table__column"><?php echo $user["rol"]; ?></th>
                 <th class="table__column">
-                    <a class="btn-status" data-id="<?php echo $user['id'] ?>" data-status="<?php echo strtolower($user['estado']) ?>" href="usuario<?php echo $user['id'] ?>">
+                    <a class="btn-status" data-id="<?php echo $user['id'] ?>" data-status="<?php echo strtolower($user['estado']) ?>" href="">
                         <?php
                         if ($user["estado"] === 'A') :
                             echo "<i class='fas fa-check-square'></i>";
@@ -28,7 +28,7 @@
                         endif; ?>
                     </a>
                 </th>
-                <th class="table__column"><a href=<?php echo "usuarioEditar.php?id=" . $user["id"] ?>><i class="fas fa-pen-square"></i></a></th>
+                <th class="table__column"><a href=<?php echo getUrlBase() . "user/edit/" . $user["id"] ?>><i class="fas fa-pen-square"></i></a></th>
             </tr>
         <?php endforeach ?>
     </tbody>

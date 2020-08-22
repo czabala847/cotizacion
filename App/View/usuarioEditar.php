@@ -50,7 +50,6 @@ $arrRoles = $db->select($sqlRol, [], true);
         <div class="container">
           <h1 class="title-primary"><?php echo  $user["nombre"] ?></h1>
           <p>C.C <?php echo $user["cedula"] ?></p>
-        </div>
       </section>
       <section class="users editUser">
         <div class="container">

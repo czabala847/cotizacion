@@ -12,7 +12,8 @@ class CotizacionController extends Controller
     {
         $dataPage = [
             "titlePage" => "cotizacion",
-            "titleMetaPage" => "Cotizacion"
+            "titleMetaPage" => "Cotizacion",
+            "urlPage" => "cotizacion"
         ];
         $this->view->loadView($this, "cotizacion", $dataPage);
     }
