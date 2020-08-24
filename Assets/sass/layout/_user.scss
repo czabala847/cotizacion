@@ -4,6 +4,7 @@
 .user-container {
   width: 100%;
   overflow-x: hidden;
+  margin-bottom: 2rem;
 
   &__info {
     margin: 2rem 0;
@@ -17,38 +18,69 @@
 
 /*Editar usuarios*/
 
-#editUser {
-  .title-primary,
-  p {
-    margin: 0;
+.user-edit {
+  background-color: $color-white;
+  color: $color-gray-dark-2;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: 25% 1fr;
+  grid-row-gap: 2rem;
+  grid-template-rows: 50px 1fr;
+  grid-template-areas: "head head" "sidebar content";
+  padding-bottom: 1rem;
+  position: relative;
+  box-shadow: 10px 10px;
+
+  &__header {
+    padding: 0 1.5rem;
+    grid-area: head;
+
+    & p {
+      margin: 0;
+      padding: 1rem 0;
+      border-bottom: 1px solid $color-gray;
+    }
   }
 
-  & .users {
-    color: $color-black;
+  &__sidebar {
+    grid-area: sidebar;
+
+    & .avatar-user {
+      @include m-container-circle(80px);
+      background-color: $color-red;
+      color: $color-white;
+      @extend .flex-center;
+      font-size: 3rem;
+    }
+  }
+
+  &__form {
+    grid-area: content;
+    padding: 0 1rem;
   }
 }
 
 .editUser {
   &__form {
-    @extend .grid-center;
-    grid-template-columns: 30% 1fr;
-    grid-row-gap: 1rem;
-    grid-column-gap: 2rem;
+    // @extend .grid-center;
+    // grid-template-columns: 30% 1fr;
+    // grid-row-gap: 1rem;
+    // grid-column-gap: 2rem;
 
-    &--field {
-      background-color: $color-white;
-      border: 1px solid lightgray;
-      color: $color-black;
-      margin: 0;
-    }
+    // &--field {
+    //   background-color: $color-white;
+    //   border: 1px solid lightgray;
+    //   color: $color-black;
+    //   margin: 0;
+    // }
 
-    & label {
-      text-align: end;
-    }
+    // & label {
+    //   text-align: end;
+    // }
 
-    & .form-login__btn {
-      grid-column: 2;
-    }
+    // & .form-login__btn {
+    //   grid-column: 2;
+    // }
   }
 }
 

@@ -1,0 +1,23 @@
+/*-----------------------------------------*\
+              FORMS
+\*-----------------------------------------*/
+
+.form-group {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: 1rem;
+  grid-row-gap: 0.5rem;
+
+  &.cl-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .form-group {
+    &.cl-2 {
+      grid-template-columns: 1fr;
+    }
+  }
+}
