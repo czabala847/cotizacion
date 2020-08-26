@@ -29,6 +29,7 @@ $header-height: 90px;
 $height-viewport: 100vh;
 $height-full: 100%;
 $height-main-section: calc(100vh - 90px);
+$col-base: 1;
 
 /*CONTAINERS*/
 $container-justify: center;
@@ -46,7 +47,7 @@ $font-size-secondary: 14px;
 
 /*SHADOW*/
 $text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-$box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+$box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
 
 /*BORDER*/
 $border-radius-size: 5px;

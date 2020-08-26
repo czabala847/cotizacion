@@ -3,7 +3,7 @@
 \*-----------------------------------------*/
 .user-container {
   width: 100%;
-  overflow-x: hidden;
+  // overflow-x: hidden;
   margin-bottom: 2rem;
 
   &__info {
@@ -26,10 +26,9 @@
   grid-template-columns: 25% 1fr;
   grid-row-gap: 2rem;
   grid-template-rows: 50px 1fr;
-  grid-template-areas: "head head" "sidebar content";
-  padding-bottom: 1rem;
-  position: relative;
-  box-shadow: 10px 10px;
+  grid-template-areas: "head head" "sidebar form";
+  padding-bottom: 2rem;
+  box-shadow: $box-shadow;
 
   &__header {
     padding: 0 1.5rem;
@@ -44,6 +43,7 @@
 
   &__sidebar {
     grid-area: sidebar;
+    margin-top: 1rem;
 
     & .avatar-user {
       @include m-container-circle(80px);
@@ -55,54 +55,53 @@
   }
 
   &__form {
-    grid-area: content;
+    grid-area: form;
     padding: 0 1rem;
+
+    .textpass {
+      @extend .flex-center;
+      justify-content: initial;
+    }
+
+    #changePass {
+      margin: 0 0 0 0.5rem;
+      width: auto;
+    }
   }
 }
-
-.editUser {
-  &__form {
-    // @extend .grid-center;
-    // grid-template-columns: 30% 1fr;
-    // grid-row-gap: 1rem;
-    // grid-column-gap: 2rem;
-
-    // &--field {
-    //   background-color: $color-white;
-    //   border: 1px solid lightgray;
-    //   color: $color-black;
-    //   margin: 0;
-    // }
-
-    // & label {
-    //   text-align: end;
-    // }
-
-    // & .form-login__btn {
-    //   grid-column: 2;
-    // }
-  }
-}
-
-// #fieldSearch {
-//   width: 100%;
-//   box-sizing: border-box;
-//   margin-top: 1rem;
-// }
 
 @media only screen and (max-width: 768px) {
-  .editUser {
-    &__form {
-      grid-template-columns: 1fr;
-      grid-row-gap: 0.5rem;
+  .user-edit {
+    grid-template-areas: "head sidebar" "form form";
+    grid-template-columns: repeat(2, 1fr);
 
-      & .login-form__btn {
-        grid-column: 1;
+    &__header {
+      grid-area: head;
+    }
+
+    &__sidebar {
+      grid-area: sidebar;
+      // @include m-flex();
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin: 0;
+      padding-right: 1rem;
+
+      & p {
+        display: none;
+      }
+
+      .avatar-user {
+        height: 40px;
+        width: 40px;
+        font-size: 20px;
+        margin: 0;
       }
     }
 
-    & label {
-      text-align: initial;
+    &__form {
+      grid-area: form;
     }
   }
 }
