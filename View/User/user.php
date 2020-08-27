@@ -16,4 +16,4 @@
     </div>
 </section>
 
-<?php getFooterTemplate(); ?>
+<?php getFooterTemplate($dataPage); ?>

@@ -5,6 +5,10 @@
 <script src="<?= getUrlMedia() ?>js/Dashboard/SideBar.js"></script>
 <script type="module" src="<?= getUrlMedia(); ?>js/Cotizacion/Cotizacion.js"></script>
 <script type="module" src="<?= getUrlMedia(); ?>js/User/User.js"></script>
+<?php if ($dataPage["titlePage"] === "roles") : ?>
+    <script type="module" src="<?= getUrlMedia(); ?>js/User/Roles.js"></script>
+<?php endif; ?>
+
 </body>
 
 </html>

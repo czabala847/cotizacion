@@ -120,7 +120,9 @@ class UserController extends Controller
         $response = $this->model->getAllUsers($valueSearch, $page);
 
         $dataTable = [
-            "data" => $response["users"],
+            "columns" => ["id", "Cédula", "Nombre", "Correo", "Perfil"],
+            "keys" => [],
+            "data" => $response["data"],
             "actualPage" => $response["pageShow"],
             "numberPages" => $response["numberPagesShow"]
         ];

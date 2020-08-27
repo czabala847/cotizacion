@@ -22,7 +22,7 @@
                         </a>
                     </li>
                     <li class="sidebar__submenu--item">
-                        <a href="" class="link-normal">
+                        <a href="<?= getUrlBase() ?>roles" class="link-normal">
                             <span>Roles</span>
                         </a>
                     </li>

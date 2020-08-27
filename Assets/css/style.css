@@ -947,4 +947,11 @@ select {
         grid-template-columns: 1fr;
   }
 }
+
+/*-----------------------------------------*\
+                  ROLES
+\*-----------------------------------------*/
+.roles {
+  padding: 2rem 0;
+}
 /*# sourceMappingURL=style.css.map */
