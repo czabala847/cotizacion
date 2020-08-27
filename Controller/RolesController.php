@@ -29,6 +29,7 @@ class RolesController extends Controller
 
         $dataTable = [
             "columns" => ["id", "Nombre", "Descripción"],
+            "keys" => ["id", "nombre", "descripcion"],
             "data" => $response["data"],
             "actualPage" => $response["pageShow"],
             "numberPages" => $response["numberPagesShow"]

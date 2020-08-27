@@ -12,7 +12,7 @@ class Mysql
         $this->conexion = $this->conexion->getConnection();
     }
 
-    public function select(string $strQuery, array $arrParams, bool $all = false, bool $assoc = true)
+    public function select(string $strQuery, array $arrParams, bool $all = false)
     {
         $this->strQuery = $strQuery;
         $this->arrParams = $arrParams;
@@ -21,11 +21,7 @@ class Mysql
         $stmt->execute($arrParams);
 
         if ($all) {
-            if ($assoc) {
-                return $stmt->fetchAll(PDO::FETCH_ASSOC);
-            } else {
-                return $stmt->fetchAll();
-            }
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         return $stmt->fetch(PDO::FETCH_ASSOC);

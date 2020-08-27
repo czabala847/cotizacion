@@ -16,17 +16,17 @@
             <tr class="table__row">
                 <!-- **** IMPRIMIR COLUMNAS DEPENDIENDO DE LOS DATOS PASADOS AL ARRAY DATATABLE["DATA"] ******** -->
                 <!-- COUNT($DATA) / 2, es el número real de columnas, ya que hay columnas que se repiten, indice númerico y llave -->
-                <?php for ($i = 0; $i < count($data) / 2; $i++) : ?>
-                    <th class="table__column"><?php echo $data[$i]; ?></th>
-                <?php endfor; ?>
+                <?php foreach ($dataTable["keys"] as $key) : ?>
+                    <th class="table__column"><?php echo $data[$key]; ?></th>
+                <?php endforeach; ?>
                 <th class="table__column">
                     <a class="btn-status" data-id="<?php echo $data['id'] ?>" data-status="<?php echo strtolower($data['estado']) ?>" href="">
                         <?php
-                        if ($data["estado"] === 'A') :
-                            echo "<i class='fas fa-check-square'></i>";
-                        else :
-                            echo "<i class='fas fa-window-close'></i>";
-                        endif; ?>
+                            if ($data["estado"] === 'A') :
+                                echo "<i class='fas fa-check-square'></i>";
+                            else :
+                                echo "<i class='fas fa-window-close'></i>";
+                            endif; ?>
                     </a>
                 </th>
                 <th class="table__column"><a href=<?php echo getUrlBase() . "user/edit/" . $data["id"] ?>><i class="fas fa-pen-square"></i></a></th>
