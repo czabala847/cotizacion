@@ -953,5 +953,7 @@ select {
 \*-----------------------------------------*/
 .roles {
   padding: 2rem 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 /*# sourceMappingURL=style.css.map */

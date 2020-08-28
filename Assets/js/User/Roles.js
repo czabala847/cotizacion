@@ -10,7 +10,7 @@ const renderTableRoles = async (container, value = "", pageShow = 0) => {
 
   const URL_FECTH = formFetch.URL_BASE + "roles/rolesTable";
   const result = await formFetch.fetchData(URL_FECTH, fd, "text");
-  debugger;
+
   const tableHTML = result.response;
 
   if (container) {
@@ -32,8 +32,6 @@ const renderTableRoles = async (container, value = "", pageShow = 0) => {
       );
 
       paginatorTable($arrBtnPaginator, container, value);
-    } else {
-      container.innerHTML = `<p>No se encontraron resultados</p>`;
     }
   }
 };

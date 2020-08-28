@@ -1,4 +1,5 @@
 import formFetch from "../Helper/FormFetch.js";
+import tableFetch from "../Helper/TableFetch.js";
 import { showModal } from "../Helper/Modal/Modal.js";
 
 let timeInterval;
@@ -7,7 +8,7 @@ let timeInterval;
 const $tableContainer = document.querySelector("#userTable");
 const $fieldSearch = document.querySelector("#fieldSearch");
 
-//====== Cambiar estado del usuario ===============================
+//====== Paginador ===============================
 const paginatorTable = (arrButtons, container, value) => {
   let page = 0;
   arrButtons.forEach((button) => {
@@ -50,6 +51,17 @@ const setStatusUser = async (idUser, container, value, page) => {
   }
 };
 
+const renderTable = (container) => {
+  const URL_FECTH = formFetch.URL_BASE + "user/userTable";
+  const data = {
+    // valueSearch: "",
+    // pageShow: 0,
+    urlFetch: URL_FECTH,
+  };
+
+  tableFetch.renderTable(container, data);
+};
+
 //====== Mostrar tabla de usuarios en pantalla ====================
 const renderTableUser = async (container, value = "", pageShow = 0) => {
   const fd = new FormData();
@@ -80,11 +92,27 @@ const renderTableUser = async (container, value = "", pageShow = 0) => {
       );
 
       paginatorTable($arrBtnPaginator, container, value);
-    } else {
-      container.innerHTML = `<p>No se encontraron resultados</p>`;
     }
   }
 };
+
+//======== Busqueda en tiempo real de usuarios ========================
+if ($fieldSearch) {
+  $fieldSearch.addEventListener("keyup", async (e) => {
+    clearInterval(timeInterval); //limpiar el intervalo
+    timeInterval = setTimeout(async () => {
+      await renderTableUser($tableContainer, e.target.value);
+    }, 1000);
+  });
+}
+
+//======== Main ========================
+if ($tableContainer) {
+  document.addEventListener("DOMContentLoaded", () => {
+    // await renderTableUser($tableContainer);
+    renderTable($tableContainer);
+  });
+}
 
 //===== Actualizar usuarios =========================================
 const updateUser = async (dataForm) => {
@@ -119,7 +147,7 @@ const updateUser = async (dataForm) => {
   return resultModal;
 };
 
-//======== Editar usuarios =============================================
+//======== Elementos HTML necesarios =============================================
 const $formUpdateUser = document.querySelector("#formUpdate");
 const $checkPassword = document.querySelector("input[type=checkbox]");
 const $iconLoading = document.querySelector("#icon-loading");
@@ -161,22 +189,5 @@ if ($formUpdateUser) {
 
     fetchLoading($iconLoading, $btnSend, false);
     // handleFieldPassword(false, $fieldsPw);
-  });
-}
-
-//======== Busqueda en tiempo real de usuarios ========================
-if ($fieldSearch) {
-  $fieldSearch.addEventListener("keyup", async (e) => {
-    clearInterval(timeInterval); //limpiar el intervalo
-    timeInterval = setTimeout(async () => {
-      await renderTableUser($tableContainer, e.target.value);
-    }, 1000);
-  });
-}
-
-//======== Main ========================
-if ($tableContainer) {
-  document.addEventListener("DOMContentLoaded", async () => {
-    await renderTableUser($tableContainer);
   });
 }
