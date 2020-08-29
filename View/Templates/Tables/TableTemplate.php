@@ -22,11 +22,11 @@
                 <th class="table__column">
                     <a class="btn-status" data-id="<?php echo $data['id'] ?>" data-status="<?php echo strtolower($data['estado']) ?>" href="">
                         <?php
-                            if ($data["estado"] === 'A') :
-                                echo "<i class='fas fa-check-square'></i>";
-                            else :
-                                echo "<i class='fas fa-window-close'></i>";
-                            endif; ?>
+                        if ($data["estado"] === 'A') :
+                            echo "<i class='fas fa-check-square'></i>";
+                        else :
+                            echo "<i class='fas fa-window-close'></i>";
+                        endif; ?>
                     </a>
                 </th>
                 <th class="table__column"><a href=<?php echo getUrlBase() . "user/edit/" . $data["id"] ?>><i class="fas fa-pen-square"></i></a></th>

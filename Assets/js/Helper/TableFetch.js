@@ -7,7 +7,7 @@ const paginatorTable = (arrButtons, containerRender, data) => {
     button.addEventListener("click", (e) => {
       e.preventDefault();
       // debugger;
-      //El boton que este desabilitado, no tendra esta opción
+      //El botón que este desabilitado, no tendra esta opción
       if (!button.classList.contains("btn--disabled")) {
         data.pageShow = button.dataset.page;
         renderTable(containerRender, data);
