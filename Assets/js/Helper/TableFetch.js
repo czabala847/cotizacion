@@ -1,15 +1,16 @@
 import formFetch from "./FormFetch.js";
 
 //====== Paginador ===============================
-const paginatorTable = (arrButtons, container, valueSearch) => {
+const paginatorTable = (arrButtons, containerRender, data) => {
   let pageShow = 0;
   arrButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
       e.preventDefault();
       // debugger;
+      //El boton que este desabilitado, no tendra esta opción
       if (!button.classList.contains("btn--disabled")) {
-        pageShow = button.dataset.page;
-        renderTable(container, { valueSearch, pageShow });
+        data.pageShow = button.dataset.page;
+        renderTable(containerRender, data);
       }
     });
   });
@@ -24,34 +25,17 @@ const renderTable = async (containerRender, data) => {
   fd.set("pageShow", pageShow ? pageShow : 0);
 
   const result = await formFetch.fetchData(urlFetch, fd, "text");
-  debugger;
   const tableHTML = result.response;
 
   if (containerRender) {
     if (result.success) {
       containerRender.innerHTML = tableHTML;
-      const $arrBtnStatus = document.querySelectorAll(".btn-status");
-
-      //===== Añadir interactividad a los botones de cambiar estados =====
-      if ($arrBtnStatus) {
-        $arrBtnStatus.forEach((button) => {
-          button.addEventListener("click", async (e) => {
-            e.preventDefault();
-            // setStatus(
-            //   button.dataset.id,
-            //   containerRender,
-            //   valueSearch,
-            //   pageShow
-            // );
-          });
-        });
-      }
 
       const $arrBtnPaginator = document.querySelectorAll(
         ".pagination__list--link"
       );
 
-      paginatorTable($arrBtnPaginator, containerRender, valueSearch);
+      paginatorTable($arrBtnPaginator, containerRender, data);
     }
   }
 };
