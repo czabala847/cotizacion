@@ -29,9 +29,10 @@ const setStatusUser = async (idUser, container, value, page) => {
       showCancelButton: false,
     });
 
+    debugger;
     //Despues de un cambio de estado volver a renderizar la tabla usuarios
     if (okModal) {
-      renderTable(container, value, page);
+      renderTable(container, value, container.dataset.page);
     }
   }
 };
@@ -44,16 +45,20 @@ const renderTable = async (container, valueSearch = "", pageShow = 0) => {
     pageShow,
     urlFetch,
   };
-
+  debugger;
   await tableFetch.renderTable(container, data);
-  const $arrBtnStatus = document.querySelectorAll(".btn-status");
 
   //===== Añadir interactividad a los botones de cambiar estados =====
-  $arrBtnStatus.forEach((button) => {
-    button.addEventListener("click", (e) => {
-      e.preventDefault();
-      setStatusUser(button.dataset.id, container, valueSearch, pageShow);
-    });
+  container.addEventListener("click", (e) => {
+    //Delegación de eventos
+    let btnStatus = event.target.closest(".btn-status");
+
+    if (btnStatus) {
+      if (btnStatus.classList.contains("btn-status")) {
+        e.preventDefault();
+        setStatusUser(btnStatus.dataset.id, container, valueSearch, pageShow);
+      }
+    }
   });
 };
 
@@ -104,7 +109,7 @@ if ($fieldSearch) {
 //======== Main ========================
 if ($tableContainer) {
   document.addEventListener("DOMContentLoaded", () => {
-    // await renderTableUser($tableContainer);
+    const urlFetch = formFetch.URL_BASE + "user/userTable";
     renderTable($tableContainer);
   });
 }

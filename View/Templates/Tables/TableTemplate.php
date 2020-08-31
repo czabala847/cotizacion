@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table" data-page="0">
     <thead class="table__header">
         <tr class="table__row">
             <!-- **** RECORRER LA CABECERA DE LA TABLA ******** -->
@@ -36,4 +36,4 @@
     </tbody>
 </table>
 
-<?php getPaginationTemplate($dataTable); ?>
+<?php getPaginationTemplate($dataTable) ?>

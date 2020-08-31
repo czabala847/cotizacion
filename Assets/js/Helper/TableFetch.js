@@ -2,7 +2,6 @@ import formFetch from "./FormFetch.js";
 
 //====== Paginador ===============================
 const paginatorTable = (arrButtons, containerRender, data) => {
-  let pageShow = 0;
   arrButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
       e.preventDefault();
@@ -10,7 +9,9 @@ const paginatorTable = (arrButtons, containerRender, data) => {
       //El botón que este desabilitado, no tendra esta opción
       if (!button.classList.contains("btn--disabled")) {
         data.pageShow = button.dataset.page;
+        containerRender.dataset.page = data.pageShow;
         renderTable(containerRender, data);
+        debugger;
       }
     });
   });
