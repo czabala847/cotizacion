@@ -22,7 +22,6 @@ const setStatusUser = async (idUser, container, value) => {
     fd.set("modify", "status");
 
     const URL_FECTH = formFetch.URL_BASE + "user/setStatus/" + idUser;
-    debugger;
     const result = await formFetch.fetchData(URL_FECTH, fd);
 
     let resultStatus = result.success ? "success" : "error";
@@ -54,7 +53,6 @@ const renderUserTable = async (container, valueSearch = "") => {
     if (btnStatus) {
       if (btnStatus.classList.contains("btn-status")) {
         e.preventDefault();
-        debugger;
         setStatusUser(btnStatus.dataset.iduser, container, valueSearch);
       }
     }
@@ -66,7 +64,9 @@ if ($fieldSearch) {
   $fieldSearch.addEventListener("keyup", async (e) => {
     clearInterval(timeInterval); //limpiar el intervalo
     timeInterval = setTimeout(async () => {
-      await renderUserTable($tableContainer, e.target.value);
+      const search = e.target.value;
+      // debugger;
+      await renderUserTable($tableContainer, search);
     }, 1000);
   });
 }
