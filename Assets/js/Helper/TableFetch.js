@@ -5,13 +5,11 @@ const paginatorTable = (arrButtons, containerRender, data) => {
   arrButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
       e.preventDefault();
-      // debugger;
       //El botón que este desabilitado, no tendra esta opción
       if (!button.classList.contains("btn--disabled")) {
-        data.pageShow = button.dataset.page;
-        containerRender.dataset.page = data.pageShow;
+        const pageShow = button.dataset.page;
+        containerRender.dataset.page = pageShow;
         renderTable(containerRender, data);
-        debugger;
       }
     });
   });
@@ -19,11 +17,11 @@ const paginatorTable = (arrButtons, containerRender, data) => {
 
 //===== Renderizar datos en la tabla =====
 const renderTable = async (containerRender, data) => {
-  const { valueSearch, pageShow, urlFetch } = data;
+  const { valueSearch, urlFetch } = data;
 
   const fd = new FormData();
   fd.set("value", valueSearch ? valueSearch : "");
-  fd.set("pageShow", pageShow ? pageShow : 0);
+  fd.set("pageShow", containerRender.dataset.page);
 
   const result = await formFetch.fetchData(urlFetch, fd, "text");
   const tableHTML = result.response;

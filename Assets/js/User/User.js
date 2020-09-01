@@ -9,7 +9,7 @@ const $tableContainer = document.querySelector("#userTable");
 const $fieldSearch = document.querySelector("#fieldSearch");
 
 //====== Cambiar estado del usuario ===============================
-const setStatusUser = async (idUser, container, value, page) => {
+const setStatusUser = async (idUser, container, value) => {
   //Mostrar el modal
   let resultModal = await showModal(
     "¿Estas seguro?",
@@ -22,6 +22,7 @@ const setStatusUser = async (idUser, container, value, page) => {
     fd.set("modify", "status");
 
     const URL_FECTH = formFetch.URL_BASE + "user/setStatus/" + idUser;
+    debugger;
     const result = await formFetch.fetchData(URL_FECTH, fd);
 
     let resultStatus = result.success ? "success" : "error";
@@ -29,71 +30,35 @@ const setStatusUser = async (idUser, container, value, page) => {
       showCancelButton: false,
     });
 
-    debugger;
     //Despues de un cambio de estado volver a renderizar la tabla usuarios
     if (okModal) {
-      renderTable(container, value, container.dataset.page);
+      renderUserTable(container, value);
     }
   }
 };
 
 //====== Mostrar tabla de usuarios en pantalla ====================
-const renderTable = async (container, valueSearch = "", pageShow = 0) => {
+const renderUserTable = async (container, valueSearch = "") => {
   const urlFetch = formFetch.URL_BASE + "user/userTable";
   const data = {
     valueSearch,
-    pageShow,
     urlFetch,
   };
-  debugger;
+
   await tableFetch.renderTable(container, data);
 
   //===== Añadir interactividad a los botones de cambiar estados =====
   container.addEventListener("click", (e) => {
     //Delegación de eventos
     let btnStatus = event.target.closest(".btn-status");
-
     if (btnStatus) {
       if (btnStatus.classList.contains("btn-status")) {
         e.preventDefault();
-        setStatusUser(btnStatus.dataset.id, container, valueSearch, pageShow);
+        debugger;
+        setStatusUser(btnStatus.dataset.iduser, container, valueSearch);
       }
     }
   });
-};
-
-//====== Mostrar tabla de usuarios en pantalla ====================
-const renderTableUser = async (container, value = "", pageShow = 0) => {
-  const fd = new FormData();
-  fd.set("value", value);
-  fd.set("pageShow", pageShow);
-
-  const URL_FECTH = formFetch.URL_BASE + "user/userTable";
-  const result = await formFetch.fetchData(URL_FECTH, fd, "text");
-
-  const tableHTML = result.response;
-
-  if (container) {
-    if (result.success) {
-      container.innerHTML = tableHTML;
-
-      const $arrBtnStatus = document.querySelectorAll(".btn-status");
-
-      //===== Añadir interactividad a los botones de cambiar estados =====
-      $arrBtnStatus.forEach((button) => {
-        button.addEventListener("click", async (e) => {
-          e.preventDefault();
-          setStatusUser(button.dataset.id, container, value, pageShow);
-        });
-      });
-
-      const $arrBtnPaginator = document.querySelectorAll(
-        ".pagination__list--link"
-      );
-
-      paginatorTable($arrBtnPaginator, container, value);
-    }
-  }
 };
 
 //======== Busqueda en tiempo real de usuarios ========================
@@ -101,7 +66,7 @@ if ($fieldSearch) {
   $fieldSearch.addEventListener("keyup", async (e) => {
     clearInterval(timeInterval); //limpiar el intervalo
     timeInterval = setTimeout(async () => {
-      await renderTableUser($tableContainer, e.target.value);
+      await renderUserTable($tableContainer, e.target.value);
     }, 1000);
   });
 }
@@ -109,8 +74,7 @@ if ($fieldSearch) {
 //======== Main ========================
 if ($tableContainer) {
   document.addEventListener("DOMContentLoaded", () => {
-    const urlFetch = formFetch.URL_BASE + "user/userTable";
-    renderTable($tableContainer);
+    renderUserTable($tableContainer);
   });
 }
 

@@ -20,7 +20,7 @@
                     <th class="table__column"><?php echo $data[$key]; ?></th>
                 <?php endforeach; ?>
                 <th class="table__column">
-                    <a class="btn-status" data-id="<?php echo $data['id'] ?>" data-status="<?php echo strtolower($data['estado']) ?>" href="">
+                    <a class="btn-status" data-iduser="<?php echo $data['id'] ?>" data-status="<?php echo strtolower($data['estado']) ?>" href="">
                         <?php
                         if ($data["estado"] === 'A') :
                             echo "<i class='fas fa-check-square'></i>";

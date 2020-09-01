@@ -115,7 +115,7 @@ class UserController extends Controller
     public function userTable()
     {
         $valueSearch = $_POST["value"];
-        $page = $_POST["pageShow"];
+        $page = intval($_POST["pageShow"]);
 
         $response = $this->model->getAllUsers($valueSearch, $page);
 
