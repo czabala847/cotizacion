@@ -2,7 +2,6 @@ import formFetch from "./FormFetch.js";
 
 //====== Paginador ===============================
 const paginatorTable = (arrButtons, containerRender, data) => {
-  let pageShow = 0;
   arrButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
       e.preventDefault();
@@ -11,6 +10,7 @@ const paginatorTable = (arrButtons, containerRender, data) => {
       if (!button.classList.contains("btn--disabled")) {
         data.pageShow = button.dataset.page;
         renderTable(containerRender, data);
+        console.log("Se ejecuto el paginador");
       }
     });
   });
@@ -26,6 +26,8 @@ const renderTable = async (containerRender, data) => {
 
   const result = await formFetch.fetchData(urlFetch, fd, "text");
   const tableHTML = result.response;
+
+  // debugger;
 
   if (containerRender) {
     if (result.success) {

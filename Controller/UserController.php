@@ -52,6 +52,7 @@ class UserController extends Controller
             }
         }
         echo json_encode(["success" => $success, "msg" => $msg], JSON_UNESCAPED_UNICODE);
+        die();
     }
 
     public function register()
@@ -78,6 +79,7 @@ class UserController extends Controller
         }
 
         echo json_encode(["success" => $success, "msg" => $msg], JSON_UNESCAPED_UNICODE);
+        die();
     }
 
     //Cerrar sesión
@@ -127,13 +129,17 @@ class UserController extends Controller
             "numberPages" => $response["numberPagesShow"]
         ];
 
-        getTableTemplate($dataTable);
+
+        // echo json_encode($dataTable);
+        echo getTableTemplate($dataTable);
+        die();
     }
 
     public function setStatus(int $idUser)
     {
         $response = $this->model->setStatusUser($idUser);
         echo json_encode($response, JSON_UNESCAPED_UNICODE);
+        die();
     }
 
     public function edit(int $idUser)
