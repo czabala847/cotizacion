@@ -1,6 +1,6 @@
 // Mostrar showModal, con la libreria sweet alert
-const showModal = async (title = "", text = "", icon = "success", opt) => {
-  let response = await Swal.fire({
+const showModal = (title = "", text = "", icon = "success", opt) => {
+  return Swal.fire({
     title: title,
     text: text,
     icon: icon,
@@ -11,9 +11,9 @@ const showModal = async (title = "", text = "", icon = "success", opt) => {
     cancelButtonText: "Cancelar",
     allowOutsideClick: opt ? opt.allowOutsideClick : true,
     allowEscapeKey: opt ? opt.allowEscapeKey : true,
-  }).then((result) => result.value);
-
-  return response;
+  }).then((result) => {
+    return result.value;
+  });
 };
 
 export { showModal };

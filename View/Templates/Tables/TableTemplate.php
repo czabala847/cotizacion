@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table" data-page="0">
     <thead class="table__header">
         <tr class="table__row">
             <!-- **** RECORRER LA CABECERA DE LA TABLA ******** -->
@@ -20,7 +20,7 @@
                     <th class="table__column"><?php echo $data[$key]; ?></th>
                 <?php endforeach; ?>
                 <th class="table__column">
-                    <a class="btn-status" data-id="<?php echo $data['id'] ?>" data-status="<?php echo strtolower($data['estado']) ?>" href="">
+                    <a class="btn-status" data-iduser="<?php echo $data['id'] ?>" data-status="<?php echo strtolower($data['estado']) ?>" href="">
                         <?php
                             if ($data["estado"] === 'A') :
                                 echo "<i class='fas fa-check-square'></i>";
@@ -36,4 +36,4 @@
     </tbody>
 </table>
 
-<?php getPaginationTemplate($dataTable); ?>
+<?php getPaginationTemplate($dataTable) ?>
