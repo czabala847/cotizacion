@@ -23,7 +23,7 @@ class RolesController extends Controller
     public function rolesTable()
     {
         $valueSearch = $_POST["value"];
-        $page = $_POST["pageShow"];
+        $page = intval($_POST["pageShow"]);
 
         $response = $this->model->getAllRoles($valueSearch, $page);
 

@@ -1,7 +1,5 @@
 import formFetch from "./FormFetch.js";
 
-let timeInterval;
-
 //====== Paginador ===============================
 const paginatorTable = (arrButtons, containerRender, data) => {
   arrButtons.forEach((button) => {
