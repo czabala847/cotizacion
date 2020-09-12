@@ -7,15 +7,10 @@ const $iconLoading = document.querySelector("#icon-loading");
 const $btnSend = document.querySelector("#btn-send");
 
 //Cambiar texto del formulario dependiendo si es sign in o sign up
-const changeTextForm = (
-  formContainer,
-  titleForm,
-  textFooterForm,
-  textLinkForm
-) => {
-  formContainer.querySelector("h2").innerText = titleForm;
-  formContainer.querySelector("span").innerText = textFooterForm;
-  formContainer.querySelector("a").innerText = textLinkForm;
+const changeTextForm = (formContainer, dataText) => {
+  formContainer.querySelector("h2").innerText = dataText.title;
+  formContainer.querySelector("span").innerText = dataText.textFooter;
+  formContainer.querySelector("a").innerText = dataText.textLink;
 };
 
 const showSignUp = (formContainer) => {
@@ -27,13 +22,14 @@ const showSignUp = (formContainer) => {
   const $fieldEmail =
     '<input type="email" name="email" placeholder="Correo electrónico" required/>';
 
+  const dataText = {
+    title: "Registrate",
+    textFooter: "Ya tienes una cuenta?",
+    textLink: "Iniciar sesión",
+  };
+
   if (formContainer) {
-    changeTextForm(
-      formContainer,
-      "Registrate",
-      "Ya tienes una cuenta?",
-      "Iniciar sesión"
-    );
+    changeTextForm(formContainer, dataText);
 
     // obtener campo contraseña, ya que es el punto de referencia, donde se mostrara
     // los campos nombre (antes) y contraseña2 (despues)
@@ -50,12 +46,13 @@ const showSignUp = (formContainer) => {
 
 const removeSignUp = (formContainer) => {
   if (formContainer) {
-    changeTextForm(
-      formContainer,
-      "Iniciar sesión",
-      "No tienes una cuenta?",
-      "Registrate"
-    );
+    const dataText = {
+      title: "Iniciar sesión",
+      textFooter: "No tienes una cuenta?",
+      textLink: "Registrate",
+    };
+
+    changeTextForm(formContainer, dataText);
 
     //Obtener los campos a eliminar
     let fieldName = formContainer.querySelector("input[name='nombre']");
@@ -103,7 +100,7 @@ $formLogin.addEventListener("submit", async (e) => {
       if (fd.get("contraseña") !== fd.get("contraseña2")) {
         $formLogin.reset();
         return Swal.fire(
-          "Las contraseñas ingresadas no coinciden",
+          "Las contraseñas ingresadas no son iguales",
           "",
           "error"
         );

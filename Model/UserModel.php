@@ -100,7 +100,6 @@ class UserModel
         $resultCount = $this->db->select($strQueryCount, $arrParams);
         //Obtener cuantas páginas tiene la tabla usuarios
         $numberPagesShow = ceil(intval($resultCount["Cantidad"]) / $limit);
-
         $strQueryUsers = "SELECT U.id, U.cedula, U.nombre, U.correo, R.nombre perfil, U.estado FROM usuarios U INNER JOIN roles R ON U.rol = R.id WHERE U.nombre LIKE ? OR U.cedula LIKE ? OR U.correo LIKE ? LIMIT $index, " . $limit;
         $arrUsers = $this->db->select($strQueryUsers, $arrParams, true);
 

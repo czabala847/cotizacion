@@ -11,9 +11,7 @@ const showModal = (title = "", text = "", icon = "success", opt) => {
     cancelButtonText: "Cancelar",
     allowOutsideClick: opt ? opt.allowOutsideClick : true,
     allowEscapeKey: opt ? opt.allowEscapeKey : true,
-  }).then((result) => {
-    return result.value;
-  });
+  }).then((result) => result.value);
 };
 
 export { showModal };

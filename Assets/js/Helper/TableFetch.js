@@ -22,7 +22,13 @@ const renderTable = async (containerRender, data) => {
 
   const fd = new FormData();
   fd.set("value", valueSearch ? valueSearch : "");
-  fd.set("pageShow", containerRender.dataset.page);
+
+  //Si se ingresa un valor a buscar, no tener encuenta las paginas, es decir, las paginas sera igual a 0
+  if (valueSearch.length <= 0 || valueSearch === "") {
+    fd.set("pageShow", containerRender.dataset.page);
+  } else {
+    fd.set("pageShow", 0);
+  }
 
   const result = await formFetch.fetchData(urlFetch, fd, "text");
   const tableHTML = result.response;
