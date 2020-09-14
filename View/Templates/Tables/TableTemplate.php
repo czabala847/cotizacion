@@ -32,8 +32,6 @@
                 <th class="table__column"><a href=<?php echo getUrlBase() . "user/edit/" . $data["id"] ?>><i class="fas fa-pen-square"></i></a></th>
             </tr>
         <?php endforeach ?>
-
-    </tbody>
 </table>
 
 <?php getPaginationTemplate($dataTable) ?>

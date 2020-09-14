@@ -67,15 +67,10 @@ figure {
 }
 
 .container {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: minmax(auto, 1024px);
-      grid-template-columns: minmax(auto, 1024px);
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  max-width: 1024px;
+  margin: 0 auto;
   height: 100%;
-  padding: 0 2rem;
+  padding: 0 1rem;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
@@ -250,7 +245,7 @@ select {
                 TABLES
 \*-----------------------------------------*/
 .table-container {
-  width: 95%;
+  width: 80%;
   margin: 0 auto;
 }
 
