@@ -67,12 +67,18 @@ figure {
 }
 
 .container {
-  max-width: 1024px;
-  margin: 0 auto;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: minmax(auto, 1024px);
+      grid-template-columns: minmax(auto, 1024px);
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   height: 100%;
   padding: 0 1rem;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  position: relative;
 }
 
 .section-container, .quotation-container, .login-container {
@@ -245,7 +251,7 @@ select {
                 TABLES
 \*-----------------------------------------*/
 .table-container {
-  width: 80%;
+  width: 95%;
   margin: 0 auto;
 }
 
@@ -529,10 +535,15 @@ select {
 .user-container {
   width: 100%;
   margin-bottom: 2rem;
+  position: absolute;
 }
 
 .user-container__info {
   margin: 2rem 0;
+}
+
+.user-search {
+  padding: 0 1rem;
 }
 
 .user-search,
@@ -955,5 +966,10 @@ select {
   padding: 2rem 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+.roles-container {
+  width: 100%;
+  position: absolute;
 }
 /*# sourceMappingURL=style.css.map */
