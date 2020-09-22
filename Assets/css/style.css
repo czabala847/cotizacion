@@ -251,12 +251,17 @@ select {
 .table-container {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  position: relative;
 }
 
 .table-responsive {
   margin: auto;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: auto;
+  margin: 0 0.5rem;
 }
 
 .table {
@@ -333,14 +338,7 @@ select {
 
 @media only screen and (max-width: 925px) {
   .table-responsive {
-    max-width: 500px;
     overflow-x: auto;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  .table-responsive {
-    max-width: 300px;
   }
 }
 
