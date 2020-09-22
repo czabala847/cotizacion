@@ -74,11 +74,9 @@ figure {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 100%;
   padding: 0 1rem;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  position: relative;
 }
 
 .section-container, .quotation-container, .login-container {
@@ -251,8 +249,14 @@ select {
                 TABLES
 \*-----------------------------------------*/
 .table-container {
-  width: 95%;
-  margin: 0 auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.table-responsive {
+  margin: auto;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
 }
 
 .table {
@@ -327,9 +331,16 @@ select {
           box-sizing: border-box;
 }
 
-@media only screen and (max-width: 877px) {
-  .table-container {
-    overflow: auto;
+@media only screen and (max-width: 925px) {
+  .table-responsive {
+    max-width: 500px;
+    overflow-x: auto;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .table-responsive {
+    max-width: 300px;
   }
 }
 
@@ -533,9 +544,7 @@ select {
               LISTA DE USUARIOS
 \*-----------------------------------------*/
 .user-container {
-  width: 100%;
   margin-bottom: 2rem;
-  position: absolute;
 }
 
 .user-container__info {
@@ -697,7 +706,6 @@ select {
   min-height: calc(100vh - 90px);
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
-  overflow-x: hidden;
 }
 
 .dashboard-content {
@@ -963,13 +971,8 @@ select {
                   ROLES
 \*-----------------------------------------*/
 .roles {
-  padding: 2rem 0;
+  padding-top: 2rem;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-}
-
-.roles-container {
-  width: 100%;
-  position: absolute;
 }
 /*# sourceMappingURL=style.css.map */

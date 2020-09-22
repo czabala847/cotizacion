@@ -2,8 +2,13 @@
                 TABLES
 \*-----------------------------------------*/
 .table-container {
-  width: 95%;
-  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.table-responsive {
+  // width: 800px;
+  margin: auto;
+  transition: $transition-base;
 }
 
 .table {
@@ -69,8 +74,15 @@
   }
 }
 
-@media only screen and (max-width: 877px) {
-  .table-container {
-    overflow: auto;
+@media only screen and (max-width: 925px) {
+  .table-responsive {
+    max-width: 500px;
+    overflow-x: auto;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .table-responsive {
+    max-width: 300px;
   }
 }

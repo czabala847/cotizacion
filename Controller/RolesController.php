@@ -30,11 +30,19 @@ class RolesController extends Controller
         $dataTable = [
             "columns" => ["id", "Nombre", "Descripción"],
             "keys" => ["id", "nombre", "descripcion"],
+            "controller" => "roles",
             "data" => $response["data"],
             "actualPage" => $response["pageShow"],
             "numberPages" => $response["numberPagesShow"]
         ];
 
         getTableTemplate($dataTable);
+    }
+
+    public function setStatus(int $idRol)
+    {
+        $response = $this->model->setStatusRol($idRol);
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
+        die();
     }
 }

@@ -49,11 +49,11 @@ const renderUserTable = async (container, valueSearch = "") => {
   //===== Añadir interactividad a los botones de cambiar estados =====
   container.addEventListener("click", (e) => {
     //Delegación de eventos
-    let btnStatus = event.target.closest(".btn-status");
+    let btnStatus = e.target.closest(".btn-status");
     if (btnStatus) {
       if (btnStatus.classList.contains("btn-status")) {
         e.preventDefault();
-        setStatusUser(btnStatus.dataset.iduser, container, valueSearch);
+        setStatusUser(btnStatus.dataset.id, container, valueSearch);
       }
     }
   });

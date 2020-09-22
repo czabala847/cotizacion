@@ -124,6 +124,7 @@ class UserController extends Controller
         $dataTable = [
             "columns" => ["id", "Cédula", "Nombre", "Correo", "Perfil"],
             "keys" => ["id", "cedula", "nombre", "correo", "perfil"],
+            "controller" => "user",
             "data" => $response["data"],
             "actualPage" => $response["pageShow"],
             "numberPages" => $response["numberPagesShow"]

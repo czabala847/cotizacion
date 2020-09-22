@@ -19,12 +19,11 @@
   display: grid;
   grid-template-columns: minmax(auto, 1024px);
   justify-content: $container-justify;
-  // max-width: 1024px;
-  // margin: 0 auto;
-  height: $height-full;
+  // height: $height-full;
+  // min-height: inherit;
   padding: 0 1rem;
   box-sizing: border-box;
-  position: relative;
+  // position: relative;
 }
 
 //Contenedor para las secciones principales de cada vista

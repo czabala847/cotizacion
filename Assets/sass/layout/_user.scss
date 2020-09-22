@@ -1,17 +1,13 @@
 /*-----------------------------------------*\
               LISTA DE USUARIOS
 \*-----------------------------------------*/
-// .user {
-//   background: url($url-assets + "rocket.jpg") no-repeat;
-//   background-size: 30%;
-//   background-position-y: 60vh;
-// }
 
 .user-container {
-  width: 100%;
+  // width: 100%;
+  // max-width: 1024px;
   // overflow-x: hidden;
   margin-bottom: 2rem;
-  position: absolute;
+  // position: absolute;
 
   &__info {
     margin: 2rem 0;
