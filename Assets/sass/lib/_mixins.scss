@@ -35,3 +35,11 @@
   grid-template-columns: repeat($col, 1fr);
   grid-column-gap: 1rem;
 }
+
+@mixin m-calc-maxwidth($less: 0, $less-sidebar: false) {
+  @if $less-sidebar {
+    max-width: calc(#{$width-viewport} - #{$less} - #{$sidebar-width});
+  } @else {
+    max-width: calc(#{$width-viewport} - #{$less});
+  }
+}

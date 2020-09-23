@@ -251,17 +251,6 @@ select {
 .table-container {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  position: relative;
-}
-
-.table-responsive {
-  margin: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: auto;
-  margin: 0 0.5rem;
 }
 
 .table {
@@ -541,12 +530,9 @@ select {
 /*-----------------------------------------*\
               LISTA DE USUARIOS
 \*-----------------------------------------*/
-.user-container {
-  margin-bottom: 2rem;
-}
-
-.user-container__info {
-  margin: 2rem 0;
+.user-container,
+.roles-container {
+  max-width: calc(100vw - 2rem - 230px);
 }
 
 .user-search {
@@ -627,7 +613,25 @@ select {
   width: auto;
 }
 
+/*Solo cuando el sidebar menu este contraido*/
+@media (min-width: 768px) {
+  #app.sidebar-toggled .user-container,
+  #app.sidebar-toggled .roles-container {
+    max-width: calc(100vw - 2rem);
+  }
+}
+
 @media only screen and (max-width: 768px) {
+  /*Tabla usuarios*/
+  .user-container,
+  .roles-container {
+    max-width: calc(100vw - 2rem);
+  }
+  .user-container .user-search,
+  .roles-container .user-search {
+    padding: 0;
+  }
+  /*Editar usuarios*/
   .user-edit {
         grid-template-areas: "head sidebar" "form form";
     -ms-grid-columns: (1fr)[2];

@@ -2,16 +2,10 @@
               LISTA DE USUARIOS
 \*-----------------------------------------*/
 
-.user-container {
-  // width: 100%;
-  // max-width: 1024px;
-  // overflow-x: hidden;
-  margin-bottom: 2rem;
-  // position: absolute;
-
-  &__info {
-    margin: 2rem 0;
-  }
+.user-container,
+.roles-container {
+  // max-width: calc(100vw - 230px - 2rem);
+  @include m-calc-maxwidth(2rem, true);
 }
 
 .user-search {
@@ -77,7 +71,30 @@
   }
 }
 
+/*Solo cuando el sidebar menu este contraido*/
+#app {
+  @media (min-width: 768px) {
+    &.sidebar-toggled {
+      .user-container,
+      .roles-container {
+        @include m-calc-maxwidth(2rem);
+      }
+    }
+  }
+}
+
 @media only screen and (max-width: 768px) {
+  /*Tabla usuarios*/
+  .user-container,
+  .roles-container {
+    @include m-calc-maxwidth(2rem); // tamaño total menos el padding 2rem
+
+    .user-search {
+      padding: 0;
+    }
+  }
+
+  /*Editar usuarios*/
   .user-edit {
     grid-template-areas: "head sidebar" "form form";
     grid-template-columns: repeat(2, 1fr);
