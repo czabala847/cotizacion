@@ -14,4 +14,23 @@ const showModal = (title = "", text = "", icon = "success", opt) => {
   }).then((result) => result.value);
 };
 
-export { showModal };
+const modalRol = () => {
+  return Swal.fire({
+    title: "Crear Rol",
+    html:
+      '<input type="text" id="swal-input1" class="swal2-input" placeholder="Nombre Rol" required >' +
+      '<textarea id="swal-input2" class="swal2-input" placeholder="Descripción"></textarea>',
+    focusConfirm: false,
+    confirmButtonColor: "#ce0f3d",
+    showCancelButton: true,
+    cancelButtonText: "Cancelar",
+    preConfirm: () => {
+      return [
+        ["nombre", document.getElementById("swal-input1").value],
+        ["descripción", document.getElementById("swal-input2").value],
+      ];
+    },
+  });
+};
+
+export { showModal, modalRol };

@@ -24,7 +24,7 @@ async function fetchData(url, data, type = "json") {
 
     return { success: true, response };
   } catch (error) {
-    debugger;
+    // debugger;
     return { success: false, error };
   }
 }
@@ -38,7 +38,6 @@ const emptyField = (arrayFields) => {
       return entry[1].length <= 0 && entry[0] !== "asunto";
     }
   });
-
   return dataFields;
 };
 

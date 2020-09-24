@@ -1,8 +1,10 @@
 import formFetch from "../Helper/FormFetch.js";
 import tableFetch from "../Helper/TableFetch.js";
-import { showModal } from "../Helper/Modal/Modal.js";
+import { showModal, modalRol } from "../Helper/Modal/Modal.js";
+import { removeAccents } from "../Helper/Strings.js";
 
 const $tableContainer = document.querySelector("#rolesTable");
+const $createRol = document.querySelector("#btnCreateRol");
 
 //====== Cambiar estado de un rol ===============================
 const setStatusRol = async (idRol, container) => {
@@ -55,9 +57,33 @@ const renderTableRoles = async (container, valueSearch = "") => {
   });
 };
 
+//======== Crear un ROL ========================
+const createRol = async (dataRol) => {
+  const URL_FECTH = formFetch.URL_BASE + "/roles/addRol";
+  const response = await formFetch.fetchData(URL_FECTH, dataRol);
+
+  debugger;
+};
+
 //======== Main ========================
 if ($tableContainer) {
   document.addEventListener("DOMContentLoaded", async () => {
     await renderTableRoles($tableContainer);
   });
 }
+
+$createRol.addEventListener("click", async () => {
+  const { value: newRol } = await modalRol();
+  const emptyField = formFetch.emptyField(newRol);
+
+  if (!emptyField) {
+    const fd = new FormData();
+
+    newRol.forEach((data) => {
+      fd.set(removeAccents(data[0]), data[1]);
+      createRol(fd);
+    });
+  } else {
+    Swal.fire(`El campo ${emptyField[0]} está vacío`, "", "error");
+  }
+});

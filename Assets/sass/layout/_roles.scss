@@ -6,3 +6,30 @@
   padding-top: 2rem;
   box-sizing: border-box;
 }
+
+.roles__create {
+  padding: 2rem 0;
+  text-align: initial;
+
+  & .btn {
+    width: auto;
+  }
+
+  //icono del boton
+  & .fas {
+    font-size: 1rem;
+    margin-left: 0.5rem;
+  }
+}
+
+#swal-input2 {
+  resize: none;
+  height: 80px;
+  padding: 1rem;
+}
+
+@media only screen and (max-width: 480px) {
+  .roles__create .btn {
+    width: 100%;
+  }
+}

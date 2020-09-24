@@ -203,6 +203,9 @@ select {
   border-radius: 15px;
   border: none;
   font-family: "Cabin", sans-serif;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  letter-spacing: 1px;
 }
 
 .btn--primary {
@@ -217,6 +220,12 @@ select {
 
 .btn:hover {
   cursor: pointer;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.1)), to(rgba(0, 0, 0, 0.1)));
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1));
+}
+
+.btn:focus {
+  outline: none;
 }
 
 @media only screen and (max-width: 768px) {
@@ -976,5 +985,31 @@ select {
   padding-top: 2rem;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+.roles__create {
+  padding: 2rem 0;
+  text-align: initial;
+}
+
+.roles__create .btn {
+  width: auto;
+}
+
+.roles__create .fas {
+  font-size: 1rem;
+  margin-left: 0.5rem;
+}
+
+#swal-input2 {
+  resize: none;
+  height: 80px;
+  padding: 1rem;
+}
+
+@media only screen and (max-width: 480px) {
+  .roles__create .btn {
+    width: 100%;
+  }
 }
 /*# sourceMappingURL=style.css.map */

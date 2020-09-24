@@ -45,4 +45,12 @@ class RolesController extends Controller
         echo json_encode($response, JSON_UNESCAPED_UNICODE);
         die();
     }
+
+    public function addRol()
+    {
+        $name = $_POST["nombre"];
+        $description = $_POST["descripcion"];
+
+        echo json_encode(["Nombre" => $name, "Descripción" => $description], JSON_UNESCAPED_UNICODE);
+    }
 }
