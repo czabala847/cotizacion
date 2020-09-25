@@ -62,7 +62,17 @@ const createRol = async (dataRol) => {
   const URL_FECTH = formFetch.URL_BASE + "/roles/addRol";
   const response = await formFetch.fetchData(URL_FECTH, dataRol);
 
-  debugger;
+  if (response.success) {
+    let resultStatus = response.response.success ? "success" : "error";
+    let okModal = await showModal("", response.response.msg, resultStatus, {
+      showCancelButton: false,
+    });
+
+    if (okModal === true && response.response.success == true) {
+      renderTableRoles($tableContainer);
+      console.log("Renderizar de nuevo");
+    }
+  }
 };
 
 //======== Main ========================
@@ -74,16 +84,21 @@ if ($tableContainer) {
 
 $createRol.addEventListener("click", async () => {
   const { value: newRol } = await modalRol();
-  const emptyField = formFetch.emptyField(newRol);
 
-  if (!emptyField) {
-    const fd = new FormData();
+  if (newRol) {
+    const emptyField = formFetch.emptyField(newRol);
 
-    newRol.forEach((data) => {
-      fd.set(removeAccents(data[0]), data[1]);
+    if (!emptyField) {
+      const fd = new FormData();
+
+      newRol.forEach((data) => {
+        const key = removeAccents(data[0]);
+        fd.set(key, data[1]);
+      });
+
       createRol(fd);
-    });
-  } else {
-    Swal.fire(`El campo ${emptyField[0]} está vacío`, "", "error");
+    } else {
+      Swal.fire(`El campo ${emptyField[0]} está vacío`, "", "error");
+    }
   }
 });

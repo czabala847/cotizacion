@@ -18,7 +18,7 @@ const modalRol = () => {
   return Swal.fire({
     title: "Crear Rol",
     html:
-      '<input type="text" id="swal-input1" class="swal2-input" placeholder="Nombre Rol" required >' +
+      '<input type="text" id="swal-input1" class="swal2-input" placeholder="Nombre Rol" autocomplete="off" required >' +
       '<textarea id="swal-input2" class="swal2-input" placeholder="Descripción"></textarea>',
     focusConfirm: false,
     confirmButtonColor: "#ce0f3d",

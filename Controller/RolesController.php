@@ -51,8 +51,18 @@ class RolesController extends Controller
         $name = $_POST["nombre"];
         $description = $_POST["descripcion"];
 
+        $success = false;
+        $msg = "El nombre del rol ya existe.";
+
         $response = $this->model->insertRol($name, $description);
 
-        echo json_encode(["Nombre" => $name, "Descripción" => $description], JSON_UNESCAPED_UNICODE);
+        if ($response === true) {
+            $msg = "Rol creado exitosamente.";
+            $success = true;
+        } elseif ($response === false) {
+            $msg = "Ocurrió un error al crear el rol.";
+        }
+
+        echo json_encode(["success" => $success, "msg" => $msg], JSON_UNESCAPED_UNICODE);
     }
 }
