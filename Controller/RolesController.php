@@ -46,7 +46,7 @@ class RolesController extends Controller
         die();
     }
 
-    public function addRol()
+    public function add()
     {
         $name = $_POST["nombre"];
         $description = $_POST["descripcion"];
@@ -64,5 +64,24 @@ class RolesController extends Controller
         }
 
         echo json_encode(["success" => $success, "msg" => $msg], JSON_UNESCAPED_UNICODE);
+    }
+
+    public function rol(int $id)
+    {
+        $id = intval($id);
+        $rol = $this->model->getRol($id);
+        echo json_encode(["rol" => [$rol["nombre"], $rol["descripcion"]]], JSON_UNESCAPED_UNICODE);
+    }
+
+    public function update()
+    {
+        $id = intval($_POST["id"]);
+        $name = $_POST["nombre"];
+        $description = $_POST["descripcion"];
+
+        $response = $this->model->updateRol($id, $name, $description);
+        $msg = $response ? "Rol actualizado correctamente" : "Ocurrió un error al actualizar el Rol.";
+
+        echo json_encode(["success" => $response, "msg" => $msg], JSON_UNESCAPED_UNICODE);
     }
 }

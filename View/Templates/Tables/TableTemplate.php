@@ -30,7 +30,7 @@
                             endif; ?>
                         </a>
                     </th>
-                    <th class="table__column"><a href=<?php echo getUrlBase() . $dataTable["controller"] . "/edit/" . $data["id"] ?>><i class="fas fa-pen-square"></i></a></th>
+                    <th class="table__column"><a class="btn-edit" data-id="<?php echo $data['id'] ?>" href=<?php echo getUrlBase() . $dataTable["controller"] . "/edit/" . $data["id"] ?>><i class="fas fa-pen-square"></i></a></th>
                 </tr>
             <?php endforeach ?>
     </table>

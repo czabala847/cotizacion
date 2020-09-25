@@ -14,12 +14,16 @@ const showModal = (title = "", text = "", icon = "success", opt) => {
   }).then((result) => result.value);
 };
 
-const modalRol = () => {
+const modalRol = (title = "", rol) => {
   return Swal.fire({
-    title: "Crear Rol",
+    title: title,
     html:
-      '<input type="text" id="swal-input1" class="swal2-input" placeholder="Nombre Rol" autocomplete="off" required >' +
-      '<textarea id="swal-input2" class="swal2-input" placeholder="Descripción"></textarea>',
+      `<input value="${
+        rol ? rol[0] : ""
+      }" type="text" id="swal-input1" class="swal2-input" placeholder="Nombre Rol" autocomplete="off" required >` +
+      `<textarea id="swal-input2" class="swal2-input" placeholder="Descripción">${
+        rol ? rol[1] : ""
+      }</textarea>`,
     focusConfirm: false,
     confirmButtonColor: "#ce0f3d",
     showCancelButton: true,

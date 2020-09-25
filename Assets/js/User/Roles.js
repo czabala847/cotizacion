@@ -16,13 +16,9 @@ const setStatusRol = async (idRol, container) => {
   );
 
   if (resultModal) {
-    // const fd = new FormData();
-    // fd.set("modify", "status");
-
     const URL_FECTH = formFetch.URL_BASE + "roles/setStatus/" + idRol;
     const result = await formFetch.fetchData(URL_FECTH);
-
-    let resultStatus = result.success ? "success" : "error";
+    let resultStatus = result.response.success ? "success" : "error";
     let okModal = await showModal("", result.response.response, resultStatus, {
       showCancelButton: false,
     });
@@ -47,19 +43,45 @@ const renderTableRoles = async (container, valueSearch = "") => {
   //===== Añadir interactividad a los botones de cambiar estados =====
   container.addEventListener("click", (e) => {
     //Delegación de eventos
+    e.preventDefault();
     let btnStatus = e.target.closest(".btn-status");
+    let btnEdit = e.target.closest(".btn-edit");
+
     if (btnStatus) {
       if (btnStatus.classList.contains("btn-status")) {
-        e.preventDefault();
         setStatusRol(btnStatus.dataset.id, container);
+      }
+    } else if (btnEdit) {
+      if (btnEdit.classList.contains("btn-edit")) {
+        updateRol(btnEdit.dataset.id);
       }
     }
   });
 };
 
+//===== Validar los datos ingresados en el formulario de los modal =====
+const validateFormRol = (data) => {
+  if (data) {
+    const emptyField = formFetch.emptyField(data);
+
+    if (!emptyField) {
+      const fd = new FormData();
+
+      data.forEach((value) => {
+        const key = removeAccents(value[0]);
+        fd.set(key, value[1]);
+      });
+
+      return { status: true, data: fd };
+    }
+
+    return { status: false, msg: `El campo ${emptyField[0]} está vacío` };
+  }
+};
+
 //======== Crear un ROL ========================
 const createRol = async (dataRol) => {
-  const URL_FECTH = formFetch.URL_BASE + "/roles/addRol";
+  const URL_FECTH = formFetch.URL_BASE + "/roles/add";
   const response = await formFetch.fetchData(URL_FECTH, dataRol);
 
   if (response.success) {
@@ -70,7 +92,38 @@ const createRol = async (dataRol) => {
 
     if (okModal === true && response.response.success == true) {
       renderTableRoles($tableContainer);
-      console.log("Renderizar de nuevo");
+    }
+  }
+};
+
+//======== Actualizar ROL ========================
+const updateRol = async (idRol) => {
+  let URL_FECTH = formFetch.URL_BASE + "/roles/rol/" + idRol;
+
+  //Colocar en el formulario la información del rol seleccionado
+  const { response: data } = await formFetch.fetchData(URL_FECTH);
+  const { value: rolUpdate } = await modalRol("Actualizar Rol", data.rol);
+
+  const dataRol = validateFormRol(rolUpdate);
+
+  if (dataRol) {
+    if (dataRol.status === true) {
+      URL_FECTH = formFetch.URL_BASE + "roles/update";
+      dataRol.data.set("id", idRol); //Añadir el campo id, del rol y enviarlo por ajax
+      const response = await formFetch.fetchData(URL_FECTH, dataRol.data);
+
+      if (response.success) {
+        let resultStatus = response.response.success ? "success" : "error";
+        let okModal = await showModal("", response.response.msg, resultStatus, {
+          showCancelButton: false,
+        });
+
+        if (okModal === true && response.response.success == true) {
+          renderTableRoles($tableContainer);
+        }
+      }
+    } else {
+      Swal.fire(dataRol.msg, "", "error");
     }
   }
 };
@@ -82,23 +135,16 @@ if ($tableContainer) {
   });
 }
 
+//Bóton de crear rol
 $createRol.addEventListener("click", async () => {
-  const { value: newRol } = await modalRol();
+  const { value: data } = await modalRol("Crear Rol");
+  const dataRol = validateFormRol(data);
 
-  if (newRol) {
-    const emptyField = formFetch.emptyField(newRol);
-
-    if (!emptyField) {
-      const fd = new FormData();
-
-      newRol.forEach((data) => {
-        const key = removeAccents(data[0]);
-        fd.set(key, data[1]);
-      });
-
-      createRol(fd);
+  if (dataRol) {
+    if (dataRol.status === true) {
+      createRol(dataRol.data);
     } else {
-      Swal.fire(`El campo ${emptyField[0]} está vacío`, "", "error");
+      Swal.fire(dataRol.msg, "", "error");
     }
   }
 });

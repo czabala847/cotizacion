@@ -44,26 +44,35 @@ class RolesModel
     {
         $this->id = $id;
         $rol = $this->getRol($this->id);
-        $strUpdate = "UPDATE roles SET estado = ? WHERE id = ?";
 
-        $messageModification = "activado";
+        //Verificar si el rol esta asignado a un usuario.
+        $strQuerySearch = "SELECT id FROM usuarios WHERE rol = ? AND estado = ?";
+        $user = $this->db->select($strQuerySearch, array($this->id, 'A'));
 
-        if ($rol) {
-            if ($rol["estado"] == 'A') {
-                $responseUpdate = $this->db->update($strUpdate, array("I", $this->id));
-                $messageModification = 'desactivado';
+        if (empty($user)) {
+            $strUpdate = "UPDATE roles SET estado = ? WHERE id = ?";
+
+            $messageModification = "activado";
+
+            if ($rol) {
+                if ($rol["estado"] == 'A') {
+                    $responseUpdate = $this->db->update($strUpdate, array("I", $this->id));
+                    $messageModification = 'desactivado';
+                } else {
+                    $responseUpdate = $this->db->update($strUpdate, array("A", $this->id));
+                }
+
+                if ($responseUpdate) {
+                    return ["success" => true, "response" => "Rol " . $messageModification . " con exito"];
+                } else {
+                    return ["success" => false, "response" => "Ocurrio error al modificar rol"];
+                }
             } else {
-                $responseUpdate = $this->db->update($strUpdate, array("A", $this->id));
+                return ["success" => false, "response" => "Rol a modificar no existe"];;
             }
-
-            if ($responseUpdate) {
-                return ["success" => true, "response" => "Rol " . $messageModification . " con exito"];
-            } else {
-                return ["success" => false, "response" => "Ocurrio error al modificar rol"];
-            }
-        } else {
-            return ["success" => false, "response" => "Rol a modificar no existe"];;
         }
+
+        return ["success" => false, "response" => "No se puede desactivar el rol si hay usuarios con este perfil"];;
     }
 
     public function insertRol(string $name, string $description)
@@ -89,5 +98,19 @@ class RolesModel
         }
 
         return "existe";
+    }
+
+    public function updateRol(int $id, string $name, string $description)
+    {
+        $this->id = $id;
+        $this->name = $name;
+        $this->description = $description;
+
+        $strQueryUpdate = "UPDATE roles SET nombre = ?, descripcion = ? WHERE id = ?";
+        $arrParams = array($this->name, $this->description, $this->id);
+
+        $responseUpdate = $this->db->update($strQueryUpdate, $arrParams);
+
+        return $responseUpdate;
     }
 }
