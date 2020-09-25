@@ -11,7 +11,8 @@ getHeadTemplate($dataPage);
 ?>
 
 <body>
-    <div id="app">
+    <div id="app" class="login-app">
+
         <header class="header">
             <div class="container">
                 <nav class="header-menu">

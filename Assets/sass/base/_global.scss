@@ -18,4 +18,8 @@ figure {
   background: $color-background-deg;
   color: $color-white;
   box-sizing: border-box;
+
+  &.login-app {
+    min-height: $height-viewport;
+  }
 }

@@ -51,6 +51,8 @@ class RolesController extends Controller
         $name = $_POST["nombre"];
         $description = $_POST["descripcion"];
 
+        $response = $this->model->insertRol($name, $description);
+
         echo json_encode(["Nombre" => $name, "Descripción" => $description], JSON_UNESCAPED_UNICODE);
     }
 }

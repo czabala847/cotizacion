@@ -40,6 +40,10 @@ figure {
           box-sizing: border-box;
 }
 
+#app.login-app {
+  min-height: 100vh;
+}
+
 /*-----------------------------------------*\
                   CONTAINERS
 \*-----------------------------------------*/
@@ -490,14 +494,10 @@ select {
                   LOGIN
 \*-----------------------------------------*/
 .login {
-  height: calc(100vh - 90px);
-  overflow: hidden;
+  overflow-x: hidden;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-}
-
-.login .container {
-  overflow: auto;
+  padding: 2rem 0;
 }
 
 .login-container .login-description {

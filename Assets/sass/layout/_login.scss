@@ -3,14 +3,10 @@
 \*-----------------------------------------*/
 
 .login {
-  height: $height-main-section;
-  overflow: hidden;
+  // max-height: $height-main-section;
+  overflow-x: hidden;
   box-sizing: border-box;
-  // padding-bottom: 2rem;
-
-  & .container {
-    overflow: auto;
-  }
+  padding: 2rem 0;
 }
 
 .login-container {
