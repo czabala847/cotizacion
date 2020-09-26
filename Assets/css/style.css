@@ -307,7 +307,7 @@ select {
                 PAGINATION
 \*-----------------------------------------*/
 .pagination {
-  margin: 2rem 0;
+  margin-top: 2rem;
 }
 
 .pagination__list {
@@ -539,6 +539,10 @@ select {
 /*-----------------------------------------*\
               LISTA DE USUARIOS
 \*-----------------------------------------*/
+.user-container {
+  padding-bottom: 1rem;
+}
+
 .user-container,
 .roles-container {
   max-width: calc(100vw - 2rem - 230px);

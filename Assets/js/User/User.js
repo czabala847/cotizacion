@@ -116,6 +116,7 @@ const $formUpdateUser = document.querySelector("#formUpdate");
 const $checkPassword = document.querySelector("input[type=checkbox]");
 const $iconLoading = document.querySelector("#icon-loading");
 const $btnSend = document.querySelector("#btnEnviar");
+const $comboRol = document.querySelector("#comboRol");
 
 //======== Activar y desactivar los campos contraseñas ==================
 const handlePasswordFields = (passFields, showFields = true) => {
@@ -130,6 +131,13 @@ const handlePasswordFields = (passFields, showFields = true) => {
   });
 };
 
+const loadRoles = async () => {
+  const URL_FECTH = formFetch.URL_BASE + "roles/show";
+  const response = await formFetch.fetchData(URL_FECTH);
+
+  debugger;
+};
+
 if ($checkPassword) {
   const $fieldsPw = document.querySelectorAll("input[type=password]");
   $checkPassword.addEventListener("change", () =>
@@ -139,6 +147,10 @@ if ($checkPassword) {
 
 //======== Formulario de actualización de datos ========================
 if ($formUpdateUser) {
+  document.addEventListener("DOMContentLoaded", async () => {
+    await loadRoles(); //Cargar los roles en el select
+  });
+
   $formUpdateUser.addEventListener("submit", async (e) => {
     e.preventDefault();
 

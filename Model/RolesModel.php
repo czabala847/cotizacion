@@ -19,8 +19,16 @@ class RolesModel
         return $this->db->select($strQuery, array($this->id));
     }
 
+    public function getAllRoles()
+    {
+        $strQuerySelect = "SELECT id, nombre, descripcion FROM roles WHERE estado = ?";
+        $arrRoles = $this->db->select($strQuerySelect, array("A"), true);
+
+        return $arrRoles;
+    }
+
     //Mostrar roles dependiendo de la pagina
-    public function getAllRoles(string $nameRol, int $pageShow = 0)
+    public function getTableRoles(string $nameRol, int $pageShow = 0)
     {
         $limit = 5;
         $index = $pageShow * $limit;

@@ -25,7 +25,7 @@ class RolesController extends Controller
         $valueSearch = $_POST["value"];
         $page = intval($_POST["pageShow"]);
 
-        $response = $this->model->getAllRoles($valueSearch, $page);
+        $response = $this->model->getTableRoles($valueSearch, $page);
 
         $dataTable = [
             "columns" => ["id", "Nombre", "Descripción"],
@@ -83,5 +83,11 @@ class RolesController extends Controller
         $msg = $response ? "Rol actualizado correctamente" : "Ocurrió un error al actualizar el Rol.";
 
         echo json_encode(["success" => $response, "msg" => $msg], JSON_UNESCAPED_UNICODE);
+    }
+
+    public function show()
+    {
+        $arrRoles = $this->model->getAllRoles();
+        echo json_encode($arrRoles, JSON_UNESCAPED_UNICODE);
     }
 }
