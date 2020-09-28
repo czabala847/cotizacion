@@ -30,9 +30,7 @@
                     </div>
 
                     <label>Seleccionar perfil de usuario</label>
-                    <select name="comboRol" id="comboRol">
-                        <option value="1">Administrador</option>
-                        <option value="2">Estandar</option>
+                    <select name="comboRol" id="comboRol" data-profile="<?= $dataPage['user']['rol'] ?>">
                     </select>
 
 
@@ -47,7 +45,7 @@
                     <label for="pw2"><span>Confirmar contraseña</span><input type="password" name="password2" id="pw2" disabled /></label>
 
                     <div class="form-login__btn">
-                        <input class="btn btn--primary" type="submit" id="btnEnviar" value="Enviar">
+                        <input class="btn btn--primary" type="submit" id="btnEnviar" value="Guardar">
                         <i id="icon-loading" class="fa fa-spinner fa-spin hidden-element"></i>
                     </div>
                 </form>

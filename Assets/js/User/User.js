@@ -131,11 +131,18 @@ const handlePasswordFields = (passFields, showFields = true) => {
   });
 };
 
-const loadRoles = async () => {
+const loadRoles = async (comboBox) => {
   const URL_FECTH = formFetch.URL_BASE + "roles/show";
   const response = await formFetch.fetchData(URL_FECTH);
 
-  debugger;
+  const arrRoles = response.response;
+  comboBox.innerHTML = "";
+  const idRol = comboBox.dataset.profile;
+  arrRoles.forEach((rol) => {
+    comboBox.innerHTML += `<option value="${rol.id}">${rol.nombre}</option>`;
+  });
+
+  comboBox.value = idRol;
 };
 
 if ($checkPassword) {
@@ -148,14 +155,14 @@ if ($checkPassword) {
 //======== Formulario de actualización de datos ========================
 if ($formUpdateUser) {
   document.addEventListener("DOMContentLoaded", async () => {
-    await loadRoles(); //Cargar los roles en el select
+    await loadRoles($comboRol); //Cargar los roles en el select
   });
 
   $formUpdateUser.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const dataForm = new FormData($formUpdateUser);
-    console.log(dataForm.get("comboRol"));
+    // console.log(dataForm.get("comboRol"));
     //Icono de cargando
     fetchLoading($iconLoading, $btnSend, true);
     let result = await updateUser(dataForm);
