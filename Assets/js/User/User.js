@@ -1,5 +1,5 @@
-import formFetch from "../Helper/FormFetch.js";
-import tableFetch from "../Helper/TableFetch.js";
+import fetchFM from "../Helper/FetchForm.js";
+import tableFetch from "../Helper/FetchTable.js";
 import { showModal } from "../Helper/Modal/Modal.js";
 
 let timeInterval;
@@ -21,8 +21,8 @@ const setStatusUser = async (idUser, container, value) => {
     const fd = new FormData();
     fd.set("modify", "status");
 
-    const URL_FECTH = formFetch.URL_BASE + "user/setStatus/" + idUser;
-    const result = await formFetch.fetchData(URL_FECTH, fd);
+    const URL_FECTH = fetchFM.URL_BASE + "user/setStatus/" + idUser;
+    const result = await fetchFM.fetchData(URL_FECTH, fd);
 
     let resultStatus = result.success ? "success" : "error";
     let okModal = await showModal("", result.response.response, resultStatus, {
@@ -38,7 +38,7 @@ const setStatusUser = async (idUser, container, value) => {
 
 //====== Mostrar tabla de usuarios en pantalla ====================
 const renderUserTable = async (container, valueSearch = "") => {
-  const urlFetch = formFetch.URL_BASE + "user/userTable";
+  const urlFetch = fetchFM.URL_BASE + "user/userTable";
   const data = {
     valueSearch,
     urlFetch,
@@ -97,10 +97,9 @@ const updateUser = async (dataForm) => {
     return resultModal;
   }
 
-  dataForm.set("modify", "update");
-
-  const result = await fetchData(URL_FECTH, dataForm);
-  // debugger;
+  const URL_FECTH = fetchFM.URL_BASE + "user/update";
+  const result = await fetchFM.fetchData(URL_FECTH, dataForm);
+  debugger;
   const iconModal = result.success ? "success" : "error";
   const message = result.success
     ? result.response.message
@@ -131,9 +130,10 @@ const handlePasswordFields = (passFields, showFields = true) => {
   });
 };
 
+//======== Mostrar los roles en el combobox ==================
 const loadRoles = async (comboBox) => {
-  const URL_FECTH = formFetch.URL_BASE + "roles/show";
-  const response = await formFetch.fetchData(URL_FECTH);
+  const URL_FECTH = fetchFM.URL_BASE + "roles/show";
+  const response = await fetchFM.fetchData(URL_FECTH);
 
   const arrRoles = response.response;
   comboBox.innerHTML = "";
@@ -152,25 +152,32 @@ if ($checkPassword) {
   );
 }
 
-//======== Formulario de actualización de datos ========================
 if ($formUpdateUser) {
-  document.addEventListener("DOMContentLoaded", async () => {
-    await loadRoles($comboRol); //Cargar los roles en el select
+  //======== Cargar los roles en el combobox ========================
+  document.addEventListener("DOMContentLoaded", () => {
+    loadRoles($comboRol); //Cargar los roles en el select
   });
 
+  //======== Formulario de actualización de datos ========================
   $formUpdateUser.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const dataForm = new FormData($formUpdateUser);
-    // console.log(dataForm.get("comboRol"));
+    const fd = new FormData($formUpdateUser);
+
     //Icono de cargando
-    fetchLoading($iconLoading, $btnSend, true);
-    let result = await updateUser(dataForm);
-    if (result) {
-      location.reload();
+    fetchFM.handlerIconFetch($iconLoading, $btnSend, true);
+    let fields = Array.from(fd.entries());
+    const emptyField = fetchFM.emptyField(fields);
+
+    if (emptyField) {
+      let result = await updateUser(fd);
+
+      if (result) {
+        location.reload();
+      }
     }
 
-    fetchLoading($iconLoading, $btnSend, false);
+    fetchFM.handlerIconFetch($iconLoading, $btnSend, false);
     // handleFieldPassword(false, $fieldsPw);
   });
 }

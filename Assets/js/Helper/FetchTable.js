@@ -1,4 +1,4 @@
-import formFetch from "./FormFetch.js";
+import formFetch from "./FetchForm.js";
 
 //====== Paginador ===============================
 const paginatorTable = (arrButtons, containerRender, data) => {

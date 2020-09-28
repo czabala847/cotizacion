@@ -132,6 +132,34 @@ class UserModel
         }
     }
 
+    //Actualizar usuario
+    public function updateUser(int $id, string $name, string $email, int $rol, $password = false)
+    {
+        $userFound = $this->searchUser($id);
+
+        if ($userFound) {
+            $this->saveDataUser($name, $email, $password);
+            $this->setId($id);
+            $this->setRol($rol);
+
+            $queryUpdate = "UPDATE usuario SET nombre = ?, correo = ?, rol = ? WHERE id = ?";
+            $params = array($this->getName(), $this->getEmail(), $this->getRol(), $this->getId());
+
+            //Si tambien se actualiza la contraseña
+            if ($password) {
+                $queryUpdate = "UPDATE usuario SET nombre = ?, correo = ?, rol = ?, contrasena = ? WHERE id = ?";
+                $params = array($this->getName(), $this->getEmail(), $this->getRol(), $this->getPassword(), $this->getId());
+            }
+
+            // $response = $this->db->modification($queryUpdate, $params);
+            // if ($response) {
+            //     return ["success" => true, "message" => "Actualizado con exito"];
+            // } else {
+            //     return ["success" => false, "message" => "Ha ocurrido un error al actualizar el usuario"];
+            // }
+        }
+    }
+
     /** GETTERS Y SETTERS */
 
     public function getId()

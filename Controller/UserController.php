@@ -143,6 +143,7 @@ class UserController extends Controller
         die();
     }
 
+    //Vista de editar
     public function edit(int $idUser)
     {
 
@@ -155,5 +156,17 @@ class UserController extends Controller
             "user" => $user
         ];
         $this->view->loadView($this, "editarUsuario", $dataPage);
+    }
+
+    //Actualizar usuario
+    public function update()
+    {
+        $id = $_POST["id"];
+        $name = $_POST["nombre"];
+        $email = $_POST["correo"];
+        $pass = isset($_POST["password"]) ? $_POST["password"] : "";
+
+        echo json_encode(["id" => $id, "nombre" => $name, "correo" => $email, "Contraseña" => $pass], JSON_UNESCAPED_UNICODE);
+        die();
     }
 }

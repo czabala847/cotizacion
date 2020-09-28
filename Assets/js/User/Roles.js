@@ -1,4 +1,4 @@
-import formFetch from "../Helper/FormFetch.js";
+import formFetch from "../Helper/FetchForm.js";
 import tableFetch from "../Helper/TableFetch.js";
 import { showModal, modalRol } from "../Helper/Modal/Modal.js";
 import { removeAccents } from "../Helper/Strings.js";

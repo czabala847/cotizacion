@@ -1,21 +1,20 @@
-import formFetch from "../Helper/FormFetch.js";
+import fetchFM from "../Helper/FetchForm.js";
 
 const $formContainer = document.querySelector("#login-form-container");
 const $formLogin = document.querySelector("#login-form");
 const $btnRegister = document.querySelector("#registerLogin");
-const $iconLoading = document.querySelector("#icon-loading");
 const $btnSend = document.querySelector("#btn-send");
 
-//Cambiar texto del formulario dependiendo si es sign in o sign up
+//*** Cambiar texto del formulario dependiendo si es sign in o sign up ***//
 const changeTextForm = (formContainer, dataText) => {
   formContainer.querySelector("h2").innerText = dataText.title;
   formContainer.querySelector("span").innerText = dataText.textFooter;
   formContainer.querySelector("a").innerText = dataText.textLink;
 };
 
+//*** Mostrar formulario SignUp ***//
 const showSignUp = (formContainer) => {
-  // campos que se muestran en el registro
-  const $fieldPassword2 =
+  const $fieldPassword =
     '<input type="password" name="contraseña2" placeholder="Repetir Contraseña" required/>';
   const $fieldName =
     '<input type="text" name="nombre" placeholder="Nombre completo" required/>';
@@ -30,7 +29,6 @@ const showSignUp = (formContainer) => {
 
   if (formContainer) {
     changeTextForm(formContainer, dataText);
-
     // obtener campo contraseña, ya que es el punto de referencia, donde se mostrara
     // los campos nombre (antes) y contraseña2 (despues)
     let fieldReference = formContainer.querySelector(
@@ -39,11 +37,13 @@ const showSignUp = (formContainer) => {
 
     fieldReference.insertAdjacentHTML("beforebegin", $fieldName);
     fieldReference.insertAdjacentHTML("beforebegin", $fieldEmail);
-    fieldReference.insertAdjacentHTML("afterend", $fieldPassword2);
-    // debugger;
+    fieldReference.insertAdjacentHTML("afterend", $fieldPassword);
+
+    formContainer.dataset.up = "active";
   }
 };
 
+//*** Mostrar formulario SignIn ***//
 const removeSignUp = (formContainer) => {
   if (formContainer) {
     const dataText = {
@@ -65,79 +65,73 @@ const removeSignUp = (formContainer) => {
     fieldName.parentNode.removeChild(fieldName);
     fieldPassword2.parentNode.removeChild(fieldPassword2);
     fieldEmail.parentNode.removeChild(fieldEmail);
+
+    formContainer.dataset.up = "inactive";
   }
 };
 
-//cambiar entre sign in y sign up
-$btnRegister.addEventListener("click", (e) => {
-  e.preventDefault();
+//*** Registrar o iniciar sesión ***//
+const loginUser = async (login, formData) => {
+  let loginUrl = "login";
 
-  //si esta en login cambiar a registrar, si esta en registrar pasar a login
-  let dataLogin = $formContainer.dataset.up;
+  if (login === "sign-up") {
+    if (formData.get("contraseña") !== formData.get("contraseña2")) {
+      $formLogin.reset();
+      return Swal.fire(
+        "Las contraseñas ingresadas no son iguales",
+        "",
+        "error"
+      );
+    }
 
-  if (dataLogin === "inactive") {
-    showSignUp($formContainer);
-    $formContainer.dataset.up = "active";
-  } else {
-    removeSignUp($formContainer);
-    $formContainer.dataset.up = "inactive";
+    loginUrl = "register";
   }
-});
 
+  formData.set("login", login);
+
+  const URL_FETCH = fetchFM.URL_BASE + `User/${loginUrl}`;
+  const response = await fetchFM.fetchData(URL_FETCH, formData);
+
+  if (response.success) {
+    return response.data;
+  }
+};
+
+//*** Enviar o Registrar ***//
 $formLogin.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const fd = new FormData($formLogin);
-  let signUp = $formContainer.dataset.up;
   fd.set("login", "sign-in");
 
   //Validar campos vacios
-  let fields = Array.from(fd.entries());
-  let isEmptyField = formFetch.emptyField(fields);
+  let emptyField = fetchFM.emptyField(Array.from(fd.entries()));
+  let login = $formContainer.dataset.up === "active" ? "sign-up" : "sign-in";
 
-  if (!isEmptyField) {
-    if (signUp == "active") {
-      if (fd.get("contraseña") !== fd.get("contraseña2")) {
-        $formLogin.reset();
-        return Swal.fire(
-          "Las contraseñas ingresadas no son iguales",
-          "",
-          "error"
-        );
-      }
-
-      fd.set("login", "sign-up");
-      formFetch.handlerIconFetch($iconLoading, $btnSend, true); //Mostrar icono de cargando...
-      //PETICION PARA REGISTRAR
-      const responseRegister = await formFetch.fetchData(
-        formFetch.URL_BASE + "User/register",
-        fd
-      );
-
-      if (responseRegister.success) {
-        let icon = responseRegister.response.success ? "success" : "error";
-        Swal.fire(responseRegister.response.msg, "", icon);
-      } else {
-        Swal.fire("Error al hacer la petición", "", "error");
-      }
-    } else {
-      formFetch.handlerIconFetch($iconLoading, $btnSend, true);
-      //PETICION PARA LOGIN
-      const responseLogin = await formFetch.fetchData(
-        formFetch.URL_BASE + "User/login",
-        fd
-      );
-
-      if (responseLogin.response.success) {
-        window.location = formFetch.URL_BASE + "dashboard";
-      } else {
-        Swal.fire(responseLogin.response.msg, "", "error");
-      }
-    }
-  } else {
-    Swal.fire(`El campo ${isEmptyField[0]} está vacío`, "", "error");
+  if (emptyField) {
+    return Swal.fire(`El campo ${emptyField[0]} está vacío`, "", "error");
   }
 
-  formFetch.handlerIconFetch($iconLoading, $btnSend, false);
+  fetchFM.loading($btnSend, true);
+  const response = await loginUser(login, fd);
+  const icon = response.success ? "success" : "error";
+
+  Swal.fire(response.msg, "", icon);
+
+  if (response.success && login === "sign-in") {
+    window.location = fetchFM.URL_BASE + "dashboard";
+  }
+
+  fetchFM.loading($btnSend, false);
   $formLogin.reset();
+});
+
+//*** Cambiar entre SignUp y  SignIn ***//
+$btnRegister.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  //Obtener si esta en sign in o sign up
+  $formContainer.dataset.up === "inactive"
+    ? showSignUp($formContainer)
+    : removeSignUp($formContainer);
 });
