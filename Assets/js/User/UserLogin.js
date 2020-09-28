@@ -76,12 +76,10 @@ const loginUser = async (login, formData) => {
 
   if (login === "sign-up") {
     if (formData.get("contraseña") !== formData.get("contraseña2")) {
-      $formLogin.reset();
-      return Swal.fire(
-        "Las contraseñas ingresadas no son iguales",
-        "",
-        "error"
-      );
+      return {
+        success: false,
+        msg: "Las contraseñas ingresadas no son iguales",
+      };
     }
 
     loginUrl = "register";
@@ -116,10 +114,10 @@ $formLogin.addEventListener("submit", async (e) => {
   const response = await loginUser(login, fd);
   const icon = response.success ? "success" : "error";
 
-  Swal.fire(response.msg, "", icon);
-
   if (response.success && login === "sign-in") {
     window.location = fetchFM.URL_BASE + "dashboard";
+  } else {
+    Swal.fire(response.msg, "", icon);
   }
 
   fetchFM.loading($btnSend, false);
