@@ -1,7 +1,6 @@
-import formFetch from "../Helper/FormFetch.js";
+import fetchFM from "../Helper/FetchForm.js";
 
 const $formCotizacion = document.getElementById("frm-cotizacion");
-const $iconLoading = document.querySelector("#icon-loading");
 const $btnSend = document.querySelector("#btn-send");
 
 if ($formCotizacion) {
@@ -10,35 +9,32 @@ if ($formCotizacion) {
     e.preventDefault();
 
     const fd = new FormData($formCotizacion);
-    const entries = Array.from(fd.entries()); //Convertir los inputs en array asociativos
-
+    const entries = Array.from(fd.entries());
     //Ver campos que estan vacios
-    const isEmptyField = formFetch.emptyField(entries);
+    const emptyFields = fetchFM.emptyField(entries);
 
-    if (!isEmptyField) {
-      formFetch.handlerIconFetch($iconLoading, $btnSend, true);
-      const files = okFiles(entries);
-
-      //Si los archivos cargados no arrojan error (0), hacer el fetch
-      if (!files.error) {
-        const URL_FETCH = formFetch.URL_BASE + "Cotizacion/crear";
-        const result = await formFetch.fetchData(URL_FETCH, fd);
-
-        debugger;
-
-        if (result.success && result.response.success) {
-          Swal.fire("Enviado Correctamente!", "", "success");
-        } else {
-          Swal.fire(result.response.errorMessage, "", "error");
-        }
-      } else {
-        Swal.fire(files.message, "", "error");
-      }
-    } else {
-      Swal.fire(`El campo ${isEmptyField[0]} está vacío`, "", "error");
+    if (emptyFields) {
+      return Swal.fire(`El campo ${emptyFields[0]} está vacío`, "", "error");
     }
 
-    formFetch.handlerIconFetch($iconLoading, $btnSend, false);
+    fetchFM.loading($btnSend, true);
+    const files = okFiles(entries);
+
+    //Si los archivos cargados no arrojan error (0), hacer el fetch
+    if (!files.error) {
+      const URL_FETCH = fetchFM.URL_BASE + "Cotizacion/crear";
+      const response = await fetchFM.fetchData(URL_FETCH, fd);
+
+      if (response.success && response.data.success) {
+        Swal.fire("Enviado Correctamente!", "", "success");
+      } else {
+        Swal.fire(response.data.errorMessage, "", "error");
+      }
+    } else {
+      Swal.fire(files.message, "", "error");
+    }
+
+    fetchFM.loading($btnSend, false);
     $formCotizacion.reset();
   });
 }
