@@ -626,6 +626,10 @@ select {
   width: auto;
 }
 
+.form-update__btn {
+  position: relative;
+}
+
 /*Solo cuando el sidebar menu este contraido*/
 @media (min-width: 768px) {
   #app.sidebar-toggled .user-container,

@@ -17,7 +17,7 @@ if ($formCotizacion) {
       return Swal.fire(`El campo ${emptyFields[0]} está vacío`, "", "error");
     }
 
-    fetchFM.loading($btnSend, true);
+    fetchFM.loadingIcon($btnSend, true);
     const files = okFiles(entries);
 
     //Si los archivos cargados no arrojan error (0), hacer el fetch
@@ -34,7 +34,7 @@ if ($formCotizacion) {
       Swal.fire(files.message, "", "error");
     }
 
-    fetchFM.loading($btnSend, false);
+    fetchFM.loadingIcon($btnSend, false);
     $formCotizacion.reset();
   });
 }

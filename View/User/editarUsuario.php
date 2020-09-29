@@ -44,7 +44,7 @@
                     <label for="pw1"><span>Contraseña</span><input type="password" name="password" id="pw1" disabled /></label>
                     <label for="pw2"><span>Confirmar contraseña</span><input type="password" name="password2" id="pw2" disabled /></label>
 
-                    <div class="form-login__btn">
+                    <div class="form-update__btn">
                         <input class="btn btn--primary" type="submit" id="btnEnviar" value="Guardar">
                         <i id="icon-loading" class="fa fa-spinner fa-spin hidden-element"></i>
                     </div>

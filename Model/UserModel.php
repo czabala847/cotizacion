@@ -17,12 +17,17 @@ class UserModel
     }
 
     //Guardar en variables datos del usuario
-    private function saveDataUser(string $name, string $email, string $password)
+    private function saveDataUser(string $name, string $email, $password)
     {
 
         $this->setName($name);
         $this->setEmail($email);
-        $this->setPassword(password_hash($password, PASSWORD_DEFAULT));
+
+        if ($password) {
+            $this->setPassword(password_hash($password, PASSWORD_DEFAULT));
+        } else {
+            $this->setPassword($password);
+        }
 
         //Valores por defecto, estado activo y rol 2 (estandar)
         $this->setStatus("A");
@@ -135,29 +140,26 @@ class UserModel
     //Actualizar usuario
     public function updateUser(int $id, string $name, string $email, int $rol, $password = false)
     {
-        $userFound = $this->searchUser($id);
+        $userFound = $this->searchUser(strval($id));
 
         if ($userFound) {
             $this->saveDataUser($name, $email, $password);
             $this->setId($id);
             $this->setRol($rol);
 
-            $queryUpdate = "UPDATE usuario SET nombre = ?, correo = ?, rol = ? WHERE id = ?";
-            $params = array($this->getName(), $this->getEmail(), $this->getRol(), $this->getId());
+            $strQueryUpdate = "UPDATE usuarios SET nombre = ?, correo = ?, rol = ? WHERE id = ?";
+            $arrParams = array($this->getName(), $this->getEmail(), $this->getRol(), $this->getId());
 
             //Si tambien se actualiza la contraseña
             if ($password) {
-                $queryUpdate = "UPDATE usuario SET nombre = ?, correo = ?, rol = ?, contrasena = ? WHERE id = ?";
-                $params = array($this->getName(), $this->getEmail(), $this->getRol(), $this->getPassword(), $this->getId());
+                $strQueryUpdate = "UPDATE usuarios SET nombre = ?, correo = ?, rol = ?, contrasena = ? WHERE id = ?";
+                $arrParams = array($this->getName(), $this->getEmail(), $this->getRol(), $this->getPassword(), $this->getId());
             }
 
-            // $response = $this->db->modification($queryUpdate, $params);
-            // if ($response) {
-            //     return ["success" => true, "message" => "Actualizado con exito"];
-            // } else {
-            //     return ["success" => false, "message" => "Ha ocurrido un error al actualizar el usuario"];
-            // }
+            return $this->db->update($strQueryUpdate, $arrParams);
         }
+
+        return "no existe";
     }
 
     /** GETTERS Y SETTERS */
@@ -217,7 +219,7 @@ class UserModel
         $this->email = $email;
     }
 
-    public function setPassword(string $password)
+    public function setPassword($password)
     {
         $this->password = $password;
     }

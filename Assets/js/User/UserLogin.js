@@ -110,7 +110,7 @@ $formLogin.addEventListener("submit", async (e) => {
     return Swal.fire(`El campo ${emptyField[0]} está vacío`, "", "error");
   }
 
-  fetchFM.loading($btnSend, true);
+  fetchFM.loadingIcon($btnSend, true);
   const response = await loginUser(login, fd);
   const icon = response.success ? "success" : "error";
 
@@ -120,7 +120,7 @@ $formLogin.addEventListener("submit", async (e) => {
     Swal.fire(response.msg, "", icon);
   }
 
-  fetchFM.loading($btnSend, false);
+  fetchFM.loadingIcon($btnSend, false);
   $formLogin.reset();
 });
 

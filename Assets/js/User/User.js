@@ -25,7 +25,7 @@ const setStatusUser = async (idUser, container, value) => {
     const result = await fetchFM.fetchData(URL_FECTH, fd);
 
     let resultStatus = result.success ? "success" : "error";
-    debugger;
+
     let okModal = await showModal("", result.data.response, resultStatus, {
       showCancelButton: false,
     });
@@ -81,34 +81,19 @@ if ($tableContainer) {
 
 //===== Actualizar usuarios =========================================
 const updateUser = async (dataForm) => {
-  let resultModal = false;
-  const optModal = {
-    showCancelButton: false,
-    allowOutsideClick: false,
-    allowEscapeKey: false,
-  };
-
   if (dataForm.get("password") !== dataForm.get("password2")) {
-    resultModal = await showModal(
-      "",
-      "Las contraseñas deben ser iguales",
-      "error",
-      optModal
-    );
-    return resultModal;
+    return {
+      success: false,
+      msg: "Las contraseñas ingresadas no son iguales",
+    };
   }
 
   const URL_FECTH = fetchFM.URL_BASE + "user/update";
-  const result = await fetchFM.fetchData(URL_FECTH, dataForm);
-  debugger;
-  const iconModal = result.success ? "success" : "error";
-  const message = result.success
-    ? result.data.message
-    : "Ocurrio un error al hacer la petición";
+  const response = await fetchFM.fetchData(URL_FECTH, dataForm);
 
-  resultModal = await showModal("", message, iconModal, optModal);
-
-  return resultModal;
+  if (response.success) {
+    return response.data;
+  }
 };
 
 //======== Elementos HTML necesarios =============================================
@@ -119,7 +104,7 @@ const $btnSend = document.querySelector("#btnEnviar");
 const $comboRol = document.querySelector("#comboRol");
 
 //======== Activar y desactivar los campos contraseñas ==================
-const handlePasswordFields = (passFields, showFields = true) => {
+const handlerPasswordFields = (passFields, showFields = true) => {
   passFields.forEach((field) => {
     if (showFields) {
       field.removeAttribute("disabled");
@@ -130,6 +115,13 @@ const handlePasswordFields = (passFields, showFields = true) => {
     }
   });
 };
+
+if ($checkPassword) {
+  const $fieldsPw = document.querySelectorAll("input[type=password]");
+  $checkPassword.addEventListener("change", () =>
+    handlerPasswordFields($fieldsPw, $checkPassword.checked)
+  );
+}
 
 //======== Mostrar los roles en el combobox ==================
 const loadRoles = async (comboBox) => {
@@ -146,39 +138,45 @@ const loadRoles = async (comboBox) => {
   comboBox.value = idRol;
 };
 
-if ($checkPassword) {
-  const $fieldsPw = document.querySelectorAll("input[type=password]");
-  $checkPassword.addEventListener("change", () =>
-    handlePasswordFields($fieldsPw, $checkPassword.checked)
-  );
-}
-
+//======== Formulario de actualizar usuarios ========================
 if ($formUpdateUser) {
-  //======== Cargar los roles en el combobox ========================
+  //Cargar los roles en el combobox
   document.addEventListener("DOMContentLoaded", () => {
     loadRoles($comboRol); //Cargar los roles en el select
   });
 
-  //======== Formulario de actualización de datos ========================
+  //Acción de enviar en el formulario
   $formUpdateUser.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const fd = new FormData($formUpdateUser);
+    fetchFM.loadingIcon($btnSend, true); //Mostrar icono de loading
 
-    //Icono de cargando
-    fetchFM.handlerIconFetch($iconLoading, $btnSend, true);
-    let fields = Array.from(fd.entries());
-    const emptyField = fetchFM.emptyField(fields);
-
+    //Validar campos vacios
+    let emptyField = fetchFM.emptyField(Array.from(fd.entries()));
     if (emptyField) {
-      let result = await updateUser(fd);
-
-      if (result) {
-        location.reload();
-      }
+      fetchFM.loadingIcon($btnSend, false);
+      return Swal.fire(`El campo ${emptyField[0]} está vacío`, "", "error");
     }
 
-    fetchFM.handlerIconFetch($iconLoading, $btnSend, false);
-    // handleFieldPassword(false, $fieldsPw);
+    const responseUpdate = await updateUser(fd);
+    const icon = responseUpdate.success ? "success" : "error";
+    const optModal = {
+      showCancelButton: false,
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+    };
+    const responseModal = await showModal(
+      "",
+      responseUpdate.msg,
+      icon,
+      optModal
+    );
+
+    if (responseModal) {
+      location.reload();
+    }
+
+    fetchFM.loadingIcon($btnSend, false);
   });
 }

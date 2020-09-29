@@ -43,7 +43,7 @@ function emptyField(arrFields) {
 }
 
 /**** Mostrar el icono de cargando al hacer el fetch ****/
-function loading(btn, active) {
+function loadingIcon(btn, active) {
   const $icon = document.querySelector("#icon-loading");
   $icon.classList.toggle("hidden-element");
 
@@ -56,4 +56,4 @@ function loading(btn, active) {
   }
 }
 
-export default { URL_BASE, fetchData, emptyField, loading };
+export default { URL_BASE, fetchData, emptyField, loadingIcon };

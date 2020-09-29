@@ -161,12 +161,24 @@ class UserController extends Controller
     //Actualizar usuario
     public function update()
     {
-        $id = $_POST["id"];
+        $id = intval($_POST["id"]);
         $name = $_POST["nombre"];
         $email = $_POST["correo"];
-        $pass = isset($_POST["password"]) ? $_POST["password"] : "";
+        $idRol = intval($_POST["comboRol"]);
+        $pass = isset($_POST["password"]) ? $_POST["password"] : false;
+        $success = false;
+        $msg = "No se puede actualizar porque el usuario no existe.";
 
-        echo json_encode(["id" => $id, "nombre" => $name, "correo" => $email, "Contraseña" => $pass], JSON_UNESCAPED_UNICODE);
+        $response = $this->model->updateUser($id, $name, $email, $idRol, $pass);
+
+        if ($response === true) {
+            $success = $response;
+            $msg = "Usuario actualizado con exito.";
+        } elseif ($response === false) {
+            $msg = "Error al actualizar usuario";
+        }
+
+        echo json_encode(["success" => $success, "msg" => $msg], JSON_UNESCAPED_UNICODE);
         die();
     }
 }

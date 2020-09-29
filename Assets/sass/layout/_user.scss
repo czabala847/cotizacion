@@ -75,6 +75,10 @@
   }
 }
 
+.form-update__btn {
+  position: relative;
+}
+
 /*Solo cuando el sidebar menu este contraido*/
 #app {
   @media (min-width: 768px) {
