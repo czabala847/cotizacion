@@ -1,4 +1,4 @@
-import formFetch from "./FetchForm.js";
+import fetchFM from "./FetchForm.js";
 
 //====== Paginador ===============================
 const paginatorTable = (arrButtons, containerRender, data) => {
@@ -30,8 +30,8 @@ const renderTable = async (containerRender, data) => {
     fd.set("pageShow", 0);
   }
 
-  const result = await formFetch.fetchData(urlFetch, fd, "text");
-  const tableHTML = result.response;
+  const result = await fetchFM.fetchData(urlFetch, fd, "text");
+  const tableHTML = result.data;
 
   // debugger;
 

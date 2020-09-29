@@ -1,5 +1,5 @@
 import fetchFM from "../Helper/FetchForm.js";
-import tableFetch from "../Helper/FetchTable.js";
+import fetchTB from "../Helper/FetchTable.js";
 import { showModal } from "../Helper/Modal/Modal.js";
 
 let timeInterval;
@@ -25,7 +25,8 @@ const setStatusUser = async (idUser, container, value) => {
     const result = await fetchFM.fetchData(URL_FECTH, fd);
 
     let resultStatus = result.success ? "success" : "error";
-    let okModal = await showModal("", result.response.response, resultStatus, {
+    debugger;
+    let okModal = await showModal("", result.data.response, resultStatus, {
       showCancelButton: false,
     });
 
@@ -44,7 +45,7 @@ const renderUserTable = async (container, valueSearch = "") => {
     urlFetch,
   };
 
-  await tableFetch.renderTable(container, data);
+  await fetchTB.renderTable(container, data);
 
   //===== Añadir interactividad a los botones de cambiar estados =====
   container.addEventListener("click", (e) => {
@@ -102,7 +103,7 @@ const updateUser = async (dataForm) => {
   debugger;
   const iconModal = result.success ? "success" : "error";
   const message = result.success
-    ? result.response.message
+    ? result.data.message
     : "Ocurrio un error al hacer la petición";
 
   resultModal = await showModal("", message, iconModal, optModal);
@@ -135,7 +136,7 @@ const loadRoles = async (comboBox) => {
   const URL_FECTH = fetchFM.URL_BASE + "roles/show";
   const response = await fetchFM.fetchData(URL_FECTH);
 
-  const arrRoles = response.response;
+  const arrRoles = response.data;
   comboBox.innerHTML = "";
   const idRol = comboBox.dataset.profile;
   arrRoles.forEach((rol) => {

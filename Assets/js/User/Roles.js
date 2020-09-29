@@ -1,5 +1,5 @@
-import formFetch from "../Helper/FetchForm.js";
-import tableFetch from "../Helper/TableFetch.js";
+import fetchFM from "../Helper/FetchForm.js";
+import fetchTB from "../Helper/FetchTable.js";
 import { showModal, modalRol } from "../Helper/Modal/Modal.js";
 import { removeAccents } from "../Helper/Strings.js";
 
@@ -16,10 +16,10 @@ const setStatusRol = async (idRol, container) => {
   );
 
   if (resultModal) {
-    const URL_FECTH = formFetch.URL_BASE + "roles/setStatus/" + idRol;
-    const result = await formFetch.fetchData(URL_FECTH);
-    let resultStatus = result.response.success ? "success" : "error";
-    let okModal = await showModal("", result.response.response, resultStatus, {
+    const URL_FECTH = fetchFM.URL_BASE + "roles/setStatus/" + idRol;
+    const result = await fetchFM.fetchData(URL_FECTH);
+    let resultStatus = result.data.success ? "success" : "error";
+    let okModal = await showModal("", result.data.response, resultStatus, {
       showCancelButton: false,
     });
 
@@ -32,13 +32,13 @@ const setStatusRol = async (idRol, container) => {
 
 //====== Mostrar roles la tabla ====================
 const renderTableRoles = async (container, valueSearch = "") => {
-  const urlFetch = formFetch.URL_BASE + "roles/rolesTable";
+  const urlFetch = fetchFM.URL_BASE + "roles/rolesTable";
   const data = {
     valueSearch,
     urlFetch,
   };
 
-  await tableFetch.renderTable(container, data);
+  await fetchTB.renderTable(container, data);
 
   //===== Añadir interactividad a los botones de cambiar estados =====
   container.addEventListener("click", (e) => {
@@ -62,7 +62,7 @@ const renderTableRoles = async (container, valueSearch = "") => {
 //===== Validar los datos ingresados en el formulario de los modal =====
 const validateFormRol = (data) => {
   if (data) {
-    const emptyField = formFetch.emptyField(data);
+    const emptyField = fetchFM.emptyField(data);
 
     if (!emptyField) {
       const fd = new FormData();
@@ -81,16 +81,16 @@ const validateFormRol = (data) => {
 
 //======== Crear un ROL ========================
 const createRol = async (dataRol) => {
-  const URL_FECTH = formFetch.URL_BASE + "/roles/add";
-  const response = await formFetch.fetchData(URL_FECTH, dataRol);
+  const URL_FECTH = fetchFM.URL_BASE + "/roles/add";
+  const response = await fetchFM.fetchData(URL_FECTH, dataRol);
 
   if (response.success) {
-    let resultStatus = response.response.success ? "success" : "error";
-    let okModal = await showModal("", response.response.msg, resultStatus, {
+    let resultStatus = response.data.success ? "success" : "error";
+    let okModal = await showModal("", response.data.msg, resultStatus, {
       showCancelButton: false,
     });
 
-    if (okModal === true && response.response.success == true) {
+    if (okModal === true && response.data.success == true) {
       renderTableRoles($tableContainer);
     }
   }
@@ -98,27 +98,27 @@ const createRol = async (dataRol) => {
 
 //======== Actualizar ROL ========================
 const updateRol = async (idRol) => {
-  let URL_FECTH = formFetch.URL_BASE + "/roles/rol/" + idRol;
+  let URL_FECTH = fetchFM.URL_BASE + "/roles/rol/" + idRol;
 
   //Colocar en el formulario la información del rol seleccionado
-  const { response: data } = await formFetch.fetchData(URL_FECTH);
+  const { data } = await fetchFM.fetchData(URL_FECTH);
   const { value: rolUpdate } = await modalRol("Actualizar Rol", data.rol);
 
   const dataRol = validateFormRol(rolUpdate);
 
   if (dataRol) {
     if (dataRol.status === true) {
-      URL_FECTH = formFetch.URL_BASE + "roles/update";
+      URL_FECTH = fetchFM.URL_BASE + "roles/update";
       dataRol.data.set("id", idRol); //Añadir el campo id, del rol y enviarlo por ajax
-      const response = await formFetch.fetchData(URL_FECTH, dataRol.data);
+      const response = await fetchFM.fetchData(URL_FECTH, dataRol.data);
 
       if (response.success) {
-        let resultStatus = response.response.success ? "success" : "error";
-        let okModal = await showModal("", response.response.msg, resultStatus, {
+        let resultStatus = response.data.success ? "success" : "error";
+        let okModal = await showModal("", response.data.msg, resultStatus, {
           showCancelButton: false,
         });
 
-        if (okModal === true && response.response.success == true) {
+        if (okModal === true && response.data.success == true) {
           renderTableRoles($tableContainer);
         }
       }
